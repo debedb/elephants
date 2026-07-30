@@ -109,6 +109,18 @@ any argument.
     Bayesian reasoning over the results cited here. It must never be pinned to a
     copy of the data — it is tied to a version of what we have, and it updates
     when we do.
+16. *Aside, inviting pushback:* the ethos is "sunlight is the best disinfectant,
+    do what you must and come what may." Fog of war is granted; what was owed
+    was the repeated meta-statement that policy would change with the data, and
+    that you deserved to know when and why. Discuss — including where it is
+    wrong. (The pushback is recorded in the conversation rather than here; the
+    load-bearing one was that "all you had to do" presumes a rhetorical choice
+    where the record shows a systems artifact — the uncertainty was written down
+    in the review file and fell out between there and the podium.)
+17. Add a timeline graph of the running P(H) that responds to the weights. Put
+    it in its own block at the bottom, responsive.
+18. More contrast, and keep the graph on screen while scrolling the ledger and
+    adjusting weights.
 
 ## Pages that reason rather than record
 

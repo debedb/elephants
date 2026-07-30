@@ -177,8 +177,22 @@
   .lrval { display: inline-block; min-width: 42px; font-variant-numeric: tabular-nums; font-size: 12px; }
   .nojudge { color: var(--text-muted); font-style: italic; }
 
-  /* ---- running-belief chart: sized from its container, redrawn on resize ---- */
-  .chartbox { position: relative; padding: 10px 12px 4px; }
+  /* ---- running-belief chart ----
+     Sized from its container each paint, and pinned to the top of the viewport
+     for as long as the ledger beneath it is on screen, so a weight can be
+     dragged and its effect watched in the same glance. */
+  .lab { position: relative; }
+  .chartbox {
+    position: sticky; top: 8px; z-index: 3;
+    padding: 8px 12px 4px;
+    box-shadow: 0 10px 24px -18px rgba(0,0,0,.9);
+  }
+  .chart-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+    padding: 2px 2px 4px;
+  }
+  .chart-title { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+  .chart-now { font-size: 17px; font-weight: 650; font-variant-numeric: tabular-nums; }
   #chart { display: block; width: 100%; height: auto; touch-action: pan-y; }
   #chart .hit { cursor: pointer; }
   .ctip {
@@ -340,25 +354,33 @@
 
   <div class="stamp" id="stamp">Loading the data from the other two pages&hellip;</div>
 
-  <h2>The ledger: every document, its weight, and why</h2>
-  <p>This is the whole model. Move a slider and the walk above re-runs against your number instead
-     of ours. Rows marked <span class="nojudge">no judgment recorded</span> are events that exist on
-     the timelines but that nobody has assessed yet; they sit at 1.00 and change nothing.</p>
-  <table id="ledger">
-    <thead>
-      <tr><th>Date</th><th>Document</th><th>Weight</th><th>Why that weight (ours)</th><th>Running P(H)</th></tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <section class="lab">
+    <h2>The same number, drawn against the calendar</h2>
+    <p>The running column below, as a line. It is flat between documents because belief only moves
+       when one arrives, and steps at each one. Blue is above the starting 0.50, red below. The
+       chart stays pinned while you scroll the ledger, so you can watch a weight move the line as
+       you drag it. Click a point to send the reader there.</p>
 
-  <h2>The same number, drawn against the calendar</h2>
-  <p>The running column above, as a line. It is flat between documents because belief only moves
-     when one arrives, and steps at each one. Blue is above the starting 0.50, red below. Move any
-     weight or the independence discount and this redraws; click a point to send the reader there.</p>
-  <div class="card chartbox" id="chartbox">
-    <svg id="chart" role="img" aria-label="Running probability of the hypothesis, over time"></svg>
-    <div id="ctip" class="ctip" aria-hidden="true"></div>
-  </div>
+    <div class="card chartbox" id="chartbox">
+      <div class="chart-head">
+        <span class="chart-title">Running P(H)</span>
+        <span class="chart-now" id="chartnow">50.0%</span>
+      </div>
+      <svg id="chart" role="img" aria-label="Running probability of the hypothesis, over time"></svg>
+      <div id="ctip" class="ctip" aria-hidden="true"></div>
+    </div>
+
+    <h2>The ledger: every document, its weight, and why</h2>
+    <p>This is the whole model. Move a slider and the walk re-runs against your number instead of
+       ours. Rows marked <span class="nojudge">no judgment recorded</span> are events that exist on
+       the timelines but that nobody has assessed yet; they sit at 1.00 and change nothing.</p>
+    <table id="ledger">
+      <thead>
+        <tr><th>Date</th><th>Document</th><th>Weight</th><th>Why that weight (ours)</th><th>Running P(H)</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
 
   <h2>The strongest objections to this whole exercise</h2>
   <p>These are not strawmen. This page is the most contestable thing in the repository, and it
@@ -662,7 +684,7 @@ const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).
 function paintChart() {
   if (!ROWS.length || !chartBox.clientWidth) return;
   const W = Math.max(300, chartBox.clientWidth - 24);
-  const H = Math.round(Math.min(260, Math.max(180, W * 0.30)));
+  const H = Math.round(Math.min(210, Math.max(158, W * 0.24)));   // short: it is pinned
   const L = 42, R = 12, T = 12, B = 28;
   chartSvg.setAttribute("width", W);
   chartSvg.setAttribute("height", H);
@@ -678,17 +700,24 @@ function paintChart() {
   const cFor = css("--pole-for"), cAgainst = css("--pole-against");
   const cGrid = css("--grid"), cAxis = css("--axis"), cMuted = css("--text-muted");
 
+  // the halves either side of the prior, tinted so the sides read before the axis does
+  chartSvg.append(sv("rect", { x: L, y: T, width: W - L - R, height: y(0.5) - T,
+                               fill: cFor, opacity: 0.05 }));
+  chartSvg.append(sv("rect", { x: L, y: y(0.5), width: W - L - R, height: (H - B) - y(0.5),
+                               fill: cAgainst, opacity: 0.05 }));
+
   // horizontal grid + labels
   [0, 0.25, 0.5, 0.75, 1].forEach(p => {
     const mid = p === 0.5;
     chartSvg.append(sv("line", {
       x1: L, x2: W - R, y1: y(p), y2: y(p),
-      stroke: mid ? cAxis : cGrid, "stroke-width": 1,
-      "stroke-dasharray": mid ? "4 3" : "none"
+      stroke: mid ? cMuted : cGrid, "stroke-width": mid ? 1.25 : 1,
+      "stroke-dasharray": mid ? "5 4" : "none", opacity: mid ? 0.85 : 1
     }));
     chartSvg.append(sv("text", {
       x: L - 7, y: y(p) + 3.5, "text-anchor": "end",
-      "font-size": 10.5, fill: cMuted
+      "font-size": 10.5, fill: mid ? cMuted : cGrid,
+      "font-weight": mid ? 700 : 400
     }, (p * 100).toFixed(0) + "%"));
   });
 
@@ -732,21 +761,26 @@ function paintChart() {
     const p = ps[i], yp = y(p), y5 = y(0.5);
     chartSvg.append(sv("rect", {
       x: x1, y: Math.min(yp, y5), width: x2 - x1, height: Math.abs(y5 - yp),
-      fill: p >= 0.5 ? cFor : cAgainst, opacity: i <= idx ? 0.20 : 0.07
+      fill: p >= 0.5 ? cFor : cAgainst, opacity: i <= idx ? 0.34 : 0.09
     }));
   }
 
-  // the full walk, recessive; then the part already read, at full strength
+  // the full walk, recessive; then the part already read, at full strength,
+  // over a surface-coloured under-stroke so it separates from the fill beneath
   chartSvg.append(sv("path", {
     d: toPath(stepPts(ROWS.length - 1)), fill: "none",
-    stroke: cAxis, "stroke-width": 2, opacity: 0.35,
-    "stroke-linejoin": "round", "stroke-linecap": "round"
+    stroke: cAxis, "stroke-width": 2, opacity: 0.5,
+    "stroke-dasharray": "1 4", "stroke-linejoin": "round", "stroke-linecap": "round"
   }));
   if (idx >= 0) {
     const p = probAfter(idx);
+    const d = toPath(stepPts(idx));
     chartSvg.append(sv("path", {
-      d: toPath(stepPts(idx)), fill: "none",
-      stroke: p >= 0.5 ? cFor : cAgainst, "stroke-width": 2,
+      d, fill: "none", stroke: css("--surface-1"), "stroke-width": 5.5,
+      "stroke-linejoin": "round", "stroke-linecap": "round", opacity: 0.85
+    }));
+    chartSvg.append(sv("path", {
+      d, fill: "none", stroke: p >= 0.5 ? cFor : cAgainst, "stroke-width": 2.6,
       "stroke-linejoin": "round", "stroke-linecap": "round"
     }));
   }
@@ -756,10 +790,10 @@ function paintChart() {
     const cx = x(r.date), cy = y(ps[i]);
     const read = i <= idx;
     chartSvg.append(sv("circle", {
-      cx, cy, r: i === idx ? 5 : 3.4,
+      cx, cy, r: i === idx ? 6 : 4,
       fill: ps[i] >= 0.5 ? cFor : cAgainst,
-      opacity: read ? 1 : 0.3,
-      stroke: css("--surface-1"), "stroke-width": i === idx ? 2 : 1.5
+      opacity: read ? 1 : 0.35,
+      stroke: css("--surface-1"), "stroke-width": 2
     }));
     const x1 = i === 0 ? L : (x(ROWS[i - 1].date) + cx) / 2;
     const x2 = i === ROWS.length - 1 ? W - R : (cx + x(ROWS[i + 1].date)) / 2;
@@ -772,6 +806,32 @@ function paintChart() {
     hit.addEventListener("click", () => { stop(); goTo(i); });
     chartSvg.append(hit);
   });
+
+  // direct-label the point the reader is standing on, so the number is on the
+  // chart rather than only in the header
+  if (idx >= 0) {
+    const cx = x(ROWS[idx].date), cy = y(ps[idx]);
+    const above = ps[idx] >= 0.5;
+    const txt = (ps[idx] * 100).toFixed(1) + "%";
+    const bw = 46, bh = 18;
+    const bx = Math.min(Math.max(cx - bw / 2, L + 1), W - R - bw - 1);
+    const by = above ? cy - bh - 10 : cy + 10;
+    chartSvg.append(sv("rect", {
+      x: bx, y: by, width: bw, height: bh, rx: 5,
+      fill: css("--surface-1"), stroke: above ? cFor : cAgainst, "stroke-width": 1.2
+    }));
+    chartSvg.append(sv("text", {
+      x: bx + bw / 2, y: by + 13, "text-anchor": "middle", "font-size": 11,
+      "font-weight": 700, fill: above ? cFor : cAgainst
+    }, txt));
+  }
+
+  const nowEl2 = document.getElementById("chartnow");
+  if (nowEl2) {
+    const p = probAfter(idx);
+    nowEl2.textContent = (p * 100).toFixed(1) + "%";
+    nowEl2.style.color = idx < 0 ? css("--text-muted") : (p >= 0.5 ? cFor : cAgainst);
+  }
 }
 
 function showCtip(i, cx, cy, p) {

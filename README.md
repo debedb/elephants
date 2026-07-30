@@ -26,6 +26,17 @@ the top and enforces it in code.
   The page checks its own links at render time and prints a warning in the
   footer if any source is not served from a `.gov` host.
 
+## Everything here is open source, including the argument
+
+Not just the data. The sources, the criteria that decide what counts as a
+source, the argument itself, the case against the argument, the verification
+process, and the prompts that produced each round of work are all in this
+repository — see **[PROCESS.md](PROCESS.md)**.
+
+That is the point rather than a side effect. An argument you cannot audit is
+worth less than one you can, and the natural home for an argument that expects
+to be checked is a place where checking it means opening a diff.
+
 ## Ethos
 
 **We have a position. We state it, we publish the case against it, and we do not

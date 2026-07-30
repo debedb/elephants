@@ -191,6 +191,18 @@
     font-size: 13px; line-height: 1.4; color: var(--text-primary);
     border-left: 2px solid var(--c); padding-left: 10px; margin: 4px 0 5px;
   }
+
+  .openbar {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-1);
+    background: var(--surface-1); border-radius: 8px;
+    padding: 15px 17px; margin: 20px 0 18px; max-width: 74ch;
+  }
+  .openbar p { margin: 0 0 10px; font-size: 14px; }
+  .openbar b { color: var(--text-primary); font-weight: 650; }
+  .openbar ul { margin: 0 0 10px; padding-left: 18px; }
+  .openbar li { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 3px; }
+  .openbar li b { font-weight: 600; }
+  .openbar .cta { margin-top: 0; }
 </style>
 <body>
 <main>
@@ -203,11 +215,35 @@
      stopped distinguishing the vaccinated from everyone else. Each step below is a federal document
      or transcript, quoted in its own words.</p>
 
+  <div class="openbar">
+    <p><b>All of this is open source. Not just the data — the argument.</b> Nothing about how this
+       page was made is withheld, because an argument you cannot audit is worth less than one you
+       can:</p>
+    <ul>
+      <li><b>The sources</b> — every one linked, on the row, in the open.</li>
+      <li><b>The criteria</b> — the rule that decides what counts as a source is written down, and
+        this page enforces it in code.</li>
+      <li><b>The argument</b> — stated in its own section, marked as ours, with the case against it
+        published beside it.</li>
+      <li><b>The process and the prompts</b> — how entries are verified, and the actual instructions
+        that produced each round of work.</li>
+      <li><b>The page itself</b> — one file, no build step, editable by anyone.</li>
+    </ul>
+    <p>Disagreement is settled the way open source settles anything: in public, as a change to the
+       thing itself, which is either merged or refused on the record.</p>
+    <p class="cta">
+      <a href="https://github.com/debedb/elephants/blob/master/PROCESS.md" rel="noopener">The process and the prompts</a>
+      <a href="https://github.com/debedb/elephants/blob/master/covid19-us-messaging/index.html" rel="noopener">This page's source</a>
+      <a href="https://github.com/debedb/elephants" rel="noopener">The repository</a>
+    </p>
+  </div>
+
   <div class="rule">
     <p><b>Only .gov sources on this page.</b> Every row links to something published by the United
        States government: an FDA review memorandum, a CDC media statement, an MMWR report, a White
        House transcript. There is no journalism here, no commentary, and no analysis of either.
-       Where an official said something on television, it is out.</p>
+       Where an official said something on television, it is out — see "Sought, and not included"
+       below for what that rule cost us.</p>
   </div>
 
   <div class="howto">
@@ -271,6 +307,23 @@
     <li><b>Eight documents is a sample, and we picked it.</b> Federal agencies published thousands
       of pages in this period, including plenty that hedged carefully. A different eight could
       support a different conclusion.</li>
+  </ul>
+
+  <h2>Sought, and not included</h2>
+  <p>Three things belong in this story that are not on the axis above. The rule this page set for
+     itself excluded them, and publishing the exclusions is the only way that rule means anything.</p>
+  <ul class="objections">
+    <li><b>"Vaccinated people ... do not carry the virus."</b> The CDC Director, 29 March 2021 —
+      the single most useful quotation for the argument this page makes. She said it on MSNBC. Not a
+      government publication, so it is out.</li>
+    <li><b>CDC's September 2021 change to its published definitions of "vaccine" and
+      "vaccination"</b> — from wording about producing <i>immunity</i> to wording about producing
+      <i>protection</i>. The current definitions are on cdc.gov; we could not locate the superseded
+      wording on any government host, only in third-party web archives. Under this page's rule we
+      cannot show the before and after, so we do not assert the change at all.</li>
+    <li><b>A statement by Dr. Fauci, in his own voice, on an NIH domain, about vaccination and
+      transmission.</b> We looked and did not find one. He appears above only as a named signatory
+      of the 18 August 2021 joint statement. If you know of one, that is a pull request.</li>
   </ul>
 
   <h2>How to argue with this page</h2>
@@ -457,6 +510,84 @@ const EVENTS = [
         + "the 74% figure can be made to mean.",
     source: { label: "MMWR 70(31), mm7031e2", org: "MMWR",
               url: "https://www.cdc.gov/mmwr/volumes/70/wr/mm7031e2.htm" }
+  },
+  {
+    date: "2021-08-05",
+    cat: "said",
+    short: "Surgeon General: breakthrough infections are \"the exception, not the rule\"",
+    title: "US Surgeon General Vivek Murthy, White House COVID-19 Response Team briefing",
+    authority: "Surgeon General of the United States; transcript published by the White House",
+    quote: "Breakthrough infections in fully vaccinated people are the exception, not the rule.",
+    blurb: "Six days after the CDC Director said in writing that vaccinated people infected with Delta "
+         + "can transmit the virus, the Surgeon General characterised breakthrough infection as "
+         + "exceptional from the White House podium.",
+    note: "The two statements are not strictly contradictory — a breakthrough infection can be both "
+        + "uncommon and transmissible when it happens. They point in opposite directions all the same, "
+        + "and they are six days apart.",
+    source: { label: "White House briefing transcript, 5 August 2021", org: "WHITE HOUSE",
+              url: "https://bidenwhitehouse.archives.gov/briefing-room/press-briefings/2021/08/05/press-briefing-by-white-house-covid-19-response-team-and-public-health-officials-48/" }
+  },
+  {
+    date: "2021-08-18",
+    cat: "said",
+    short: "Eight federal health leaders: protection against infection is decreasing",
+    title: "Joint statement of HHS public health and medical experts on COVID-19 booster shots",
+    authority: "Walensky (CDC), Woodcock (FDA), Murthy (Surgeon General), Collins (NIH), Fauci (NIAID), Levine (ASH), Kessler and Nunez-Smith",
+    quote: "The available data make very clear that protection against SARS-CoV-2 infection begins to "
+         + "decrease over time following the initial doses of vaccination, and in association with the "
+         + "dominance of the Delta variant, we are starting to see evidence of reduced protection "
+         + "against mild and moderate disease.",
+    ourCall: "Our call: this is the closest thing to a Fauci statement on the page. He is a named "
+           + "signatory here. We looked for a remark of his on vaccination and transmission hosted on "
+           + "an NIH domain and did not find one, so he appears as a co-signer rather than in his own "
+           + "voice.",
+    blurb: "The government's own announcement that the protection it had described in the spring was "
+         + "waning, issued by the heads of CDC, FDA, NIH and NIAID together, and used to justify a "
+         + "booster programme starting the following month.",
+    note: "The same statement stresses that severe disease, hospitalization and death remained "
+        + "overwhelmingly concentrated among the unvaccinated. Both halves are in the same document.",
+    source: { label: "Joint HHS statement, 18 August 2021 (CDC newsroom archive)", org: "CDC ARCHIVE",
+              url: "https://archive.cdc.gov/www_cdc_gov/media/releases/2021/s0818-covid-19-booster-shots.html" }
+  },
+  {
+    date: "2021-09-17",
+    cat: "evidence",
+    short: "FDA's own advisers take up boosters for everyone 16 and older",
+    title: "Vaccines and Related Biological Products Advisory Committee meets on the Pfizer booster application",
+    authority: "Vaccines and Related Biological Products Advisory Committee, US Food and Drug Administration",
+    quote: "To discuss [Pfizer's] supplemental Biologics License Application for administration of a "
+         + "third dose, or \"booster\" dose, of Comirnaty in individuals 16 years of age and older.",
+    ourCall: "Our call: the committee's vote is widely reported as 16 to 2 against boosters for the "
+           + "general 16-and-over population, followed by unanimous support for older and high-risk "
+           + "groups. We could not retrieve that tally from a .gov page, so this row does not assert "
+           + "it. What the government's own record shows is the application that went in, and the "
+           + "narrower authorization that came out five days later.",
+    blurb: "The application asked for boosters for everyone aged 16 and older. What the FDA authorized "
+         + "on 22 September was materially narrower, and the FDA's announcement refers to \"the vote "
+         + "regarding individuals over 65 years of age and individuals at high risk\".",
+    note: "This row exists to mark a case where the agency's external experts and the request they "
+        + "were given did not line up. The primary evidence for that is the gap between the two "
+        + "documents, not a vote count we could not source.",
+    source: { label: "FDA meeting announcement, 17 September 2021", org: "FDA",
+              url: "https://www.fda.gov/advisory-committees/advisory-committee-calendar/vaccines-and-related-biological-products-advisory-committee-september-17-2021-meeting-announcement" }
+  },
+  {
+    date: "2021-09-22",
+    cat: "guidance",
+    short: "FDA authorizes boosters, but not for everyone who was asked for",
+    title: "FDA amends the Pfizer-BioNTech emergency use authorization to allow a booster dose in certain populations",
+    authority: "US Food and Drug Administration; statement of Peter Marks, Director, Center for Biologics Evaluation and Research",
+    quote: "We appreciate the robust discussion, including the vote regarding individuals over 65 years "
+         + "of age and individuals at high risk for severe disease, as well as the committee's views "
+         + "regarding the use of a booster dose for those with institutional or occupational exposure "
+         + "to SARS-CoV-2.",
+    blurb: "The authorization covers people 65 and older, those at high risk of severe COVID-19, and "
+         + "those whose jobs put them at frequent risk of exposure — not the general population aged 16 "
+         + "and up that the application had requested.",
+    note: "Eligibility was broadened repeatedly over the following months, ending with all adults on "
+        + "19 November 2021.",
+    source: { label: "FDA news release, 22 September 2021", org: "FDA",
+              url: "https://www.fda.gov/news-events/press-announcements/fda-authorizes-booster-dose-pfizer-biontech-covid-19-vaccine-certain-populations" }
   },
   {
     date: "2022-08-11",

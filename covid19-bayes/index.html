@@ -164,6 +164,8 @@
   .controls button:hover { border-color: var(--axis); }
   .controls button[disabled] { opacity: .45; cursor: default; }
   .progress { font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-left: auto; }
+  .indep { border-top: 1px solid var(--grid); padding-top: 10px; font-size: 12.5px; color: var(--text-secondary); }
+  .indep-note { font-size: 11.5px; color: var(--text-muted); flex: 1 1 260px; line-height: 1.35; }
 
   /* ---- ledger ---- */
   table { border-collapse: collapse; width: 100%; font-size: 13px; }
@@ -235,6 +237,11 @@
     <p><b>The arithmetic is one line.</b> Belief is carried as odds; each document multiplies the
        odds by a weight; the bar shows the result as a probability. A weight above 1 makes the
        hypothesis more likely, below 1 less likely, exactly 1 changes nothing. Nothing else happens.</p>
+    <p><b>The walk moves in both directions, and it is supposed to.</b> The heaviest single weight
+       on this page is not against the authorities — it is the CDC reversing a popular guidance
+       change within days of receiving contrary data, at obvious political cost, which is exactly
+       what the hypothesis predicts and is weighted accordingly. A model that only ever ratchets
+       one way is not a model.</p>
     <p><b>The weights are ours and they are contestable</b>, which is why they are exposed as
        sliders and listed with reasons in the ledger below. Set them all to 1.00 and the belief
        never moves from 0.50 — that is the shape of the claim that nothing here is evidence of
@@ -304,6 +311,13 @@
         <button id="allone">Set every weight to 1.00</button>
         <span class="progress" id="progress"></span>
       </div>
+      <div class="controls indep">
+        <label for="discount">Independence discount</label>
+        <input id="discount" type="range" min="0" max="1" step="0.05" value="0.6" class="slider">
+        <span class="lrval" id="discountval">0.60</span>
+        <span class="indep-note">1.00 treats every document as an independent observation, which
+          they are not. Lower values shrink every weight toward 1.00 together.</span>
+      </div>
     </div>
   </div>
 
@@ -331,7 +345,12 @@
     <li><b>The events are not independent, and the maths assumes they are.</b> Multiplying weights
       is only valid for independent observations. The California closures are four views of one
       decision; the vaccine authorizations share regulators and evidence. Treating them as separate
-      updates overstates how much the belief should move, in whichever direction it moves.</li>
+      updates overstates how much the belief should move, in whichever direction it moves. This
+      objection is real enough that it is a control rather than a paragraph — the independence
+      discount above shrinks every weight toward 1.00 together, and it ships set to 0.60 rather than
+      1.00 because we think the naive walk is wrong. Set it to 1.00 to see what we are discounting.
+      Even 0.60 is a guess: the honest treatment would group correlated documents explicitly, and
+      that is a change worth sending us.</li>
     <li><b>The hypothesis is too coarse to be true or false.</b> "The authorities were following the
       evidence" bundles dozens of different bodies, in different jurisdictions, over three years,
       under wildly different information. There is no single fact of the matter for the number to
@@ -372,27 +391,27 @@
 // ===========================================================================
 const JUDGMENTS = {
   "timeline|2020-03-19": { lr: 1.15, why: "A broad stay-at-home order in March 2020, issued under genuine uncertainty and before the outdoor evidence was in. Acting hard on little information is what following the evidence looks like when there is almost none." },
-  "timeline|2020-03-27": { lr: 0.70, why: "Closing an open coastline 24 days after the first published finding that closed environments carried 18.7 times the odds of open air. Mitigated by the crowd-density rationale, which is a real argument and not an evidential one." },
-  "timeline|2020-03-29": { lr: 0.65, why: "A blanket closure of all 280 state parks, including empty coastline nobody was crowding, on the same evidence." },
-  "timeline|2020-04-30": { lr: 0.35, why: "Announced verbally after televised images of crowds, three weeks after the outdoor-transmission preprint, with no signed instrument ever published. The trigger was pictures." },
-  "timeline|2020-05-31": { lr: 0.30, why: "1,288 public health professionals distinguishing between gatherings by their cause rather than by their transmission risk, in writing, and saying so explicitly." },
-  "timeline|2020-06-25": { lr: 0.75, why: "A vaccine authorized for soldiers with no Phase 3 data at all." },
-  "timeline|2020-08-11": { lr: 0.75, why: "Registered before Phase 3 trials had begun." },
-  "timeline|2020-11-06": { lr: 0.60, why: "One official breaking his own guidance is evidence about that official, not about the institutions. It counts for something — rule-makers' private behaviour is weak evidence about whether they believed the rules — but not for much." },
+  "timeline|2020-03-27": { lr: 0.82, why: "Closing an open coastline 24 days after the first published finding that closed environments carried 18.7 times the odds of open air. Mitigated by the crowd-density rationale, which is a real argument and not an evidential one." },
+  "timeline|2020-03-29": { lr: 0.80, why: "A blanket closure of all 280 state parks, including empty coastline nobody was crowding, on the same evidence." },
+  "timeline|2020-04-30": { lr: 0.55, why: "Announced verbally after televised images of crowds, three weeks after the outdoor-transmission preprint, with no signed instrument ever published. The trigger was pictures." },
+  "timeline|2020-05-31": { lr: 0.55, why: "1,288 public health professionals distinguishing between gatherings by their cause rather than by their transmission risk, in writing, and saying so explicitly." },
+  "timeline|2020-06-25": { lr: 0.85, why: "A vaccine authorized for soldiers with no Phase 3 data at all." },
+  "timeline|2020-08-11": { lr: 0.85, why: "Registered before Phase 3 trials had begun." },
+  "timeline|2020-11-06": { lr: 0.85, why: "One official breaking his own guidance is evidence about that official, not about the institutions. It counts for something — rule-makers' private behaviour is weak evidence about whether they believed the rules — but not for much." },
   "timeline|2020-12-02": { lr: 1.30, why: "The first authorization anywhere to follow published Phase 3 efficacy data." },
   "timeline|2020-12-18": { lr: 1.20, why: "Authorized on published trial data through the ordinary emergency process." },
   "timeline|2020-12-30": { lr: 1.20, why: "Same." },
-  "timeline|2021-01-03": { lr: 0.75, why: "Authorized in clinical trial mode before efficacy results existed, over objections from scientists in the same country." },
+  "timeline|2021-01-03": { lr: 0.85, why: "Authorized in clinical trial mode before efficacy results existed, over objections from scientists in the same country." },
   "timeline|2021-11-01": { lr: 0.90, why: "An American vaccine authorized first in Indonesia and last by its own regulator: a fact about regulatory queues and filings, only faintly about evidence." },
 
   "usgov|2020-12-11": { lr: 1.60, why: "The regulator wrote down, in the authorizing document itself, the limits of what it had shown — including that transmission data were limited. That is the behaviour the hypothesis predicts." },
   "usgov|2021-03-29": { lr: 1.25, why: "A real study, reported with its actual measure (infection), and the inference to spread stated as an inference." },
   "usgov|2021-05-13": { lr: 1.20, why: "Guidance loosened in the direction the agency's own fresh data pointed." },
-  "usgov|2021-07-21": { lr: 0.25, why: "A flat claim of total protection that exceeds every government document then in existence, including the ones this administration's own agencies had published." },
-  "usgov|2021-07-27": { lr: 1.80, why: "Reversing a popular guidance change within days of receiving unpublished contrary data, at obvious political cost. This is the single strongest piece of evidence on the page for the hypothesis." },
+  "usgov|2021-07-21": { lr: 0.45, why: "A flat claim of total protection that exceeds every government document then in existence, including the ones this administration's own agencies had published." },
+  "usgov|2021-07-27": { lr: 1.70, why: "Reversing a popular guidance change within days of receiving unpublished contrary data, at obvious political cost. This is the single strongest piece of evidence on the page for the hypothesis." },
   "usgov|2021-07-30": { lr: 1.60, why: "Publishing the reversal, its basis, and the sequencing — guidance first, data three days later — in writing, under the Director's name." },
-  "usgov|2021-08-05": { lr: 0.70, why: "Characterising breakthrough infection as exceptional from the podium six days after the agency said in writing that it drives transmission." },
-  "usgov|2021-08-18": { lr: 0.60, why: "A booster programme announced with a start date by eight officials before the FDA's own advisers had reviewed it. Policy ahead of process." },
+  "usgov|2021-08-05": { lr: 0.85, why: "Characterising breakthrough infection as exceptional from the podium six days after the agency said in writing that it drives transmission." },
+  "usgov|2021-08-18": { lr: 0.78, why: "A booster programme announced with a start date by eight officials before the FDA's own advisers had reviewed it. Policy ahead of process." },
   "usgov|2021-09-17": { lr: 1.25, why: "Convening the external advisory committee in public, on the record, on an application the administration had already announced." },
   "usgov|2021-09-22": { lr: 1.50, why: "The regulator authorized materially less than was applied for, and less than the announced programme implied — evidence that the review was not a formality." },
   "usgov|2021-08-06": { lr: 1.45, why: "Publishing an inconvenient outbreak study promptly, including the finding that most cases were in vaccinated people." },
@@ -456,9 +475,15 @@ const stampEl = document.getElementById("stamp");
 const tbody = document.querySelector("#ledger tbody");
 
 const PRIOR = 0.5;
+// These documents are not independent: four of the California rows are views of
+// one decision, the vaccine rows share regulators and evidence. Naive
+// multiplication therefore overstates every movement. DISCOUNT raises each
+// weight to a power < 1, shrinking all of them toward 1.00 by the same factor.
+// 1.00 = treat every document as fully independent (the naive walk).
+let DISCOUNT = 0.6;
 const oddsAfter = n => {
   let odds = PRIOR / (1 - PRIOR);
-  for (let i = 0; i <= n && i < ROWS.length; i++) odds *= ROWS[i].lr;
+  for (let i = 0; i <= n && i < ROWS.length; i++) odds *= Math.pow(ROWS[i].lr, DISCOUNT);
   return odds;
 };
 const probAfter = n => { const o = oddsAfter(n); return o / (1 + o); };
@@ -646,15 +671,33 @@ function refreshRunning() {
   } catch (e) { /* the fingerprint is the stamp that matters; this is a nicety */ }
 
   const foot = document.getElementById("foot");
+  const finalP = probAfter(ROWS.length - 1);
+  const reading =
+    Math.abs(finalP - 0.5) < 0.06
+      ? "which is to say: on our numbers, " + ROWS.length + " documents move a beginner's mind almost "
+        + "nowhere. The weights point in both directions and very nearly cancel. Anyone telling you this "
+        + "record obviously proves either story is claiming more than the record carries — including us, "
+        + "if we ever do."
+      : (finalP > 0.5
+          ? "on our numbers the record leans toward the authorities having followed the evidence."
+          : "on our numbers the record leans away from the authorities having followed the evidence.");
   foot.append(document.createTextNode(
-    "The posterior shown after all " + ROWS.length + " documents is "
-    + (probAfter(ROWS.length - 1) * 100).toFixed(1) + "% on our weights. It is not a measurement. "
-    + "It is what our numbers imply, and the sliders exist so that it can stop being ours. "
-    + "Corrections and better weights: "));
+    "The posterior after all " + ROWS.length + " documents is " + (finalP * 100).toFixed(1)
+    + "% at an independence discount of " + DISCOUNT.toFixed(2) + " — " + reading
+    + " It is not a measurement. It is what our numbers imply, and the sliders exist so that it can "
+    + "stop being ours. Corrections and better weights: "));
   const a = el("a", null, "github.com/debedb/elephants");
   a.href = "https://github.com/debedb/elephants";
   a.rel = "noopener";
   foot.append(a);
+
+  const disc = document.getElementById("discount");
+  disc.addEventListener("input", () => {
+    DISCOUNT = parseFloat(disc.value);
+    document.getElementById("discountval").textContent = DISCOUNT.toFixed(2);
+    paintBelief(probAfter(idx));
+    refreshRunning();
+  });
 
   document.getElementById("play").addEventListener("click", play);
   document.getElementById("step").addEventListener("click", () => { stop(); goTo(idx + 1); });

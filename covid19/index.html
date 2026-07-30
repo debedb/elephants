@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>COVID-19, 2020: a sourced timeline</title>
-<meta name="description" content="COVID-19 events of 2020 on one time axis. Every row is somebody else's document, linked. Nothing here is our own reporting.">
+<title>COVID-19: a sourced timeline</title>
+<meta name="description" content="COVID-19 events on one time axis. Every row is somebody else's document, linked. Nothing here is our own reporting.">
 <style>
   :root {
     color-scheme: light;
@@ -181,7 +181,7 @@
 </head>
 <body>
 <main>
-  <h1>COVID-19, 2020: a sourced timeline</h1>
+  <h1>COVID-19: a sourced timeline</h1>
   <p class="lede">Nothing on this page is our own reporting. Every row is somebody else's
      document, named and linked, and the link is the point of the row.</p>
 
@@ -196,7 +196,10 @@
        <span class="kind none">no document</span> means exactly that, and it is stated rather than
        papered over.</p>
     <p><b>Where we made a judgment call, it says so on the row.</b> Dates that a source left
-       ambiguous, and superlatives that depend on a definition, are marked "our call" in the open.</p>
+       ambiguous, and superlatives that depend on a definition, are marked "our call" in the open.
+       The vaccine rows are one standing call worth stating here: each is placed at the date of its
+       <i>first authorization anywhere</i>, not its first dose, because authorization is the act
+       that leaves a document. Where the two differ materially, the row says so.</p>
     <p><b>Our voice appears in exactly two places:</b> the choice of which events share this axis,
        and the lines marked "our call". Everywhere else the page reports what a source says and
        attributes it. We have a position, stated below in its own words so you can argue with it
@@ -212,14 +215,18 @@
   <div class="card" id="detail"></div>
 
   <h2>The argument, stated plainly</h2>
-  <p>This is ours, and it is the only claim on the page that is. Nine events, each individually
-     documented above, are placed on one axis because we think the sequence shows something the
-     events do not show apart: <b>in 2020 the same institutions applied public health authority
-     unevenly, and the unevenness tracked the politics of the activity rather than its
-     epidemiology.</b> Beaches on an open coastline were closed by signed order; one mass gathering
-     was studied as the country's largest superspreader event while another was endorsed by 1,288
-     public health professionals; the official who signed the orders dined in violation of his own
-     guidance.</p>
+  <p>This is ours, and it is the only claim on the page that is. The events above, each individually
+     documented, are placed on one axis because we think the sequence shows something the events do
+     not show apart: <b>public health authority was applied unevenly, and the unevenness tracked the
+     politics of the activity rather than its epidemiology.</b> Beaches on an open coastline were
+     closed by signed order three weeks after the first published finding that transmission outdoors
+     was 18.7 times less likely than indoors, and stayed closed after a second paper found one
+     outdoor cluster in a Chinese national dataset; one mass gathering was studied as the country's
+     largest superspreader event while another was endorsed by 1,288 public health professionals;
+     the official who signed the orders dined in violation of his own guidance. Meanwhile the
+     vaccines arrived in an order set by which regulator was willing to move first, not by which
+     vaccine was best evidenced — the earliest authorization on this axis had no Phase 3 data and
+     was for soldiers only.</p>
   <p>We are not asking you to accept that from the picture. The picture is only an index of
      documents. Follow the links, then decide.</p>
 
@@ -240,14 +247,21 @@
       health emergency and that the response to outdoor protest should differ from the response to
       protests demanding an end to the mitigations. That is a contestable position, but it is a
       position, not simple hypocrisy — and it is worth reading in the original before deciding.</li>
-    <li><b>Beach closure was defensible on the evidence available in March 2020.</b> Outdoor
-      transmission was not yet well characterised, the closures were justified as crowd-density
-      control rather than as claims about sand, and later evidence about outdoor risk was not
-      available to the officials who signed them. Judging a March decision with December knowledge
-      is its own error.</li>
-    <li><b>Nine events is a sample, and we picked it.</b> A different nine could support a
-      different conclusion. The selection is the argument, which is exactly why we say so rather
-      than presenting this as a complete record.</li>
+    <li><b>The outdoor evidence was thinner in March than the timeline makes it look.</b> Nishiura
+      was a preprint, not peer reviewed, built on 110 traced cases in one country, with a confidence
+      interval running from 6 to 58. Qian's data came from a population that was locked down, so
+      outdoor exposure was suppressed in the sample itself. "Less likely outdoors" is also not "safe
+      when a hundred thousand people share a beach" — the closures were argued as crowd-density
+      control, not as claims about sand. Placing a preprint next to an order does not establish that
+      the officials had, or should have credited, a finding that would have changed the decision.</li>
+    <li><b>Vaccine authorization dates measure regulators, not vaccines.</b> Reading the vaccine
+      rows as a race is a category error. The order reflects which agency used which emergency
+      power, how much risk each state was willing to carry, and where each manufacturer filed
+      first — and a military-only clearance with no Phase 3 data is not the same kind of act as an
+      authorization following published efficacy results, however similar the two rows look.</li>
+    <li><b>The list is a sample, and we picked it.</b> A different set could support a different
+      conclusion. The selection is the argument, which is exactly why we say so rather than
+      presenting this as a complete record.</li>
   </ul>
 
   <h2>How to argue with this page</h2>
@@ -317,14 +331,32 @@ const EVENTS = [
     short: "WHO: no clear human-to-human transmission",
     title: "WHO Disease Outbreak News states there is no evidence of significant human-to-human transmission",
     authority: "World Health Organization, Disease Outbreak News DON229",
-    ourCall: "Our call: read as the earliest authoritative document declaring no known onward "
-           + "transmission. It is a WHO situation report, not a journal paper.",
+    ourCall: "Our call: \"no known transmission\" has two readings and this page carries both. This row is the "
+           + "person-to-person reading. For the outdoor reading, see the two rows below on Nishiura (3 March 2020) and "
+           + "Qian (7 April 2020). Note also that this is a WHO situation report, not a journal paper.",
     blurb: "WHO's first Disease Outbreak News on the Wuhan pneumonia cluster reports 44 cases and states: "
          + "\"no evidence of significant human-to-human transmission and no health care worker infections have been reported.\"",
     note: "Journal-paper alternatives if you want a peer-reviewed answer instead: Huang et al., The Lancet, "
         + "24 January 2020 (market-exposure cluster); WHO's 14 January 2020 tweet relaying the same Chinese finding.",
     source: { label: "WHO Disease Outbreak News, 5 January 2020", kind: "primary",
               url: "https://www.who.int/emergencies/disease-outbreak-news/item/2020-DON229" }
+  },
+  {
+    date: "2020-03-03",
+    cat: "evidence",
+    short: "Closed environments: 18.7 times the odds of open air",
+    title: "Nishiura et al. find the odds of transmission in a closed environment 18.7 times greater than in open air",
+    authority: "Nishiura, Oshitani, Kobayashi, Saito, Sunagawa, Matsui, Wakita and the Japanese National COVID-19 Cluster Taskforce; medRxiv preprint",
+    ourCall: "Our call: this is the earliest dated finding we could locate on outdoor versus indoor transmission, and it is on "
+           + "the axis because of when it appeared: 24 days before Los Angeles County closed every beach in the county.",
+    blurb: "Contact tracing of 110 cases across eleven Japanese clusters: \"The odds that a primary case transmitted COVID-19 "
+         + "in a closed environment was 18.7 times greater compared to an open-air environment (95% confidence interval: "
+         + "6.0, 57.9).\"",
+    note: "A preprint, not peer reviewed at the time, drawn from 110 cases in one country. It was not a claim that outdoor "
+        + "transmission is impossible, and its confidence interval is wide. It was, however, public and citable before the "
+        + "California beach closures.",
+    source: { label: "medRxiv 2020.02.28.20029272, posted 3 March 2020", kind: "primary",
+              url: "https://www.medrxiv.org/content/10.1101/2020.02.28.20029272v2" }
   },
   {
     date: "2020-03-19",
@@ -377,6 +409,29 @@ const EVENTS = [
     ]
   },
   {
+    date: "2020-04-07",
+    cat: "evidence",
+    short: "Of 318 Chinese outbreaks, one was outdoors",
+    title: "Qian et al. find that essentially every identified transmission cluster in China occurred indoors",
+    authority: "Qian, Miao, Liu, Zheng, Luo and Li, University of Hong Kong and Southeast University; medRxiv preprint",
+    ourCall: "Our call: this is the paper people usually mean by \"no outdoor transmission\", and it is the strongest version "
+           + "of that finding we can date. It appeared nine days after the California beach closures, which stayed in force "
+           + "for weeks afterwards.",
+    blurb: "Case reports from 320 Chinese cities outside Hubei, 4 January to 11 February 2020. The preprint identified 318 "
+         + "outbreaks of three or more cases, involving 1,245 confirmed cases across 120 cities, and found a single "
+         + "transmission outdoors. The peer-reviewed version reports that among 7,324 identified cases, one outbreak, "
+         + "involving two people, occurred outdoors.",
+    note: "The finding is about outbreaks of three or more traced cases, not about individual infections, and it comes from a "
+        + "country that was locked down at the time — outdoor exposure opportunities were themselves reduced. Published a "
+        + "little over seven months later in Indoor Air, 20 November 2020.",
+    source: { label: "medRxiv 2020.04.04.20053058, posted 7 April 2020", kind: "primary",
+              url: "https://www.medrxiv.org/content/10.1101/2020.04.04.20053058v1" },
+    also: [
+      { label: "Peer-reviewed version, Indoor Air, 20 November 2020", kind: "primary",
+        url: "https://onlinelibrary.wiley.com/doi/10.1111/ina.12766" }
+    ]
+  },
+  {
     date: "2020-04-30",
     cat: "orders",
     short: "\"Hard close\" of Orange County beaches",
@@ -419,23 +474,165 @@ const EVENTS = [
     ]
   },
   {
+    date: "2020-06-25",
+    cat: "orders",
+    short: "CanSino: first authorization of any COVID-19 vaccine, anywhere",
+    title: "China's Central Military Commission approves CanSino's Ad5-nCoV as a \"military specially-needed drug\"",
+    authority: "Health Bureau of the Logistics Support Department, Central Military Commission, People's Republic of China",
+    ourCall: "Our call: this, not Sputnik V, is the earliest authorization we can date. It was restricted to the military, "
+           + "for one year, and could not be widened without the same bureau's approval. We could not find a public copy of "
+           + "the authorization itself; the date comes from CanSino's own filing to the Hong Kong Stock Exchange.",
+    blurb: "Ad5-nCoV, developed with the Institute of Biotechnology of the Academy of Military Medical Sciences, was cleared "
+         + "for use in Chinese military personnel after Phase 2, with no Phase 3 efficacy data. CanSino disclosed the "
+         + "approval to the Hong Kong Stock Exchange on 29 June 2020.",
+    note: "Whether a military-only authorization counts as \"availability\" is a real question. We include it because it is a "
+        + "dated act by a state authority putting a vaccine into arms outside a trial, which is the test we applied to every "
+        + "other row.",
+    source: { label: "Global Times report of CanSino's HKEX filing, 29 June 2020", kind: "reporting",
+              url: "https://www.globaltimes.cn/content/1192994.shtml" },
+    also: [
+      { label: "CNN, Beijing approves CanSino vaccine for military use", kind: "reporting",
+        url: "https://www.cnn.com/2020/06/30/health/china-coronavirus-military-vaccine-intl-hnk-scli" }
+    ]
+  },
+  {
+    date: "2020-07-22",
+    cat: "orders",
+    short: "Sinopharm BBIBP-CorV enters China's emergency-use programme",
+    title: "China begins emergency use of Sinopharm's inactivated vaccine in essential workers",
+    authority: "State Council of the People's Republic of China; vaccine from Sinopharm CNBG (Beijing Institute of Biological Products)",
+    ourCall: "Our call: the 22 July start date is reported rather than documented. China published no emergency-use "
+           + "instrument we could link, which is why the primary citation here is the WHO listing from ten months later.",
+    blurb: "Ahead of any published efficacy results, China opened an emergency-use programme covering medical workers, border "
+         + "staff and state employees travelling abroad. BBIBP-CorV went on to be one of the most widely administered "
+         + "vaccines in the world.",
+    note: "The United Arab Emirates granted BBIBP-CorV an emergency authorization for frontline workers on 14 September 2020, "
+        + "the first such authorization outside China. Full Chinese approval followed on 31 December 2020.",
+    source: { label: "WHO emergency use listing of the Sinopharm vaccine, 7 May 2021", kind: "primary",
+              url: "https://www.who.int/news/item/07-05-2021-who-lists-additional-covid-19-vaccine-for-emergency-use-and-issues-interim-policy-recommendations" },
+    also: [
+      { label: "WHO SAGE evidence assessment, Sinopharm/BBIBP (PDF)", kind: "primary",
+        url: "https://cdn.who.int/media/docs/default-source/immunization/sage/2021/april/2_sage29apr2021_critical-evidence_sinopharm.pdf" }
+    ]
+  },
+  {
     date: "2020-08-11",
     cat: "orders",
-    short: "Sputnik V registered in Russia",
-    title: "Russia registers Sputnik V, the first COVID-19 vaccine approved anywhere",
+    short: "Sputnik V: first vaccine registered for civilian use",
+    title: "Russia registers Sputnik V, the first COVID-19 vaccine registered for general civilian use anywhere",
     authority: "Ministry of Health of the Russian Federation; developed by the Gamaleya National Research Center",
-    ourCall: "Our call: \"first availability\" read as first regulatory approval. The first dose outside a clinical trial came "
-           + "on 8 December 2020 (Margaret Keenan, Pfizer/BioNTech, Coventry).",
-    blurb: "The Gamaleya Center's adenovirus-vector vaccine was registered before Phase 3 trials had begun, making Russia the "
-         + "first country to approve a COVID-19 vaccine.",
+    ourCall: "Our call: earlier drafts of this page called Sputnik V the first vaccine approved anywhere. That is wrong, and "
+           + "the CanSino row above is why. Sputnik V is the first registered for the general population rather than a "
+           + "restricted group.",
+    blurb: "The Gamaleya Center's adenovirus-vector vaccine was registered before Phase 3 trials had begun. Mass civilian "
+         + "vaccination in Russia did not begin until 5 December 2020.",
     note: "The Lancet Respiratory Medicine piece linked here is a commentary, not the Russian registration document itself, "
         + "which was never published in a form we could link.",
     source: { label: "The Lancet Respiratory Medicine, \"The Russian vaccine for COVID-19\"", kind: "primary",
-              url: "https://www.thelancet.com/journals/lanres/article/PIIS2213-2600(20)30402-1/fulltext" },
+              url: "https://www.thelancet.com/journals/lanres/article/PIIS2213-2600(20)30402-1/fulltext" }
+  },
+  {
+    date: "2020-08-23",
+    cat: "orders",
+    short: "Sinovac CoronaVac enters China's emergency-use programme",
+    title: "China extends emergency use to Sinovac's CoronaVac",
+    authority: "State Council of the People's Republic of China; vaccine from Sinovac Biotech",
+    ourCall: "Our call: as with Sinopharm, the August 2020 emergency-use date is reported rather than documented. The "
+           + "citation is the WHO listing, which is the first instrument for this vaccine we can link.",
+    blurb: "CoronaVac, an inactivated vaccine, joined the emergency-use programme in late August 2020 and went on to be "
+         + "deployed at scale across Latin America and Southeast Asia. China's own conditional marketing authorization "
+         + "followed on 5 February 2021.",
+    note: "Indonesia and Turkey authorized CoronaVac in January 2021; Hong Kong in February 2021. Those are documented; the "
+        + "original Chinese emergency use is not.",
+    source: { label: "WHO emergency use listing of the Sinovac-CoronaVac vaccine, 1 June 2021", kind: "primary",
+              url: "https://www.who.int/news/item/01-06-2021-who-validates-sinovac-covid-19-vaccine-for-emergency-use-and-issues-interim-policy-recommendations" }
+  },
+  {
+    date: "2020-12-02",
+    cat: "orders",
+    short: "Pfizer-BioNTech authorized in the UK; first dose six days later",
+    title: "MHRA grants temporary authorization to the Pfizer-BioNTech vaccine, the first Western authorization",
+    authority: "Medicines and Healthcare products Regulatory Agency, United Kingdom, under Regulation 174",
+    ourCall: "Our call: this row carries the milestone people usually mean by \"the first COVID vaccine\" — on 8 December 2020 "
+           + "Margaret Keenan received the first dose given outside a clinical trial anywhere in the world.",
+    blurb: "The first authorization anywhere to follow published Phase 3 efficacy data. The UK used a temporary emergency "
+         + "provision rather than a full marketing authorization, which is how it moved ahead of the FDA and the EMA.",
+    note: "The US FDA followed with an emergency use authorization on 11 December 2020; the European Medicines Agency on "
+        + "21 December 2020.",
+    source: { label: "MHRA authorization announcement, 2 December 2020", kind: "primary",
+              url: "https://www.gov.uk/government/news/uk-medicines-regulator-gives-approval-for-first-uk-covid-19-vaccine" },
     also: [
+      { label: "MHRA regulatory approval documents for the vaccine", kind: "primary",
+        url: "https://www.gov.uk/government/publications/regulatory-approval-of-pfizer-biontech-vaccine-for-covid-19" },
       { label: "First dose outside a trial, 8 December 2020", kind: "reporting",
         url: "https://blog.sciencemuseum.org.uk/marking-two-years-since-margaret-keenan-and-may-parsons-made-history/" }
     ]
+  },
+  {
+    date: "2020-12-18",
+    cat: "orders",
+    short: "Moderna authorized in the United States",
+    title: "FDA issues an emergency use authorization for the Moderna COVID-19 vaccine",
+    authority: "US Food and Drug Administration, under section 564 of the Federal Food, Drug, and Cosmetic Act",
+    blurb: "The second mRNA vaccine authorized anywhere, developed with the National Institute of Allergy and Infectious "
+         + "Diseases. First doses were administered on 21 December 2020.",
+    note: "The EUA letter linked from the FDA's page has been reissued several times since; every version recites the "
+        + "original 18 December 2020 issuance.",
+    source: { label: "FDA, Moderna COVID-19 vaccines: authorization history and letters", kind: "primary",
+              url: "https://www.fda.gov/emergency-preparedness-and-response/coronavirus-disease-2019-covid-19/moderna-covid-19-vaccines" }
+  },
+  {
+    date: "2020-12-30",
+    cat: "orders",
+    short: "Oxford-AstraZeneca authorized in the UK",
+    title: "MHRA authorizes the Oxford University/AstraZeneca vaccine",
+    authority: "Medicines and Healthcare products Regulatory Agency, United Kingdom",
+    blurb: "The vaccine that carried most of the world's early supply, because it needed only refrigeration rather than "
+         + "ultra-cold storage and was licensed for production at cost. First dose administered 4 January 2021.",
+    note: "India authorized the same vaccine, manufactured by the Serum Institute as Covishield, on 3 January 2021.",
+    source: { label: "MHRA regulatory approval of COVID-19 Vaccine AstraZeneca, 30 December 2020", kind: "primary",
+              url: "https://www.gov.uk/government/publications/regulatory-approval-of-covid-19-vaccine-astrazeneca" }
+  },
+  {
+    date: "2021-01-03",
+    cat: "orders",
+    short: "Covaxin authorized in India, before efficacy data",
+    title: "India grants restricted emergency use to Bharat Biotech's Covaxin",
+    authority: "Drugs Controller General of India, on the recommendation of the CDSCO Subject Expert Committee",
+    ourCall: "Our call: included because the authorization preceded any efficacy results, which drew objections from Indian "
+           + "scientists at the time and makes it a distinct kind of act from the Western authorizations above.",
+    blurb: "Approved \"in clinical trial mode\" alongside Covishield, the Serum Institute's licensed Oxford-AstraZeneca "
+         + "vaccine. Covaxin's Phase 3 efficacy results were not published until later in 2021.",
+    note: "The same announcement covers Covishield, which is why there is no separate Covishield row.",
+    source: { label: "Press Information Bureau, Government of India, 3 January 2021", kind: "primary",
+              url: "https://pib.gov.in/PressReleasePage.aspx?PRID=1685761" }
+  },
+  {
+    date: "2021-02-27",
+    cat: "orders",
+    short: "Johnson & Johnson authorized in the United States",
+    title: "FDA issues an emergency use authorization for the Janssen single-dose vaccine",
+    authority: "US Food and Drug Administration, under section 564 of the Federal Food, Drug, and Cosmetic Act",
+    blurb: "The first single-dose COVID-19 vaccine. US use was paused on 13 April 2021 over rare blood-clotting events, "
+         + "resumed ten days later with a warning, and the authorization was eventually revoked in 2023.",
+    note: "This is the one vaccine on the list whose authorization was later withdrawn, which is part of why it is here.",
+    source: { label: "FDA, Janssen COVID-19 vaccine: authorization history and letters", kind: "primary",
+              url: "https://www.fda.gov/emergency-preparedness-and-response/coronavirus-disease-2019-covid-19/janssen-covid-19-vaccine" }
+  },
+  {
+    date: "2021-11-01",
+    cat: "orders",
+    short: "Novavax authorized, in Indonesia first",
+    title: "Indonesia grants the first emergency use authorization anywhere for the Novavax protein-subunit vaccine",
+    authority: "Badan POM, the Indonesian food and drug authority; manufactured by the Serum Institute of India",
+    ourCall: "Our call: the notable fact is where it happened. The first authorization for an American-developed vaccine came "
+           + "from Indonesia, more than a year after the first Chinese and Russian authorizations, and eight months before "
+           + "the FDA's.",
+    blurb: "A protein-subunit vaccine using conventional technology, developed in Maryland, first authorized in Jakarta. "
+         + "WHO listed it on 20 December 2021; the FDA did not authorize it until 13 July 2022.",
+    note: "By the time it was available, most of the world's vaccinated population had already received something else.",
+    source: { label: "Novavax announcement of the Indonesian authorization, 1 November 2021", kind: "primary",
+              url: "https://ir.novavax.com/2021-11-01-Novavax-and-Serum-Institute-of-India-Receive-Emergency-Use-Authorization-for-COVID-19-Vaccine-in-Indonesia" }
   },
   {
     date: "2020-09-08",
@@ -541,7 +738,9 @@ months.forEach(d => {
 plot.append(grid);
 
 const head = el("div", "head");
-head.append(el("span", null, "What happened, and who says so"), el("span", null, "2020"));
+const years = [...new Set(byDate.map(e => e.date.slice(0, 4)))];
+head.append(el("span", null, "What happened, and who says so"),
+            el("span", null, years[0] + (years.length > 1 ? " to " + years[years.length - 1] : "")));
 plot.append(head);
 
 byDate.forEach(e => {
@@ -575,7 +774,10 @@ byDate.forEach(e => {
 
 const axis = el("div", "axis");
 const axisTrack = el("div", "axis-track");
+// label quarterly once the span is long enough that monthly labels would collide
+const tickEvery = months.length > 14 ? 3 : 1;
 months.forEach(d => {
+  if (d.getUTCMonth() % tickEvery !== 0) return;
   const label = d.getUTCMonth() === 0
     ? d.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })
     : d.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" });

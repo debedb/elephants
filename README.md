@@ -6,9 +6,16 @@ Sourced timelines of things that are easier to remember one at a time than side
 by side. One folder per subject; each folder is a self-contained page published
 to GitHub Pages.
 
+Published at **[elephants.debedb.com](https://elephants.debedb.com/)**.
+
 | Subject | Page |
 |---|---|
-| [`covid19/`](covid19/) | COVID-19, 2020 — [debedb.github.io/elephants/covid19/](https://debedb.github.io/elephants/covid19/) |
+| [`covid19/`](covid19/) | COVID-19, 2020 — [elephants.debedb.com/covid19/](https://elephants.debedb.com/covid19/) |
+
+The site is served from its own subdomain rather than
+`debedb.github.io/elephants/` because the user site's domain (`www.debedb.com`)
+has a wedged Let's Encrypt authorization, so every project repo that inherits it
+is HTTP-only. A fresh subdomain gets a clean certificate in seconds.
 
 ## House rules
 

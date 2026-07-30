@@ -656,6 +656,7 @@ const sv = (tag, attrs, text) => {
 const chartSvg = document.getElementById("chart");
 const chartBox = document.getElementById("chartbox");
 const ctip = document.getElementById("ctip");
+let chartObserver = null;   // must stay referenced; see the note where it is created
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
 function paintChart() {
@@ -870,9 +871,16 @@ function showCtip(i, cx, cy, p) {
     paintChart();
   });
 
-  // responsive: redraw at whatever width the container actually has
-  if (window.ResizeObserver) new ResizeObserver(() => paintChart()).observe(chartBox);
-  else window.addEventListener("resize", paintChart);
+  // Responsive: redraw at whatever width the container actually has.
+  // Keep a reference to the observer. An unreferenced ResizeObserver can be
+  // garbage-collected while still "observing", and then the callback simply
+  // never fires again — the chart keeps its first width and CSS scales it
+  // instead, shrinking the axis labels.
+  if (window.ResizeObserver) {
+    chartObserver = new ResizeObserver(() => paintChart());
+    chartObserver.observe(chartBox);
+  }
+  window.addEventListener("resize", paintChart);
 
   document.getElementById("play").addEventListener("click", play);
   document.getElementById("step").addEventListener("click", () => { stop(); goTo(idx + 1); });

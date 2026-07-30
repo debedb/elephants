@@ -14,15 +14,30 @@ Published at **[elephants.debedb.com](https://elephants.debedb.com/)**.
 
 ## Ethos
 
-**We are making a point, and we are transparent about making it.** Both halves
-of that sentence are load-bearing.
+**We have a position. We state it, we publish the case against it, and we do not
+smuggle it into anything else.**
 
-The point is in the *selection*: which events get put on one axis together, and
-the fact that reading them in order does something that reading them apart does
-not. That choice is ours, it is an argument, and we say so on the page rather
-than pretending the list assembled itself.
+That is the whole method. Having a point of view is not the problem; pretending
+not to have one is. So each page does three things in the open:
 
-Everything else is not ours, and we never claim it is:
+1. **States its argument in its own section, in plain words.** An argument you
+   have to infer from a layout is an argument that cannot be attacked. Ours is
+   written down under a heading that says it is ours.
+2. **Publishes the strongest objections to itself**, written to land rather than
+   to be knocked down. If the argument loses, we expect it to lose on one of the
+   objections we printed ourselves. An event that cuts *against* the argument is
+   more valuable to the page than one that supports it, and gets added on the
+   same terms.
+3. **Keeps our voice out of everything else.** It appears in exactly two places:
+   which events share an axis, and the lines explicitly marked "our call".
+   Everywhere else the page reports what a source says and attributes it.
+
+This is the difference between arguing and opinionating. We are not telling you
+what to think about these documents; we are putting them where you can read them
+in an order we chose, saying why we chose it, and handing you the argument
+against.
+
+Everything below the argument is not ours, and we never claim it is:
 
 - **We never say "this is ours." We say "this is what we found."** No entry
   rests on our own assertion. Every claim on a page is a link to somebody
@@ -43,7 +58,8 @@ Everything else is not ours, and we never claim it is:
 - **We name what we could not verify.** "We looked for a signed order and did not
   find one" is a finding, and it is published as one.
 - **A dead link or a wrong citation is a bug**, and is as welcome in the issue
-  tracker as any other bug.
+  tracker as any other bug. So is "your framing is wrong" — that is a bug report
+  about the only part of the page we actually wrote.
 
 The vertical axis of these charts carries no magnitude and no ranking. It exists
 only so that every document has somewhere to sit where you can see and click its

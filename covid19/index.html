@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>COVID-19, 2020: a sourced timeline</title>
-<meta name="description" content="COVID-19 events of 2020 on one timeline. Every entry names the instrument that authorized it, who signed it, and when.">
+<meta name="description" content="COVID-19 events of 2020 on one time axis. Every row is somebody else's document, linked. Nothing here is our own reporting.">
 <style>
   :root {
     color-scheme: light;
@@ -58,47 +58,73 @@
     color: var(--text-primary);
     font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  main { max-width: 1120px; margin: 0 auto; padding: 34px 20px 72px; }
+  main { max-width: 1180px; margin: 0 auto; padding: 34px 20px 72px; }
   h1 { font-size: 27px; line-height: 1.22; margin: 0 0 10px; letter-spacing: -0.01em; }
-  h2 { font-size: 17px; margin: 42px 0 10px; }
-  p { margin: 0 0 12px; color: var(--text-secondary); max-width: 72ch; }
+  h2 { font-size: 17px; margin: 44px 0 10px; }
+  p { margin: 0 0 12px; color: var(--text-secondary); max-width: 74ch; }
   a { color: inherit; }
   .lede { font-size: 16px; }
   .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
 
-  .legend { display: flex; flex-wrap: wrap; gap: 20px; margin: 22px 0 12px; padding: 0; list-style: none; }
+  .howto {
+    border-left: 2px solid var(--axis); padding: 2px 0 2px 14px; margin: 18px 0 6px;
+    font-size: 13.5px; max-width: 74ch;
+  }
+  .howto p { margin: 0 0 6px; font-size: 13.5px; }
+  .howto p:last-child { margin: 0; }
+  .howto b { color: var(--text-primary); font-weight: 600; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0 10px; padding: 0; list-style: none; }
   .legend li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
   .swatch { width: 13px; height: 13px; border-radius: 50%; flex: none; }
 
-  /* chart: one row per event, x = date */
+  /* chart: one row per document. x = date. y carries no magnitude. */
   .scroller { overflow-x: auto; }
-  .plot { position: relative; min-width: 900px; padding: 0 20px 6px; }
+  .plot { position: relative; min-width: 1000px; padding: 0 20px 6px; }
+  .head {
+    display: grid; grid-template-columns: var(--gutter) 1fr;
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-muted); padding: 12px 0 8px;
+  }
+  .head span:last-child { padding-left: 2px; }
+
   .row {
     position: relative;
     display: grid;
-    grid-template-columns: 264px 1fr;
+    grid-template-columns: var(--gutter) 1fr;
     align-items: center;
-    min-height: 46px;
-    border: 0; margin: 0; padding: 5px 0;
-    background: none;
-    font: inherit;
-    text-align: left;
-    color: inherit;
-    width: 100%;
+    min-height: 58px;
+    padding: 8px 0;
+    border-top: 1px solid var(--grid);
+  }
+  .row:hover { background: color-mix(in srgb, var(--c) 6%, transparent); }
+  .row.on { background: color-mix(in srgb, var(--c) 11%, transparent); }
+
+  .r-label { padding-right: 18px; }
+  .r-date { font-size: 11.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .r-claim {
+    display: block; text-align: left; width: 100%;
+    border: 0; background: none; padding: 0; margin: 1px 0 3px;
+    font: inherit; font-size: 13.5px; line-height: 1.3; color: var(--text-primary);
     cursor: pointer;
   }
-  .row + .row { border-top: 1px solid var(--grid); }
-  .row:hover, .row:focus-visible { background: color-mix(in srgb, var(--c) 7%, transparent); }
-  .row:focus-visible { outline: 2px solid var(--text-primary); outline-offset: -2px; }
-  .row[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 12%, transparent); }
+  .r-claim:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .r-claim:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+  .row.on .r-claim { font-weight: 650; }
 
-  .r-label { padding-right: 16px; }
-  .r-date { font-size: 11.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
-  .r-title { font-size: 13px; line-height: 1.3; color: var(--text-primary); }
-  .row[aria-pressed="true"] .r-title { font-weight: 650; }
+  .r-src { display: flex; align-items: baseline; gap: 6px; font-size: 12px; line-height: 1.35; }
+  .r-src a { color: var(--text-secondary); }
+  .kind {
+    flex: none; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 1px 5px; border-radius: 3px; border: 1px solid var(--axis); color: var(--text-muted);
+    position: relative; top: -1px;
+  }
+  .kind.primary { border-color: currentColor; color: var(--text-secondary); }
+  .kind.none { border-style: dashed; }
+  .r-call { font-size: 11.5px; color: var(--text-muted); font-style: italic; margin-top: 3px; }
 
-  .r-track { position: relative; height: 100%; }
-  .r-track::before {                       /* leader from the label to the mark */
+  .r-track { position: relative; height: 100%; min-height: 32px; }
+  .r-track::before {
     content: ""; position: absolute; left: 0; top: 50%; height: 1px;
     width: var(--x); background: var(--grid);
   }
@@ -109,32 +135,18 @@
     box-shadow: 0 0 0 2px var(--surface-1);
     transition: transform .12s ease;
   }
-  .row:hover .dot, .row:focus-visible .dot { transform: scale(1.35); }
-  .row[aria-pressed="true"] .dot { transform: scale(1.5); box-shadow: 0 0 0 2px var(--surface-1), 0 0 0 4px var(--c); }
+  .row:hover .dot { transform: scale(1.3); }
+  .row.on .dot { transform: scale(1.5); box-shadow: 0 0 0 2px var(--surface-1), 0 0 0 4px var(--c); }
 
-  .gridlines { position: absolute; left: 284px; right: 20px; top: 0; bottom: 26px; pointer-events: none; }
+  .gridlines { position: absolute; left: calc(20px + var(--gutter)); right: 20px; top: 0; bottom: 26px; pointer-events: none; }
   .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--grid); }
   .gridline.q { background: var(--axis); }
-  .axis { display: grid; grid-template-columns: 264px 1fr; }
+  .axis { display: grid; grid-template-columns: var(--gutter) 1fr; }
   .axis-track { position: relative; height: 26px; border-top: 1px solid var(--axis); }
   .tick {
     position: absolute; top: 6px; left: var(--x); transform: translateX(-50%);
     font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap;
   }
-
-  #tip {
-    position: absolute; z-index: 5; pointer-events: none; opacity: 0;
-    transform: translate(-50%, -100%);
-    background: var(--surface-1); border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px 10px; max-width: 280px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.16);
-    transition: opacity .1s ease;
-  }
-  #tip.on { opacity: 1; }
-  #tip .tip-date { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  #tip .tip-title { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; }
-  #tip .tip-cat { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 11.5px; color: var(--text-muted); }
-  #tip .tip-key { width: 14px; height: 2px; border-radius: 1px; flex: none; }
 
   #detail { padding: 18px 20px; margin-top: 18px; }
   #detail .d-date { font-size: 12.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
@@ -142,8 +154,8 @@
   #detail .d-note { border-left: 2px solid var(--axis); padding-left: 12px; font-size: 13.5px; }
   #detail .d-src { font-size: 13.5px; margin-bottom: 4px; word-break: break-word; }
   #detail .d-hint { color: var(--text-muted); margin: 0; }
-  #detail .d-auth { font-size: 13.5px; }
   #detail .d-auth b { color: var(--text-primary); font-weight: 600; }
+  #detail .d-auth { font-size: 13.5px; }
 
   table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
   th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
@@ -152,15 +164,31 @@
   .cat-tag { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
   .cat-tag i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
-  footer { margin-top: 44px; font-size: 12.5px; color: var(--text-muted); }
+  footer { margin-top: 44px; font-size: 12.5px; color: var(--text-muted); max-width: 74ch; }
 </style>
 </head>
 <body>
 <main>
   <h1>COVID-19, 2020: a sourced timeline</h1>
-  <p class="lede">One row per event, positioned by date. Every entry names the instrument that
-     authorized it, who issued it, and when &mdash; or says plainly that no such instrument was
-     ever published. Select a row for the source and the caveats.</p>
+  <p class="lede">Nothing on this page is our own reporting. Every row is somebody else's
+     document, named and linked, and the link is the point of the row.</p>
+
+  <div class="howto">
+    <p><b>The horizontal axis is time.</b> The vertical axis carries no magnitude and no ranking.
+       Rows are stacked in date order for one reason: to give every document a place to sit where
+       you can see and click its citation.</p>
+    <p><b>Every source is labelled by what it is.</b>
+       <span class="kind primary">primary</span> means the instrument or study itself.
+       <span class="kind">reporting</span> means a journalist's account, used only where no
+       primary document exists.
+       <span class="kind none">no document</span> means exactly that, and it is stated rather than
+       papered over.</p>
+    <p><b>Where we made a judgment call, it says so on the row.</b> Dates that a source left
+       ambiguous, and superlatives that depend on a definition, are marked "our call" in the open.</p>
+    <p><b>What is ours is the selection.</b> Which nine events sit on this axis together is an
+       editorial choice, and putting them side by side is meant to be read as an argument.
+       Each individual claim is not ours; check it against its link.</p>
+  </div>
 
   <ul class="legend" id="legend"></ul>
 
@@ -172,19 +200,20 @@
 
   <h2>All events</h2>
   <table id="table">
-    <thead><tr><th>Date</th><th>Event</th><th>Category</th><th>Most authoritative link</th></tr></thead>
+    <thead><tr><th>Date</th><th>Event</th><th>Grouping</th><th>Source</th></tr></thead>
     <tbody></tbody>
   </table>
 
   <footer id="foot"></footer>
 </main>
 
-<div id="tip" role="tooltip" aria-hidden="true"></div>
-
 <script>
 // ---------------------------------------------------------------------------
-// Data. Add an event here; the chart, the table and the axis follow.
-//   authority: who signed the thing, under what power. "" when none exists.
+// Data. One entry per document.
+//   source.kind: "primary"   the instrument, order, letter or study itself
+//                "reporting" a journalist's account (only where no primary exists)
+//                "none"      no document was ever published; say so
+//   ourCall:     any interpretation WE made, shown on the row, not buried
 // ---------------------------------------------------------------------------
 const CATEGORIES = [
   { id: "evidence", name: "Science and evidence", color: "var(--cat-1)" },
@@ -199,13 +228,14 @@ const EVENTS = [
     short: "WHO: no clear human-to-human transmission",
     title: "WHO Disease Outbreak News states there is no evidence of significant human-to-human transmission",
     authority: "World Health Organization, Disease Outbreak News DON229",
+    ourCall: "Our call: read as the earliest authoritative document declaring no known onward "
+           + "transmission. It is a WHO situation report, not a journal paper.",
     blurb: "WHO's first Disease Outbreak News on the Wuhan pneumonia cluster reports 44 cases and states: "
          + "\"no evidence of significant human-to-human transmission and no health care worker infections have been reported.\"",
-    note: "Read as the earliest authoritative document declaring no known onward transmission. It is a WHO situation "
-        + "report, not a journal paper. Journal-paper alternatives: Huang et al., The Lancet, 24 January 2020 (market-exposure "
-        + "cluster); WHO's 14 January 2020 tweet relaying the same Chinese finding.",
-    url: "https://www.who.int/emergencies/disease-outbreak-news/item/2020-DON229",
-    src: "WHO Disease Outbreak News, 5 January 2020"
+    note: "Journal-paper alternatives if you want a peer-reviewed answer instead: Huang et al., The Lancet, "
+        + "24 January 2020 (market-exposure cluster); WHO's 14 January 2020 tweet relaying the same Chinese finding.",
+    source: { label: "WHO Disease Outbreak News, 5 January 2020", kind: "primary",
+              url: "https://www.who.int/emergencies/disease-outbreak-news/item/2020-DON229" }
   },
   {
     date: "2020-03-19",
@@ -217,8 +247,8 @@ const EVENTS = [
          + "beach, park and trail closure that follows is issued under or justified by.",
     note: "Every later California closure below traces back here. The county orders cite it explicitly; so does the state's "
         + "own letter of 7 May 2020 approving Orange County's phased beach reopening.",
-    url: "https://www.gov.ca.gov/wp-content/uploads/2020/03/3.19.20-attested-EO-N-33-20-COVID-19-HEALTH-ORDER.pdf",
-    src: "Executive Order N-33-20, attested copy (PDF)"
+    source: { label: "Executive Order N-33-20, attested copy (PDF)", kind: "primary",
+              url: "https://www.gov.ca.gov/wp-content/uploads/2020/03/3.19.20-attested-EO-N-33-20-COVID-19-HEALTH-ORDER.pdf" }
   },
   {
     date: "2020-03-27",
@@ -226,16 +256,16 @@ const EVENTS = [
     short: "LA County closes every beach, pier and bike path",
     title: "Los Angeles County Health Officer order closes all public beaches, piers, beach parking lots, bike paths and trails",
     authority: "County of Los Angeles Health Officer (Muntu Davis), under California Health and Safety Code sections 101040, 101085 and 120175",
+    ourCall: "Our call: the county has since pulled the standalone 27 March PDF. We cite the county's own "
+           + "consolidated order of 10 April, which names the 27 March order among those it supersedes.",
     blurb: "This is the order that emptied the Pacific Coast Highway beaches from Santa Monica through Malibu. The county cited "
          + "\"an unusually high volume of beach and trail users on March 21 and 22.\" It ran through 15 May 2020 and was later "
          + "extended. It applies to the county public health jurisdiction, that is every city except Long Beach and Pasadena.",
-    note: "The standalone 27 March PDF has since been pulled from the county's site. The consolidated Safer at Home order of "
-        + "10 April 2020 linked here is the county's own surviving copy: it names the 27 March order among those it supersedes "
-        + "and \"continues the closure of ... beaches, trails and trailheads.\"",
-    url: "https://covid19.lacounty.gov/wp-content/uploads/HOO_Safer-at-Home-Order-for-Control-of-COVID_04102020.pdf",
-    src: "LA County Health Officer, Safer at Home Order revised 10 April 2020 (PDF)",
+    note: "The 10 April order's own words: it \"continues the closure of ... beaches, trails and trailheads.\"",
+    source: { label: "LA County Health Officer, Safer at Home Order revised 10 April 2020 (PDF)", kind: "primary",
+              url: "https://covid19.lacounty.gov/wp-content/uploads/HOO_Safer-at-Home-Order-for-Control-of-COVID_04102020.pdf" },
     also: [
-      { label: "City of Santa Monica notice of the 27 March county order",
+      { label: "City of Santa Monica notice of the 27 March county order", kind: "primary",
         url: "https://www.santamonica.gov/press/2020/03/27/los-angeles-county-temporarily-closes-all-county-beaches-including-santa-monica-beach-bike-path-ocean-front-walk-and-beach-access-points-through-april-19-2020" }
     ]
   },
@@ -250,10 +280,10 @@ const EVENTS = [
          + "El Capitan, Pismo, Big Sur, Half Moon Bay. This is the closure a driver on Route 1 actually saw.",
     note: "Third round in a week. State Parks had closed vehicle access at 59 parks and beaches on 26 March 2020, after a "
         + "statewide parking-lot closure announced on 23 March. Full-park closures followed on 3 April 2020.",
-    url: "https://www.parks.ca.gov/NewsRelease/947",
-    src: "California State Parks news release 947, 29 March 2020",
+    source: { label: "California State Parks news release 947, 29 March 2020", kind: "primary",
+              url: "https://www.parks.ca.gov/NewsRelease/947" },
     also: [
-      { label: "Follow-up release 948: additional beaches and parks closed entirely, 3 April 2020",
+      { label: "Follow-up release 948: additional beaches and parks closed entirely, 3 April 2020", kind: "primary",
         url: "https://www.parks.ca.gov/NewsRelease/948" }
     ]
   },
@@ -263,17 +293,19 @@ const EVENTS = [
     short: "\"Hard close\" of Orange County beaches",
     title: "Newsom orders a hard close of all Orange County beaches, effective 1 May 2020",
     authority: "Announced verbally by Gov. Gavin Newsom; no separate signed order was published",
+    ourCall: "Our call: we looked for a signed instrument and did not find one. If a 30 April order exists, it is not public. "
+           + "The nearest state document is the letter approving the reopening a week later.",
     blurb: "Announced at the governor's 30 April briefing after crowds at Newport and Huntington Beach the previous weekend: "
          + "\"We're gonna do a hard close in that part of the state, just in the Orange County area.\" Unlike the LA County and "
          + "State Parks closures, no signed instrument was ever released for this one.",
-    note: "Worth being precise about: the written trace is a memo to California police chiefs the day before, which described a "
-        + "closure of ALL state beaches and parks that did not happen, plus the state's letter of 7 May 2020 approving Orange "
-        + "County's phased reopening, which cites Executive Order N-33-20 as the governing authority. If a signed 30 April order "
-        + "exists, it is not public.",
-    url: "https://www.parks.ca.gov/pages/712/files/Joint-letter-to-County-of-Orange.pdf",
-    src: "Cal OES and Natural Resources Agency letter to OC Parks, 7 May 2020 (PDF)",
+    note: "The written trace is a memo to California police chiefs the day before, which described a closure of ALL state "
+        + "beaches and parks that did not happen, plus the state's letter of 7 May 2020 approving Orange County's phased "
+        + "reopening, which cites Executive Order N-33-20 as the governing authority.",
+    source: { label: "No signed closure order published", kind: "none", url: "" },
     also: [
-      { label: "CNN report of the 30 April announcement",
+      { label: "Cal OES and Natural Resources Agency letter to OC Parks, 7 May 2020 (PDF)", kind: "primary",
+        url: "https://www.parks.ca.gov/pages/712/files/Joint-letter-to-County-of-Orange.pdf" },
+      { label: "CNN report of the 30 April announcement", kind: "reporting",
         url: "https://www.cnn.com/travel/article/california-newsom-close-beaches-parks/index.html" }
     ]
   },
@@ -283,15 +315,17 @@ const EVENTS = [
     short: "1,288 public health professionals back the protests",
     title: "Open letter advocating an anti-racist public health response to demonstrations during the COVID-19 pandemic",
     authority: "Drafted at the University of Washington Division of Allergy and Infectious Diseases; 1,288 signatories",
+    ourCall: "Our call: the letter carries no date of its own. Its text is written \"as of May 30\" and coverage ran 2 to 5 June. "
+           + "We placed it at 31 May.",
     blurb: "Signed by 1,288 public health professionals, infectious diseases professionals and community stakeholders. It asks "
          + "officials not to disband the protests on COVID-19 grounds, and explicitly distinguishes them from protests against "
          + "stay-home orders, which it describes as \"rooted in white nationalism.\"",
-    note: "The letter carries no date of its own. Its text is written \"as of May 30\" and it circulated over the following days, "
-        + "with national coverage between 2 and 5 June 2020. Dated here to 31 May 2020.",
-    url: "https://www.hoplofobia.info/wp-content/uploads/2021/12/Open-Letter-advocating-for-an-anti-racist-public-health-response.pdf",
-    src: "Full letter text with signature count (PDF)",
+    note: "The linked PDF is the full letter text including the signature count. It is a mirror: the letter circulated as a "
+        + "Google Doc and had no permanent home of its own.",
+    source: { label: "Full letter text with signature count (PDF)", kind: "primary",
+              url: "https://www.hoplofobia.info/wp-content/uploads/2021/12/Open-Letter-advocating-for-an-anti-racist-public-health-response.pdf" },
     also: [
-      { label: "CNN coverage, 5 June 2020",
+      { label: "CNN coverage, 5 June 2020", kind: "reporting",
         url: "https://www.cnn.com/2020/06/05/health/health-care-open-letter-protests-coronavirus-trnd" }
     ]
   },
@@ -301,14 +335,16 @@ const EVENTS = [
     short: "Sputnik V registered in Russia",
     title: "Russia registers Sputnik V, the first COVID-19 vaccine approved anywhere",
     authority: "Ministry of Health of the Russian Federation; developed by the Gamaleya National Research Center",
+    ourCall: "Our call: \"first availability\" read as first regulatory approval. The first dose outside a clinical trial came "
+           + "on 8 December 2020 (Margaret Keenan, Pfizer/BioNTech, Coventry).",
     blurb: "The Gamaleya Center's adenovirus-vector vaccine was registered before Phase 3 trials had begun, making Russia the "
          + "first country to approve a COVID-19 vaccine.",
-    note: "\"First availability\" has two defensible readings. This is the first regulatory approval anywhere. The first dose "
-        + "given outside a clinical trial came on 8 December 2020: Margaret Keenan, Pfizer/BioNTech, Coventry, United Kingdom.",
-    url: "https://www.thelancet.com/journals/lanres/article/PIIS2213-2600(20)30402-1/fulltext",
-    src: "The Lancet Respiratory Medicine, \"The Russian vaccine for COVID-19\"",
+    note: "The Lancet Respiratory Medicine piece linked here is a commentary, not the Russian registration document itself, "
+        + "which was never published in a form we could link.",
+    source: { label: "The Lancet Respiratory Medicine, \"The Russian vaccine for COVID-19\"", kind: "primary",
+              url: "https://www.thelancet.com/journals/lanres/article/PIIS2213-2600(20)30402-1/fulltext" },
     also: [
-      { label: "First dose outside a trial, 8 December 2020",
+      { label: "First dose outside a trial, 8 December 2020", kind: "reporting",
         url: "https://blog.sciencemuseum.org.uk/marking-two-years-since-margaret-keenan-and-may-parsons-made-history/" }
     ]
   },
@@ -318,14 +354,16 @@ const EVENTS = [
     short: "Sturgis rally called the largest superspreader event",
     title: "IZA discussion paper attributes 266,796 COVID-19 cases to the Sturgis Motorcycle Rally",
     authority: "Dave, Friedson, McNichols and Sabia; IZA Institute of Labor Economics Discussion Paper 13670",
+    ourCall: "Our call: this row is the paper, not the claim. The paper was a working paper, not peer reviewed at release, "
+           + "and South Dakota officials disputed it as inconsistent with state case data.",
     blurb: "Anonymized SafeGraph cell phone data was used to estimate that the 7 to 16 August rally, attended by roughly 460,000 "
          + "people, generated 266,796 cases and $12.2 billion in public health costs.",
-    note: "A working paper, not peer reviewed at release. South Dakota officials disputed it as inconsistent with state case data. "
-        + "A separate CDC MMWR report of 20 November 2020 traced a far smaller, directly contact-traced cluster.",
-    url: "https://docs.iza.org/dp13670.pdf",
-    src: "IZA Discussion Paper 13670, September 2020 (PDF)",
+    note: "A separate CDC MMWR report of 20 November 2020 traced a far smaller, directly contact-traced cluster. The two are "
+        + "not measuring the same thing.",
+    source: { label: "IZA Discussion Paper 13670, September 2020 (PDF)", kind: "primary",
+              url: "https://docs.iza.org/dp13670.pdf" },
     also: [
-      { label: "IZA landing page for DP 13670",
+      { label: "IZA landing page for DP 13670", kind: "primary",
         url: "https://www.iza.org/publications/dp/13670/the-contagion-externality-of-a-superspreading-event-the-sturgis-motorcycle-rally-and-covid-19" }
     ]
   },
@@ -335,15 +373,16 @@ const EVENTS = [
     short: "Newsom at the French Laundry",
     title: "Gavin Newsom attends a birthday dinner at the French Laundry in Yountville",
     authority: "No instrument. The governor's own conduct, under his own guidance",
+    ourCall: "Our call: there is no document behind this one. It is journalism, originating with the San Francisco Chronicle, "
+           + "and it is on the list as reporting rather than as a record.",
     blurb: "The governor and his wife joined a party of about twelve, drawn from more than the three households California's own "
          + "guidance then allowed, for lobbyist Jason Kinney's 50th birthday. Photographs later showed the group maskless in a "
          + "room enclosed on three sides, contradicting the initial description of the dinner as outdoors.",
-    note: "Reported by the San Francisco Chronicle roughly a week after the fact. Newsom later called it \"a bad mistake.\" "
-        + "Two of the other guests were executives of the California Medical Association.",
-    url: "https://calmatters.org/politics/2020/11/newsom-dinner-california-medical-lobby-french-laundry-pandemic/",
-    src: "CalMatters, 18 November 2020",
+    note: "Newsom later called it \"a bad mistake.\" Two of the other guests were executives of the California Medical Association.",
+    source: { label: "CalMatters, 18 November 2020", kind: "reporting",
+              url: "https://calmatters.org/politics/2020/11/newsom-dinner-california-medical-lobby-french-laundry-pandemic/" },
     also: [
-      { label: "Snopes fact check with attendee detail",
+      { label: "Snopes fact check with attendee detail", kind: "reporting",
         url: "https://www.snopes.com/fact-check/newsom-french-laundry/" }
     ]
   }
@@ -352,7 +391,7 @@ const EVENTS = [
 // ---------------------------------------------------------------------------
 const byDate = [...EVENTS].sort((a, b) => a.date.localeCompare(b.date));
 const parse = iso => Date.parse(iso + "T00:00:00Z");
-const PAD = 18 * 864e5;                                   // 18 days of breathing room
+const PAD = 18 * 864e5;
 const T0 = parse(byDate[0].date) - PAD;
 const T1 = parse(byDate[byDate.length - 1].date) + PAD;
 const pos = iso => ((parse(iso) - T0) / (T1 - T0) * 100) + "%";
@@ -362,20 +401,29 @@ const fmt = iso => new Date(parse(iso)).toLocaleDateString("en-US",
   { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
 const fmtShort = iso => new Date(parse(iso)).toLocaleDateString("en-US",
   { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
+const KIND_TEXT = { primary: "primary", reporting: "reporting", none: "no document" };
+
 const el = (tag, cls, text) => {
   const n = document.createElement(tag);
   if (cls) n.className = cls;
   if (text !== undefined) n.textContent = text;
   return n;
 };
-const link = (label, url) => {
-  const a = el("a", null, label);
-  a.href = url;
-  a.rel = "noopener";
-  return a;
+// a source, rendered as its kind tag plus the citation. Unlinked when kind is "none".
+const cite = s => {
+  const wrap = el("span", "r-src");
+  wrap.append(el("span", "kind " + s.kind, KIND_TEXT[s.kind]));
+  if (s.url) {
+    const a = el("a", null, s.label);
+    a.href = s.url;
+    a.rel = "noopener";
+    wrap.append(a);
+  } else {
+    wrap.append(el("span", null, s.label));
+  }
+  return wrap;
 };
 
-// month starts spanned by the domain
 const months = [];
 for (let d = new Date(T0); d.getTime() <= T1; d.setUTCMonth(d.getUTCMonth() + 1)) {
   const m = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1);
@@ -391,6 +439,7 @@ CATEGORIES.forEach(c => {
   li.append(sw, el("span", null, c.name));
   legend.append(li);
 });
+legend.append(el("li", null, "Grouping and colour are ours, not the sources'."));
 
 // chart --------------------------------------------------------------------
 const plot = document.getElementById("plot");
@@ -402,16 +451,28 @@ months.forEach(d => {
 });
 plot.append(grid);
 
+const head = el("div", "head");
+head.append(el("span", null, "What happened, and who says so"), el("span", null, "2020"));
+plot.append(head);
+
 byDate.forEach(e => {
   const c = catOf(e.cat);
-  const row = el("button", "row");
-  row.type = "button";
+  const row = el("div", "row");
   row.style.setProperty("--c", c.color);
-  row.setAttribute("aria-pressed", "false");
   row.dataset.date = e.date;
 
   const lab = el("div", "r-label");
-  lab.append(el("div", "r-date", fmtShort(e.date)), el("div", "r-title", e.short));
+  lab.append(el("div", "r-date", fmtShort(e.date)));
+
+  const claim = el("button", "r-claim", e.short);
+  claim.type = "button";
+  claim.setAttribute("aria-label", e.short + " — full detail");
+  claim.addEventListener("click", () => select(e));
+  lab.append(claim);
+
+  lab.append(cite(e.source));
+  (e.also || []).forEach(s => lab.append(cite(s)));
+  if (e.ourCall) lab.append(el("div", "r-call", e.ourCall));
 
   const track = el("div", "r-track");
   track.style.setProperty("--x", pos(e.date));
@@ -420,11 +481,6 @@ byDate.forEach(e => {
   track.append(dot);
 
   row.append(lab, track);
-  row.addEventListener("click", () => select(e));
-  row.addEventListener("pointerenter", () => showTip(dot, e, c));
-  row.addEventListener("focus", () => showTip(dot, e, c));
-  row.addEventListener("pointerleave", hideTip);
-  row.addEventListener("blur", hideTip);
   plot.append(row);
 });
 
@@ -441,33 +497,13 @@ months.forEach(d => {
 axis.append(el("div"), axisTrack);
 plot.append(axis);
 
-// tooltip ------------------------------------------------------------------
-const tip = document.getElementById("tip");
-function showTip(node, e, c) {
-  tip.replaceChildren();
-  tip.append(el("div", "tip-date", fmt(e.date)));
-  tip.append(el("div", "tip-title", e.short));
-  const row = el("div", "tip-cat");
-  const key = el("i", "tip-key");
-  key.style.background = c.color;
-  row.append(key, el("span", null, c.name));
-  tip.append(row);
-  const r = node.getBoundingClientRect();
-  tip.style.left = (r.left + scrollX + r.width / 2) + "px";
-  tip.style.top = (r.top + scrollY - 8) + "px";
-  tip.classList.add("on");
-  tip.setAttribute("aria-hidden", "false");
-}
-function hideTip() {
-  tip.classList.remove("on");
-  tip.setAttribute("aria-hidden", "true");
-}
+// gutter width: wide enough for a citation to sit on one or two lines
+plot.style.setProperty("--gutter", "460px");
 
 // detail -------------------------------------------------------------------
 const detail = document.getElementById("detail");
 function select(e) {
-  document.querySelectorAll(".row").forEach(r =>
-    r.setAttribute("aria-pressed", String(r.dataset.date === e.date)));
+  document.querySelectorAll(".row").forEach(r => r.classList.toggle("on", r.dataset.date === e.date));
   detail.replaceChildren();
   detail.append(el("div", "d-date", fmt(e.date) + "  |  " + catOf(e.cat).name));
   detail.append(el("div", "d-title", e.title));
@@ -475,17 +511,15 @@ function select(e) {
   auth.append(el("b", null, "Authority: "), document.createTextNode(e.authority));
   detail.append(auth);
   detail.append(el("p", null, e.blurb));
+  if (e.ourCall) detail.append(el("p", "d-note", e.ourCall));
   if (e.note) detail.append(el("p", "d-note", e.note));
-  const src = el("p", "d-src");
-  src.append(document.createTextNode("Source: "), link(e.src, e.url));
-  detail.append(src);
-  (e.also || []).forEach(x => {
+  [e.source, ...(e.also || [])].forEach(s => {
     const p = el("p", "d-src");
-    p.append(document.createTextNode("Also: "), link(x.label, x.url));
+    p.append(cite(s));
     detail.append(p);
   });
 }
-detail.append(el("p", "d-hint", "Select a row for the authority, the source and the caveats."));
+detail.append(el("p", "d-hint", "Select any row's headline for the full account, the authority behind it, and what we could not verify."));
 
 // table --------------------------------------------------------------------
 const tbody = document.querySelector("#table tbody");
@@ -502,17 +536,23 @@ byDate.forEach(e => {
   td.append(tag);
   tr.append(td);
   const cell = el("td");
-  cell.append(link(e.src, e.url));
+  [e.source, ...(e.also || [])].forEach(s => cell.append(cite(s)));
   tr.append(cell);
   tbody.append(tr);
 });
 
 // footer -------------------------------------------------------------------
 const foot = document.getElementById("foot");
+const counts = byDate.flatMap(e => [e.source, ...(e.also || [])])
+  .reduce((a, s) => (a[s.kind] = (a[s.kind] || 0) + 1, a), {});
 foot.append(document.createTextNode(
-  byDate.length + " events. The data lives in the EVENTS array at the top of this page's HTML. "
-  + "Corrections and additions welcome: "));
-foot.append(link("github.com/debedb/elephants", "https://github.com/debedb/elephants"));
+  byDate.length + " events, " + (counts.primary || 0) + " primary documents, "
+  + (counts.reporting || 0) + " journalist accounts, " + (counts.none || 0)
+  + " where no document exists. If a link rots or a citation is wrong, that is a bug: "));
+const a = el("a", null, "github.com/debedb/elephants");
+a.href = "https://github.com/debedb/elephants";
+a.rel = "noopener";
+foot.append(a);
 </script>
 </body>
 </html>

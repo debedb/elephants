@@ -716,7 +716,7 @@ function paintChart() {
     }));
     chartSvg.append(sv("text", {
       x: L - 7, y: y(p) + 3.5, "text-anchor": "end",
-      "font-size": 10.5, fill: mid ? cMuted : cGrid,
+      "font-size": 10.5, fill: cMuted, opacity: mid ? 1 : 0.75,
       "font-weight": mid ? 700 : 400
     }, (p * 100).toFixed(0) + "%"));
   });

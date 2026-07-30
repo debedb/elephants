@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What the US government said about COVID-19 vaccines</title>
+<meta name="description" content="US federal statements on COVID-19 vaccines and transmission, on one time axis. Every source is a .gov document or transcript. No media, no analysis.">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --plane: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --cat-1: #2a78d6;
+    --cat-2: #eb6834;
+    --cat-3: #1baf7a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.10);
+      --cat-1: #3987e5;
+      --cat-2: #d95926;
+      --cat-3: #199e70;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--text-primary);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 34px 20px 72px; }
+  h1 { font-size: 27px; line-height: 1.22; margin: 0 0 10px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 44px 0 10px; }
+  p { margin: 0 0 12px; color: var(--text-secondary); max-width: 74ch; }
+  a { color: inherit; }
+  .lede { font-size: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+
+  .howto {
+    border-left: 2px solid var(--axis); padding: 2px 0 2px 14px; margin: 18px 0 6px;
+    font-size: 13.5px; max-width: 74ch;
+  }
+  .howto p { margin: 0 0 6px; font-size: 13.5px; }
+  .howto p:last-child { margin: 0; }
+  .howto b { color: var(--text-primary); font-weight: 600; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0 10px; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
+  .swatch { width: 13px; height: 13px; border-radius: 50%; flex: none; }
+
+  /* chart: one row per document. x = date. y carries no magnitude. */
+  .scroller { overflow-x: auto; }
+  .plot { position: relative; min-width: 1000px; padding: 0 20px 6px; }
+  .head {
+    display: grid; grid-template-columns: var(--gutter) 1fr;
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-muted); padding: 12px 0 8px;
+  }
+  .head span:last-child { padding-left: 2px; }
+
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--gutter) 1fr;
+    align-items: center;
+    min-height: 58px;
+    padding: 8px 0;
+    border-top: 1px solid var(--grid);
+  }
+  .row:hover { background: color-mix(in srgb, var(--c) 6%, transparent); }
+  .row.on { background: color-mix(in srgb, var(--c) 11%, transparent); }
+
+  .r-label { padding-right: 18px; }
+  .r-date { font-size: 11.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .r-claim {
+    display: block; text-align: left; width: 100%;
+    border: 0; background: none; padding: 0; margin: 1px 0 3px;
+    font: inherit; font-size: 13.5px; line-height: 1.3; color: var(--text-primary);
+    cursor: pointer;
+  }
+  .r-claim:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .r-claim:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+  .row.on .r-claim { font-weight: 650; }
+
+  .r-src { display: flex; align-items: baseline; gap: 6px; font-size: 12px; line-height: 1.35; }
+  .r-src a { color: var(--text-secondary); }
+  .kind {
+    flex: none; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 1px 5px; border-radius: 3px; border: 1px solid var(--axis); color: var(--text-muted);
+    position: relative; top: -1px;
+  }
+  .kind.primary { border-color: currentColor; color: var(--text-secondary); }
+  .kind.none { border-style: dashed; }
+  .r-call { font-size: 11.5px; color: var(--text-muted); font-style: italic; margin-top: 3px; }
+
+  .r-track { position: relative; height: 100%; min-height: 32px; }
+  .r-track::before {
+    content: ""; position: absolute; left: 0; top: 50%; height: 1px;
+    width: var(--x); background: var(--grid);
+  }
+  .dot {
+    position: absolute; top: 50%; left: var(--x);
+    width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px;
+    border-radius: 50%; background: var(--c);
+    box-shadow: 0 0 0 2px var(--surface-1);
+    transition: transform .12s ease;
+  }
+  .row:hover .dot { transform: scale(1.3); }
+  .row.on .dot { transform: scale(1.5); box-shadow: 0 0 0 2px var(--surface-1), 0 0 0 4px var(--c); }
+
+  .gridlines { position: absolute; left: calc(20px + var(--gutter)); right: 20px; top: 0; bottom: 26px; pointer-events: none; }
+  .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--grid); }
+  .gridline.q { background: var(--axis); }
+  .axis { display: grid; grid-template-columns: var(--gutter) 1fr; }
+  .axis-track { position: relative; height: 26px; border-top: 1px solid var(--axis); }
+  .tick {
+    position: absolute; top: 6px; left: var(--x); transform: translateX(-50%);
+    font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+
+  #detail { padding: 18px 20px; margin-top: 18px; }
+  #detail .d-date { font-size: 12.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  #detail .d-title { font-size: 19px; font-weight: 650; line-height: 1.3; margin: 3px 0 10px; }
+  #detail .d-note { border-left: 2px solid var(--axis); padding-left: 12px; font-size: 13.5px; }
+  #detail .d-src { font-size: 13.5px; margin-bottom: 4px; word-break: break-word; }
+  #detail .d-hint { color: var(--text-muted); margin: 0; }
+  #detail .d-auth b { color: var(--text-primary); font-weight: 600; }
+  #detail .d-auth { font-size: 13.5px; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .cat-tag { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .cat-tag i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+  .cta { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 16px; max-width: none; }
+  .cta a {
+    display: inline-block; padding: 7px 13px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--surface-1);
+    font-size: 13.5px; text-decoration: none; color: var(--text-primary);
+  }
+  .cta a:hover { border-color: var(--axis); }
+
+  .objections { max-width: 74ch; padding-left: 18px; margin: 0 0 12px; }
+  .objections li { color: var(--text-secondary); margin-bottom: 9px; font-size: 14px; }
+  .objections b { color: var(--text-primary); font-weight: 600; }
+
+  footer { margin-top: 44px; font-size: 12.5px; color: var(--text-muted); max-width: 74ch; }
+
+  .siblings { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 22px; font-size: 13px; }
+  .siblings a { color: var(--text-secondary); }
+  .rule {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-2);
+    background: var(--surface-1); border-radius: 8px;
+    padding: 14px 16px; margin: 0 0 18px; max-width: 74ch;
+  }
+  .rule p { margin: 0; font-size: 14px; }
+  .rule b { color: var(--text-primary); font-weight: 650; }
+  .quote {
+    font-size: 13px; line-height: 1.4; color: var(--text-primary);
+    border-left: 2px solid var(--c); padding-left: 10px; margin: 4px 0 5px;
+  }
+</style>
+<body>
+<main>
+  <h1>What the US government said about COVID-19 vaccines and transmission</h1>
+  <p class="siblings">
+    <a href="../covid19/">&larr; COVID-19: a sourced timeline</a>
+  </p>
+  <p class="lede">The claim moved: from "data are limited" at authorization, to "you're not going to
+     get COVID", to "vaccinated people infected with Delta can transmit the virus", to guidance that
+     stopped distinguishing the vaccinated from everyone else. Each step below is a federal document
+     or transcript, quoted in its own words.</p>
+
+  <div class="rule">
+    <p><b>Only .gov sources on this page.</b> Every row links to something published by the United
+       States government: an FDA review memorandum, a CDC media statement, an MMWR report, a White
+       House transcript. There is no journalism here, no commentary, and no analysis of either.
+       Where an official said something on television, it is out.</p>
+  </div>
+
+  <div class="howto">
+    <p><b>The most quoted line in this whole argument is missing, on purpose.</b> On 29 March 2021
+       the CDC Director said of vaccinated people that "they don't get sick" and "do not carry the
+       virus". She said it on MSNBC. It is not a government publication, so it is not on this page,
+       even though it is the single most useful quotation for the argument we are making. That is
+       the rule doing its job rather than us doing ours.</p>
+    <p><b>The horizontal axis is time.</b> The vertical axis carries no magnitude and no ranking.
+       Rows are stacked in date order so that every document has a place to sit where you can see
+       and click its citation.</p>
+    <p><b>Quotations are verbatim</b> and were read out of the linked document, not out of an
+       article about it. Ellipses mark omitted words; nothing else is altered.</p>
+    <p><b>Our voice appears in two places only:</b> which statements share this axis, and the lines
+       marked "our call". The argument they add up to is stated below, in its own section, so you
+       can argue with it instead of inferring it.</p>
+  </div>
+
+  <ul class="legend" id="legend"></ul>
+
+  <div class="card scroller">
+    <div class="plot" id="plot"></div>
+  </div>
+
+  <div class="card" id="detail"></div>
+
+  <h2>The argument, stated plainly</h2>
+  <p>This is ours, and it is the only claim on the page that is. <b>The strongest public assurances
+     were made in the window when the government's own documents did not support them, and they
+     were withdrawn without ever being retracted as claims.</b> The FDA said at authorization that
+     transmission data were limited. Fourteen weeks later the CDC reported a real reduction in
+     infection and framed it as preventing spread. Three months after that a President told a
+     televised audience that vaccinated people were not going to get COVID at all. Six days later
+     the CDC told vaccinated people to put masks back on indoors, and three days after that its
+     Director said in writing that vaccinated people infected with Delta can transmit the virus.
+     By August 2022 the guidance no longer distinguished the vaccinated from anyone else.</p>
+  <p>Every one of those steps is defensible on its own. The claim is about the sequence: the
+     confidence of the public message ran ahead of the evidence in the government's own files, and
+     the correction arrived as a guidance change rather than as a correction.</p>
+
+  <h2>The strongest objections to it</h2>
+  <p>These are not strawmen. If we lose the argument, we expect to lose it on one of these.</p>
+  <ul class="objections">
+    <li><b>The March 2021 claim was not invented — it was true of the virus at the time.</b> The CDC
+      study found a 90% reduction in all infections, symptomatic and not, against the variants then
+      circulating. Reduced infection really does mean reduced transmission. Delta was a materially
+      different virus with a different immune-escape profile, and a claim that was well supported in
+      March can become false in July without anybody having lied in March.</li>
+    <li><b>Changing guidance on new evidence is the system working, not failing.</b> The CDC
+      reversed itself within days of receiving unpublished outbreak data and said so in writing.
+      The alternative — holding a position because reversing looks bad — is the actual failure mode.
+      A timeline that reads reversals as embarrassments punishes exactly the behaviour we want.</li>
+    <li><b>A town hall is not agency guidance.</b> Presidential speech is political persuasion
+      aimed at raising uptake, and holding CDC's documentary record responsible for a President's
+      compression of it conflates two very different institutions. No CDC document ever said "you
+      are not going to get COVID".</li>
+    <li><b>Cycle threshold values are not transmission.</b> The Barnstable inference — similar viral
+      loads therefore similar infectiousness — was itself a leap beyond what the data showed, made
+      under time pressure. If we credit it here as the moment the story changed, we are accepting a
+      standard of evidence we would not accept from the other direction.</li>
+    <li><b>Eight documents is a sample, and we picked it.</b> Federal agencies published thousands
+      of pages in this period, including plenty that hedged carefully. A different eight could
+      support a different conclusion.</li>
+  </ul>
+
+  <h2>How to argue with this page</h2>
+  <p>You don't have to persuade us. Everything here — every date, every quotation, every word of the
+     argument above — sits in a single public file that anyone is allowed to edit. You change what
+     you think is wrong and send us your version. We either accept it, publicly, or we have to say
+     publicly why not.</p>
+  <ul class="objections">
+    <li><b>A quotation is wrong or out of context.</b> The full document is one click away on every
+      row; if the surrounding paragraph changes the meaning, that is the strongest correction you
+      can make and we want it.</li>
+    <li><b>A federal document is missing.</b> Particularly one that hedged where this page implies
+      confidence. Those are worth more here than ones that help us.</li>
+    <li><b>A source is not really .gov.</b> That is a bug by this page's own stated rule, and it
+      gets fixed.</li>
+    <li><b>The argument itself is wrong.</b> Rewrite it. It is the one part of this page we actually
+      wrote.</li>
+  </ul>
+  <p><b>And if you'd rather not argue with us at all, take the whole thing.</b> You are free to make
+     a complete copy of this page and publish your own version under your own name, with different
+     documents and a different conclusion. You need nobody's permission. Send us yours and we will
+     link to it from here.</p>
+  <p class="cta">
+    <a href="https://github.com/debedb/elephants/blob/master/covid19-us-messaging/index.html" rel="noopener">See the file everything lives in</a>
+    <a href="https://github.com/debedb/elephants/compare" rel="noopener">Send us a change</a>
+    <a href="https://github.com/debedb/elephants/fork" rel="noopener">Take your own copy</a>
+    <a href="https://github.com/debedb/elephants/issues/new" rel="noopener">Or just tell us what's wrong</a>
+  </p>
+
+  <h2>All statements</h2>
+  <table id="table">
+    <thead><tr><th>Date</th><th>Statement</th><th>Kind</th><th>Source</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <footer id="foot"></footer>
+</main>
+
+<div id="tip" role="tooltip" aria-hidden="true"></div>
+<script>
+// ---------------------------------------------------------------------------
+// Data. One entry per federal document or transcript.
+//   PROVENANCE RULE: every source.url on this page must be a United States
+//   government domain (.gov). No journalism, no commentary, no analysis of
+//   either. A source that fails this test is a bug, not an exception.
+//   quote:   verbatim from the linked document, read there and not elsewhere
+//   ourCall: any interpretation WE made, shown on the row, not buried
+// ---------------------------------------------------------------------------
+const CATEGORIES = [
+  { id: "evidence", name: "What the government's own data said", color: "var(--cat-1)" },
+  { id: "guidance", name: "What the guidance required",          color: "var(--cat-2)" },
+  { id: "said",     name: "What officials said in public",       color: "var(--cat-3)" }
+];
+
+const EVENTS = [
+  {
+    date: "2020-12-11",
+    cat: "evidence",
+    short: "FDA authorizes, and records that transmission data are limited",
+    title: "FDA's emergency use authorization review memorandum for the Pfizer-BioNTech vaccine",
+    authority: "US Food and Drug Administration, Center for Biologics Evaluation and Research",
+    quote: "Data are limited to assess the effect of the vaccine against transmission of SARS-CoV-2 "
+         + "from individuals who are infected despite vaccination.",
+    blurb: "The document authorizing the first US vaccine states in its own effectiveness section that "
+         + "the trials did not establish an effect on transmission, and separately that data on "
+         + "asymptomatic infection were limited. Efficacy was demonstrated against symptomatic COVID-19.",
+    note: "The memorandum does go on to say that high efficacy against symptomatic disease \"may translate "
+        + "to overall prevention of transmission in populations with high enough vaccine uptake\" — a "
+        + "conditional, not a finding. Both halves are in the same paragraph.",
+    source: { label: "FDA EUA review memorandum, December 2020 (PDF)", org: "FDA",
+              url: "https://www.fda.gov/media/144416/download" }
+  },
+  {
+    date: "2021-03-29",
+    cat: "evidence",
+    short: "CDC reports 90% reduction in infection, and frames it as preventing spread",
+    title: "CDC announces real-world study finding mRNA vaccines reduce all infections, not only symptomatic ones",
+    authority: "Centers for Disease Control and Prevention, reporting MMWR early release mm7013e3",
+    quote: "Preventing both asymptomatic and pre-symptomatic infections among health care workers and "
+         + "other essential workers through vaccination can help prevent the spread of SARS-CoV-2 to "
+         + "those they care for or serve.",
+    blurb: "A study of about 4,000 health care personnel and first responders found risk of infection "
+         + "reduced by 90% two or more weeks after the second dose, with 58% of the infections detected "
+         + "before symptoms appeared. This is the evidentiary basis for everything the government said "
+         + "next about transmission.",
+    note: "The study measured infection, not onward transmission, and predates Delta by about three "
+        + "months. It is a real finding and this page does not dispute it.",
+    source: { label: "CDC newsroom release, 29 March 2021", org: "CDC",
+              url: "https://archive.cdc.gov/www_cdc_gov/media/releases/2021/p0329-COVID-19-Vaccines.html" },
+    also: [
+      { label: "MMWR early release mm7013e3, the underlying study", org: "MMWR",
+        url: "https://www.cdc.gov/mmwr/volumes/70/wr/mm7013e3.htm" }
+    ]
+  },
+  {
+    date: "2021-05-13",
+    cat: "guidance",
+    short: "CDC: fully vaccinated people can drop masks and distancing",
+    title: "Interim public health recommendations for fully vaccinated people",
+    authority: "Centers for Disease Control and Prevention",
+    quote: "Fully vaccinated people can resume activities without wearing a mask or physically "
+         + "distancing, except where required by federal, state, local, tribal, or territorial laws, "
+         + "rules, and regulations, including local business and workplace guidance.",
+    blurb: "The guidance change that ended masking for vaccinated Americans, issued seven weeks after "
+         + "the March study and before any published US data on vaccinated transmission of Delta.",
+    note: "The same guidance retained exceptions for health care settings, transport and local rules.",
+    source: { label: "CDC interim recommendations, version of 13 May 2021 (CDC Stacks)", org: "CDC",
+              url: "https://stacks.cdc.gov/view/cdc/105629" }
+  },
+  {
+    date: "2021-07-21",
+    cat: "said",
+    short: "\"You're not going to get COVID if you have these vaccinations\"",
+    title: "President Biden, CNN town hall, Cincinnati",
+    authority: "The President of the United States; transcript published by the White House",
+    quote: "You're not going to get COVID if you have these vaccinations. ... If you're vaccinated, "
+         + "you're not going to be hospitalized, you're not going to be in an ICU unit, and you're not "
+         + "going to die.",
+    ourCall: "Our call: this is on the page because the White House published the transcript, which "
+           + "makes it a government record of a government claim. It is political speech, not agency "
+           + "guidance, and the objections section takes that seriously.",
+    blurb: "Said six days before the CDC reversed its mask guidance for vaccinated people, and nine "
+         + "days before the CDC Director stated in writing that vaccinated people can transmit Delta.",
+    note: "In the same answer the President also said that if you do catch it, \"not many people do\" "
+        + "and \"you're probably going to be symptomless\" — a hedge, in the middle of the strongest "
+        + "claim.",
+    source: { label: "White House transcript, remarks of 21 July 2021", org: "WHITE HOUSE",
+              url: "https://bidenwhitehouse.archives.gov/briefing-room/speeches-remarks/2021/07/22/remarks-by-president-biden-in-a-cnn-town-hall-with-don-lemon/" }
+  },
+  {
+    date: "2021-07-27",
+    cat: "guidance",
+    short: "CDC reverses: masks indoors again, regardless of vaccination status",
+    title: "CDC updates its guidance for fully vaccinated people",
+    authority: "Centers for Disease Control and Prevention",
+    quote: "On July 27th, CDC updated its guidance for fully vaccinated people, recommending that "
+         + "everyone wear a mask in indoor public settings in areas of substantial and high "
+         + "transmission, regardless of vaccination status.",
+    blurb: "Ten weeks after telling vaccinated people they could stop masking, and six days after the "
+         + "President's town hall, the CDC reinstated indoor masking for the vaccinated in most of the "
+         + "country.",
+    note: "The quotation is the CDC Director's own description of the change, from her statement three "
+        + "days later. The guidance document itself is linked alongside.",
+    source: { label: "CDC Director's statement describing the 27 July change", org: "CDC",
+              url: "https://archive.cdc.gov/www_cdc_gov/media/releases/2021/s0730-mmwr-covid-19.html" },
+    also: [
+      { label: "Interim recommendations for fully vaccinated people, updated 28 July 2021", org: "CDC",
+        url: "https://stacks.cdc.gov/view/cdc/108355" },
+      { label: "MMWR mm7030e2, the prevention-strategy guidance published the same week", org: "MMWR",
+        url: "https://www.cdc.gov/mmwr/volumes/70/wr/mm7030e2.htm" }
+    ]
+  },
+  {
+    date: "2021-07-30",
+    cat: "said",
+    short: "CDC Director: vaccinated people infected with Delta can transmit the virus",
+    title: "Statement from CDC Director Rochelle P. Walensky on that day's MMWR",
+    authority: "Director, Centers for Disease Control and Prevention; CDC media statement",
+    quote: "High viral loads suggest an increased risk of transmission and raised concern that, unlike "
+         + "with other variants, vaccinated people infected with Delta can transmit the virus. This "
+         + "finding is concerning and was a pivotal discovery leading to CDC's updated mask "
+         + "recommendation.",
+    blurb: "The government's own written reversal of the transmission claim, nine days after the "
+         + "President told a national audience that vaccinated people would not get COVID at all.",
+    note: "Note the sequencing the statement itself describes: the guidance changed on 27 July on the "
+        + "basis of unpublished data, and the data were published on 30 July.",
+    source: { label: "CDC media statement, 30 July 2021", org: "CDC",
+              url: "https://archive.cdc.gov/www_cdc_gov/media/releases/2021/s0730-mmwr-covid-19.html" }
+  },
+  {
+    date: "2021-08-06",
+    cat: "evidence",
+    short: "Provincetown: 74% of outbreak cases were fully vaccinated",
+    title: "MMWR: outbreak of SARS-CoV-2 infections, including vaccine breakthrough infections, Barnstable County, Massachusetts",
+    authority: "Morbidity and Mortality Weekly Report, Centers for Disease Control and Prevention",
+    quote: "469 COVID-19 cases were identified among Massachusetts residents who had traveled to the "
+         + "town during July 3-17; 346 (74%) occurred in fully vaccinated persons. ... Cycle threshold "
+         + "values were similar among specimens from patients who were fully vaccinated and those who "
+         + "were not.",
+    blurb: "The study behind the reversal. Delta was identified in 90% of sequenced specimens. Four of "
+         + "the five hospitalized patients were fully vaccinated; there were no deaths.",
+    note: "Released 30 July 2021 and published in the 6 August issue. The vaccinated were also the "
+        + "large majority of the population attending, which the report notes and which limits what "
+        + "the 74% figure can be made to mean.",
+    source: { label: "MMWR 70(31), mm7031e2", org: "MMWR",
+              url: "https://www.cdc.gov/mmwr/volumes/70/wr/mm7031e2.htm" }
+  },
+  {
+    date: "2022-08-11",
+    cat: "guidance",
+    short: "CDC guidance stops distinguishing the vaccinated from everyone else",
+    title: "MMWR: summary of guidance for minimizing the impact of COVID-19",
+    authority: "Centers for Disease Control and Prevention; MMWR early release",
+    quote: "CDC's COVID-19 prevention recommendations no longer differentiate based on a person's "
+         + "vaccination status because breakthrough infections occur, though they are generally mild.",
+    blurb: "Twenty months after authorization, federal guidance formally abandoned the vaccinated/"
+         + "unvaccinated distinction it had built the previous year's rules on. Quarantine of exposed "
+         + "persons was dropped \"regardless of vaccination status\" in the same document.",
+    note: "The document continues to recommend vaccination, on the ground that it reduces severe "
+        + "illness and death. That is the claim the government still makes, and this page does not "
+        + "contest it.",
+    source: { label: "MMWR 71(33), mm7133e1, early release 11 August 2022", org: "MMWR",
+              url: "https://www.cdc.gov/mmwr/volumes/71/wr/mm7133e1.htm" }
+  }
+];
+
+// ---------------------------------------------------------------------------
+const byDate = [...EVENTS].sort((a, b) => a.date.localeCompare(b.date));
+const parse = iso => Date.parse(iso + "T00:00:00Z");
+const PAD = 30 * 864e5;
+const T0 = parse(byDate[0].date) - PAD;
+const T1 = parse(byDate[byDate.length - 1].date) + PAD;
+const pos = iso => ((parse(iso) - T0) / (T1 - T0) * 100) + "%";
+
+const catOf = id => CATEGORIES.find(c => c.id === id);
+const fmt = iso => new Date(parse(iso)).toLocaleDateString("en-US",
+  { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const fmtShort = iso => new Date(parse(iso)).toLocaleDateString("en-US",
+  { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
+
+const el = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined) n.textContent = text;
+  return n;
+};
+// a source, rendered as its agency tag plus the citation
+const cite = s => {
+  const wrap = el("span", "r-src");
+  wrap.append(el("span", "kind primary", s.org));
+  const a = el("a", null, s.label);
+  a.href = s.url;
+  a.rel = "noopener";
+  wrap.append(a);
+  return wrap;
+};
+// every link on this page must be a .gov host; anything else is a bug
+const isGov = url => { try { return new URL(url).hostname.endsWith(".gov"); } catch (e) { return false; } };
+
+const months = [];
+for (let d = new Date(T0); d.getTime() <= T1; d.setUTCMonth(d.getUTCMonth() + 1)) {
+  const m = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1);
+  if (m >= T0 && m <= T1) months.push(new Date(m));
+}
+
+// legend -------------------------------------------------------------------
+const legend = document.getElementById("legend");
+CATEGORIES.forEach(c => {
+  const li = el("li");
+  const sw = el("span", "swatch");
+  sw.style.background = c.color;
+  li.append(sw, el("span", null, c.name));
+  legend.append(li);
+});
+legend.append(el("li", null, "Grouping and colour are ours, not the government's."));
+
+// chart --------------------------------------------------------------------
+const plot = document.getElementById("plot");
+const grid = el("div", "gridlines");
+months.forEach(d => {
+  const g = el("div", "gridline" + (d.getUTCMonth() % 3 === 0 ? " q" : ""));
+  g.style.left = pos(d.toISOString().slice(0, 10));
+  grid.append(g);
+});
+plot.append(grid);
+
+const head = el("div", "head");
+const years = [...new Set(byDate.map(e => e.date.slice(0, 4)))];
+head.append(el("span", null, "What was said, and which document says it"),
+            el("span", null, years[0] + (years.length > 1 ? " to " + years[years.length - 1] : "")));
+plot.append(head);
+
+byDate.forEach(e => {
+  const c = catOf(e.cat);
+  const row = el("div", "row");
+  row.style.setProperty("--c", c.color);
+  row.dataset.date = e.date;
+
+  const lab = el("div", "r-label");
+  lab.append(el("div", "r-date", fmtShort(e.date)));
+
+  const claim = el("button", "r-claim", e.short);
+  claim.type = "button";
+  claim.setAttribute("aria-label", e.short + " — full detail");
+  claim.addEventListener("click", () => select(e));
+  lab.append(claim);
+
+  if (e.quote) lab.append(el("div", "quote", "“" + e.quote + "”"));
+  lab.append(cite(e.source));
+  (e.also || []).forEach(s => lab.append(cite(s)));
+  if (e.ourCall) lab.append(el("div", "r-call", e.ourCall));
+
+  const track = el("div", "r-track");
+  track.style.setProperty("--x", pos(e.date));
+  const dot = el("span", "dot");
+  dot.style.setProperty("--x", pos(e.date));
+  track.append(dot);
+
+  row.append(lab, track);
+  plot.append(row);
+});
+
+const axis = el("div", "axis");
+const axisTrack = el("div", "axis-track");
+const tickEvery = months.length > 14 ? 3 : 1;
+months.forEach(d => {
+  if (d.getUTCMonth() % tickEvery !== 0) return;
+  const label = d.getUTCMonth() === 0
+    ? d.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })
+    : d.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" });
+  const t = el("div", "tick", label);
+  t.style.setProperty("--x", pos(d.toISOString().slice(0, 10)));
+  axisTrack.append(t);
+});
+axis.append(el("div"), axisTrack);
+plot.append(axis);
+
+plot.style.setProperty("--gutter", "560px");
+
+// detail -------------------------------------------------------------------
+const detail = document.getElementById("detail");
+function select(e) {
+  document.querySelectorAll(".row").forEach(r => r.classList.toggle("on", r.dataset.date === e.date));
+  detail.replaceChildren();
+  detail.append(el("div", "d-date", fmt(e.date) + "  |  " + catOf(e.cat).name));
+  detail.append(el("div", "d-title", e.title));
+  const auth = el("p", "d-auth");
+  auth.append(el("b", null, "Authority: "), document.createTextNode(e.authority));
+  detail.append(auth);
+  if (e.quote) {
+    const q = el("p", "d-note", "“" + e.quote + "”");
+    detail.append(q);
+  }
+  detail.append(el("p", null, e.blurb));
+  if (e.ourCall) detail.append(el("p", "d-note", e.ourCall));
+  if (e.note) detail.append(el("p", "d-note", e.note));
+  [e.source, ...(e.also || [])].forEach(s => {
+    const p = el("p", "d-src");
+    p.append(cite(s));
+    detail.append(p);
+  });
+}
+detail.append(el("p", "d-hint", "Select any row's headline for the full quotation, the authority behind it, and what we could not verify."));
+
+// table --------------------------------------------------------------------
+const tbody = document.querySelector("#table tbody");
+byDate.forEach(e => {
+  const tr = el("tr");
+  tr.append(el("td", null, e.date));
+  tr.append(el("td", null, e.title));
+  const c = catOf(e.cat);
+  const td = el("td");
+  const tag = el("span", "cat-tag");
+  const dot = el("i");
+  dot.style.background = c.color;
+  tag.append(dot, el("span", null, c.name));
+  td.append(tag);
+  tr.append(td);
+  const cell = el("td");
+  [e.source, ...(e.also || [])].forEach(s => cell.append(cite(s)));
+  tr.append(cell);
+  tbody.append(tr);
+});
+
+// footer: state the provenance rule, and prove it held ----------------------
+const all = byDate.flatMap(e => [e.source, ...(e.also || [])]);
+const offenders = all.filter(s => !isGov(s.url));
+const foot = document.getElementById("foot");
+foot.append(document.createTextNode(
+  byDate.length + " statements, " + all.length + " sources. "
+  + "Provenance rule: every source on this page is a United States government publication, served "
+  + "from a .gov domain — FDA, CDC, MMWR, CDC Stacks, the CDC archive, and the White House "
+  + "transcript archive. No journalism is cited here, on any point, including points where "
+  + "journalism would help the argument. "
+  + (offenders.length === 0
+      ? "All " + all.length + " links check out as .gov."
+      : "WARNING: " + offenders.length + " link(s) on this page are not .gov and should be removed: "
+        + offenders.map(s => s.url).join(", "))
+  + " If a link rots or a citation is wrong, that is a bug: "));
+const a = el("a", null, "github.com/debedb/elephants");
+a.href = "https://github.com/debedb/elephants";
+a.rel = "noopener";
+foot.append(a);
+</script>
+</body>
+</html>

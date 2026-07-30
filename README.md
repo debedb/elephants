@@ -10,7 +10,21 @@ Published at **[elephants.debedb.com](https://elephants.debedb.com/)**.
 
 | Subject | Page |
 |---|---|
-| [`covid19/`](covid19/) | COVID-19, 2020 — [elephants.debedb.com/covid19/](https://elephants.debedb.com/covid19/) |
+| [`covid19/`](covid19/) | COVID-19, 2020–2021 — [elephants.debedb.com/covid19/](https://elephants.debedb.com/covid19/) |
+| [`covid19-us-messaging/`](covid19-us-messaging/) | What the US government said about vaccines and transmission — [elephants.debedb.com/covid19-us-messaging/](https://elephants.debedb.com/covid19-us-messaging/) |
+
+### Per-page provenance rules
+
+A page may narrow the house sourcing rule further, and if it does, it says so at
+the top and enforces it in code.
+
+- `covid19-us-messaging/` is **strictly .gov**. Every source is a United States
+  government publication — FDA, CDC, MMWR, CDC Stacks, the CDC archive, the
+  White House transcript archive. No journalism is cited on any point, including
+  points where journalism would help the argument: the most quoted line in the
+  whole controversy is absent from that page because it was said on television.
+  The page checks its own links at render time and prints a warning in the
+  footer if any source is not served from a `.gov` host.
 
 ## Ethos
 

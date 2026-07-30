@@ -164,6 +164,14 @@
   .cat-tag { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
   .cat-tag i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
+  .cta { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 16px; max-width: none; }
+  .cta a {
+    display: inline-block; padding: 7px 13px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--surface-1);
+    font-size: 13.5px; text-decoration: none; color: var(--text-primary);
+  }
+  .cta a:hover { border-color: var(--axis); }
+
   .objections { max-width: 74ch; padding-left: 18px; margin: 0 0 12px; }
   .objections li { color: var(--text-secondary); margin-bottom: 9px; font-size: 14px; }
   .objections b { color: var(--text-primary); font-weight: 600; }
@@ -242,22 +250,42 @@
       than presenting this as a complete record.</li>
   </ul>
 
-  <h2>Challenge this</h2>
-  <p>Disagreement is the product, not a complaint about it. Four kinds are all equally welcome, and
-     all go to the same place:
-     <a href="https://github.com/debedb/elephants/issues/new" rel="noopener">open an issue</a>.</p>
+  <h2>How to argue with this page</h2>
+  <p>You don't have to persuade us. This page isn't published the way an article is, where the
+     author keeps the pen and you get a comment box underneath. Everything you see here — every
+     date, every link, every word of the argument above — sits in a single public file that anyone
+     is allowed to edit. You change what you think is wrong and send us your version. We either
+     accept it, publicly, or we have to say publicly why not. Both the change and the refusal stay
+     on the record where anyone can read them.</p>
   <ul class="objections">
-    <li><b>A fact is wrong.</b> A date, a name, a signature, a quotation. Bring the document.</li>
-    <li><b>A better source exists.</b> Particularly if it replaces one of our
-      <span class="kind">reporting</span> citations with a primary one, or turns a
-      <span class="kind none">no document</span> into a document. The 30 April Orange County
-      closure is the open one: if a signed order exists, we want it.</li>
-    <li><b>An event is missing, especially one that cuts against us.</b> Events that weaken the
-      argument above are more useful to this page than events that strengthen it, and will be added
-      on the same terms.</li>
-    <li><b>The framing is wrong.</b> If the argument does not survive contact with the objections
-      above, that belongs in the issue tracker too, and the page should change.</li>
+    <li><b>Something here is factually wrong.</b> A date, a name, a quotation. Correct it and show
+      the document you're correcting it from.</li>
+    <li><b>You have a better source.</b> Especially one that replaces a journalist's account with
+      the original document. The 30 April Orange County beach closure is the open question: if a
+      signed order exists, whoever finds it has done more than this whole page has.</li>
+    <li><b>An event is missing — particularly one that undercuts us.</b> Those are worth more here
+      than ones that help us, and they get added on the same terms as anything else.</li>
+    <li><b>The argument itself is wrong.</b> Rewrite it. It is the one part of this page we
+      actually wrote, so it is the part most owed a rewrite.</li>
   </ul>
+  <p><b>And if you'd rather not argue with us at all, take the whole thing.</b> You are free to
+     make a complete copy of this page — our events, our sources, our argument and all — and
+     publish your own version of it under your own name, with different events and a different
+     conclusion. You need nobody's permission and there is nothing to ask for. That isn't us
+     losing an argument; it is the argument working as intended, because now two versions exist and
+     both can be checked against the same documents. Send us yours and we'll link to it from
+     here.</p>
+  <p>The buttons below are how that actually happens. It runs on GitHub, which is a tool
+     programmers use to edit things together and to keep an unforgeable record of who changed what;
+     you do not need to be one to use it, but you will need to make a free account. In its
+     vocabulary, sending us your version is a "pull request" and taking your own copy is a
+     "fork".</p>
+  <p class="cta">
+    <a href="https://github.com/debedb/elephants/blob/master/covid19/index.html" rel="noopener">See the file everything lives in</a> ·
+    <a href="https://github.com/debedb/elephants/compare" rel="noopener">Send us a change</a> ·
+    <a href="https://github.com/debedb/elephants/fork" rel="noopener">Take your own copy</a> ·
+    <a href="https://github.com/debedb/elephants/issues/new" rel="noopener">Or just tell us what's wrong</a>
+  </p>
 
   <h2>All events</h2>
   <table id="table">

@@ -57,9 +57,17 @@ Everything below the argument is not ours, and we never claim it is:
   the call without having to reverse-engineer it.
 - **We name what we could not verify.** "We looked for a signed order and did not
   find one" is a finding, and it is published as one.
-- **A dead link or a wrong citation is a bug**, and is as welcome in the issue
-  tracker as any other bug. So is "your framing is wrong" — that is a bug report
-  about the only part of the page we actually wrote.
+- **A dead link or a wrong citation is a bug**, and is as welcome as any other
+  bug. So is "your framing is wrong" — that is a bug report about the only part
+  of the page we actually wrote.
+- **Disagreement takes the form of a change, not a comment.** There is no
+  comment section and no editor to get past: correct the file and send the
+  correction (a pull request), and we either accept it in public or say in
+  public why not. If you'd rather not argue with us at all, take a complete copy
+  and publish your own version (a fork) — different events, different
+  conclusion, no permission needed. That is not the argument failing; it is the
+  argument working, because then two versions exist and both can be checked
+  against the same documents. Send us yours and it gets linked from here.
 
 The vertical axis of these charts carries no magnitude and no ranking. It exists
 only so that every document has somewhere to sit where you can see and click its

@@ -12,6 +12,30 @@ Published at **[elephants.debedb.com](https://elephants.debedb.com/)**.
 |---|---|
 | [`covid19/`](covid19/) | COVID-19, 2020–2021 — [elephants.debedb.com/covid19/](https://elephants.debedb.com/covid19/) |
 | [`covid19-us-messaging/`](covid19-us-messaging/) | What the US government said about vaccines and transmission — [elephants.debedb.com/covid19-us-messaging/](https://elephants.debedb.com/covid19-us-messaging/) |
+| [`covid19-bayes/`](covid19-bayes/) | Shoshin: a beginner's mind updates on the record — [elephants.debedb.com/covid19-bayes/](https://elephants.debedb.com/covid19-bayes/) |
+
+### Pages that reason, rather than record
+
+`covid19-bayes/` is a different kind of page: it makes no claims of its own and
+cites no sources of its own. It reads the other two pages **live, at load time**,
+walks their documents in date order, and updates a single belief using one
+weight per document. Three properties keep it honest:
+
+- **It is never pinned to a copy of the data.** Add, correct or remove an event
+  on either timeline and the reasoning changes on next load, with no edit here.
+  It stamps the fingerprint of the exact data it reasoned over, so you always
+  know which version of the record produced the number you are looking at.
+- **New events arrive weightless.** An event with no recorded judgment sits at
+  exactly 1.00 and moves nothing, and is listed as unjudged. Nothing acquires
+  evidential weight silently.
+- **The weights are the only opinion, and they are sliders.** Set them all to
+  1.00 and the belief never leaves 0.50. That is the shape of "none of this is
+  evidence of anything", and the page will show it to you on request.
+
+No automation is needed for the page to stay current — reading the source pages
+at load time *is* the update mechanism. A scheduled job would only be worth
+adding later, if we ever want stamped historical snapshots rather than a live
+read.
 
 ### Per-page provenance rules
 

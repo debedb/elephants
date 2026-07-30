@@ -105,6 +105,29 @@ any argument.
     this is entirely open source — the argument, the criteria, the prompts, the
     source. The argument is conducted in the open, on GitHub.
 
+15. Add a meta page: an animation of an unassuming *shoshin* figure doing
+    Bayesian reasoning over the results cited here. It must never be pinned to a
+    copy of the data — it is tied to a version of what we have, and it updates
+    when we do.
+
+## Pages that reason rather than record
+
+`covid19-bayes/` is the first page here that draws a conclusion instead of
+recording a document, so it carries extra obligations:
+
+- It cites nothing of its own. Every input is an entry on another page, fetched
+  live at load time rather than copied.
+- It stamps the fingerprint of the data it reasoned over, so the number on
+  screen is always attributable to a specific state of the record.
+- Its single opinion — one weight per document — is exposed as a slider and
+  listed with a written reason, so a reader can re-run the whole argument on
+  their own numbers without asking anyone's permission.
+- Events with no recorded judgment default to a weight of 1.00 and are labelled
+  unjudged. Nothing gains evidential weight by being added.
+- Its own objections section argues that the exercise is the most contestable
+  thing in the repository, including the point that Bayesian arithmetic can
+  launder a judgment call as a calculation.
+
 ## What this file is not
 
 It is not a claim that the process is neutral. The selection of events is an

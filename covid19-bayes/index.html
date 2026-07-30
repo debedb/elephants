@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoshin: a beginner's mind updates on the record</title>
+<meta name="description" content="An animation of someone with no prior commitment updating their belief, one documented event at a time, over the live contents of this repository's timelines.">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --plane: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --cat-1: #2a78d6;   /* toward "followed the evidence" */
+    --cat-2: #eb6834;
+    --cat-3: #1baf7a;
+    --pole-for: #2a78d6;
+    --pole-against: #e34948;
+    --pole-mid: #f0efec;
+    --skin: #c3c2b7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.10);
+      --cat-1: #3987e5;
+      --cat-2: #d95926;
+      --cat-3: #199e70;
+      --pole-for: #3987e5;
+      --pole-against: #e66767;
+      --pole-mid: #383835;
+      --skin: #52514e;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+    --pole-for: #3987e5;
+    --pole-against: #e66767;
+    --pole-mid: #383835;
+    --skin: #52514e;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--text-primary);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 34px 20px 72px; }
+  h1 { font-size: 27px; line-height: 1.22; margin: 0 0 10px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 44px 0 10px; }
+  p { margin: 0 0 12px; color: var(--text-secondary); max-width: 74ch; }
+  a { color: inherit; }
+  .lede { font-size: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+  .siblings { display: flex; gap: 14px; flex-wrap: wrap; margin: 0 0 22px; font-size: 13px; }
+  .siblings a { color: var(--text-secondary); }
+
+  .openbar {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-1);
+    background: var(--surface-1); border-radius: 8px;
+    padding: 15px 17px; margin: 20px 0 18px; max-width: 74ch;
+  }
+  .openbar p { margin: 0 0 10px; font-size: 14px; }
+  .openbar p:last-child { margin: 0; }
+  .openbar b { color: var(--text-primary); font-weight: 650; }
+
+  .howto {
+    border-left: 2px solid var(--axis); padding: 2px 0 2px 14px; margin: 18px 0 6px;
+    font-size: 13.5px; max-width: 74ch;
+  }
+  .howto p { margin: 0 0 6px; font-size: 13.5px; }
+  .howto p:last-child { margin: 0; }
+  .howto b { color: var(--text-primary); font-weight: 600; }
+
+  /* ---- the stage ---- */
+  .stage {
+    display: grid; grid-template-columns: 260px 1fr; gap: 0;
+    align-items: stretch; margin: 22px 0 0; overflow: hidden;
+  }
+  @media (max-width: 800px) { .stage { grid-template-columns: 1fr; } }
+
+  .figure-pane {
+    padding: 22px 18px; border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  }
+  @media (max-width: 800px) { .figure-pane { border-right: 0; border-bottom: 1px solid var(--border); } }
+  .figure-caption { font-size: 11.5px; color: var(--text-muted); text-align: center; line-height: 1.4; }
+
+  /* the shoshin figure: breathing, blinking, writing */
+  #shoshin { width: 190px; height: 190px; display: block; }
+  #shoshin .body { animation: breathe 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
+  @keyframes breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.014); } }
+  #shoshin .lid { transform-origin: center; animation: blink 6.1s infinite; }
+  @keyframes blink { 0%,92%,100% { transform: scaleY(0); } 95% { transform: scaleY(1); } }
+  #shoshin .arm { transform-origin: 118px 118px; transition: transform .35s ease; }
+  #shoshin.writing .arm { animation: scribble .5s ease-in-out 2; }
+  @keyframes scribble { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-7deg); } }
+  #shoshin .head { transform-origin: 95px 82px; transition: transform .5s ease; }
+  #shoshin.lean-for .head { transform: rotate(-5deg); }
+  #shoshin.lean-against .head { transform: rotate(5deg); }
+  #shoshin .thought { opacity: 0; transition: opacity .4s ease; }
+  #shoshin.thinking .thought { opacity: 1; }
+
+  .read-pane { padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; min-height: 340px; }
+
+  .belief-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .belief-q { font-size: 13px; color: var(--text-secondary); max-width: 60ch; }
+  .belief-num { font-size: 30px; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+  .meter { position: relative; height: 16px; border-radius: 8px; background: var(--pole-mid); overflow: hidden; }
+  .meter .fill {
+    position: absolute; top: 0; bottom: 0; left: 0;
+    background: linear-gradient(90deg, var(--pole-against), var(--pole-for));
+    width: 50%; transition: width .55s cubic-bezier(.4,0,.2,1);
+  }
+  .meter .mid { position: absolute; top: -3px; bottom: -3px; left: 50%; width: 1px; background: var(--axis); }
+  .meter-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+
+  .now { border-top: 1px solid var(--grid); padding-top: 12px; min-height: 132px; }
+  .now-date { font-size: 11.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .now-title { font-size: 15px; font-weight: 600; line-height: 1.3; margin: 2px 0 6px; }
+  .now-why { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; max-width: 70ch; }
+  .now-lr { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; }
+  .lr-pill {
+    font-variant-numeric: tabular-nums; font-weight: 650; font-size: 12px;
+    padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border);
+  }
+  .lr-for { color: var(--pole-for); border-color: currentColor; }
+  .lr-against { color: var(--pole-against); border-color: currentColor; }
+  .lr-neutral { color: var(--text-muted); }
+  .now-src { font-size: 12px; }
+  .now-src a { color: var(--text-secondary); }
+
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
+  .controls button {
+    font: inherit; font-size: 13px; padding: 6px 13px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--plane); color: var(--text-primary); cursor: pointer;
+  }
+  .controls button:hover { border-color: var(--axis); }
+  .controls button[disabled] { opacity: .45; cursor: default; }
+  .progress { font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-left: auto; }
+
+  /* ---- ledger ---- */
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  tr.active td { background: color-mix(in srgb, var(--cat-1) 8%, transparent); }
+  .slider { width: 130px; vertical-align: middle; }
+  .lrval { display: inline-block; min-width: 42px; font-variant-numeric: tabular-nums; font-size: 12px; }
+  .nojudge { color: var(--text-muted); font-style: italic; }
+
+  .stamp {
+    font-size: 12px; color: var(--text-muted); margin-top: 14px;
+    font-variant-numeric: tabular-nums; max-width: 74ch;
+  }
+  .stamp code { font-size: 11.5px; }
+
+  .cta { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 16px; max-width: none; }
+  .cta a {
+    display: inline-block; padding: 7px 13px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--surface-1);
+    font-size: 13.5px; text-decoration: none; color: var(--text-primary);
+  }
+  .cta a:hover { border-color: var(--axis); }
+
+  .objections { max-width: 74ch; padding-left: 18px; margin: 0 0 12px; }
+  .objections li { color: var(--text-secondary); margin-bottom: 9px; font-size: 14px; }
+  .objections b { color: var(--text-primary); font-weight: 600; }
+
+  .err { border-left: 3px solid var(--pole-against); padding: 12px 16px; margin: 20px 0; }
+  .err b { color: var(--text-primary); }
+
+  footer { margin-top: 44px; font-size: 12.5px; color: var(--text-muted); max-width: 74ch; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Shoshin: a beginner's mind updates on the record</h1>
+  <p class="siblings">
+    <a href="../covid19/">&larr; COVID-19: a sourced timeline</a>
+    <a href="../covid19-us-messaging/">&larr; What the US government said</a>
+  </p>
+  <p class="lede">Someone with no stake in the answer sits down with the documents on the other two
+     pages, in order, and updates one belief as each one arrives. They start at exactly fifty-fifty,
+     because they have not decided anything yet. That is the whole of their method, and you can take
+     it away from them at any point by changing the numbers.</p>
+
+  <div class="openbar">
+    <p><b>This animation is not tied to a fixed dataset. It reads the other two pages live.</b>
+       Every time an event is added, corrected or removed over there, this reasoning changes here,
+       automatically, with no edit to this page. A new event enters the walk immediately with a
+       weight of exactly 1.00 — no evidential effect — until somebody records a judgment about it
+       and says why. The version of the data being reasoned over is stamped underneath.</p>
+    <p><b>All of it is open source: the sources, the criteria, the argument, the process and the
+       prompts.</b> The weights below are the only opinion on this page, they are written down as
+       numbers rather than as adjectives, and you can move every one of them.</p>
+    <p class="cta">
+      <a href="https://github.com/debedb/elephants/blob/master/PROCESS.md" rel="noopener">The process and the prompts</a>
+      <a href="https://github.com/debedb/elephants/blob/master/covid19-bayes/index.html" rel="noopener">This page's source</a>
+      <a href="https://github.com/debedb/elephants" rel="noopener">The repository</a>
+    </p>
+  </div>
+
+  <div class="howto">
+    <p><b>Shoshin</b> is the beginner's mind: approaching something without the expertise that tells
+       you in advance what you are going to find. Here it means a prior of 0.50 and no other
+       commitments. The figure is deliberately unassuming — she is not an authority, she has no
+       credentials, and nothing on this page depends on trusting her.</p>
+    <p><b>The arithmetic is one line.</b> Belief is carried as odds; each document multiplies the
+       odds by a weight; the bar shows the result as a probability. A weight above 1 makes the
+       hypothesis more likely, below 1 less likely, exactly 1 changes nothing. Nothing else happens.</p>
+    <p><b>The weights are ours and they are contestable</b>, which is why they are exposed as
+       sliders and listed with reasons in the ledger below. Set them all to 1.00 and the belief
+       never moves from 0.50 — that is the shape of the claim that nothing here is evidence of
+       anything.</p>
+  </div>
+
+  <div class="card stage">
+    <div class="figure-pane">
+      <svg id="shoshin" viewBox="0 0 190 190" role="img" aria-label="An unassuming person sitting with a notebook, updating a belief">
+        <g class="body">
+          <!-- cushion -->
+          <ellipse cx="95" cy="168" rx="52" ry="9" fill="var(--grid)"/>
+          <!-- crossed legs -->
+          <path d="M52 160 q43 -16 86 0 q-8 10 -43 10 q-35 0 -43 -10 z" fill="var(--skin)" opacity=".55"/>
+          <!-- torso -->
+          <path d="M70 152 q-4 -44 25 -52 q29 8 25 52 z" fill="var(--skin)" opacity=".9"/>
+          <!-- arm + notebook -->
+          <g class="arm">
+            <rect x="104" y="120" width="34" height="24" rx="3" fill="var(--surface-1)" stroke="var(--axis)"/>
+            <line x1="110" y1="128" x2="132" y2="128" stroke="var(--grid)" stroke-width="2"/>
+            <line x1="110" y1="135" x2="126" y2="135" stroke="var(--grid)" stroke-width="2"/>
+            <path d="M96 110 q16 4 14 16" fill="none" stroke="var(--skin)" stroke-width="9" stroke-linecap="round"/>
+          </g>
+          <path d="M94 110 q-16 4 -14 16" fill="none" stroke="var(--skin)" stroke-width="9" stroke-linecap="round"/>
+          <!-- head -->
+          <g class="head">
+            <circle cx="95" cy="82" r="25" fill="var(--skin)"/>
+            <circle cx="86" cy="80" r="2.6" fill="var(--text-primary)"/>
+            <circle cx="104" cy="80" r="2.6" fill="var(--text-primary)"/>
+            <g class="lid">
+              <rect x="82" y="76" width="9" height="6" fill="var(--skin)"/>
+              <rect x="100" y="76" width="9" height="6" fill="var(--skin)"/>
+            </g>
+            <path d="M88 92 q7 4 14 0" fill="none" stroke="var(--text-primary)" stroke-width="1.6" stroke-linecap="round" opacity=".65"/>
+          </g>
+        </g>
+        <!-- an open, empty thought -->
+        <g class="thought">
+          <circle cx="140" cy="46" r="4" fill="none" stroke="var(--axis)" stroke-width="1.4"/>
+          <circle cx="149" cy="36" r="6" fill="none" stroke="var(--axis)" stroke-width="1.4"/>
+          <circle cx="160" cy="24" r="9" fill="none" stroke="var(--axis)" stroke-width="1.4"/>
+        </g>
+      </svg>
+      <div class="figure-caption" id="figcap">Beginner's mind.<br>No prior commitments.</div>
+    </div>
+
+    <div class="read-pane">
+      <div class="belief-head">
+        <div class="belief-q">
+          <b>P(H)</b> where <b>H</b> = "the authorities in this record were following the evidence
+          available to them at the time"
+        </div>
+        <div class="belief-num" id="belief">50.0%</div>
+      </div>
+      <div class="meter"><div class="fill" id="fill"></div><div class="mid"></div></div>
+      <div class="meter-labels">
+        <span>0% &mdash; following something else</span>
+        <span>following the evidence &mdash; 100%</span>
+      </div>
+
+      <div class="now" id="now"></div>
+
+      <div class="controls">
+        <button id="play">Play</button>
+        <button id="step">Step</button>
+        <button id="reset">Reset</button>
+        <button id="allone">Set every weight to 1.00</button>
+        <span class="progress" id="progress"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stamp" id="stamp">Loading the data from the other two pages&hellip;</div>
+
+  <h2>The ledger: every document, its weight, and why</h2>
+  <p>This is the whole model. Move a slider and the walk above re-runs against your number instead
+     of ours. Rows marked <span class="nojudge">no judgment recorded</span> are events that exist on
+     the timelines but that nobody has assessed yet; they sit at 1.00 and change nothing.</p>
+  <table id="ledger">
+    <thead>
+      <tr><th>Date</th><th>Document</th><th>Weight</th><th>Why that weight (ours)</th><th>Running P(H)</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>The strongest objections to this whole exercise</h2>
+  <p>These are not strawmen. This page is the most contestable thing in the repository, and it
+     should be.</p>
+  <ul class="objections">
+    <li><b>The weights are the argument, and we chose them.</b> A Bayesian frame looks like
+      arithmetic, and arithmetic looks like objectivity, but every conclusion here is carried by
+      numbers we assigned by judgment. The maths is window dressing on an opinion unless you move
+      the sliders yourself — which is why they are sliders.</li>
+    <li><b>The events are not independent, and the maths assumes they are.</b> Multiplying weights
+      is only valid for independent observations. The California closures are four views of one
+      decision; the vaccine authorizations share regulators and evidence. Treating them as separate
+      updates overstates how much the belief should move, in whichever direction it moves.</li>
+    <li><b>The hypothesis is too coarse to be true or false.</b> "The authorities were following the
+      evidence" bundles dozens of different bodies, in different jurisdictions, over three years,
+      under wildly different information. There is no single fact of the matter for the number to
+      converge on.</li>
+    <li><b>Selection still dominates.</b> This page inherits the other two pages' selection of
+      events, and a Bayesian walk over a selected sample tells you about the selection at least as
+      much as about the world.</li>
+    <li><b>A number implies a precision nobody has.</b> Reporting a posterior to one decimal place
+      is a rhetorical move. The honest output of this exercise is a direction and a rough size, and
+      the page should probably say "somewhat more likely than not" rather than a percentage.</li>
+  </ul>
+
+  <h2>How to argue with this page</h2>
+  <p>Move the sliders — that is the argument, and it costs nothing. If you want the change to stick
+     for everyone else, change the numbers in the file and send it back; the weights live in a plain
+     table at the top of this page's source, next to the reasons. Adding a reason for one of the
+     unjudged rows is the most useful contribution here, and disagreeing with a weight we set is the
+     second.</p>
+  <p class="cta">
+    <a href="https://github.com/debedb/elephants/blob/master/covid19-bayes/index.html" rel="noopener">The weights, in the source</a>
+    <a href="https://github.com/debedb/elephants/compare" rel="noopener">Send us a change</a>
+    <a href="https://github.com/debedb/elephants/fork" rel="noopener">Take your own copy</a>
+    <a href="https://github.com/debedb/elephants/issues/new" rel="noopener">Or just tell us what's wrong</a>
+  </p>
+
+  <footer id="foot"></footer>
+</main>
+
+<script>
+// ===========================================================================
+// The only opinion on this page: a weight (likelihood ratio) per document.
+//   > 1  the document is more likely if the authorities were following evidence
+//   < 1  more likely if they were following something else
+//   = 1  no evidential value either way
+// Keyed by "<page>|<date>", which survives rewording of any headline.
+// Anything on the timelines without an entry here defaults to 1.00 and is
+// listed as unjudged, so new events never silently acquire a weight.
+// ===========================================================================
+const JUDGMENTS = {
+  "timeline|2020-03-19": { lr: 1.15, why: "A broad stay-at-home order in March 2020, issued under genuine uncertainty and before the outdoor evidence was in. Acting hard on little information is what following the evidence looks like when there is almost none." },
+  "timeline|2020-03-27": { lr: 0.70, why: "Closing an open coastline 24 days after the first published finding that closed environments carried 18.7 times the odds of open air. Mitigated by the crowd-density rationale, which is a real argument and not an evidential one." },
+  "timeline|2020-03-29": { lr: 0.65, why: "A blanket closure of all 280 state parks, including empty coastline nobody was crowding, on the same evidence." },
+  "timeline|2020-04-30": { lr: 0.35, why: "Announced verbally after televised images of crowds, three weeks after the outdoor-transmission preprint, with no signed instrument ever published. The trigger was pictures." },
+  "timeline|2020-05-31": { lr: 0.30, why: "1,288 public health professionals distinguishing between gatherings by their cause rather than by their transmission risk, in writing, and saying so explicitly." },
+  "timeline|2020-06-25": { lr: 0.75, why: "A vaccine authorized for soldiers with no Phase 3 data at all." },
+  "timeline|2020-08-11": { lr: 0.75, why: "Registered before Phase 3 trials had begun." },
+  "timeline|2020-11-06": { lr: 0.60, why: "One official breaking his own guidance is evidence about that official, not about the institutions. It counts for something — rule-makers' private behaviour is weak evidence about whether they believed the rules — but not for much." },
+  "timeline|2020-12-02": { lr: 1.30, why: "The first authorization anywhere to follow published Phase 3 efficacy data." },
+  "timeline|2020-12-18": { lr: 1.20, why: "Authorized on published trial data through the ordinary emergency process." },
+  "timeline|2020-12-30": { lr: 1.20, why: "Same." },
+  "timeline|2021-01-03": { lr: 0.75, why: "Authorized in clinical trial mode before efficacy results existed, over objections from scientists in the same country." },
+  "timeline|2021-11-01": { lr: 0.90, why: "An American vaccine authorized first in Indonesia and last by its own regulator: a fact about regulatory queues and filings, only faintly about evidence." },
+
+  "usgov|2020-12-11": { lr: 1.60, why: "The regulator wrote down, in the authorizing document itself, the limits of what it had shown — including that transmission data were limited. That is the behaviour the hypothesis predicts." },
+  "usgov|2021-03-29": { lr: 1.25, why: "A real study, reported with its actual measure (infection), and the inference to spread stated as an inference." },
+  "usgov|2021-05-13": { lr: 1.20, why: "Guidance loosened in the direction the agency's own fresh data pointed." },
+  "usgov|2021-07-21": { lr: 0.25, why: "A flat claim of total protection that exceeds every government document then in existence, including the ones this administration's own agencies had published." },
+  "usgov|2021-07-27": { lr: 1.80, why: "Reversing a popular guidance change within days of receiving unpublished contrary data, at obvious political cost. This is the single strongest piece of evidence on the page for the hypothesis." },
+  "usgov|2021-07-30": { lr: 1.60, why: "Publishing the reversal, its basis, and the sequencing — guidance first, data three days later — in writing, under the Director's name." },
+  "usgov|2021-08-05": { lr: 0.70, why: "Characterising breakthrough infection as exceptional from the podium six days after the agency said in writing that it drives transmission." },
+  "usgov|2021-08-18": { lr: 0.60, why: "A booster programme announced with a start date by eight officials before the FDA's own advisers had reviewed it. Policy ahead of process." },
+  "usgov|2021-09-17": { lr: 1.25, why: "Convening the external advisory committee in public, on the record, on an application the administration had already announced." },
+  "usgov|2021-09-22": { lr: 1.50, why: "The regulator authorized materially less than was applied for, and less than the announced programme implied — evidence that the review was not a formality." },
+  "usgov|2021-08-06": { lr: 1.45, why: "Publishing an inconvenient outbreak study promptly, including the finding that most cases were in vaccinated people." },
+  "usgov|2022-08-11": { lr: 0.90, why: "Guidance eventually conformed to what had been known for about a year. Conforming late is weak evidence against, not strong." }
+};
+
+const SOURCES = [
+  { key: "timeline", url: "../covid19/index.html",            label: "COVID-19: a sourced timeline" },
+  { key: "usgov",    url: "../covid19-us-messaging/index.html", label: "What the US government said" }
+];
+
+const el = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined) n.textContent = text;
+  return n;
+};
+const fmt = iso => new Date(Date.parse(iso + "T00:00:00Z"))
+  .toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+
+// a stable, order-independent fingerprint of the data actually reasoned over
+const fingerprint = rows => {
+  const s = rows.map(r => r.key + "|" + r.date + "|" + (r.short || "")).sort().join("\n");
+  let h1 = 0x811c9dc5, h2 = 0x01000193;
+  for (let i = 0; i < s.length; i++) {
+    h1 = Math.imul(h1 ^ s.charCodeAt(i), 16777619) >>> 0;
+    h2 = Math.imul(h2 + s.charCodeAt(i) + 1, 2246822519) >>> 0;
+  }
+  return (h1.toString(36) + h2.toString(36)).slice(0, 12);
+};
+
+// ---- load the live data out of the sibling pages --------------------------
+async function loadEvents(src) {
+  const res = await fetch(src.url, { cache: "no-store" });
+  if (!res.ok) throw new Error(src.url + " returned " + res.status);
+  const text = await res.text();
+  const m = text.match(/const EVENTS = (\[[\s\S]*?\n\]);/);
+  if (!m) throw new Error("could not find the EVENTS array in " + src.url);
+  const events = Function('"use strict"; return (' + m[1] + ");")();
+  return events.map(e => ({
+    key: src.key,
+    page: src.label,
+    date: e.date,
+    short: e.short,
+    title: e.title,
+    source: e.source
+  }));
+}
+
+let ROWS = [];      // every event, in date order, with its weight
+let idx = -1;       // how far the walk has got
+let timer = null;
+
+const beliefEl = document.getElementById("belief");
+const fillEl = document.getElementById("fill");
+const nowEl = document.getElementById("now");
+const figEl = document.getElementById("shoshin");
+const figCap = document.getElementById("figcap");
+const progressEl = document.getElementById("progress");
+const stampEl = document.getElementById("stamp");
+const tbody = document.querySelector("#ledger tbody");
+
+const PRIOR = 0.5;
+const oddsAfter = n => {
+  let odds = PRIOR / (1 - PRIOR);
+  for (let i = 0; i <= n && i < ROWS.length; i++) odds *= ROWS[i].lr;
+  return odds;
+};
+const probAfter = n => { const o = oddsAfter(n); return o / (1 + o); };
+
+function paintBelief(p) {
+  beliefEl.textContent = (p * 100).toFixed(1) + "%";
+  fillEl.style.width = (p * 100).toFixed(2) + "%";
+}
+
+function renderNow(i) {
+  nowEl.replaceChildren();
+  if (i < 0) {
+    nowEl.append(el("div", "now-title", "Nothing has been read yet."));
+    nowEl.append(el("p", "now-why",
+      "The prior is 0.50 because a beginner's mind has not yet met the evidence. Press play, or "
+      + "step through one document at a time."));
+    return;
+  }
+  const r = ROWS[i];
+  nowEl.append(el("div", "now-date", fmt(r.date) + "  ·  " + r.page));
+  nowEl.append(el("div", "now-title", r.short || r.title));
+  const lrRow = el("div", "now-lr");
+  const cls = r.lr > 1.001 ? "lr-for" : (r.lr < 0.999 ? "lr-against" : "lr-neutral");
+  lrRow.append(el("span", "lr-pill " + cls, "×" + r.lr.toFixed(2)));
+  lrRow.append(el("span", null,
+    r.lr > 1.001 ? "toward: following the evidence"
+    : r.lr < 0.999 ? "toward: following something else"
+    : "no evidential weight assigned"));
+  nowEl.append(lrRow);
+  nowEl.append(el("p", "now-why", r.why || "No judgment has been recorded for this document yet, so it does not move the belief."));
+  if (r.source && r.source.url) {
+    const p = el("p", "now-src");
+    const a = el("a", null, r.source.label);
+    a.href = r.source.url;
+    a.rel = "noopener";
+    p.append(document.createTextNode("Source: "), a);
+    nowEl.append(p);
+  }
+}
+
+function highlightLedger(i) {
+  [...tbody.rows].forEach((tr, j) => tr.classList.toggle("active", j === i));
+}
+
+function reactTo(r) {
+  figEl.classList.remove("lean-for", "lean-against");
+  figEl.classList.add("thinking");
+  if (r.lr > 1.05) figEl.classList.add("lean-for");
+  else if (r.lr < 0.95) figEl.classList.add("lean-against");
+  figEl.classList.remove("writing");
+  void figEl.offsetWidth;               // restart the scribble
+  figEl.classList.add("writing");
+  const strength = Math.abs(Math.log(r.lr));
+  figCap.innerHTML = strength < 0.05
+    ? "Notes it down.<br>Changes nothing."
+    : (r.lr > 1 ? "Leans toward yes." : "Leans toward no.")
+      + "<br>" + (strength > 0.5 ? "This one counts." : "A little.");
+}
+
+function goTo(i) {
+  idx = Math.max(-1, Math.min(i, ROWS.length - 1));
+  paintBelief(probAfter(idx));
+  renderNow(idx);
+  highlightLedger(idx);
+  if (idx >= 0) reactTo(ROWS[idx]);
+  else { figEl.classList.remove("lean-for", "lean-against", "writing", "thinking");
+         figCap.innerHTML = "Beginner's mind.<br>No prior commitments."; }
+  progressEl.textContent = (idx + 1) + " of " + ROWS.length + " documents read";
+  document.getElementById("step").disabled = idx >= ROWS.length - 1;
+}
+
+function stop() {
+  clearInterval(timer);
+  timer = null;
+  document.getElementById("play").textContent = "Play";
+}
+function play() {
+  if (timer) { stop(); return; }
+  if (idx >= ROWS.length - 1) goTo(-1);
+  document.getElementById("play").textContent = "Pause";
+  timer = setInterval(() => {
+    if (idx >= ROWS.length - 1) { stop(); return; }
+    goTo(idx + 1);
+  }, 2600);
+}
+
+function rebuildLedger() {
+  tbody.replaceChildren();
+  ROWS.forEach((r, i) => {
+    const tr = el("tr");
+    tr.append(el("td", "num", r.date));
+    const t = el("td");
+    if (r.source && r.source.url) {
+      const a = el("a", null, r.short || r.title);
+      a.href = r.source.url;
+      a.rel = "noopener";
+      t.append(a);
+    } else t.append(document.createTextNode(r.short || r.title));
+    t.append(el("div", "now-src", r.page));
+    tr.append(t);
+
+    const w = el("td", "num");
+    const slider = el("input");
+    slider.type = "range";
+    slider.className = "slider";
+    slider.min = "-1.4"; slider.max = "1.4"; slider.step = "0.02";
+    slider.value = Math.log(r.lr).toFixed(2);
+    slider.setAttribute("aria-label", "weight for " + (r.short || r.title));
+    const val = el("span", "lrval", "×" + r.lr.toFixed(2));
+    slider.addEventListener("input", () => {
+      r.lr = Math.exp(parseFloat(slider.value));
+      r.userSet = true;
+      val.textContent = "×" + r.lr.toFixed(2);
+      paintBelief(probAfter(idx));
+      refreshRunning();
+      if (idx >= 0 && ROWS[idx] === r) renderNow(idx);
+    });
+    w.append(slider, val);
+    tr.append(w);
+
+    tr.append(el("td", r.why ? null : "nojudge", r.why || "no judgment recorded — contribute one"));
+    tr.append(el("td", "num running", (probAfter(i) * 100).toFixed(1) + "%"));
+    tbody.append(tr);
+  });
+}
+function refreshRunning() {
+  [...tbody.rows].forEach((tr, i) => {
+    tr.querySelector(".running").textContent = (probAfter(i) * 100).toFixed(1) + "%";
+  });
+}
+
+// ---- go -------------------------------------------------------------------
+(async function init() {
+  let loaded;
+  try {
+    loaded = (await Promise.all(SOURCES.map(loadEvents))).flat();
+  } catch (err) {
+    stampEl.replaceChildren();
+    const box = el("div", "err");
+    box.append(el("b", null, "The data could not be loaded, so this page is showing nothing rather than showing something made up. "));
+    box.append(document.createTextNode(
+      "This page reads the other two pages over the network at load time. That works when it is served "
+      + "(elephants.debedb.com, or any local web server) and fails when the file is opened directly from "
+      + "disk, because a browser will not let a file read its neighbours. Error: " + err.message));
+    stampEl.append(box);
+    return;
+  }
+
+  ROWS = loaded.sort((a, b) => a.date.localeCompare(b.date) || a.key.localeCompare(b.key))
+    .map(r => {
+      const j = JUDGMENTS[r.key + "|" + r.date];
+      return Object.assign(r, { lr: j ? j.lr : 1, why: j ? j.why : null, judged: !!j });
+    });
+
+  rebuildLedger();
+  goTo(-1);
+
+  const judged = ROWS.filter(r => r.judged).length;
+  const fp = fingerprint(ROWS);
+  stampEl.replaceChildren();
+  stampEl.append(document.createTextNode(
+    "Reasoning over " + ROWS.length + " documents read live from " + SOURCES.length
+    + " pages at " + new Date().toISOString().slice(0, 16).replace("T", " ") + " UTC. "
+    + judged + " carry a recorded judgment; " + (ROWS.length - judged)
+    + " are unjudged and weighted 1.00. Data fingerprint "));
+  stampEl.append(el("code", null, fp));
+  stampEl.append(document.createTextNode(
+    " — this changes whenever the timelines change, which is the point: the animation is tied to a "
+    + "version of the record, never to a copy of it. "));
+
+  // best-effort: name the exact commit the data is at
+  try {
+    const r = await fetch("https://api.github.com/repos/debedb/elephants/commits?path=covid19&per_page=1");
+    if (r.ok) {
+      const j = await r.json();
+      if (j[0]) {
+        stampEl.append(document.createTextNode("Timeline data last changed in commit "));
+        const a = el("a", null, j[0].sha.slice(0, 7));
+        a.href = j[0].html_url;
+        a.rel = "noopener";
+        stampEl.append(a, document.createTextNode(
+          ", " + j[0].commit.committer.date.slice(0, 10) + "."));
+      }
+    }
+  } catch (e) { /* the fingerprint is the stamp that matters; this is a nicety */ }
+
+  const foot = document.getElementById("foot");
+  foot.append(document.createTextNode(
+    "The posterior shown after all " + ROWS.length + " documents is "
+    + (probAfter(ROWS.length - 1) * 100).toFixed(1) + "% on our weights. It is not a measurement. "
+    + "It is what our numbers imply, and the sliders exist so that it can stop being ours. "
+    + "Corrections and better weights: "));
+  const a = el("a", null, "github.com/debedb/elephants");
+  a.href = "https://github.com/debedb/elephants";
+  a.rel = "noopener";
+  foot.append(a);
+
+  document.getElementById("play").addEventListener("click", play);
+  document.getElementById("step").addEventListener("click", () => { stop(); goTo(idx + 1); });
+  document.getElementById("reset").addEventListener("click", () => { stop(); goTo(-1); });
+  document.getElementById("allone").addEventListener("click", () => {
+    ROWS.forEach(r => { r.lr = 1; });
+    rebuildLedger();
+    paintBelief(probAfter(idx));
+    if (idx >= 0) renderNow(idx);
+    highlightLedger(idx);
+  });
+})();
+</script>
+</body>
+</html>

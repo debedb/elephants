@@ -177,6 +177,23 @@
   .lrval { display: inline-block; min-width: 42px; font-variant-numeric: tabular-nums; font-size: 12px; }
   .nojudge { color: var(--text-muted); font-style: italic; }
 
+  /* ---- running-belief chart: sized from its container, redrawn on resize ---- */
+  .chartbox { position: relative; padding: 10px 12px 4px; }
+  #chart { display: block; width: 100%; height: auto; touch-action: pan-y; }
+  #chart .hit { cursor: pointer; }
+  .ctip {
+    position: absolute; z-index: 4; pointer-events: none; opacity: 0;
+    transform: translate(-50%, -100%);
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 10px; max-width: 260px; box-shadow: 0 6px 20px rgba(0,0,0,.16);
+    transition: opacity .1s ease;
+  }
+  .ctip.on { opacity: 1; }
+  .ctip .t-p { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ctip .t-d { font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .ctip .t-t { font-size: 12px; color: var(--text-secondary); margin-top: 3px; line-height: 1.35; }
+  .ctip .t-w { font-size: 11.5px; margin-top: 4px; font-variant-numeric: tabular-nums; }
+
   .stamp {
     font-size: 12px; color: var(--text-muted); margin-top: 14px;
     font-variant-numeric: tabular-nums; max-width: 74ch;
@@ -333,6 +350,15 @@
     </thead>
     <tbody></tbody>
   </table>
+
+  <h2>The same number, drawn against the calendar</h2>
+  <p>The running column above, as a line. It is flat between documents because belief only moves
+     when one arrives, and steps at each one. Blue is above the starting 0.50, red below. Move any
+     weight or the independence discount and this redraws; click a point to send the reader there.</p>
+  <div class="card chartbox" id="chartbox">
+    <svg id="chart" role="img" aria-label="Running probability of the hypothesis, over time"></svg>
+    <div id="ctip" class="ctip" aria-hidden="true"></div>
+  </div>
 
   <h2>The strongest objections to this whole exercise</h2>
   <p>These are not strawmen. This page is the most contestable thing in the repository, and it
@@ -553,6 +579,7 @@ function goTo(i) {
          figCap.innerHTML = "Beginner's mind.<br>No prior commitments."; }
   progressEl.textContent = (idx + 1) + " of " + ROWS.length + " documents read";
   document.getElementById("step").disabled = idx >= ROWS.length - 1;
+  paintChart();
 }
 
 function stop() {
@@ -599,6 +626,7 @@ function rebuildLedger() {
       val.textContent = "×" + r.lr.toFixed(2);
       paintBelief(probAfter(idx));
       refreshRunning();
+      paintChart();
       if (idx >= 0 && ROWS[idx] === r) renderNow(idx);
     });
     w.append(slider, val);
@@ -613,6 +641,148 @@ function refreshRunning() {
   [...tbody.rows].forEach((tr, i) => {
     tr.querySelector(".running").textContent = (probAfter(i) * 100).toFixed(1) + "%";
   });
+}
+
+// ---- the running-belief chart ---------------------------------------------
+// Sized from its container every paint, so it is responsive without a fixed
+// viewBox shrinking the labels into illegibility on a phone.
+const NS = "http://www.w3.org/2000/svg";
+const sv = (tag, attrs, text) => {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (text !== undefined) n.textContent = text;
+  return n;
+};
+const chartSvg = document.getElementById("chart");
+const chartBox = document.getElementById("chartbox");
+const ctip = document.getElementById("ctip");
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+function paintChart() {
+  if (!ROWS.length || !chartBox.clientWidth) return;
+  const W = Math.max(300, chartBox.clientWidth - 24);
+  const H = Math.round(Math.min(260, Math.max(180, W * 0.30)));
+  const L = 42, R = 12, T = 12, B = 28;
+  chartSvg.setAttribute("width", W);
+  chartSvg.setAttribute("height", H);
+  chartSvg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  chartSvg.replaceChildren();
+
+  const t = iso => Date.parse(iso + "T00:00:00Z");
+  const pad = 20 * 864e5;
+  const t0 = t(ROWS[0].date) - pad, t1 = t(ROWS[ROWS.length - 1].date) + pad;
+  const x = iso => L + (t(iso) - t0) / (t1 - t0) * (W - L - R);
+  const y = p => T + (1 - p) * (H - T - B);
+
+  const cFor = css("--pole-for"), cAgainst = css("--pole-against");
+  const cGrid = css("--grid"), cAxis = css("--axis"), cMuted = css("--text-muted");
+
+  // horizontal grid + labels
+  [0, 0.25, 0.5, 0.75, 1].forEach(p => {
+    const mid = p === 0.5;
+    chartSvg.append(sv("line", {
+      x1: L, x2: W - R, y1: y(p), y2: y(p),
+      stroke: mid ? cAxis : cGrid, "stroke-width": 1,
+      "stroke-dasharray": mid ? "4 3" : "none"
+    }));
+    chartSvg.append(sv("text", {
+      x: L - 7, y: y(p) + 3.5, "text-anchor": "end",
+      "font-size": 10.5, fill: cMuted
+    }, (p * 100).toFixed(0) + "%"));
+  });
+
+  // quarterly x ticks
+  const d = new Date(t0);
+  d.setUTCDate(1);
+  d.setUTCMonth(d.getUTCMonth() - (d.getUTCMonth() % 3) + 3);
+  for (; d.getTime() <= t1; d.setUTCMonth(d.getUTCMonth() + 3)) {
+    const iso = d.toISOString().slice(0, 10);
+    chartSvg.append(sv("line", { x1: x(iso), x2: x(iso), y1: T, y2: H - B, stroke: cGrid, "stroke-width": 1 }));
+    chartSvg.append(sv("text", {
+      x: x(iso), y: H - B + 15, "text-anchor": "middle", "font-size": 10.5, fill: cMuted
+    }, d.toLocaleDateString("en-US", { month: "short", year: "2-digit", timeZone: "UTC" })));
+  }
+
+  // belief is constant between documents and steps at each one
+  const ps = ROWS.map((_, i) => probAfter(i));
+  const stepPts = upTo => {
+    const pts = [[L, y(0.5)]];
+    const n = upTo < 0 ? 0 : Math.min(upTo + 1, ROWS.length);
+    for (let i = 0; i < n; i++) {
+      pts.push([x(ROWS[i].date), y(i === 0 ? 0.5 : ps[i - 1])]);
+      pts.push([x(ROWS[i].date), y(ps[i])]);
+    }
+    pts.push([n === 0 ? W - R : (n >= ROWS.length ? W - R : x(ROWS[n].date)),
+              y(n === 0 ? 0.5 : ps[n - 1])]);
+    return pts;
+  };
+  const toPath = pts => pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+
+  // area between the walk and the 0.50 prior, coloured by side
+  for (let i = 0; i < ROWS.length; i++) {
+    const x1 = x(ROWS[i].date);
+    const x2 = i + 1 < ROWS.length ? x(ROWS[i + 1].date) : W - R;
+    if (x2 <= x1) continue;
+    const p = ps[i], yp = y(p), y5 = y(0.5);
+    chartSvg.append(sv("rect", {
+      x: x1, y: Math.min(yp, y5), width: x2 - x1, height: Math.abs(y5 - yp),
+      fill: p >= 0.5 ? cFor : cAgainst, opacity: i <= idx ? 0.20 : 0.07
+    }));
+  }
+
+  // the full walk, recessive; then the part already read, at full strength
+  chartSvg.append(sv("path", {
+    d: toPath(stepPts(ROWS.length - 1)), fill: "none",
+    stroke: cAxis, "stroke-width": 2, opacity: 0.35,
+    "stroke-linejoin": "round", "stroke-linecap": "round"
+  }));
+  if (idx >= 0) {
+    const p = probAfter(idx);
+    chartSvg.append(sv("path", {
+      d: toPath(stepPts(idx)), fill: "none",
+      stroke: p >= 0.5 ? cFor : cAgainst, "stroke-width": 2,
+      "stroke-linejoin": "round", "stroke-linecap": "round"
+    }));
+  }
+
+  // one dot per document, and a hit target wider than the dot
+  ROWS.forEach((r, i) => {
+    const cx = x(r.date), cy = y(ps[i]);
+    const read = i <= idx;
+    chartSvg.append(sv("circle", {
+      cx, cy, r: i === idx ? 5 : 3.4,
+      fill: ps[i] >= 0.5 ? cFor : cAgainst,
+      opacity: read ? 1 : 0.3,
+      stroke: css("--surface-1"), "stroke-width": i === idx ? 2 : 1.5
+    }));
+    const x1 = i === 0 ? L : (x(ROWS[i - 1].date) + cx) / 2;
+    const x2 = i === ROWS.length - 1 ? W - R : (cx + x(ROWS[i + 1].date)) / 2;
+    const hit = sv("rect", {
+      class: "hit", x: x1, y: T, width: Math.max(2, x2 - x1), height: H - T - B,
+      fill: "transparent"
+    });
+    hit.addEventListener("pointerenter", () => showCtip(i, cx, cy, ps[i]));
+    hit.addEventListener("pointerleave", () => ctip.classList.remove("on"));
+    hit.addEventListener("click", () => { stop(); goTo(i); });
+    chartSvg.append(hit);
+  });
+}
+
+function showCtip(i, cx, cy, p) {
+  const r = ROWS[i];
+  ctip.replaceChildren();
+  ctip.append(el("div", "t-p", (p * 100).toFixed(1) + "%"));
+  ctip.append(el("div", "t-d", fmt(r.date)));
+  ctip.append(el("div", "t-t", r.short || r.title));
+  const w = el("div", "t-w");
+  w.style.color = r.lr > 1.001 ? css("--pole-for") : (r.lr < 0.999 ? css("--pole-against") : css("--text-muted"));
+  w.textContent = "weight ×" + r.lr.toFixed(2) + (r.judged ? "" : " (unjudged)");
+  ctip.append(w);
+  const box = chartBox.getBoundingClientRect();
+  const svgBox = chartSvg.getBoundingClientRect();
+  ctip.style.left = (svgBox.left - box.left + cx) + "px";
+  ctip.style.top = (svgBox.top - box.top + cy - 10) + "px";
+  ctip.classList.add("on");
 }
 
 // ---- go -------------------------------------------------------------------
@@ -697,7 +867,12 @@ function refreshRunning() {
     document.getElementById("discountval").textContent = DISCOUNT.toFixed(2);
     paintBelief(probAfter(idx));
     refreshRunning();
+    paintChart();
   });
+
+  // responsive: redraw at whatever width the container actually has
+  if (window.ResizeObserver) new ResizeObserver(() => paintChart()).observe(chartBox);
+  else window.addEventListener("resize", paintChart);
 
   document.getElementById("play").addEventListener("click", play);
   document.getElementById("step").addEventListener("click", () => { stop(); goTo(idx + 1); });
@@ -706,6 +881,7 @@ function refreshRunning() {
     ROWS.forEach(r => { r.lr = 1; });
     rebuildLedger();
     paintBelief(probAfter(idx));
+    paintChart();
     if (idx >= 0) renderNow(idx);
     highlightLedger(idx);
   });

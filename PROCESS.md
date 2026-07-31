@@ -143,6 +143,30 @@ any argument.
     it in its own block at the bottom, responsive.
 18. More contrast, and keep the graph on screen while scrolling the ledger and
     adjusting weights.
+19. Put the repository link prominently in the header. We are open.
+20. A new page: COVID-19 origins. Timeline; the most-heard hypotheses; how the
+    lab hypothesis was treated as a conspiracy theory; Fauci's position
+    throughout. Sources unrestricted this time.
+21. **Attribution is key.** "Person X said A on camera" is a different thing from
+    journalism reporting it. Attribution levels must be strictly attributable —
+    chain of custody. *"I don't care who you think Deep Throat was — that is not
+    attributable."* And: avoid the laundering of facts via links, where one piece
+    cites another piece citing a third. Also: an officeholder speaking in that
+    capacity is the institution speaking, but only while they hold the office.
+22. State the limits and invite working philosophers and legal theorists to weigh
+    in. We have raised questions we cannot settle; the dialogue is centuries old
+    and we have no conceit of having thought of it first.
+23. On the regress of distrust — git, then blockchain, then what? At some point
+    the appeal has to end, as it does in the oven of Akhnai. The point is not to
+    defeat a determined deceiver; that gets settled at the Reichenbach falls
+    either way. The point is for someone to say "I had not thought about this."
+
+The exchange behind 21 and 23 is worth recording because one side of it was
+wrong. The argument for admitting anonymous sources rested on Deep Throat having
+been right — and the correction was that nobody knew who Deep Throat was until
+Mark Felt said so in 2005, during which time several people were confidently and
+wrongly named in print. The rule that came out of it is that anonymous sources
+are investigative leads, not evidence.
 
 ## Pages that reason rather than record
 

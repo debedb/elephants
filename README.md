@@ -50,6 +50,20 @@ the top and enforces it in code.
   The page checks its own links at render time and prints a warning in the
   footer if any source is not served from a `.gov` host.
 
+## Open questions, and an invitation
+
+Applying these rules carefully surfaced problems we cannot solve, and that
+people have been arguing about for centuries — the difference between who said a
+thing and whose act it was, when an officeholder speaks as the institution,
+where a claim acquires authority it never earned, and whether an anonymous
+source is a lead or evidence.
+
+**[OPEN-QUESTIONS.md](OPEN-QUESTIONS.md)** states them, records where we already
+got one wrong in public, and invites philosophers, legal theorists,
+epistemologists, journalists and archivists to correct us. We make no claim to
+originality. What we have is a small concrete artifact where a rule can be
+applied and the cost of applying it is visible on the page.
+
 ## Everything here is open source, including the argument
 
 Not just the data. The sources, the criteria that decide what counts as a

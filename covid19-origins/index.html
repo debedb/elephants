@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COVID-19 origins: the hypotheses, and what they were called</title>
+<meta name="description" content="The leading hypotheses for the origin of SARS-CoV-2, what was documented when, how the lab hypothesis was labelled, and Anthony Fauci's stated position throughout. This page does not assert an origin.">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --plane: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --cat-1: #2a78d6;
+    --cat-2: #eb6834;
+    --cat-3: #1baf7a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.10);
+      --cat-1: #3987e5;
+      --cat-2: #d95926;
+      --cat-3: #199e70;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--text-primary);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 34px 20px 72px; }
+  h1 { font-size: 27px; line-height: 1.22; margin: 0 0 10px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 44px 0 10px; }
+  p { margin: 0 0 12px; color: var(--text-secondary); max-width: 74ch; }
+  a { color: inherit; }
+  .lede { font-size: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+
+  .howto {
+    border-left: 2px solid var(--axis); padding: 2px 0 2px 14px; margin: 18px 0 6px;
+    font-size: 13.5px; max-width: 74ch;
+  }
+  .howto p { margin: 0 0 6px; font-size: 13.5px; }
+  .howto p:last-child { margin: 0; }
+  .howto b { color: var(--text-primary); font-weight: 600; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0 10px; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
+  .swatch { width: 13px; height: 13px; border-radius: 50%; flex: none; }
+
+  /* chart: one row per document. x = date. y carries no magnitude. */
+  .scroller { overflow-x: auto; }
+  .plot { position: relative; min-width: 1000px; padding: 0 20px 6px; }
+  .head {
+    display: grid; grid-template-columns: var(--gutter) 1fr;
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-muted); padding: 12px 0 8px;
+  }
+  .head span:last-child { padding-left: 2px; }
+
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--gutter) 1fr;
+    align-items: center;
+    min-height: 58px;
+    padding: 8px 0;
+    border-top: 1px solid var(--grid);
+  }
+  .row:hover { background: color-mix(in srgb, var(--c) 6%, transparent); }
+  .row.on { background: color-mix(in srgb, var(--c) 11%, transparent); }
+
+  .r-label { padding-right: 18px; }
+  .r-date { font-size: 11.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .r-claim {
+    display: block; text-align: left; width: 100%;
+    border: 0; background: none; padding: 0; margin: 1px 0 3px;
+    font: inherit; font-size: 13.5px; line-height: 1.3; color: var(--text-primary);
+    cursor: pointer;
+  }
+  .r-claim:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .r-claim:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+  .row.on .r-claim { font-weight: 650; }
+
+  .r-src { display: flex; align-items: baseline; gap: 6px; font-size: 12px; line-height: 1.35; }
+  .r-src a { color: var(--text-secondary); }
+  .kind {
+    flex: none; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 1px 5px; border-radius: 3px; border: 1px solid var(--axis); color: var(--text-muted);
+    position: relative; top: -1px;
+  }
+  .kind.primary { border-color: currentColor; color: var(--text-secondary); }
+  .kind.none { border-style: dashed; }
+  .r-call { font-size: 11.5px; color: var(--text-muted); font-style: italic; margin-top: 3px; }
+
+  .r-track { position: relative; height: 100%; min-height: 32px; }
+  .r-track::before {
+    content: ""; position: absolute; left: 0; top: 50%; height: 1px;
+    width: var(--x); background: var(--grid);
+  }
+  .dot {
+    position: absolute; top: 50%; left: var(--x);
+    width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px;
+    border-radius: 50%; background: var(--c);
+    box-shadow: 0 0 0 2px var(--surface-1);
+    transition: transform .12s ease;
+  }
+  .row:hover .dot { transform: scale(1.3); }
+  .row.on .dot { transform: scale(1.5); box-shadow: 0 0 0 2px var(--surface-1), 0 0 0 4px var(--c); }
+
+  .gridlines { position: absolute; left: calc(20px + var(--gutter)); right: 20px; top: 0; bottom: 26px; pointer-events: none; }
+  .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--grid); }
+  .gridline.q { background: var(--axis); }
+  .axis { display: grid; grid-template-columns: var(--gutter) 1fr; }
+  .axis-track { position: relative; height: 26px; border-top: 1px solid var(--axis); }
+  .tick {
+    position: absolute; top: 6px; left: var(--x); transform: translateX(-50%);
+    font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+
+  #detail { padding: 18px 20px; margin-top: 18px; }
+  #detail .d-date { font-size: 12.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  #detail .d-title { font-size: 19px; font-weight: 650; line-height: 1.3; margin: 3px 0 10px; }
+  #detail .d-note { border-left: 2px solid var(--axis); padding-left: 12px; font-size: 13.5px; }
+  #detail .d-src { font-size: 13.5px; margin-bottom: 4px; word-break: break-word; }
+  #detail .d-hint { color: var(--text-muted); margin: 0; }
+  #detail .d-auth b { color: var(--text-primary); font-weight: 600; }
+  #detail .d-auth { font-size: 13.5px; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .cat-tag { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .cat-tag i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+  .cta { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 16px; max-width: none; }
+  .cta a {
+    display: inline-block; padding: 7px 13px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--surface-1);
+    font-size: 13.5px; text-decoration: none; color: var(--text-primary);
+  }
+  .cta a:hover { border-color: var(--axis); }
+
+  .objections { max-width: 74ch; padding-left: 18px; margin: 0 0 12px; }
+  .objections li { color: var(--text-secondary); margin-bottom: 9px; font-size: 14px; }
+  .objections b { color: var(--text-primary); font-weight: 600; }
+
+  /* open-source banner: first thing on every page */
+  .topbar {
+    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    border: 1px solid var(--border); background: var(--surface-1);
+    border-radius: 999px; padding: 8px 18px; margin: 0 0 20px;
+    font-size: 13px; color: var(--text-secondary); text-decoration: none;
+    line-height: 1.4;
+  }
+  .topbar:hover { border-color: var(--axis); }
+  .topbar b { color: var(--text-primary); font-weight: 650; }
+  .topbar .go { color: var(--text-primary); font-weight: 600; white-space: nowrap; }
+  .topbar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cat-3); flex: none; }
+
+  footer { margin-top: 44px; font-size: 12.5px; color: var(--text-muted); max-width: 74ch; }
+
+  .siblings { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 22px; font-size: 13px; }
+  .siblings a { color: var(--text-secondary); }
+  .rule {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-2);
+    background: var(--surface-1); border-radius: 8px;
+    padding: 14px 16px; margin: 0 0 18px; max-width: 74ch;
+  }
+  .rule p { margin: 0; font-size: 14px; }
+  .rule b { color: var(--text-primary); font-weight: 650; }
+  .quote {
+    font-size: 13px; line-height: 1.4; color: var(--text-primary);
+    border-left: 2px solid var(--c); padding-left: 10px; margin: 4px 0 5px;
+  }
+
+  .openbar {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-1);
+    background: var(--surface-1); border-radius: 8px;
+    padding: 15px 17px; margin: 20px 0 18px; max-width: 74ch;
+  }
+  .openbar p { margin: 0 0 10px; font-size: 14px; }
+  .openbar b { color: var(--text-primary); font-weight: 650; }
+  .openbar ul { margin: 0 0 10px; padding-left: 18px; }
+  .openbar li { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 3px; }
+  .openbar li b { font-weight: 600; }
+  .openbar .cta { margin-top: 0; }
+
+  .hyp { display: grid; gap: 10px; margin: 0 0 18px; max-width: 78ch; }
+  .hyp-card {
+    border: 1px solid var(--border); border-left: 3px solid var(--h); border-radius: 8px;
+    background: var(--surface-1); padding: 12px 15px;
+  }
+  .hyp-card h3 { margin: 0 0 4px; font-size: 14px; }
+  .hyp-card p { margin: 0; font-size: 13px; }
+  .hyp-tag {
+    display: inline-block; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 1px 6px; border-radius: 3px; border: 1px solid currentColor; margin-right: 6px;
+  }
+  .bears { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+  .bears i { font-style: normal; border: 1px solid currentColor; border-radius: 3px; padding: 0 4px;
+             font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase; margin-right: 5px; }
+</style>
+<body>
+<main>
+  <a class="topbar" href="https://github.com/debedb/elephants" rel="noopener">
+    <span class="dot"></span>
+    <span><b>Open source, all of it.</b> The sources, the criteria, the argument, the case against
+      the argument, and the prompts.</span>
+    <span class="go">github.com/debedb/elephants &rarr;</span>
+  </a>
+
+  <h1>COVID-19 origins: the hypotheses, and what they were called</h1>
+  <p class="siblings">
+    <a href="../covid19/">&larr; COVID-19: a sourced timeline</a>
+    <a href="../covid19-us-messaging/">&larr; What the US government said</a>
+    <a href="../covid19-bayes/">Shoshin: a beginner's mind &rarr;</a>
+  </p>
+
+  <div class="rule">
+    <p><b>This page does not claim to know where the virus came from, and nothing on it should be
+       read as evidence for any origin.</b> The origin is unresolved. American intelligence
+       agencies remain split, at low confidence, and no primary source here settles it. What this
+       page tracks is narrower and answerable from documents: which hypotheses were on the table,
+       what was published when, what the lab hypothesis was <i>called</i> at each point, and what
+       Anthony Fauci said at each of those points.</p>
+  </div>
+
+  <div class="openbar">
+    <p><b>Sources on this page are unrestricted</b> — journals, government, newspapers, platform
+       policy — because the subject includes how publications and platforms treated the question,
+       which cannot be told from government documents alone. Every source is still labelled by
+       what it is, and every quotation was read in the linked document.</p>
+    <p><b>A rule the repository sets for itself, and how it applies here.</b> These pages exclude
+       "reception": how a record was received, who aligned with whom, what any audience concluded.
+       That rule survives intact. A dated, attributable, quotable publication or a written platform
+       policy is not reception — it is a document, with an author and a date, exactly like an order
+       or a memo. "The media said" is a characterisation of a crowd and stays out. Individual
+       named publications saying specific things on specific days stay in.</p>
+    <p><b>Chain of custody. Every row is graded by how far its attribution goes</b>, and one grade
+       is not admitted at all:</p>
+    <ul>
+      <li><span class="kind primary">on the record</span> the person's own words, in a transcript, a
+        recording, or a paper they signed. You can watch or read them saying it.</li>
+      <li><span class="kind primary">document</span> published by the body whose act it is — an
+        agency report, a journal statement, a platform policy, a newspaper's own headline or
+        editor's note.</li>
+      <li><span class="kind">named reporting</span> journalism whose source is named and on the
+        record, or which publishes the underlying document.</li>
+      <li><span class="kind none">anonymous — not admitted</span> a claim resting on unnamed
+        sources does not appear on this page at all, regardless of the outlet's reputation or how
+        widely the claim has been repeated. See "Sought, and not included".</li>
+    </ul>
+    <p><b>No laundering through links.</b> A citation here points at the artifact itself — the
+       recording, the transcript, the report — never at a piece describing another piece. "This
+       article reports that another article reported" is how a claim acquires authority it never
+       earned, one hop at a time, and each hop is where the qualifiers fall off. Where we cannot
+       reach the artifact, the row says we cannot reach it. That is why one significant assessment
+       is absent from this page entirely.</p>
+    <p><b>An office is not a person, and the difference is dated.</b> An institution's only
+       ultimate voice is whoever holds its top office, so a director speaking in that capacity is
+       the institution speaking — but only while they hold it. Rows carry the office and the years
+       it was held, because the same human being carries different authority before and after. The
+       clearest case on this page is Anthony Fauci: in 2021 he speaks as the sitting director of
+       NIAID, and in 2024 he speaks as a private citizen under subpoena. Same person, same subject,
+       two different things.</p>
+    <p class="cta">
+      <a href="https://github.com/debedb/elephants/blob/master/PROCESS.md" rel="noopener">The process and the prompts</a>
+      <a href="https://github.com/debedb/elephants/blob/master/covid19-origins/index.html" rel="noopener">This page's source</a>
+    </p>
+  </div>
+
+  <h2>The hypotheses, as most often stated</h2>
+  <p>Three claims have carried most of the public argument. They are not equally supported and the
+     page does not treat them as though they were.</p>
+  <div class="hyp" id="hyps"></div>
+
+  <div class="howto">
+    <p><b>The horizontal axis is time.</b> The vertical axis carries no magnitude and no ranking.
+       Rows are stacked in date order so every document has somewhere to sit with its citation.</p>
+    <p><b>Each row is tagged with the hypothesis it bears on</b>, and with whether it supports it,
+       weighs against it, or only concerns what it was called.</p>
+    <p><b>Our voice appears in two places only:</b> which documents share this axis, and the lines
+       marked "our call".</p>
+  </div>
+
+  <ul class="legend" id="legend"></ul>
+
+  <div class="card scroller">
+    <div class="plot" id="plot"></div>
+  </div>
+
+  <div class="card" id="detail"></div>
+
+  <h2>The argument, stated plainly</h2>
+  <p>This is ours, and it is the only claim on the page that is. <b>The boundary of respectable
+     opinion was drawn before the evidence could support drawing it, and it was redrawn quietly.</b>
+     In February 2020 a hypothesis that United States intelligence agencies would later judge
+     plausible — and that two of them would come to favour — was formally condemned in a medical
+     journal as a conspiracy theory, in a statement organised by a man whose own institution funded
+     coronavirus research at the laboratory in question, a competing interest not disclosed for
+     sixteen months. A month later a paper declared no laboratory scenario plausible. A major
+     newspaper called the idea debunked. A platform made it a removable offence. Each of those was
+     reversed or corrected between May 2021 and 2023, and every correction was quieter than the
+     original.</p>
+  <p>That is a claim about the labelling, not about the virus. If the lab hypothesis is eventually
+     ruled out entirely, this page's argument is unaffected: the objection is to condemning a
+     hypothesis as illegitimate while the evidence to settle it did not exist, not to the answer
+     that condemnation happened to favour.</p>
+
+  <h2>The strongest objections to it</h2>
+  <p>These are not strawmen. The first one is the most serious criticism this page faces and we
+     think it lands partially.</p>
+  <ul class="objections">
+    <li><b>Two very different claims are being blurred together, and the blur favours us.</b> What
+      was condemned in early 2020 was largely the <i>engineered bioweapon</i> claim — that the virus
+      was deliberately built or released. That claim was poorly supported then and remains
+      unsupported: the intelligence community judged the virus was not developed as a biological
+      weapon. The <i>accidental research-related incident</i> hypothesis is a separate and far more
+      credible proposition. A page that lets the vindication of the second rehabilitate the first is
+      doing exactly the sleight of hand it accuses others of. The rows below are tagged by
+      hypothesis for this reason, and readers should check whether we kept the line straight.</li>
+    <li><b>Scientists updating on evidence is correct behaviour, not hypocrisy.</b> The signatories
+      of the February 2020 statement and the authors of the March 2020 paper were writing at a
+      moment of near-total ignorance, and several publicly changed position as evidence
+      accumulated. Treating a revised view as an exposed lie punishes the exact behaviour we spent
+      the rest of this repository asking for.</li>
+    <li><b>Platforms faced real harm, not hypothetical harm.</b> Moderating a pandemic information
+      space included genuinely false and dangerous claims. Drawing the line in the wrong place is a
+      serious error; it is not the same as drawing it in bad faith, and a page that does not
+      distinguish those is not being fair.</li>
+    <li><b>The newspaper correction does not vindicate the politician.</b> The Washington Post's
+      editor's note withdraws the words "debunked" and "conspiracy theory" on the ground that no
+      determination had been made. That is a statement about the label, not an endorsement of what
+      Senator Cotton actually said, parts of which invoked the deliberate-release framing.</li>
+    <li><b>Absence of a proven natural origin is not evidence of a lab origin.</b> Both remain
+      open. A timeline of failed condemnations can read as a scoreboard for the other side, and
+      that reading is not supported by anything here.</li>
+    <li><b>Fourteen documents is a sample, and we picked it.</b> The literature is enormous and a
+      different fourteen could support a different emphasis.</li>
+  </ul>
+
+  <h2>Sought, and not included</h2>
+  <p>The attribution rule cost us three things a reader would reasonably expect to find here.
+     Publishing what a rule excludes is the only way the rule means anything.</p>
+  <ul class="objections">
+    <li><b>The Department of Energy's assessment</b> that a laboratory incident was the likely
+      origin, reported in February 2023. It is a real and significant assessment. It is also known
+      publicly only through reporting that rests on unnamed officials describing a classified
+      annex. No named person has stated it on the record and no document has been released. Under
+      the rule above it is not admissible, however widely it has been repeated. This is why the FBI
+      row exists instead: its director said it himself, on camera, with his name on it.</li>
+    <li><b>The teleconference of 1 February 2020</b> between Anthony Fauci, Francis Collins and
+      several virologists, which is central to almost every account of this story. There is no
+      transcript. What is on the record is correspondence around the call and later testimony about
+      it, and the two do not agree. A row asserting what was said on that call would be a row
+      asserting something nobody can produce.</li>
+    <li><b>Any claim resting on an unnamed source, however credible the outlet.</b> We do not care
+      who anyone believes Deep Throat was; an anonymous source is not attributable, and a page that
+      admits one has no principled way to refuse the next. If a document is released or a named
+      person goes on the record, it becomes admissible that day.</li>
+  </ul>
+
+  <h2>How to argue with this page</h2>
+  <p>You don't have to persuade us. Everything here sits in a single public file that anyone can
+     edit; you change what you think is wrong and send us your version, and we accept it publicly
+     or say publicly why not. The most useful contributions to this page in particular: documents
+     that show the engineered claim and the accidental claim being carefully distinguished at the
+     time, which would weaken our argument; and any early, prominent, dated defence of the
+     accidental hypothesis as legitimate, which would strengthen it.</p>
+  <p class="cta">
+    <a href="https://github.com/debedb/elephants/blob/master/covid19-origins/index.html" rel="noopener">See the file everything lives in</a>
+    <a href="https://github.com/debedb/elephants/compare" rel="noopener">Send us a change</a>
+    <a href="https://github.com/debedb/elephants/fork" rel="noopener">Take your own copy</a>
+    <a href="https://github.com/debedb/elephants/issues/new" rel="noopener">Or just tell us what's wrong</a>
+  </p>
+
+  <h2>All documents</h2>
+  <table id="table">
+    <thead><tr><th>Date</th><th>Document</th><th>Kind</th><th>Bears on</th><th>Source</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <footer id="foot"></footer>
+</main>
+
+<div id="tip" role="tooltip" aria-hidden="true"></div>
+<script>
+// ===========================================================================
+// ATTRIBUTION RULE (chain of custody). Every source carries a grade:
+//   "record"   the person's own words: transcript, recording, signed paper
+//   "document" published by the body whose act it is
+//   "named"    journalism with a named on-record source, or publishing the doc
+//   anonymous-sourced claims are NOT ADMITTED and do not appear here at all.
+// A source without one of the three grades is a bug.
+// ===========================================================================
+const ATTR = {
+  record:   { label: "on the record", cls: "primary" },
+  document: { label: "document",      cls: "primary" },
+  named:    { label: "named reporting", cls: "" }
+};
+
+const HYPOTHESES = [
+  { id: "natural", name: "Zoonotic spillover", color: "var(--cat-1)",
+    text: "The virus passed from an animal to a human, plausibly at or near the Huanan seafood "
+        + "market in Wuhan, by the same route as previous coronaviruses. Favoured at low confidence "
+        + "by four US intelligence elements and the National Intelligence Council." },
+  { id: "lab", name: "Research-related incident", color: "var(--cat-2)",
+    text: "An accidental infection connected to research — sampling, animal handling or laboratory "
+        + "work, plausibly at the Wuhan Institute of Virology. No deliberate act is claimed. "
+        + "Favoured at moderate confidence by the FBI and, in 2023, by one further agency." },
+  { id: "engineered", name: "Deliberate engineering or release", color: "var(--cat-3)",
+    text: "The virus was built as a weapon, or released on purpose. This is the claim most often "
+        + "condemned in early 2020, and it is the one the record does not support: the US "
+        + "intelligence community judged that the virus was not developed as a biological weapon. "
+        + "It is listed because it was among the most heard, not because it is on equal footing." }
+];
+
+const EVENTS = [
+  {
+    date: "2020-02-16",
+    cat: "label",
+    bears: "engineered", stance: "condemned as illegitimate",
+    short: "A major newspaper calls it a conspiracy theory, already debunked",
+    title: "The Washington Post: \"Tom Cotton keeps repeating a coronavirus conspiracy theory that was already debunked\"",
+    authority: "The Washington Post, its own headline and framing",
+    quote: "Tom Cotton keeps repeating a coronavirus conspiracy theory that was already debunked.",
+    blurb: "The original headline of a news analysis piece. Fifteen months later the paper withdrew "
+         + "both the word \"debunked\" and the phrase \"conspiracy theory\" from it.",
+    note: "Cotton's own remarks moved between framings, including one invoking deliberate release. "
+        + "The correction concerns the label the paper applied, not the accuracy of what he said.",
+    source: { label: "The Washington Post, 16 February 2020 (carries the later editor's note)",
+              attr: "document",
+              url: "https://www.washingtonpost.com/politics/2020/02/16/tom-cotton-coronavirus-conspiracy/" }
+  },
+  {
+    date: "2020-02-19",
+    cat: "science",
+    bears: "engineered", stance: "condemned as illegitimate",
+    short: "27 scientists condemn \"conspiracy theories\" in The Lancet",
+    title: "Statement in support of the scientists, public health professionals, and medical professionals of China combatting COVID-19",
+    authority: "Charles Calisher and 26 co-signatories, published in The Lancet",
+    quote: "We stand together to strongly condemn conspiracy theories suggesting that COVID-19 does "
+         + "not have a natural origin.",
+    ourCall: "Our call: this is the hinge document for the argument this page makes, so it is worth "
+           + "being exact about what it did and did not say. It condemns theories that the virus is "
+           + "not natural. It does not distinguish deliberate engineering from an accidental "
+           + "research-related infection, and that absence is the whole problem.",
+    blurb: "A signed statement in a leading medical journal, published eight weeks after the first "
+         + "reported cases, declaring the non-natural hypotheses conspiracy theories.",
+    note: "Sixteen months later the journal published an addendum on competing interests: the "
+        + "statement had been organised by Peter Daszak, whose EcoHealth Alliance funded coronavirus "
+        + "research at the Wuhan Institute of Virology. See the row of 21 June 2021.",
+    source: { label: "The Lancet, 19 February 2020", attr: "document",
+              url: "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30418-9/fulltext" },
+    also: [
+      { label: "Open-access mirror (PubMed Central)", attr: "document",
+        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7159086/" }
+    ]
+  },
+  {
+    date: "2020-03-17",
+    cat: "science",
+    bears: "lab", stance: "argued against",
+    short: "\"We do not believe that any type of laboratory-based scenario is plausible\"",
+    title: "Andersen, Rambaut, Lipkin, Holmes and Garry, \"The proximal origin of SARS-CoV-2\", Nature Medicine",
+    authority: "Five named virologists, peer-reviewed correspondence in Nature Medicine",
+    quote: "Our analyses clearly show that SARS-CoV-2 is not a laboratory construct or a purposefully "
+         + "manipulated virus. ... We do not believe that any type of laboratory-based scenario is plausible.",
+    blurb: "The paper that did most to establish a natural origin as the scientific default. Its "
+         + "genomic argument against deliberate engineering is far stronger than its argument "
+         + "against an accidental infection with a natural virus, and the two conclusions are "
+         + "stated in the same breath.",
+    note: "The authors' private correspondence in the weeks before publication was later released "
+        + "and has been the subject of congressional inquiry. This row cites the paper, which is "
+        + "what the paper says.",
+    source: { label: "Nature Medicine, 17 March 2020", attr: "document",
+              url: "https://www.nature.com/articles/s41591-020-0820-9" }
+  },
+  {
+    date: "2021-03-30",
+    cat: "science",
+    bears: "lab", stance: "argued against",
+    short: "WHO joint study: a laboratory incident is \"extremely unlikely\"",
+    title: "WHO-convened Global Study of Origins of SARS-CoV-2: China Part",
+    authority: "Joint WHO-China study team; report published by the World Health Organization",
+    quote: "Introduction through a laboratory incident was considered to be an extremely unlikely pathway.",
+    blurb: "The joint mission's report ranked four pathways, placing a laboratory incident last. On "
+         + "the day of publication the WHO Director-General said that in his view all hypotheses "
+         + "remained on the table and that the assessment of the laboratory pathway was not "
+         + "extensive enough.",
+    note: "The study team's access was negotiated with the Chinese government, a limitation the "
+        + "report itself and the Director-General both noted.",
+    source: { label: "WHO, 30 March 2021", attr: "document",
+              url: "https://www.who.int/publications/i/item/who-convened-global-study-of-origins-of-sars-cov-2-china-part" },
+    also: [
+      { label: "Full joint report (PDF)", attr: "document",
+        url: "https://www.who.int/docs/default-source/coronaviruse/who-convened-global-study-of-origins-of-sars-cov-2-china-part-joint-report.pdf" }
+    ]
+  },
+  {
+    date: "2021-05-11",
+    cat: "fauci",
+    bears: "lab", stance: "open",
+    short: "Fauci: \"I am not convinced about that\"",
+    title: "Anthony Fauci interviewed by PolitiFact at United Facts of America",
+    authority: "Anthony Fauci, in his own words; full transcript published by PolitiFact",
+    quote: "No, actually. ... I am not convinced about that. I think we should continue to "
+         + "investigate what went on in China until we continue to find out to the best of our "
+         + "ability what happened.",
+    ourCall: "Our call: this is dated to the interview, 11 May 2021, not to the day it was widely "
+           + "reported roughly two weeks later. The transcript is the record; the reporting is not.",
+    blurb: "Asked whether he remained confident the virus developed naturally, the director of "
+         + "NIAID said he was not convinced, and called for continued investigation. In the same "
+         + "interview he disputed Senator Rand Paul's characterisation of NIH funding at the Wuhan "
+         + "Institute of Virology.",
+    note: "This is the earliest on-the-record statement we found from him treating the question as "
+        + "genuinely open.",
+    source: { label: "PolitiFact, full transcript of the 11 May 2021 interview", attr: "record",
+              url: "https://www.politifact.com/article/2021/may/14/transcript-what-dr-fauci-told-politifact/" },
+    also: [
+      { label: "PolitiFact's same-day write-up", attr: "named",
+        url: "https://www.politifact.com/article/2021/may/11/united-facts-america-fauci-disputes-sen-rand-paul-/" }
+    ]
+  },
+  {
+    date: "2021-05-14",
+    cat: "science",
+    bears: "lab", stance: "argued legitimate",
+    short: "18 scientists in Science: both hypotheses remain viable",
+    title: "Bloom et al., \"Investigate the origins of COVID-19\", Science",
+    authority: "Eighteen named scientists, letter published in Science",
+    quote: "Theories of accidental release from a lab and zoonotic spillover both remain viable. "
+         + "Knowing how COVID-19 emerged is critical for informing global strategies to mitigate "
+         + "the risk of future outbreaks.",
+    blurb: "The document that moved the accidental-release hypothesis back inside scientific "
+         + "respectability, signed by researchers including several with no prior involvement in "
+         + "the dispute. It is the turning point on this page.",
+    note: "Published fifteen months after the Lancet statement, and two weeks before the "
+        + "presidential order and the platform reversal below.",
+    source: { label: "Science, 14 May 2021", attr: "document",
+              url: "https://www.science.org/doi/10.1126/science.abj0016" }
+  },
+  {
+    date: "2021-05-26",
+    cat: "science",
+    bears: "lab", stance: "argued legitimate",
+    short: "The President orders a 90-day intelligence review of both hypotheses",
+    title: "Statement by President Joe Biden on the investigation into the origins of COVID-19",
+    authority: "The President of the United States; statement published by the White House",
+    quote: "I have now asked the Intelligence Community to redouble their efforts to collect and "
+         + "analyze information that could bring us closer to a definitive conclusion, and to "
+         + "report back to me in 90 days.",
+    blurb: "The statement discloses that two IC elements leaned toward the animal hypothesis and one "
+         + "toward the laboratory hypothesis, all at low or moderate confidence — an official "
+         + "acknowledgement that the laboratory hypothesis was live inside the government.",
+    source: { label: "The White House, 26 May 2021", attr: "document",
+              url: "https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2021/05/26/statement-by-president-joe-biden-on-the-investigation-into-the-origins-of-covid-19/" }
+  },
+  {
+    date: "2021-05-26",
+    cat: "label",
+    bears: "engineered", stance: "label withdrawn",
+    short: "Facebook stops removing posts saying COVID-19 was man-made",
+    title: "Facebook reverses its policy of removing the claim that COVID-19 is man-made or manufactured",
+    authority: "Facebook, company statement on its own policy",
+    quote: "In light of ongoing investigations into the origin of COVID-19 and in consultation with "
+         + "public health experts, we will no longer remove the claim that COVID-19 is man-made or "
+         + "manufactured from our apps.",
+    blurb: "The claim had been removable since February 2021. This row is on the page because a "
+         + "platform policy is a written, dated instrument that determined what hundreds of "
+         + "millions of people could say.",
+    note: "The policy covered the man-made claim specifically. It is the engineered hypothesis, not "
+        + "the accidental one, that was the removable offence.",
+    source: { label: "Facebook, COVID-19 misinformation policy update", attr: "document",
+              url: "https://about.fb.com/news/2020/04/covid-19-misinfo-update/" }
+  },
+  {
+    date: "2021-06-01",
+    cat: "label",
+    bears: "engineered", stance: "label withdrawn",
+    short: "The Washington Post withdraws \"debunked\" and \"conspiracy theory\"",
+    title: "Editor's note appended to the February 2020 article on Senator Cotton",
+    authority: "The Washington Post, its own correction",
+    quote: "Earlier versions of this story and its headline inaccurately characterized comments by "
+         + "Sen. Tom Cotton (R-Ark.) regarding the origins of the coronavirus. The term \"debunked\" "
+         + "and The Post's use of \"conspiracy theory\" have been removed because, then as now, "
+         + "there was no determination about the origins of the virus.",
+    ourCall: "Our call: the sentence \"then as now, there was no determination\" is the most "
+           + "important thing on this page. It is the paper stating that the evidence to justify "
+           + "the label did not exist at the time the label was applied.",
+    blurb: "The headline was changed from \"a coronavirus conspiracy theory that was already "
+         + "debunked\" to \"a coronavirus fringe theory that scientists have disputed\".",
+    source: { label: "The Washington Post editor's note, on the original article", attr: "document",
+              url: "https://www.washingtonpost.com/politics/2020/02/16/tom-cotton-coronavirus-conspiracy/" }
+  },
+  {
+    date: "2021-06-21",
+    cat: "label",
+    bears: "engineered", stance: "conflict disclosed",
+    short: "The Lancet discloses the competing interest behind the 2020 statement",
+    title: "Addendum: competing interests and the origins of SARS-CoV-2",
+    authority: "The Lancet, addendum to the February 2020 statement",
+    quote: "Peter Daszak reports grants from the US National Institutes of Health ... EcoHealth "
+         + "Alliance's work in China includes collaboration with the Wuhan Institute of Virology.",
+    blurb: "Sixteen months after publication, the journal invited the signatories to restate their "
+         + "competing interests. The organiser of a statement condemning non-natural hypotheses as "
+         + "conspiracy theories had an institutional interest in the laboratory at the centre of "
+         + "those hypotheses.",
+    note: "A competing interest is not proof that a claim is wrong. It is a fact a reader was "
+        + "entitled to have at the time, and did not.",
+    source: { label: "The Lancet, 21 June 2021", attr: "document",
+              url: "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)01377-5/fulltext" }
+  },
+  {
+    date: "2021-08-27",
+    cat: "science",
+    bears: "lab", stance: "open",
+    short: "US intelligence: both plausible, split, low confidence; not a bioweapon",
+    title: "Unclassified summary of assessment on COVID-19 origins",
+    authority: "Office of the Director of National Intelligence",
+    quote: "All agencies assess that two hypotheses are plausible: natural exposure to an infected "
+         + "animal and a laboratory-associated incident. ... The IC judges the virus was not "
+         + "developed as a biological weapon.",
+    blurb: "Four elements and the National Intelligence Council favoured natural exposure at low "
+         + "confidence; one favoured a laboratory-associated incident at moderate confidence. The "
+         + "same document rules out the deliberate-weapon hypothesis.",
+    ourCall: "Our call: this row cuts both ways and we have not tagged it as favouring anyone. It "
+           + "legitimises the accidental hypothesis and it forecloses the engineered one.",
+    source: { label: "ODNI, 27 August 2021", attr: "document",
+              url: "https://www.dni.gov/index.php/newsroom/reports-publications/reports-publications-2021/3562-unclassified-summary-of-assessment-on-covid-19-origins" }
+  },
+  {
+    date: "2023-02-28",
+    cat: "science",
+    bears: "lab", stance: "favoured",
+    short: "The FBI director says it on camera, in his own name",
+    title: "FBI Director Christopher Wray on the Bureau's assessment of COVID-19 origins",
+    authority: "Christopher Wray, Director of the Federal Bureau of Investigation, on camera",
+    quote: "The FBI has for quite some time now assessed that the origins of the pandemic are most "
+         + "likely a potential lab incident in Wuhan.",
+    ourCall: "Our call: this row exists in the form it does because of the attribution rule. Another "
+           + "agency's assessment favouring a laboratory origin was reported the same week, but only "
+           + "through unnamed officials describing a classified annex, so it is not on this page. "
+           + "Wray put his name and his face to his.",
+    blurb: "The first time the head of a US agency stated an agency assessment favouring a "
+         + "laboratory origin publicly and on the record.",
+    source: { label: "Fox News interview, 28 February 2023 (video)", attr: "record",
+              url: "https://www.foxnews.com/video/6321445279112" },
+    also: [
+      { label: "FBI's own account of the statement", attr: "document",
+        url: "https://x.com/FBI/status/1630733743777300483" }
+    ]
+  },
+  {
+    date: "2024-01-08",
+    cat: "fauci",
+    bears: "lab", stance: "argued legitimate",
+    short: "Fauci: a lab leak is not a conspiracy theory",
+    title: "Anthony Fauci, transcribed interview before the Select Subcommittee on the Coronavirus Pandemic",
+    authority: "Anthony Fauci under questioning; transcript released by the House committee",
+    quote: "It's a possibility. ... People have made conspiracy aspects from it. But you have to "
+         + "separate the two when you keep an open mind, that it could be a lab leak or it could be "
+         + "a natural occurrence.",
+    blurb: "Asked directly whether the laboratory hypothesis is a conspiracy theory, over a two-day "
+         + "transcribed interview in January 2024, he separated the hypothesis from the conspiracy "
+         + "claims attached to it — the distinction the February 2020 statement did not make.",
+    note: "The committee's own memo and the full transcript are both public. The memo is a partisan "
+        + "document; the transcript is the record.",
+    source: { label: "House Oversight, release of the Fauci transcript and memo", attr: "document",
+              url: "https://oversight.house.gov/release/covid-select-subcommittee-releases-dr-faucis-transcript-highlights-key-takeaways-in-new-memo/" },
+    also: [
+      { label: "Committee memo summarising the two days (PDF)", attr: "document",
+        url: "https://oversight.house.gov/wp-content/uploads/2024/05/FINAL-Fauci-Memo.pdf" }
+    ]
+  }
+];
+
+const CATEGORIES = [
+  { id: "science", name: "Scientific and official assessment", color: "var(--cat-1)" },
+  { id: "fauci",   name: "Fauci's stated position",            color: "var(--cat-2)" },
+  { id: "label",   name: "Labelling and platform policy",      color: "var(--cat-3)" }
+];
+
+// ---------------------------------------------------------------------------
+const byDate = [...EVENTS].sort((a, b) => a.date.localeCompare(b.date));
+const parse = iso => Date.parse(iso + "T00:00:00Z");
+const PAD = 40 * 864e5;
+const T0 = parse(byDate[0].date) - PAD;
+const T1 = parse(byDate[byDate.length - 1].date) + PAD;
+const pos = iso => ((parse(iso) - T0) / (T1 - T0) * 100) + "%";
+
+const catOf = id => CATEGORIES.find(c => c.id === id);
+const hypOf = id => HYPOTHESES.find(h => h.id === id);
+const fmt = iso => new Date(parse(iso)).toLocaleDateString("en-US",
+  { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const fmtShort = iso => new Date(parse(iso)).toLocaleDateString("en-US",
+  { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
+
+const el = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined) n.textContent = text;
+  return n;
+};
+const cite = s => {
+  const wrap = el("span", "r-src");
+  const a = ATTR[s.attr];
+  wrap.append(el("span", "kind " + (a ? a.cls : "none"), a ? a.label : "UNGRADED — bug"));
+  const link = el("a", null, s.label);
+  link.href = s.url;
+  link.rel = "noopener";
+  wrap.append(link);
+  return wrap;
+};
+
+const months = [];
+for (let d = new Date(T0); d.getTime() <= T1; d.setUTCMonth(d.getUTCMonth() + 1)) {
+  const m = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1);
+  if (m >= T0 && m <= T1) months.push(new Date(m));
+}
+
+// hypotheses ----------------------------------------------------------------
+const hyps = document.getElementById("hyps");
+HYPOTHESES.forEach(h => {
+  const c = el("div", "hyp-card");
+  c.style.setProperty("--h", h.color);
+  const head = el("h3");
+  const tag = el("span", "hyp-tag", h.id);
+  tag.style.color = h.color;
+  head.append(tag, document.createTextNode(h.name));
+  c.append(head, el("p", null, h.text));
+  hyps.append(c);
+});
+
+// legend --------------------------------------------------------------------
+const legend = document.getElementById("legend");
+CATEGORIES.forEach(c => {
+  const li = el("li");
+  const sw = el("span", "swatch");
+  sw.style.background = c.color;
+  li.append(sw, el("span", null, c.name));
+  legend.append(li);
+});
+legend.append(el("li", null, "Grouping and colour are ours."));
+
+// chart ---------------------------------------------------------------------
+const plot = document.getElementById("plot");
+const grid = el("div", "gridlines");
+months.forEach(d => {
+  const g = el("div", "gridline" + (d.getUTCMonth() % 3 === 0 ? " q" : ""));
+  g.style.left = pos(d.toISOString().slice(0, 10));
+  grid.append(g);
+});
+plot.append(grid);
+
+const head = el("div", "head");
+const years = [...new Set(byDate.map(e => e.date.slice(0, 4)))];
+head.append(el("span", null, "What was said, and who can be held to it"),
+            el("span", null, years[0] + " to " + years[years.length - 1]));
+plot.append(head);
+
+byDate.forEach(e => {
+  const c = catOf(e.cat);
+  const row = el("div", "row");
+  row.style.setProperty("--c", c.color);
+  row.dataset.date = e.date + e.cat;
+
+  const lab = el("div", "r-label");
+  lab.append(el("div", "r-date", fmtShort(e.date)));
+
+  const claim = el("button", "r-claim", e.short);
+  claim.type = "button";
+  claim.addEventListener("click", () => select(e));
+  lab.append(claim);
+
+  if (e.quote) lab.append(el("div", "quote", "“" + e.quote + "”"));
+  lab.append(cite(e.source));
+  (e.also || []).forEach(s => lab.append(cite(s)));
+
+  const h = hypOf(e.bears);
+  const bears = el("div", "bears");
+  const bi = el("i", null, h ? h.id : "?");
+  bi.style.color = h ? h.color : "";
+  bears.append(bi, document.createTextNode(e.stance));
+  lab.append(bears);
+
+  if (e.ourCall) lab.append(el("div", "r-call", e.ourCall));
+
+  const track = el("div", "r-track");
+  track.style.setProperty("--x", pos(e.date));
+  const dot = el("span", "dot");
+  dot.style.setProperty("--x", pos(e.date));
+  track.append(dot);
+
+  row.append(lab, track);
+  plot.append(row);
+});
+
+const axis = el("div", "axis");
+const axisTrack = el("div", "axis-track");
+const tickEvery = months.length > 14 ? 3 : 1;
+months.forEach(d => {
+  if (d.getUTCMonth() % tickEvery !== 0) return;
+  const label = d.getUTCMonth() === 0
+    ? d.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })
+    : d.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" });
+  const t = el("div", "tick", label);
+  t.style.setProperty("--x", pos(d.toISOString().slice(0, 10)));
+  axisTrack.append(t);
+});
+axis.append(el("div"), axisTrack);
+plot.append(axis);
+plot.style.setProperty("--gutter", "560px");
+
+// detail --------------------------------------------------------------------
+const detail = document.getElementById("detail");
+function select(e) {
+  document.querySelectorAll(".row").forEach(r => r.classList.toggle("on", r.dataset.date === e.date + e.cat));
+  detail.replaceChildren();
+  detail.append(el("div", "d-date", fmt(e.date) + "  |  " + catOf(e.cat).name));
+  detail.append(el("div", "d-title", e.title));
+  const auth = el("p", "d-auth");
+  auth.append(el("b", null, "Attribution: "), document.createTextNode(e.authority));
+  detail.append(auth);
+  const h = hypOf(e.bears);
+  if (h) {
+    const b = el("p", "d-auth");
+    b.append(el("b", null, "Bears on: "), document.createTextNode(h.name + " — " + e.stance));
+    detail.append(b);
+  }
+  if (e.quote) detail.append(el("p", "d-note", "“" + e.quote + "”"));
+  detail.append(el("p", null, e.blurb));
+  if (e.ourCall) detail.append(el("p", "d-note", e.ourCall));
+  if (e.note) detail.append(el("p", "d-note", e.note));
+  [e.source, ...(e.also || [])].forEach(s => {
+    const p = el("p", "d-src");
+    p.append(cite(s));
+    detail.append(p);
+  });
+}
+detail.append(el("p", "d-hint", "Select any row's headline for the full quotation, who can be held to it, and what we could not verify."));
+
+// table ---------------------------------------------------------------------
+const tbody = document.querySelector("#table tbody");
+byDate.forEach(e => {
+  const tr = el("tr");
+  tr.append(el("td", null, e.date));
+  tr.append(el("td", null, e.title));
+  const c = catOf(e.cat);
+  const td = el("td");
+  const tag = el("span", "cat-tag");
+  const dot = el("i");
+  dot.style.background = c.color;
+  tag.append(dot, el("span", null, c.name));
+  td.append(tag);
+  tr.append(td);
+  const h = hypOf(e.bears);
+  tr.append(el("td", null, (h ? h.name : "?") + " — " + e.stance));
+  const cell = el("td");
+  [e.source, ...(e.also || [])].forEach(s => cell.append(cite(s)));
+  tr.append(cell);
+  tbody.append(tr);
+});
+
+// footer: prove the attribution rule held -----------------------------------
+const all = byDate.flatMap(e => [e.source, ...(e.also || [])]);
+const ungraded = all.filter(s => !ATTR[s.attr]);
+const counts = all.reduce((a, s) => (a[s.attr] = (a[s.attr] || 0) + 1, a), {});
+const foot = document.getElementById("foot");
+foot.append(document.createTextNode(
+  byDate.length + " documents, " + all.length + " sources: "
+  + (counts.record || 0) + " first-person on the record, "
+  + (counts.document || 0) + " institutional documents, "
+  + (counts.named || 0) + " named reporting, and by rule zero resting on anonymous sources. "
+  + (ungraded.length ? "WARNING: " + ungraded.length + " ungraded source(s) — a bug. " : "")
+  + "This page asserts no origin. If a citation is wrong, a quotation is out of context, or a "
+  + "source turns out to rest on an unnamed informant, that is a bug: "));
+const a = el("a", null, "github.com/debedb/elephants");
+a.href = "https://github.com/debedb/elephants";
+a.rel = "noopener";
+foot.append(a);
+</script>
+</body>
+</html>

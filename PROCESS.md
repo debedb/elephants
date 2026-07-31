@@ -162,6 +162,38 @@ recording a document, so it carries extra obligations:
   thing in the repository, including the point that Bayesian arithmetic can
   launder a judgment call as a calculation.
 
+## Attribution, and the chain of custody
+
+Added after a long argument about what "attributable" means. Three admissible
+grades, and one that is not admitted at all:
+
+- **on the record** — the person's own words in a transcript, a recording, or a
+  paper they signed. You can watch or read them saying it.
+- **document** — published by the body whose act it is: an agency report, a
+  journal statement, a platform policy, a newspaper's own headline or correction.
+- **named reporting** — journalism whose source is named and on the record, or
+  which publishes the underlying document.
+- **anonymously sourced — not admitted.** A claim resting on unnamed sources does
+  not appear, regardless of the outlet's reputation or how widely it has been
+  repeated. The reasoning: *anonymous sources are investigative leads, not
+  evidence.* We did not know who Deep Throat was until Mark Felt said so in 2005,
+  and in the intervening decades several people were confidently and wrongly
+  named in print. Nixon fell because of the tapes and sworn testimony, not
+  because of the source who pointed at them.
+
+**No laundering through links.** A citation points at the artifact — the
+recording, the transcript, the report — never at a piece describing another
+piece. Every hop is where the qualifiers fall off, and the drift is directional,
+always toward more confidence. Where the artifact cannot be reached, the row says
+so; it does not cite the nearest hop as though it were the thing.
+
+**An office is not a person, and the difference is dated.** An institution's
+ultimate voice is whoever holds its top office, so a director speaking in that
+capacity is the institution speaking — but only while they hold it, and only when
+describing an institutional position rather than a personal one. The same human
+being carries different authority before and after leaving office. Where this
+gets genuinely hard, see [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
+
 ## What this file is not
 
 It is not a claim that the process is neutral. The selection of events is an

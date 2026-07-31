@@ -211,6 +211,28 @@ piece. Every hop is where the qualifiers fall off, and the drift is directional,
 always toward more confidence. Where the artifact cannot be reached, the row says
 so; it does not cite the nearest hop as though it were the thing.
 
+**When the artifact is reachable, the reporting drops out of the citation
+entirely.** Not demoted below the primary source — removed. If the body that
+acted published the thing it did, cite that, and cite nobody who described it.
+Adding the journalist does not add corroboration; it adds a hop, and a hop is
+where the qualifiers fall off.
+
+This has a practical form worth stating, because it came up as soon as the rule
+existed. An entry was proposed as "I think it was such-and-such reporter who
+covered this, but I could be wrong." The right response is not to go verify who
+reported it. It is to go find out whether the underlying artifact exists — and in
+that case it did, because China's National Health Commission had published the
+revision notification itself. The journalist's identity turned out to be
+irrelevant to the row, and a shaky attribution was replaced by a document.
+
+**So a half-remembered citation is a lead, not a problem to be repaired.** It
+tells you roughly where to dig; what goes on the page is what you dig up. This is
+the same rule as the one about anonymous sources, applied one layer out:
+reporting can legitimately be the thing that leads you to an artifact, and can
+legitimately supply context or analysis that no artifact contains. It just does
+not belong in the citation for the fact itself when the fact has its own
+document.
+
 **An office is not a person, and the difference is dated.** An institution's
 ultimate voice is whoever holds its top office, so a director speaking in that
 capacity is the institution speaking — but only while they hold it, and only when

@@ -16,6 +16,15 @@
   @media (prefers-color-scheme: dark) { body { background: #0d0d0d; color: #fff; } }
   main { max-width: 46ch; padding: 32px 24px 64px; }
   h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .topbar {
+    display: inline-flex; align-items: center; gap: 9px; flex-wrap: wrap;
+    border: 1px solid rgba(137,135,129,.4); border-radius: 999px;
+    padding: 7px 15px; margin: 0 0 22px; font-size: 13px;
+    color: inherit; text-decoration: none; line-height: 1.4;
+  }
+  .topbar:hover { border-color: rgba(137,135,129,.8); }
+  .topbar .dot { width: 8px; height: 8px; border-radius: 50%; background: #1baf7a; flex: none; }
+  .topbar .go { font-weight: 600; white-space: nowrap; }
   .sub { color: #898781; margin: 0 0 28px; font-size: 15px; }
   ul { list-style: none; padding: 0; margin: 0 0 28px; }
   li { padding: 12px 0; border-top: 1px solid rgba(137,135,129,.35); }
@@ -26,6 +35,11 @@
 </head>
 <body>
 <main>
+  <a class="topbar" href="https://github.com/debedb/elephants" rel="noopener">
+    <span class="dot"></span>
+    <span>Open source, all of it.</span>
+    <span class="go">github.com/debedb/elephants &rarr;</span>
+  </a>
   <h1>elephants</h1>
   <p class="sub">Elephants do not forget.</p>
   <ul>

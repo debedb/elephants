@@ -176,6 +176,19 @@
   .objections li { color: var(--text-secondary); margin-bottom: 9px; font-size: 14px; }
   .objections b { color: var(--text-primary); font-weight: 600; }
 
+  /* open-source banner: first thing on every page */
+  .topbar {
+    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    border: 1px solid var(--border); background: var(--surface-1);
+    border-radius: 999px; padding: 8px 18px; margin: 0 0 20px;
+    font-size: 13px; color: var(--text-secondary); text-decoration: none;
+    line-height: 1.4;
+  }
+  .topbar:hover { border-color: var(--axis); }
+  .topbar b { color: var(--text-primary); font-weight: 650; }
+  .topbar .go { color: var(--text-primary); font-weight: 600; white-space: nowrap; }
+  .topbar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cat-3); flex: none; }
+
   footer { margin-top: 44px; font-size: 12.5px; color: var(--text-muted); max-width: 74ch; }
 
   .siblings { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 22px; font-size: 13px; }
@@ -206,6 +219,13 @@
 </style>
 <body>
 <main>
+  <a class="topbar" href="https://github.com/debedb/elephants" rel="noopener">
+    <span class="dot"></span>
+    <span><b>Open source, all of it.</b> The sources, the criteria, the argument, the case against
+      the argument, and the prompts.</span>
+    <span class="go">github.com/debedb/elephants &rarr;</span>
+  </a>
+
   <h1>What the US government said about COVID-19 vaccines and transmission</h1>
   <p class="siblings">
     <a href="../covid19/">&larr; COVID-19: a sourced timeline</a>

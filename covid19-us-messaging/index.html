@@ -340,11 +340,15 @@
     <li><b>"Vaccinated people ... do not carry the virus."</b> The CDC Director, 29 March 2021 —
       the single most useful quotation for the argument this page makes. She said it on MSNBC. Not a
       government publication, so it is out.</li>
-    <li><b>CDC's September 2021 change to its published definitions of "vaccine" and
-      "vaccination"</b> — from wording about producing <i>immunity</i> to wording about producing
-      <i>protection</i>. The current definitions are on cdc.gov; we could not locate the superseded
-      wording on any government host, only in third-party web archives. Under this page's rule we
-      cannot show the before and after, so we do not assert the change at all.</li>
+    <li><b>CDC's September 2021 change to its published definitions — no longer excluded, and the
+      reason for the reversal is itself worth recording.</b> This entry previously read: "we could
+      not locate the superseded wording on any government host, only in third-party web archives,
+      so we do not assert the change at all." The rule was then amended. An Internet Archive
+      capture of a government page is custody of a government document — the Archive holds it, the
+      agency published it — and a capture is <i>checkable</i> in a way that reporting is not, so the
+      burden properly sits with anyone who wants to argue a capture is unfaithful. The change now
+      has its own row, with both captures linked, and the page's automated host check unwraps
+      archive URLs to test the original publisher.</li>
     <li><b>A statement by Dr. Fauci, in his own voice, on an NIH domain, about vaccination and
       transmission.</b> We looked and did not find one. He appears above only as a named signatory
       of the 18 August 2021 joint statement. If you know of one, that is a pull request.</li>
@@ -574,6 +578,44 @@ const EVENTS = [
               url: "https://archive.cdc.gov/www_cdc_gov/media/releases/2021/s0818-covid-19-booster-shots.html" }
   },
   {
+    date: "2021-09-01",
+    cat: "guidance",
+    short: "CDC quietly rewrites its definitions of \"vaccine\" and \"vaccination\"",
+    title: "CDC changes its published definitions to remove the word \"immunity\"",
+    authority: "Centers for Disease Control and Prevention, its own immunization basics page",
+    quote: "Before — Vaccination: \"The act of introducing a vaccine into the body to produce "
+         + "immunity to a specific disease.\" Vaccine: \"A product that stimulates a person's immune "
+         + "system to produce immunity to a specific disease, protecting the person from that "
+         + "disease.\"  After — Vaccination: \"The act of introducing a vaccine into the body to "
+         + "produce protection from a specific disease.\" Vaccine: \"A preparation that is used to "
+         + "stimulate the body's immune response against diseases.\"",
+    ourCall: "Our call, and the reason this row exists at all: this page previously listed the "
+           + "definition change under \"sought and not included\", because the superseded wording "
+           + "was not on any government host. It is now included because we accept an Internet "
+           + "Archive capture as custody of a government document — the Archive is the custodian, "
+           + "not the publisher. Both captures are linked, both are dated, and anyone who thinks a "
+           + "capture is unfaithful can open it and argue. The page's automated host check now "
+           + "unwraps the archive URL and tests the original .gov host.",
+    blurb: "The change was not announced. It was surfaced publicly on 8 September 2021 when "
+         + "Representative Thomas Massie posted the successive versions side by side. The captures "
+         + "bracket it to between 26 August and 1 September 2021. Note that the second definition "
+         + "changed more than the first: \"vaccine\" stopped being a product that produces immunity "
+         + "and became a preparation that stimulates a response.",
+    note: "A defence of the change on the merits is straightforward and worth stating: no vaccine "
+        + "produces absolute immunity in every recipient, \"immunity\" invites an all-or-nothing "
+        + "reading, and CDC had used several formulations over the years. That it was defensible on "
+        + "the merits and made without announcement, during a period when breakthrough infections "
+        + "were the central public argument, are both true at once.",
+    source: { label: "CDC immunization basics, captured 26 August 2021 — the earlier wording",
+              org: "CDC", archived: true,
+              url: "https://web.archive.org/web/20210826113846/https://www.cdc.gov/vaccines/vac-gen/imz-basics.htm" },
+    also: [
+      { label: "The same page captured 3 September 2021 — the revised wording",
+        org: "CDC", archived: true,
+        url: "https://web.archive.org/web/20210903133551/https://www.cdc.gov/vaccines/vac-gen/imz-basics.htm" }
+    ]
+  },
+  {
     date: "2021-09-17",
     cat: "evidence",
     short: "FDA's own advisers take up boosters for everyone 16 and older",
@@ -656,14 +698,27 @@ const el = (tag, cls, text) => {
 const cite = s => {
   const wrap = el("span", "r-src");
   wrap.append(el("span", "kind primary", s.org));
+  if (s.archived) wrap.append(el("span", "kind none", "archived capture"));
   const a = el("a", null, s.label);
   a.href = s.url;
   a.rel = "noopener";
   wrap.append(a);
   return wrap;
 };
-// every link on this page must be a .gov host; anything else is a bug
-const isGov = url => { try { return new URL(url).hostname.endsWith(".gov"); } catch (e) { return false; } };
+// every link on this page must resolve to a .gov publisher; anything else is a bug
+// A Wayback capture of a .gov page is still a .gov document: the Internet
+// Archive is the custodian, not the publisher. So the host check unwraps
+// web.archive.org/web/<timestamp>/<original-url> and tests the ORIGINAL host.
+// Captures are labelled on the row; anyone who thinks a capture is unfaithful
+// can inspect it and say so, which is the point of admitting them.
+const originalUrl = url => {
+  const m = url.match(/^https?:\/\/web\.archive\.org\/web\/[^/]+\/(https?:\/\/.+)$/);
+  return m ? m[1] : url;
+};
+const isGov = url => {
+  try { return new URL(originalUrl(url)).hostname.endsWith(".gov"); }
+  catch (e) { return false; }
+};
 
 const months = [];
 for (let d = new Date(T0); d.getTime() <= T1; d.setUTCMonth(d.getUTCMonth() + 1)) {

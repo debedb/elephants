@@ -233,6 +233,26 @@ legitimately supply context or analysis that no artifact contains. It just does
 not belong in the citation for the fact itself when the fact has its own
 document.
 
+**Web archives are admitted, and labelled.** A capture of a page that has since
+changed or vanished is *custody* of a document, not a substitute for it: the
+Internet Archive holds it, the original body published it. Two things follow.
+Captures are labelled as captures on the row, so nobody mistakes one for a live
+artifact. And the burden sits with whoever wants to contest a capture, because a
+capture is checkable — you can open it and look — in a way that reporting about
+a vanished document is not.
+
+This was not the original rule. The `.gov` page first listed CDC's September 2021
+redefinition of "vaccine" under material it had gone looking for and could not
+use, because the superseded wording existed only in third-party archives. The
+rule was then amended and the row admitted, with both captures linked. The
+page's automated host check was extended to unwrap `web.archive.org/web/<ts>/<url>`
+and test the *original* publisher, so the guarantee is still enforced in code
+rather than by good intentions.
+
+The reversal is recorded on the page rather than quietly applied, and the
+superseded exclusion text is quoted there. A rule that changes without leaving a
+trace is indistinguishable from a rule that was never applied.
+
 **An office is not a person, and the difference is dated.** An institution's
 ultimate voice is whoever holds its top office, so a director speaking in that
 capacity is the institution speaking — but only while they hold it, and only when

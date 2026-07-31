@@ -34,6 +34,28 @@ is not served from a `.gov` domain.
 something useful, the exclusion is published, not quietly taken. Both pages
 carry a list of material we went looking for and did not use, with the reason.
 
+## Out of scope, deliberately
+
+These pages record what was decided, by whom, on what date, with what stated
+basis. They do not cover:
+
+- **Reception.** How the record was received, who aligned with whom, which
+  faction adopted which fact. That is a story about audiences, not about
+  documents, and it cannot be sourced to an instrument.
+- **Motive.** What anyone intended, believed privately, or was trying to
+  achieve. A document shows what was said, not why. Where behaviour is
+  suggestive, the row states the behaviour and stops.
+- **Character.** Individual officials are named only as signatories and authors,
+  because that is what the documents establish. The person who most nearly did
+  the thing this repository asks for — publishing a reversal, its basis, and its
+  awkward sequencing, in writing, under her own name — is also among the most
+  frequently cast as a villain. That asymmetry is a good reason to keep the
+  rule rather than an interesting subject for a page.
+
+The line is not squeamishness. Reception and motive are where an argument stops
+being checkable, and everything else here is built so a stranger who does not
+trust us can check it.
+
 ## Verification steps actually used
 
 - **Liveness.** Every URL is fetched before it ships. Dead links are replaced,

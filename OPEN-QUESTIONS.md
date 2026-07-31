@@ -107,6 +107,79 @@ place implies a precision nobody has. We are not sure the mitigations are
 sufficient, or whether the honest output is a direction and a rough size rather
 than a percentage.
 
+### 8. Every chain of verification stops somewhere. Where should ours stop, and who says?
+
+The conversation that produced this section began with an objection: you rely on
+git for your history, and git can in principle be tampered with, so you need
+something stronger. Something stronger has the same problem, and so does the
+thing after that. If the answer to distrust is always one more layer of
+distrust, there is no answer.
+
+**The strongest version of this objection refutes itself, and the receipt is on
+its own ledger.** In 2016 an immutable blockchain produced an outcome its
+community found intolerable, and the community forked it — decided, socially,
+which history counted. The other branch still exists as Ethereum Classic. The
+fork is recorded in Ethereum's own standards process as
+[EIP-779, "Hardfork Meta: DAO Fork"](https://eips.ethereum.org/EIPS/eip-779).
+Immutability held exactly until humans decided it should not, and then humans
+chose which chain was real. The regress was not escaped; it was relocated into
+consensus rules and a community vote, and then described as though it had been
+eliminated. Git is more honest: it says plainly that it is hashes plus
+maintainers plus convention.
+
+**The structure is old.** Münchhausen's trilemma: every justification chain ends
+in infinite regress, circularity, or a dogmatic stop, and there is no fourth
+option. Wittgenstein's version in *On Certainty*: the spade turns, and what
+remains is not a better reason but the hinge the door swings on.
+
+The legal version is Hart's **rule of recognition** — the ultimate rule of a
+system is not itself valid or invalid, it is simply practised and accepted.
+Kelsen's alternative was to posit a basic norm at the top; Hart's objection was
+that a fiction was doing work that a social fact could do honestly.
+
+**And the sharpest statement of it is much older than either.** The Talmudic
+account of the oven of Akhnai (Bava Metzia 59b): R. Eliezer proves his position
+with miracles and finally with a voice from heaven, and R. Yehoshua stands and
+answers *lo ba-shamayim hi* — it is not in heaven. The appeal chain is
+terminated, and it is terminated by the highest possible authority renouncing
+its standing as final arbiter. Not from lack of power. Because a community that
+can always appeal upward is not an interpretive community. The reported response
+is laughter: *nitzchuni banai*, my children have defeated me.
+
+**The story does not end well, and we should not skip that.** R. Eliezer is
+excommunicated. The text is ambivalent about its own victory, and the casualty is
+the man who may have been right on the merits and lost on procedure. That is the
+most useful warning here for a project like this one. Our rules will exclude true
+claims — the assessment we ruled inadmissible may well be correct — and the
+Talmud's warning is that you do not get to feel clean about it.
+
+**So the reframing we think is right:** these rules were never about eliminating
+trust. They are about placing it where a stranger can inspect it, and then saying
+where it was placed. Not *trust nothing*, which is not available to anyone. Rather:
+*here is the smallest set of things we are asking you to trust, named out loud.*
+
+Ours, explicitly:
+
+1. That git and GitHub have not silently altered this repository's history.
+2. That the linked artifact is what it appears to be — that the video is not
+   fabricated, the transcript not doctored, the archived page not forged.
+3. That a publisher's website today shows what it showed then, except where an
+   editor's note says otherwise.
+4. That we read what we say we read.
+
+Every one of those could fail. We are not defending against a determined
+forger, and we want to be explicit that we are not: **the threat model here is
+not Moriarty.** Someone committed to fabrication defeats an artifact-based rule
+with a good enough forgery, and that contest gets settled somewhere else, by
+other means, at some other waterfall. These rules are built for the honest
+reader and the honest author — so that someone can follow a link, look at the
+thing, and say *I had not thought about that*. That is the whole ambition, and
+pretending to a stronger one would be its own kind of laundering.
+
+The open question: is that the right place to stop? Is there a principled account
+of where a public evidentiary artifact *should* terminate its chain, as opposed to
+where it is convenient to?
+
 ## Prior art we are aware of
 
 Split into what we have verified and what we have not, because a reading list is
@@ -126,6 +199,19 @@ a set of claims and this repository does not get to exempt its own.
 - Jennifer Lackey, *The Epistemology of Groups*, Oxford University Press (online
   December 2020).
   [doi:10.1093/oso/9780199656608.001.0001](https://doi.org/10.1093/oso/9780199656608.001.0001)
+- Onora O'Neill, *Autonomy and Trust in Bioethics*, Cambridge University Press,
+  2002. [doi:10.1017/CBO9780511606250](https://doi.org/10.1017/CBO9780511606250)
+  — on trust and the limits of accountability machinery. Her Reith Lectures of
+  the same year, *A Question of Trust*, are the more directly relevant text and
+  are in the unverified list below.
+- Bernard Williams, *Truth and Truthfulness*, Princeton University Press
+  (Crossref records the digital edition; the original is 2002).
+  [doi:10.1515/9781400825141](https://doi.org/10.1515/9781400825141) — accuracy
+  and sincerity as virtues, and the risk that the drive to unmask consumes the
+  value it serves.
+- Ethereum Improvement Proposal 779, "Hardfork Meta: DAO Fork" —
+  [eips.ethereum.org/EIPS/eip-779](https://eips.ethereum.org/EIPS/eip-779). The
+  community's own record of choosing which history counted.
 - Vienna Convention on the Law of Treaties, 1969 —
   [full text (PDF, UN)](https://legal.un.org/ilc/texts/instruments/english/conventions/1_1_1969.pdf).
   Article 7(2)(a) treats heads of state and government as representing their
@@ -153,9 +239,20 @@ question 3.
   Injustice*.
 - Restatement (Third) of Agency — actual versus apparent authority, and
   ratification.
+- Ludwig Wittgenstein, *On Certainty* — hinge propositions; justification coming
+  to an end.
+- Hans Albert on the Münchhausen trilemma.
+- Onora O'Neill, *A Question of Trust* (Reith Lectures, 2002).
+- Babylonian Talmud, Bava Metzia 59b — the oven of Akhnai. We are working from
+  the standard account and would welcome correction from anyone who reads it
+  properly, including on the aftermath, which we think matters more than the
+  famous line does.
 
-While assembling this list one guessed identifier resolved to an entirely
-different book. That is the whole argument for the split above.
+While assembling this list, two guessed identifiers resolved to entirely
+different books — one to a work by a different author on a different subject,
+one to a different book by the right author. Neither error would have been
+visible to a reader. That is the whole argument for the split above, and for
+the rule against citing at second hand.
 
 ## How to weigh in
 

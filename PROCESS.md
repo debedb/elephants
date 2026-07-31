@@ -194,6 +194,30 @@ describing an institutional position rather than a personal one. The same human
 being carries different authority before and after leaving office. Where this
 gets genuinely hard, see [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
+
+## Where our chain of verification stops
+
+Every verification chain terminates somewhere — in a dogmatic stop, a circle, or
+an infinite regress, and there is no fourth option. A project that claims to have
+escaped this has relocated the stop and stopped mentioning it. So here is ours,
+stated rather than hidden. We ask a reader to trust exactly four things:
+
+1. That git and GitHub have not silently altered this repository's history.
+2. That a linked artifact is what it appears to be — the video not fabricated,
+   the transcript not doctored, the archived page not forged.
+3. That a publisher's site today shows what it showed then, except where an
+   editor's note says otherwise.
+4. That we read what we say we read.
+
+Any of those can fail. **The threat model is not a determined forger.** Someone
+committed to fabrication beats an artifact-based rule with a good enough forgery,
+and that contest is settled elsewhere by other means. These rules exist so that an
+honest reader can follow a link, look at the thing, and disagree with us on the
+evidence. Claiming more would be its own laundering.
+
+See [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) question 8 for why we think this is
+the honest form of the problem rather than a weakness in it.
+
 ## What this file is not
 
 It is not a claim that the process is neutral. The selection of events is an

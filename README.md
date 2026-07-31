@@ -12,6 +12,7 @@ Published at **[elephants.debedb.com](https://elephants.debedb.com/)**.
 |---|---|
 | [`covid19/`](covid19/) | COVID-19, 2020–2021 — [elephants.debedb.com/covid19/](https://elephants.debedb.com/covid19/) |
 | [`covid19-us-messaging/`](covid19-us-messaging/) | What the US government said about vaccines and transmission — [elephants.debedb.com/covid19-us-messaging/](https://elephants.debedb.com/covid19-us-messaging/) |
+| [`covid19-origins/`](covid19-origins/) | Origins: the hypotheses, and what they were called — [elephants.debedb.com/covid19-origins/](https://elephants.debedb.com/covid19-origins/) |
 | [`covid19-bayes/`](covid19-bayes/) | Shoshin: a beginner's mind updates on the record — [elephants.debedb.com/covid19-bayes/](https://elephants.debedb.com/covid19-bayes/) |
 
 ### Pages that reason, rather than record

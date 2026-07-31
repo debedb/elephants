@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>COVID-19 origins: the hypotheses, and what they were called</title>
 <meta name="description" content="The leading hypotheses for the origin of SARS-CoV-2, what was documented when, how the lab hypothesis was labelled, and Anthony Fauci's stated position throughout. This page does not assert an origin.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <style>
   :root {
     color-scheme: light;
@@ -452,6 +454,7 @@ const EVENTS = [
     date: "2019-12-31",
     cat: "science",
     bears: "natural", stance: "neither — concealment, not origin",
+    capacity: { kind: "institution", held: "Taiwan Centers for Disease Control, acting as the agency" },
     short: "Taiwan emails the WHO about atypical pneumonia in Wuhan",
     title: "Taiwan Centers for Disease Control notifies the WHO International Health Regulations focal point",
     authority: "Taiwan Centers for Disease Control, its own published account",
@@ -484,6 +487,7 @@ const EVENTS = [
     date: "2020-02-16",
     cat: "label",
     bears: "engineered", stance: "condemned as illegitimate",
+    capacity: { kind: "institution", held: "The Washington Post, its own headline" },
     short: "A major newspaper calls it a conspiracy theory, already debunked",
     title: "The Washington Post: \"Tom Cotton keeps repeating a coronavirus conspiracy theory that was already debunked\"",
     authority: "The Washington Post, its own headline and framing",
@@ -500,6 +504,7 @@ const EVENTS = [
     date: "2020-02-19",
     cat: "science",
     bears: "engineered", stance: "condemned as illegitimate",
+    capacity: { kind: "signatories", held: "27 named individuals signing in their own names; the journal published it" },
     short: "27 scientists condemn \"conspiracy theories\" in The Lancet",
     title: "Statement in support of the scientists, public health professionals, and medical professionals of China combatting COVID-19",
     authority: "Charles Calisher and 26 co-signatories, published in The Lancet",
@@ -525,6 +530,7 @@ const EVENTS = [
     date: "2020-03-17",
     cat: "science",
     bears: "lab", stance: "argued against",
+    capacity: { kind: "signatories", held: "5 named authors; peer-reviewed correspondence" },
     short: "\"We do not believe that any type of laboratory-based scenario is plausible\"",
     title: "Andersen, Rambaut, Lipkin, Holmes and Garry, \"The proximal origin of SARS-CoV-2\", Nature Medicine",
     authority: "Five named virologists, peer-reviewed correspondence in Nature Medicine",
@@ -544,6 +550,7 @@ const EVENTS = [
     date: "2020-04-17",
     cat: "science",
     bears: "natural", stance: "neither — data reliability",
+    capacity: { kind: "institution", held: "Wuhan epidemic HQ via China's National Health Commission" },
     short: "Wuhan revises its death toll upward by 50.02%",
     title: "Wuhan notification on revising the numbers of confirmed COVID-19 cases and deaths",
     authority: "Wuhan epidemic prevention and control headquarters; published by China's National Health Commission",
@@ -576,6 +583,7 @@ const EVENTS = [
     date: "2021-03-30",
     cat: "science",
     bears: "lab", stance: "argued against",
+    capacity: { kind: "institution", held: "Joint WHO-China study team; published by the WHO" },
     short: "WHO joint study: a laboratory incident is \"extremely unlikely\"",
     title: "WHO-convened Global Study of Origins of SARS-CoV-2: China Part",
     authority: "Joint WHO-China study team; report published by the World Health Organization",
@@ -597,6 +605,7 @@ const EVENTS = [
     date: "2021-05-11",
     cat: "fauci",
     bears: "lab", stance: "open",
+    capacity: { kind: "personal", held: "his own assessment, stated while serving as Director, NIAID (1984-2022)" },
     short: "Fauci: \"I am not convinced about that\"",
     title: "Anthony Fauci interviewed by PolitiFact at United Facts of America",
     authority: "Anthony Fauci, in his own words; full transcript published by PolitiFact",
@@ -622,6 +631,7 @@ const EVENTS = [
     date: "2021-05-14",
     cat: "science",
     bears: "lab", stance: "argued legitimate",
+    capacity: { kind: "signatories", held: "18 named individuals signing in their own names" },
     short: "18 scientists in Science: both hypotheses remain viable",
     title: "Bloom et al., \"Investigate the origins of COVID-19\", Science",
     authority: "Eighteen named scientists, letter published in Science",
@@ -640,6 +650,7 @@ const EVENTS = [
     date: "2021-05-26",
     cat: "science",
     bears: "lab", stance: "argued legitimate",
+    capacity: { kind: "office", held: "President of the United States (2021-2025), acting in that office" },
     short: "The President orders a 90-day intelligence review of both hypotheses",
     title: "Statement by President Joe Biden on the investigation into the origins of COVID-19",
     authority: "The President of the United States; statement published by the White House",
@@ -656,6 +667,7 @@ const EVENTS = [
     date: "2021-05-26",
     cat: "label",
     bears: "engineered", stance: "label withdrawn",
+    capacity: { kind: "institution", held: "Facebook, stating its own policy" },
     short: "Facebook stops removing posts saying COVID-19 was man-made",
     title: "Facebook reverses its policy of removing the claim that COVID-19 is man-made or manufactured",
     authority: "Facebook, company statement on its own policy",
@@ -674,6 +686,7 @@ const EVENTS = [
     date: "2021-05-26",
     cat: "label",
     bears: "lab", stance: "condemned as illegitimate",
+    capacity: { kind: "personal", held: "her own account; not a position of The New York Times" },
     short: "A New York Times science reporter calls the theory racist in its roots",
     title: "Apoorva Mandavilli on the lab leak theory's \"racist roots\"",
     authority: "Apoorva Mandavilli, then covering COVID-19 for The New York Times, on her own account",
@@ -703,6 +716,7 @@ const EVENTS = [
     date: "2021-06-01",
     cat: "label",
     bears: "engineered", stance: "label withdrawn",
+    capacity: { kind: "institution", held: "The Washington Post, its own correction" },
     short: "The Washington Post withdraws \"debunked\" and \"conspiracy theory\"",
     title: "Editor's note appended to the February 2020 article on Senator Cotton",
     authority: "The Washington Post, its own correction",
@@ -722,6 +736,7 @@ const EVENTS = [
     date: "2021-06-21",
     cat: "label",
     bears: "engineered", stance: "conflict disclosed",
+    capacity: { kind: "institution", held: "The Lancet, its own addendum" },
     short: "The Lancet discloses the competing interest behind the 2020 statement",
     title: "Addendum: competing interests and the origins of SARS-CoV-2",
     authority: "The Lancet, addendum to the February 2020 statement",
@@ -740,6 +755,7 @@ const EVENTS = [
     date: "2021-08-27",
     cat: "science",
     bears: "lab", stance: "open",
+    capacity: { kind: "institution", held: "Office of the Director of National Intelligence, collating agency assessments" },
     short: "US intelligence: both plausible, split, low confidence; not a bioweapon",
     title: "Unclassified summary of assessment on COVID-19 origins",
     authority: "Office of the Director of National Intelligence",
@@ -758,6 +774,7 @@ const EVENTS = [
     date: "2023-02-28",
     cat: "science",
     bears: "lab", stance: "favoured",
+    capacity: { kind: "office", held: "Director of the FBI (2017-2025), describing an institutional assessment" },
     short: "The FBI director says it on camera, in his own name",
     title: "FBI Director Christopher Wray on the Bureau's assessment of COVID-19 origins",
     authority: "Christopher Wray, Director of the Federal Bureau of Investigation, on camera",
@@ -780,6 +797,7 @@ const EVENTS = [
     date: "2024-01-08",
     cat: "fauci",
     bears: "lab", stance: "argued legitimate",
+    capacity: { kind: "personal", held: "private citizen under subpoena; formerly Director, NIAID (1984-2022)" },
     short: "Fauci: a lab leak is not a conspiracy theory",
     title: "Anthony Fauci, transcribed interview before the Select Subcommittee on the Coronavirus Pandemic",
     authority: "Anthony Fauci under questioning; transcript released by the House committee",
@@ -909,6 +927,12 @@ byDate.forEach(e => {
   bears.append(bi, document.createTextNode(e.stance));
   lab.append(bears);
 
+  if (e.capacity) {
+    const cap = el("div", "bears cap");
+    cap.append(el("i", null, e.capacity.kind), document.createTextNode(e.capacity.held));
+    lab.append(cap);
+  }
+
   if (e.ourCall) lab.append(el("div", "r-call", e.ourCall));
 
   const track = el("div", "r-track");
@@ -947,6 +971,12 @@ function select(e) {
   const auth = el("p", "d-auth");
   auth.append(el("b", null, "Attribution: "), document.createTextNode(e.authority));
   detail.append(auth);
+  if (e.capacity) {
+    const c = el("p", "d-auth");
+    c.append(el("b", null, "Capacity: "),
+             document.createTextNode(e.capacity.kind + " — " + e.capacity.held));
+    detail.append(c);
+  }
   const h = hypOf(e.bears);
   if (h) {
     const b = el("p", "d-auth");

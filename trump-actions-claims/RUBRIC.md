@@ -148,6 +148,32 @@ Each test takes one of four values: `supported`, `unsupported`, `contradicted`,
 | `modality` | Does the claim describe a completed act, and does the artifact show one? |
 | `quantity` | Where the claim asserts a number, does the artifact carry that number? |
 
+**Modality, explained, because it is the only one of the five that is jargon.**
+Modality is the *mood* of a claim rather than its content. Grammar already has
+the idea: *did*, *will*, *may*, *should*, *was ordered to*, *is considering* are
+all different modes of asserting the same underlying event. A claim can name the
+right actor, the right act and the right date and still be wrong about whether
+the thing was **done**, **planned**, **proposed**, **threatened**, **permitted**
+or merely **discussed**.
+
+It carries more weight here than on any other page in this repository, because
+the dataset under examination is a tracker of *actions*, and its format presents
+every row in the mode of something having been done. Drafts, intentions,
+recommendations and interim procedural steps all arrive wearing the same clothes
+as completed acts, and nothing in a date-plus-sentence row distinguishes them.
+
+The failure this test catches has a characteristic shape: **the event is real and
+the mood is wrong.** It is also directional. A summary drifts toward the more
+finished, more decided, more consequential reading — never toward "and then a
+temporary procedural thing happened." That is the same directional drift
+`PROCESS.md` describes for citations, appearing in tense rather than in
+attribution.
+
+A claim asserting a plan or an intention is not thereby false, and is often the
+most important thing in a record. It is a *different kind of claim*, and it earns
+the `plan not act` flag rather than being graded as though a document could
+settle it.
+
 **Quantity (v2).** A claim's number is load-bearing and v1 had nowhere to put it,
 so a claim asserting "532,000" against an artifact saying "approximately 500,000"
 scored clean. Numbers get their own test. `n/a` where the claim asserts none.

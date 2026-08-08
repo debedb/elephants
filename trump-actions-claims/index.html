@@ -137,6 +137,14 @@
   .steel h4 { margin: 0 0 6px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
   .steel p { margin: 0; font-size: 13.5px; }
 
+  dl.tests-key { max-width: 74ch; margin: 14px 0 18px; font-size: 13.5px; }
+  dl.tests-key dt {
+    font: 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--text-primary); margin-top: 10px;
+  }
+  dl.tests-key dd { margin: 2px 0 0 0; color: var(--text-secondary); }
+  .gloss { display: block; font-size: 11.5px; color: var(--text-muted); margin-top: 2px; max-width: 34ch; }
+
   .flags { font-size: 12.5px; color: var(--text-muted); margin: 8px 0 0; }
   .flags span { border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; margin-right: 6px; display: inline-block; }
 
@@ -175,6 +183,25 @@
 
 <h2>Source of the claims</h2>
 <p>Claims are quoted verbatim from the <b>Trump Action Tracker</b>, by Christina Pagel — <a href="https://trumpactiontracker.info">trumpactiontracker.info</a> — export <code>trump-actions-6-26-26.csv</code>, accessed 2026-06-27, pinned at <code>sha256 6fa721f4…2cc8f2</code>. The wording of each claim is the artifact under examination here, so it is quoted rather than summarised; paraphrasing the thing you are judging is the same laundering-by-hop this repository refuses everywhere else. The dataset is not mirrored into this repository and nothing here permits its reconstruction.</p>
+
+<h2>The five tests</h2>
+
+<p>Each claim is broken into clauses and each clause is tested separately against the artifact, because a claim is rarely wholly right or wholly wrong. Four of the five tests are what they sound like. The fifth is the one that does most of the work here, so it is worth a paragraph.</p>
+
+<dl class="tests-key">
+  <dt>agent</dt><dd>Does the artifact establish that the actor was who the claim says? Institutions act through people and people act on behalf of institutions, and the two get swapped freely.</dd>
+  <dt>predicate</dt><dd>Does the artifact establish that the thing described actually happened?</dd>
+  <dt>date</dt><dd>Does the artifact establish the date as claimed? The common failure is not error but indexing: the date an event was reported is not the date it occurred.</dd>
+  <dt>quantity</dt><dd>Where the claim asserts a number, does the artifact carry that number? A claim more precise than its artifact is marked unsupported, not contradicted — the artifact may simply be rounding.</dd>
+  <dt>modality</dt><dd><b>What kind of thing is being asserted — and is the artifact that kind of thing?</b></dd>
+</dl>
+
+<div class="howto">
+  <p><b>Modality is the mood of a claim rather than its content.</b> Grammar has this idea already: <i>did</i>, <i>will</i>, <i>may</i>, <i>should</i>, <i>was ordered to</i>, <i>is considering</i> are all different modes of asserting the same underlying event. A claim can name the right actor, the right act and the right date, and still be wrong about whether the thing was <b>done</b>, <b>planned</b>, <b>proposed</b>, <b>threatened</b>, <b>permitted</b> or merely <b>discussed</b>.</p>
+  <p>This matters more here than anywhere else on this site, because the dataset under examination is a tracker of <i>actions</i>. Every row it contains is presented in the mode of something having been done. Some of them are drafts, intentions, recommendations, or interim steps in a process that has not finished — and nothing in the format distinguishes those from completed acts.</p>
+  <p>Two of the three rows below turn on exactly this. The Supreme Court did not decide that the government may end a status; it granted a <i>stay pending appeal</i>, an interim order that provides for its own expiry — so "announces it will allow" is a modality error, not a factual one. Everything else in that row checks out. That is the shape of the finding this test exists to catch: <b>the event is real, the mood is wrong,</b> and the mood always shifts toward the more finished, more decided, more alarming reading. Nobody's summary of a court order ever drifts toward "and then a temporary procedural thing happened."</p>
+  <p>A claim asserting a plan or an intention is not thereby false or unimportant. It is a different kind of claim, and it earns its own label — <code>plan not act</code> — rather than being graded as though a document could settle it.</p>
+</div>
 
 <h2>The ledger</h2>
 <div id="ledger"></div>
@@ -421,6 +448,16 @@ const CLAIMS = [
 // ---------------------------------------------------------------------------
 const TESTS = ["agent", "predicate", "date", "modality", "quantity"];
 
+// Shown under each test name in every row's table, so a reader never meets a
+// bare column header. "modality" is the only one of the five that is jargon.
+const TEST_GLOSS = {
+  agent:     "was it who the claim says?",
+  predicate: "did the thing described happen?",
+  date:      "on the date claimed?",
+  modality:  "what kind of thing is asserted — done, planned, proposed, permitted? and is the artifact that kind of thing?",
+  quantity:  "does the artifact carry the number?"
+};
+
 function isParked(row) {
   let retval = (row.status === "parked" || row.status === "awaiting fetch");
   return retval;
@@ -584,7 +621,9 @@ CLAIMS.forEach(row => {
     TESTS.forEach(t => {
       const cell = row.tests[t] || { v: "n/a" };
       const tr = el("tr");
-      tr.append(el("td", null, t));
+      const nameCell = el("td", null, t);
+      nameCell.append(el("span", "gloss", TEST_GLOSS[t] || ""));
+      tr.append(nameCell);
       tr.append(el("td", "t-" + String(cell.v).replace(/[^a-z]/g, ""), cell.v));
       const td = el("td");
       if (cell.quote) {

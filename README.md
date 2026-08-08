@@ -14,6 +14,7 @@ Published at **[elephants.debedb.com](https://elephants.debedb.com/)**.
 | [`covid19-us-messaging/`](covid19-us-messaging/) | What the US government said about vaccines and transmission — [elephants.debedb.com/covid19-us-messaging/](https://elephants.debedb.com/covid19-us-messaging/) |
 | [`covid19-origins/`](covid19-origins/) | Origins: the hypotheses, and what they were called — [elephants.debedb.com/covid19-origins/](https://elephants.debedb.com/covid19-origins/) |
 | [`covid19-bayes/`](covid19-bayes/) | Shoshin: a beginner's mind updates on the record — [elephants.debedb.com/covid19-bayes/](https://elephants.debedb.com/covid19-bayes/) |
+| [`trump-actions-claims/`](trump-actions-claims/) | Claims under audit: a random sample from someone else's dataset — [elephants.debedb.com/trump-actions-claims/](https://elephants.debedb.com/trump-actions-claims/) |
 
 ### Pages that reason, rather than record
 
@@ -37,6 +38,31 @@ No automation is needed for the page to stay current — reading the source page
 at load time *is* the update mechanism. A scheduled job would only be worth
 adding later, if we ever want stamped historical snapshots rather than a live
 read.
+
+### Pages that adjudicate someone else's claims
+
+`trump-actions-claims/` is a third genre, and the one that most needs watching.
+It takes a random sample of claims from a third party's dataset, goes looking for
+the primary artifact behind each, and reports which clauses the artifact carries.
+That is much closer to opinion than anything else here, so the strictness is
+structural rather than attitudinal:
+
+- **The draw was published before the work.** A seeded uniform sample over all
+  3,466 rows, committed in its own commit ahead of any adjudication, so no row
+  can be quietly dropped for coming out inconveniently. Every drawn row ships.
+- **The rubric was frozen before the draw.** Changing it bumps a version and
+  marks every row judged under an older one stale until re-adjudicated. Its
+  version history records what changed and why.
+- **Verdicts are computed, not written.** Each row records clause tests; a
+  published function turns those into a verdict at render time. Where the rubric
+  defines no answer, the page prints the gap rather than filling it.
+- **Both steelmen are mandatory.** Every row carries the strongest reading under
+  which the claim stands and the strongest under which it does not. A row missing
+  either does not render.
+- **It grades supportability, never truth.** A clause we could not source is a
+  statement about our search, not about the world, and the page contains no
+  sentence calling a claim false. It is also not about the curator: character is
+  out of scope here as everywhere else in this repository.
 
 ### Per-page provenance rules
 

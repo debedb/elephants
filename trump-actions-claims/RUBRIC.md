@@ -1,13 +1,50 @@
-# Rubric v1 — pre-registered
+# Rubric v2
 
-**Frozen before any row was drawn or read.** Committed ahead of the sample draw so
-that a reader can verify from git history that the procedure was fixed before the
-results were known. Repository HEAD at freezing: `cfe569c`.
+**v1 was frozen before any row was drawn or read.** Committed ahead of the sample
+draw so that a reader can verify from git history that the procedure was fixed
+before the results were known. Repository HEAD at freezing: `cfe569c`; the
+pre-registration commit is `e58acf0` and contains the rubric and the draw and
+nothing else.
 
 Changing this file is expensive on purpose. Any change bumps the version, and
 every row stamped with an older version is marked stale on the page until it is
 re-adjudicated under the new one. A rubric that quietly moves to fit its results
 is indistinguishable from no rubric.
+
+## Version history
+
+### v2 — after a five-row pilot, before the remaining twenty-five
+
+The pilot existed to break v1 while breaking it was still cheap, and it did, in
+five places. All five were failures of the procedure, not of any row, and none of
+them changed a verdict in a direction that favours our argument — the three
+adjudicated rows were `carried in part` under v1 and remain `carried in part`
+under v2.
+
+1. **`not reachable` conflated two different things.** *Nobody can reach this* is
+   a finding about the record. *This fetcher cannot reach this* is a finding
+   about us. v1 published the second as though it were the first. Split, and the
+   second is now non-terminal.
+2. **The `capture` grade assumed archives fail independently of publishers.** On
+   one row the publisher, the Internet Archive and archive.today all failed
+   inside the same minute. A fallback correlated with the thing it backs up is
+   weaker than v1 assumed.
+3. **No fetch provenance.** v1 recorded a URL as though reachability were a
+   property of a document. It is a property of (document, fetcher, jurisdiction,
+   moment). Every artifact now records how it was actually obtained, failures
+   included.
+4. **No test for a quantity.** A claim asserting "532,000" had no place to record
+   that the artifact says "approximately 500,000." The number was neither graded
+   nor visible in the verdict.
+5. **Step 5 was not total.** `carried in part` with no motive clause fell through
+   every case. The renderer silently produced the nearest plausible label, which
+   is exactly the failure mode this page exists to catch. It now refuses to
+   answer where the rubric does not define one, and says so on the page.
+
+### v1 — pre-registered, superseded
+
+Retained above in git history at `e58acf0`. Rows judged under v1 are marked stale
+on the page until re-adjudicated.
 
 ## What this page does, and does not do
 
@@ -64,11 +101,39 @@ The artifact is graded with this repository's existing custody grades from
 - `document` — published by the body whose act it is
 - `named reporting` — journalism whose source is named and on the record, or
   which publishes the underlying document
-- `capture` — an Internet Archive capture; custody of a document, labelled as a
-  capture
+- `capture` — an Internet Archive or archive.today capture; custody of a
+  document, labelled as a capture
 - `none found` — searched, not found. This is a finding and is published as one.
 
 Anonymously sourced material is not admitted, per `PROCESS.md`.
+
+**Captures are not an independent fallback (v2).** v1 treated an archive as the
+backstop for a publisher that has moved or removed something. That holds when the
+failure is editorial. It does not hold when the failure is at the network or
+fetcher layer, where a publisher and both major archives can refuse the same
+requester in the same minute — which is what happened on the first row that
+needed it. A capture is custody of a document; it is not a guarantee of access,
+and it fails in correlation with everything else when the cause is the requester
+rather than the record.
+
+### Fetch provenance is recorded, including failures (v2)
+
+Reachability is not a property of a document. It is a property of the tuple
+**(document, fetcher, jurisdiction, moment)** — see `OPEN-QUESTIONS.md`
+question 9, which this page produced. So each artifact records how it was
+actually obtained:
+
+    fetch: { by: agent | human, route, date, status, note }
+
+and a row that could not be fetched records **every route tried, named**, rather
+than a bare assertion that something is unavailable. `by: human` marks an
+artifact supplied by a person whose tuple differs from the agent's. That is a
+legitimate custody route and it reduces to trust assumption 4 in `PROCESS.md` —
+*that we read what we say we read*. It carries a cost that must be printed rather
+than buried: **human-supplied access widens what we can reach while narrowing
+what a reader can independently check.** Where a human can supply either a route
+the reader could also use — an archive link, a DOI, a docket number — or a
+transcribed quotation from behind a wall, the route ranks above the quotation.
 
 ## Step 2 — Clause tests
 
@@ -81,6 +146,14 @@ Each test takes one of four values: `supported`, `unsupported`, `contradicted`,
 | `predicate` | Does the artifact establish that the thing described happened? |
 | `date` | Does the artifact establish the date as claimed? |
 | `modality` | Does the claim describe a completed act, and does the artifact show one? |
+| `quantity` | Where the claim asserts a number, does the artifact carry that number? |
+
+**Quantity (v2).** A claim's number is load-bearing and v1 had nowhere to put it,
+so a claim asserting "532,000" against an artifact saying "approximately 500,000"
+scored clean. Numbers get their own test. `n/a` where the claim asserts none.
+A number that is merely more precise than the artifact's is `unsupported`, not
+`contradicted`: the artifact may be rounding, and a different artifact may carry
+the exact figure. Say which artifact would settle it.
 
 **Date tolerance.** A claim dated to the day the event was *reported* rather than
 the day it *occurred* is marked `unsupported` on `date` with a note, not
@@ -108,18 +181,29 @@ read and re-run, not in thirty separate judgment calls.
 
 | Verdict | Condition |
 |---|---|
-| `carried` | Artifact found; `agent`, `predicate`, `date`, `modality` all `supported` |
+| `carried` | Artifact found; every applicable test `supported` |
 | `carried in part` | Artifact found; at least one `supported` and at least one not |
 | `contradicted in part` | Artifact found; at least one test `contradicted` |
 | `restated` | The only thing found is the reporting the row already cites; nothing independent |
-| `not reachable` | Searched; no artifact found |
+| `not reachable` | Searched every route we have; the artifact does not appear to exist or is reachable by nobody |
+| `awaiting fetch` | **Non-terminal.** The artifact exists but this fetcher could not obtain it |
 
 `restated` is not a criticism. Some acts genuinely leave no public instrument,
 and for those, reporting is the record. The point of the label is that a reader
 should know which case they are in.
 
-Orthogonal flags, which are not verdicts: `motive present`, `plan not act`,
-`third-party act`, `anonymous sourcing`.
+**`awaiting fetch` is the v2 split (see version history).** v1 had one terminal
+state where there are two situations, and so published an infrastructure accident
+as though it were an evidentiary one. A row is `awaiting fetch` when the block is
+plausibly at the requester's end — a 403, a 429, a paywall, a CAPTCHA, a 451 —
+rather than at the record's. It is not a verdict about the claim, it never
+resolves by the passage of time alone, and it must name every route tried. It is
+the state in which a human with a different tuple can move the row, and nothing
+else can.
+
+Orthogonal flags, which are not verdicts: `motive present`,
+`characterization present`, `plan not act`, `third-party act`,
+`anonymous sourcing`, `reachability blocked`.
 
 ## Step 5 — The good-faith question, also computed
 
@@ -128,10 +212,20 @@ assert the claim. It is derived, never typed:
 
 | Value | Condition |
 |---|---|
-| `yes — on the artifact` | `carried`, no `motive present` flag |
-| `yes — on the act, not the characterization` | `carried` or `carried in part`, with `motive present` or characterization clauses |
+| `yes — on the artifact` | `carried`, no motive or characterization clause |
+| `yes — on the act, not the characterisation` | `carried` or `carried in part`, **with** a motive or characterization clause |
+| `yes — on the documented act, not on every clause` | `carried in part`, **without** any such clause |
 | `only on the reporting` | `restated` |
 | `not on what we found` | `not reachable` or `contradicted in part` |
+| `not yet asked` | `awaiting fetch`, or the row is parked |
+
+**This table must be total (v2).** v1's version left `carried in part` with no
+motive clause undefined, and the renderer quietly emitted the nearest plausible
+label instead — inventing an answer the procedure did not authorise, which is the
+precise failure this whole page is built to detect. The renderer now returns a
+gap marker for any combination the table does not cover, and prints it on the
+page as a defect in our procedure rather than filling it in. If a future
+combination falls through, the page says so instead of guessing.
 
 **`not on what we found` does not mean false.** The page says this next to every
 occurrence of it, not once in a footer.
@@ -160,6 +254,12 @@ the `.gov` host check on `covid19-us-messaging/`:
    stale.
 5. Rows with verdict other than `restated` cite an artifact whose host differs
    from the host the upstream row cites.
+6. Every artifact carries fetch provenance — who fetched it, by what route, when,
+   and with what status. *(v2)*
+7. Every parked or `awaiting fetch` row names every route tried. *(v2)*
+8. Any row whose combination falls outside the step 5 table is reported as a
+   rubric gap, in the page's own footer, and its good-faith value is left
+   unanswered. *(v2)*
 
 ## Sample and selection
 

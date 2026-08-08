@@ -180,6 +180,72 @@ The open question: is that the right place to stop? Is there a principled accoun
 of where a public evidentiary artifact *should* terminate its chain, as opposed to
 where it is convenient to?
 
+### 9. Reachability is not a property of a document
+
+Our central rule is *cite the artifact, because the reader can open it and look*.
+That rule quietly assumes the reader's **open** resolves to the same thing ours
+did. It does not. Reachability is a property of the tuple **(document, fetcher,
+jurisdiction, moment)**, and every one of those four can move without anyone
+editing the document.
+
+We did not reason our way to this. We ran into it, and the receipts are all from
+a single afternoon of work on one page:
+
+- A CNN live blog returned **451 Unavailable For Legal Reasons**, with an empty
+  body, to one fetcher — and **200** with a 5.7 MB body to another, on the same
+  URL, minutes apart. Both of CNN's hostnames served fine on the second path, so
+  the difference was the egress, not the document and not the reader's country.
+  RFC 7725 says a 451 should carry a `Link: rel="blocked-by"` header naming who
+  blocked it. Nobody implements that, so the status arrives with no account of
+  itself.
+- `supremecourt.gov` and `federalregister.gov` refused one fetcher and served
+  another. The Supreme Court order we needed was a hard 403 by one route and a
+  clean PDF by the next.
+- For one newspaper article we tried the publisher (**403**), the Internet
+  Archive (**403** on playback, and its availability API reported no snapshot at
+  all), and archive.today (**429**, behind a CAPTCHA). Three independent custody
+  routes, all closed, in the same minute. We do not conclude the article is
+  unreachable. We conclude *we* could not reach it, then, from there.
+
+This lands directly on our own rules. The `capture` grade was added on the
+reasoning that an archive holds custody when a publisher's copy moves or
+vanishes — but archives sit inside the same tuple, and can be the thing that is
+unavailable. A fallback that fails in correlation with what it is backing up is
+weaker than it looked when we wrote it down.
+
+There is a structural version of this, not just an intermittent one. Auditing a
+third party's dataset of 3,466 citations, we found **1,067 of them (30.8%) point
+at UK outlets or at publishers' international-edition hostnames** — 80
+`edition.cnn.com` against 15 `www.cnn.com`, 73 `www.bbc.co.uk` against 5
+`www.bbc.com`. That is a consistent signal about the environment the citations
+were gathered in, and it is not a criticism of the curator: those URLs were
+correct where they were collected. It does mean a reader elsewhere following
+those links is not guaranteed the document the curator saw. The citation layer
+of a public record can carry a location inside it without anyone intending that,
+and without it being visible on the page.
+
+We think the honest response is to stop treating a link as a claim that something
+*is* reachable, and start recording the fetch as an event: what we requested,
+by what route, when, and what came back — including the failures, named. "We
+could not reach this from here on this date, having tried these three routes" is
+a finding, in the same way "we looked for a signed order and did not find one"
+is a finding. It is also falsifiable by anyone whose tuple differs from ours,
+which is the property we actually want.
+
+The questions we cannot settle:
+
+- Is a document only some readers can open still an admissible artifact? If yes,
+  admissibility is partly a fact about infrastructure rather than about evidence,
+  which is uncomfortable. If no, we have just excluded a large amount of true
+  and properly published material on the grounds that a CDN disliked our IP.
+- Should an evidentiary artifact carry its own fetch provenance the way it
+  carries its citation — and if so, whose fetch counts? Ours is no more
+  authoritative than the reader's.
+- Does this collapse into question 8, or is it separate? It looks like a fifth
+  item for the list of things we ask a reader to trust — *that the link resolves
+  for you the way it resolved for us* — which we had not noticed we were
+  assuming.
+
 ## Prior art we are aware of
 
 Split into what we have verified and what we have not, because a reading list is

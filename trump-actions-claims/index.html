@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims under audit: a random sample from the Trump Action Tracker</title>
+<meta name="description" content="Thirty claims drawn at random from a third party's dataset, with the primary artifact behind each one, and which clauses of the claim the artifact carries. Grades supportability, never truth. Five of thirty adjudicated so far.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --plane: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --cat-1: #2a78d6;
+    --cat-2: #eb6834;
+    --cat-3: #1baf7a;
+    --warn: #b3541e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.10);
+      --cat-1: #3987e5;
+      --cat-2: #d95926;
+      --cat-3: #199e70;
+      --warn: #e08a4e;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+    --warn: #e08a4e;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--text-primary);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 34px 20px 72px; }
+  h1 { font-size: 27px; line-height: 1.22; margin: 0 0 10px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 44px 0 10px; }
+  h3 { font-size: 15px; margin: 22px 0 8px; }
+  p { margin: 0 0 12px; color: var(--text-secondary); max-width: 74ch; }
+  a { color: inherit; }
+  .lede { font-size: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+  code { font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .repo { font-size: 13px; color: var(--text-muted); margin: 0 0 18px; }
+
+  .banner {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-2);
+    background: var(--surface-1); border-radius: 10px;
+    padding: 14px 16px; margin: 18px 0 8px; max-width: 74ch;
+  }
+  .banner b { color: var(--text-primary); }
+  .banner p { margin: 0 0 8px; }
+  .banner p:last-child { margin: 0; }
+
+  .howto {
+    border-left: 2px solid var(--axis); padding: 2px 0 2px 14px; margin: 18px 0 6px;
+    font-size: 13.5px; max-width: 74ch;
+  }
+  .howto p { margin: 0 0 6px; font-size: 13.5px; }
+  .howto p:last-child { margin: 0; }
+  .howto b { color: var(--text-primary); font-weight: 600; }
+
+  .row { margin: 14px 0; padding: 16px 18px; }
+  .rowhead { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 10px; }
+  .idx { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text-muted); }
+  .verdict {
+    font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; border: 1px solid var(--border);
+    color: var(--text-primary); white-space: nowrap;
+  }
+  .v-carried { background: color-mix(in srgb, var(--cat-3) 16%, transparent); }
+  .v-part    { background: color-mix(in srgb, var(--cat-2) 16%, transparent); }
+  .v-parked  { background: color-mix(in srgb, var(--axis) 26%, transparent); }
+  .v-pending { background: transparent; color: var(--text-muted); }
+
+  blockquote.claim {
+    margin: 0 0 12px; padding: 10px 14px;
+    border-left: 2px solid var(--cat-1);
+    background: color-mix(in srgb, var(--cat-1) 6%, transparent);
+    font-size: 14.5px; color: var(--text-primary); max-width: 74ch;
+  }
+  .attrib { font-size: 12.5px; color: var(--text-muted); margin: -6px 0 12px; }
+
+  table.tests { border-collapse: collapse; width: 100%; margin: 8px 0 14px; font-size: 13.5px; }
+  table.tests th, table.tests td { text-align: left; vertical-align: top; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--border); }
+  table.tests th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  td.t-supported { color: var(--cat-3); }
+  td.t-unsupported { color: var(--warn); }
+  td.t-contradicted { color: var(--cat-2); }
+  td.t-na { color: var(--text-muted); }
+  .q { color: var(--text-secondary); display: block; margin-top: 4px; }
+
+  ul.art { margin: 4px 0 14px; padding-left: 18px; font-size: 13.5px; color: var(--text-secondary); }
+  ul.art li { margin-bottom: 6px; }
+  .grade {
+    font: 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+    border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; margin-right: 6px;
+    color: var(--text-muted);
+  }
+  .fetch { color: var(--text-muted); font-size: 12.5px; }
+
+  .steel { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0 4px; }
+  @media (max-width: 720px) { .steel { grid-template-columns: 1fr; } }
+  .steel > div { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .steel h4 { margin: 0 0 6px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  .steel p { margin: 0; font-size: 13.5px; }
+
+  .flags { font-size: 12.5px; color: var(--text-muted); margin: 8px 0 0; }
+  .flags span { border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; margin-right: 6px; display: inline-block; }
+
+  .pendlist { font-size: 13.5px; color: var(--text-secondary); }
+  .pendlist td { padding: 5px 14px 5px 0; border-bottom: 1px solid var(--border); }
+  table.pend { border-collapse: collapse; width: 100%; margin-top: 10px; }
+
+  #foot { font-size: 13px; color: var(--text-muted); margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); max-width: 82ch; }
+  #checks { font-size: 13px; margin-top: 18px; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border); max-width: 82ch; }
+  #checks b { color: var(--text-primary); }
+  .ok { color: var(--cat-3); }
+  .bad { color: var(--cat-2); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Claims under audit</h1>
+<p class="repo">Part of <a href="https://github.com/debedb/elephants">github.com/debedb/elephants</a> — the sources, the rules, the argument and the case against it are all in the repository.</p>
+
+<p class="lede">Thirty claims drawn at random from a third party's dataset of 3,466. For each one we go looking for the primary artifact behind it and report <b>which clauses of the claim the artifact carries</b>.</p>
+
+<div class="banner">
+  <p><b>This page is 5 of 30 adjudicated. It is not a finished audit and must not be read as one.</b> The remaining 25 rows are listed below, drawn but not yet worked. Every drawn row ships when it is done, including rows that come out fully carried and rows we abandon.</p>
+  <p>The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a>, in its own commit, so that nothing can be quietly dropped for coming out inconveniently. The procedure was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>.</p>
+</div>
+
+<h2>What this page does not do</h2>
+
+<div class="howto">
+  <p><b>It does not decide whether claims are true.</b> A clause our search did not support is a clause <i>we could not source</i>. That is a statement about our search and the reachable record, not about the world. You will not find a sentence here saying a claim is false.</p>
+  <p><b>It is not about the curator.</b> A claim we could not source is not a finding of bad faith, error or incompetence by anyone. Character is out of scope in this repository and that applies here with extra force, because this page is pointed at one identifiable person's work — work that is larger in scope than anything on this site.</p>
+  <p><b>Thirty out of 3,466 is 0.9%.</b> This page reports counts and never percentages. Nothing here measures the dataset.</p>
+  <p><b>The verdicts are computed, not written.</b> Each row records four clause tests; a published function turns those into a verdict at render time. Our opinion is meant to sit in one rule you can read and re-run, not in thirty separate judgment calls. The two steelman paragraphs on each row are the only prose of ours doing any work, and both are required on every row.</p>
+</div>
+
+<h2>Source of the claims</h2>
+<p>Claims are quoted verbatim from the <b>Trump Action Tracker</b>, by Christina Pagel — <a href="https://trumpactiontracker.info">trumpactiontracker.info</a> — export <code>trump-actions-6-26-26.csv</code>, accessed 2026-06-27, pinned at <code>sha256 6fa721f4…2cc8f2</code>. The wording of each claim is the artifact under examination here, so it is quoted rather than summarised; paraphrasing the thing you are judging is the same laundering-by-hop this repository refuses everywhere else. The dataset is not mirrored into this repository and nothing here permits its reconstruction.</p>
+
+<h2>The ledger</h2>
+<div id="ledger"></div>
+
+<h2>Drawn, not yet adjudicated</h2>
+<p>These rows are in the sample and will be published when worked. They are listed by index and date only.</p>
+<table class="pend"><tbody id="pending"></tbody></table>
+
+<h2>Where this page stops</h2>
+<p>Our search is not exhaustive, and reachability turned out not to be a property of a document at all — it is a property of the tuple (document, fetcher, jurisdiction, moment). One row below is <b>awaiting fetch</b> for exactly that reason, with every route we tried named — a state rubric v2 added because v1 could not tell an artifact nobody can reach from one this fetcher cannot. See <a href="https://github.com/debedb/elephants/blob/master/OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>, question 9, which this page produced.</p>
+
+<div id="checks"></div>
+<p id="foot"></p>
+
+</main>
+<script>
+// ---------------------------------------------------------------------------
+// Rubric version this page renders. Rows stamped below this are marked stale.
+// RUBRIC.md was frozen at v1 before the sample was drawn; v2 amends it after a
+// five-row pilot, and its version history records what changed and why.
+// ---------------------------------------------------------------------------
+const RUBRIC_VERSION = 2;
+
+const SOURCE_CREDIT = "Trump Action Tracker, Christina Pagel, trumpactiontracker.info";
+
+// Every drawn index, in draw order. Rows not in CLAIMS below are pending.
+const DRAWN = [71,348,437,473,527,652,734,789,954,1219,1337,1413,1420,1592,1595,
+               1784,1785,1844,1949,1979,2013,2270,2294,2616,2719,2772,2827,3228,3282,3443];
+
+// ---------------------------------------------------------------------------
+// The rows. `verdict` and `goodFaith` are deliberately absent: both are
+// computed at render time. A row that stores either is flagged by the checks.
+// ---------------------------------------------------------------------------
+const CLAIMS = [
+  {
+    index: 348,
+    date: "2025-05-02",
+    rubric: 2,
+    status: "adjudicated",
+    citedUrl: "https://apnews.com/article/trump-doj-climate-states-policy-lawsuits-a5228e1dd6348f09d2a70f460142531a",
+    claim: "To enforce Trump's Executive Order (EO) \"Protecting American Energy from State Overreach,\" "
+         + "the U.S. Attorney General Pam Bondi is suing Hawaii, Michigan, New York, and Vermont claiming "
+         + "their actions conflict with the administration's federal authority and agenda.",
+    clauses: [
+      { type: "act", text: "the Attorney General is suing Hawaii, Michigan, New York and Vermont" },
+      { type: "act", text: "the suits enforce Executive Order 14260" },
+      { type: "characterization", text: "conflict with the administration's federal authority and agenda" }
+    ],
+    artifacts: [
+      { grade: "document", url: "https://public-inspection.federalregister.gov/2025-06379.pdf",
+        what: "Executive Order 14260, Protecting American Energy From State Overreach, as filed for publication",
+        fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } },
+      { grade: "document", url: "https://www.justice.gov/opa/pr/justice-department-files-complaints-against-hawaii-michigan-new-york-and-vermont-over",
+        what: "Justice Department press release, Thursday 1 May 2025",
+        fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 1,
+        quote: "President Trump recently directed Attorney General Pamela Bondi to take action to stop the enforcement of state laws that unreasonably burden domestic energy development" },
+      predicate: { v: "supported", src: 1,
+        quote: "The Justice Department today filed complaints against the states of New York and Vermont over their “climate superfund laws.” In separate actions, the Justice Department yesterday filed lawsuits against the states of Hawaii and Michigan" },
+      date: { v: "unsupported", src: 1,
+        note: "The row is dated 2 May 2025. The Hawaii and Michigan complaints were filed 30 April and the New York and Vermont complaints 1 May; the Department's release is dated Thursday, 1 May 2025. The row carries the date of the news article, not of the act. Marked unsupported rather than contradicted: indexing by report date is a defensible convention, and saying so is cheaper than calling it an error." },
+      modality: { v: "supported", src: 1,
+        quote: "These lawsuits advance President Trump’s directive in Executive Order 14260, Protecting American Energy from State Overreach" },
+      quantity: { v: "supported", src: 1,
+        quote: "complaints against the states of New York and Vermont ... lawsuits against the states of Hawaii and Michigan" }
+    },
+    rubricNote: "Re-adjudicated under v2. The new quantity test asks whether the four named states are the four in the artifact; they are. The verdict is unchanged.",
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: "Every load-bearing element is in a government document, and the link the claim asserts between the "
+            + "executive order and the lawsuits is not the row's inference — the Department states it itself, by "
+            + "EO number. Naming the Attorney General as the party suing is ordinary usage for a Department "
+            + "acting under her direction, and the release names her in exactly that role.",
+    againstClaim: "The United States is the plaintiff, not Pam Bondi, and four separate complaints in four "
+                + "districts are compressed into one sentence with one date that matches none of the filings. "
+                + "“Their actions conflict with the administration's ... agenda” is not the government's "
+                + "stated theory: the complaints plead preemption under the Clean Air Act and constitutional "
+                + "grounds. An agenda is a political object; preemption is a legal one, and the substitution "
+                + "flatters the row's framing."
+  },
+
+  {
+    index: 473,
+    date: "2025-05-30",
+    rubric: 2,
+    status: "adjudicated",
+    citedUrl: "https://www.theguardian.com/us-news/2025/may/30/supreme-court-trump-administration-revoke-temporary-protected-status",
+    claim: "The U.S. Supreme Court announces it will allow the Trump administration to remove temporary legal "
+         + "status of 532,000 Venezuelan, Cuban, Haitian, and Nicaraguan migrants living in the U.S.",
+    clauses: [
+      { type: "act", text: "the Supreme Court acted to allow the removal of the status" },
+      { type: "act", text: "the people affected are Venezuelan, Cuban, Haitian and Nicaraguan" },
+      { type: "act", text: "the number affected is 532,000" }
+    ],
+    artifacts: [
+      { grade: "document", url: "https://www.supremecourt.gov/opinions/24pdf/24a1079_p86b.pdf",
+        what: "Order on application for stay, Noem v. Svitlana Doe, No. 24A1079, with Jackson, J., dissenting",
+        fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "The application for stay presented to JUSTICE JACKSON and by her referred to the Court is granted." },
+      predicate: { v: "supported", src: 0,
+        quote: "The April 15, 2025 order entered by the United States District Court for the District of Massachusetts, case No. 1:25–cv–10495, is stayed pending the disposition of the appeal in the United States Court of Appeals for the First Circuit" },
+      date: { v: "supported", src: 0,
+        quote: "[May 30, 2025]" },
+      modality: { v: "unsupported", src: 0,
+        note: "The Court granted a stay pending appeal. It did not decide the merits, and the order provides for its own termination — “Should certiorari be denied, this stay shall terminate automatically.” “Announces it will allow” reads as a settled permission; the artifact is an interim order whose effect is to let the government proceed while the case continues." },
+      quantity: { v: "unsupported", src: 0,
+        note: "The claim says 532,000. That figure appears nowhere in the artifact. The nearest quantities are in the dissent — “approximately 500,000 current CHNV parole beneficiaries” and “nearly half a million.” Marked unsupported rather than contradicted: the Court is not the natural source for the exact count, and the artifact that would settle it is the Department of Homeland Security's own Federal Register notice of 25 March 2025 terminating the CHNV parole programmes, which we have not yet pulled. Naming the document that would settle a test is part of recording the test." }
+    },
+    rubricNote: "Re-adjudicated under v2. The 532,000 figure was recorded as an ungraded note under v1, which had no test for a quantity; it is now graded unsupported. The verdict is unchanged.",
+    notes: [
+      "The status at issue is humanitarian parole under the CHNV programme, not Temporary Protected Status. The row says “temporary legal status,” which is accurate; the URL it cites has “temporary-protected-status” in its slug, which is not. The row is more precise than its own citation."
+    ],
+    rowSourcing: "named",
+    flags: [],
+    forClaim: "The date is the date of the act, not of the reporting — rare in this dataset. The four "
+            + "nationalities match the document exactly, and the row's phrase “temporary legal status” "
+            + "is the correct general description of parole, avoiding an error its own cited article's URL makes. "
+            + "In practical effect the Court did allow the administration to proceed, which is what a reader "
+            + "of a timeline needs to know.",
+    againstClaim: "A stay pending appeal is not a decision that the government may do the thing; it is a "
+                + "decision about who bears the risk while a court decides. Compressing that into “the "
+                + "Supreme Court announces it will allow” imports a finality the order explicitly disclaims, "
+                + "and does so in the direction that makes the timeline's point more sharply. The specific "
+                + "figure of 532,000 is carried by nothing we have read."
+  },
+
+  {
+    index: 437,
+    date: "2025-05-22",
+    rubric: 2,
+    status: "adjudicated",
+    citedUrl: "https://edition.cnn.com/politics/live-news/trump-president-administration-news-05-22-25#cmaznstvk00003b6nbfrgh306",
+    claim: "As Trump views voting for the \"Big Beautiful Bill Act\" a loyalty test, he says the two House "
+         + "Republicans who voted against the bill should face primary challenges.",
+    clauses: [
+      { type: "motive", text: "Trump views voting for the bill as a loyalty test" },
+      { type: "act", text: "he says the two Republicans should face primary challenges" },
+      { type: "act", text: "two House Republicans voted against the bill" }
+    ],
+    artifacts: [
+      { grade: "document", url: "https://clerk.house.gov/evs/2025/roll145.xml",
+        what: "Office of the Clerk, U.S. House of Representatives, roll call 145, H R 1, On Passage",
+        fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } },
+      { grade: "named reporting", url: "https://www.cnn.com/politics/live-news/trump-president-administration-news-05-22-25#cmaznstvk00003b6nbfrgh306",
+        what: "The CNN live-blog card the row itself cites, by Kevin Liptak, published 2025-05-22T17:48:06Z",
+        fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200,
+                 note: "This URL returned 451 with an empty body to one fetcher and 200 with a full body to another, minutes apart. See OPEN-QUESTIONS question 9." } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 1,
+        note: "The claim says “he says.” The cited card's own headline is “White House says Trump believes Republicans who voted ‘no’ on tax bill should face primary challenges,” and the only person quoted is the press secretary: “I don’t think he likes to see grandstanders in Congress,” said Karoline Leavitt. The card reports the White House characterising the President's belief. It does not report the President speaking." },
+      predicate: { v: "supported", src: 1,
+        quote: "President Donald Trump believes the two House Republicans who voted against his budget mega-bill should face primary challenges, the White House said today" },
+      date: { v: "supported", src: 1,
+        quote: "\"datePublished\":\"2025-05-22T17:48:06Z\"" },
+      modality: { v: "supported", src: 1,
+        quote: "“The president believes the Republican Party needs to be unified,” Leavitt said" },
+      quantity: { v: "supported", src: 0,
+        quote: "Davidson (R-OH) — Nay; Massie (R-KY) — Nay; total Yea 215, Nay 214, Present 1, Not Voting 2" }
+    },
+    rubricNote: "Re-adjudicated under v2. The new quantity test moves the row's strongest element — “two House Republicans” — from a footnote into a graded test, settled against the roll call rather than against the reporting. The verdict is unchanged.",
+    notes: [
+      "The subordinate factual clause is independently confirmed by a primary document the row does not cite. Roll call 145 records passage 215–214 with exactly two Republicans voting Nay — Davidson (R-OH) and Massie (R-KY) — and Harris (R-MD) voting Present. The row's “two House Republicans” is exact.",
+      "The loyalty-test clause is typed as motive and is therefore not adjudicated. For what it is worth, the cited card asserts it in CNN's own voice — “Ahead of the vote, Trump made clear he viewed support for the bill as a loyalty test” — without quoting him. That is reporting's characterisation, which is a different thing from an artifact, and the rubric declines to grade it either way."
+    ],
+    rowSourcing: "named",
+    flags: ["motive present"],
+    forClaim: "A press secretary speaking at the podium in that capacity is the White House speaking, and this "
+            + "repository's own rule is that an institution's voice is whoever holds its office, while they hold "
+            + "it. On that rule, “the White House says the President believes X” is close to the best "
+            + "available evidence of the President's position short of his own words, and compressing it to "
+            + "“he says” is a defensible shorthand that a good-faith reader can make. The hard factual "
+            + "core — two Republicans, which two, and when — is exactly right.",
+    againstClaim: "The compression runs in one direction. “The White House says Trump believes” has two "
+                + "hops in it and a hedge at the end of the second; “he says” has neither. The row's own "
+                + "source put the qualifier in its headline, and the row removed it. That is the drift this "
+                + "repository documents elsewhere — every hop is where the qualifiers fall off, and the drift is "
+                + "always toward more confidence — occurring in a single hop, with both documents in hand. A "
+                + "spokesperson's report of a belief is also not a speech act by the person: Leavitt prefaced it "
+                + "with “I believe he does,” which is her inference, not his statement."
+  },
+
+  {
+    index: 71,
+    date: "2025-02-06",
+    rubric: 2,
+    status: "parked",
+    parkedKind: "not yet worked",
+    routesTried: [],
+    citedUrl: "https://www.theguardian.com/us-news/2025/feb/06/trump-politico-usaid-subcriptions",
+    claim: "Trump repeats the right-wing claim that USAID subscriptions to Politico were payoffs. The $8 million "
+         + "payment in question was for subscriptions for Politico for the entire federal government, not payoffs "
+         + "from USAid.",
+    parkedReason: "Two clauses, two missing artifacts. The first is a statement by Trump, quoted consistently "
+                + "across several outlets as a Truth Social post of 6 February 2025, but we have not reached the "
+                + "post itself; truthsocial.com is client-rendered and we will not cite a quotation at second hand "
+                + "when the artifact exists. The second is the row's own corrective — that the $8 million figure "
+                + "was government-wide subscription spending rather than USAID payments — which should be settled "
+                + "against federal spending records rather than against the fact-checks that assert it. Neither "
+                + "search has been done, so the row is parked rather than graded.",
+    rowSourcing: "named",
+    flags: []
+  },
+
+  {
+    index: 527,
+    date: "2025-06-11",
+    rubric: 2,
+    status: "awaiting fetch",
+    parkedKind: "reachability blocked",
+    routesTried: [
+      "nytimes.com direct, HTTP 403, 2026-08-07",
+      "web.archive.org playback, HTTP 403, 2026-08-07",
+      "archive.org availability API, reported no snapshot, 2026-08-07",
+      "archive.today via stealth proxy, HTTP 429 behind a CAPTCHA, 2026-08-07"
+    ],
+    citedUrl: "https://www.nytimes.com/2025/06/11/us/politics/rubio-is-pressing-to-open-sanctions-investigation-into-harvard.html",
+    claim: "In a highly unusual move, the State Department Secretary Marco Rubio is trying to influence the "
+         + "Treasury Department's sanctions process to target a domestic entity, Harvard University.",
+    parkedReason: "The artifact exists — a published New York Times article — and this fetcher could not obtain "
+                + "it by any route available to it. The four routes tried are listed above; three supposedly "
+                + "independent custody paths closed inside the same minute. Every other outlet carrying this story "
+                + "attributes it to the Times rather than to anything of its own, so there is no second path to the "
+                + "underlying fact. One adjacent primary document does exist and is reachable — Senator Tom "
+                + "Cotton's letter to Rubio and Bessent — but that records a senator asking, which is a different "
+                + "act by a different person. Under rubric v2 this is 'awaiting fetch', not 'not reachable': the "
+                + "block is at our end, and calling it a finding about the record would be publishing an "
+                + "infrastructure accident as an evidentiary one. It is the state a human with a different tuple "
+                + "can move, and nothing else can. What is needed is narrow — whether the piece attributes to "
+                + "named people or to unnamed officials — because that single fact decides the row under this "
+                + "repository's rule against anonymously sourced claims. See OPEN-QUESTIONS question 9.",
+    rowSourcing: "unknown",
+    flags: ["reachability blocked"]
+  }
+];
+
+// ---------------------------------------------------------------------------
+// Verdict, computed. RUBRIC.md step 4.
+// ---------------------------------------------------------------------------
+const TESTS = ["agent", "predicate", "date", "modality", "quantity"];
+
+function isParked(row) {
+  let retval = (row.status === "parked" || row.status === "awaiting fetch");
+  return retval;
+}
+
+function verdictOf(row) {
+  let retval;
+  if (row.status === "awaiting fetch") {
+    retval = "awaiting fetch";
+    return retval;
+  }
+  if (row.status === "parked") {
+    retval = "parked";
+    return retval;
+  }
+  const values = TESTS.map(t => row.tests[t] && row.tests[t].v);
+  const anyContradicted = values.some(v => v === "contradicted");
+  const anySupported = values.some(v => v === "supported");
+  const allSupported = values.every(v => v === "supported" || v === "n/a");
+  const independent = (row.artifacts || []).some(a => a.grade === "document" || a.grade === "on the record");
+  if (anyContradicted) {
+    retval = "contradicted in part";
+  } else if (!independent) {
+    retval = "restated";
+  } else if (allSupported) {
+    retval = "carried";
+  } else if (anySupported) {
+    retval = "carried in part";
+  } else {
+    retval = "not reachable";
+  }
+  return retval;
+}
+
+// Good-faith reading, computed. RUBRIC.md step 5.
+//
+// This function refuses to invent a value the rubric does not define. Rubric v1
+// enumerates four cases; a row falling outside all four returns the gap marker
+// below, and the self-check prints it. Silently returning the nearest plausible
+// label would be the exact failure this page was built to catch, so it does not.
+const RUBRIC_GAP = "the rubric defines no answer for this combination";
+
+function goodFaithOf(row, verdict) {
+  let retval;
+  const hasMotive = (row.flags || []).includes("motive present")
+                 || (row.flags || []).includes("characterization present");
+  if (verdict === "parked" || verdict === "awaiting fetch") {
+    retval = "not yet asked — the row is " + verdict;
+  } else if (verdict === "carried" && !hasMotive) {
+    retval = "yes — on the artifact";
+  } else if ((verdict === "carried" || verdict === "carried in part") && hasMotive) {
+    retval = "yes — on the act, not the characterisation";
+  } else if (verdict === "carried in part" && !hasMotive) {
+    retval = "yes — on the documented act, not on every clause";
+  } else if (verdict === "restated") {
+    retval = "only on the reporting";
+  } else if (verdict === "not reachable" || verdict === "contradicted in part") {
+    retval = "not on what we found — which does not mean false";
+  } else {
+    retval = RUBRIC_GAP;
+  }
+  return retval;
+}
+
+const VERDICT_CLASS = {
+  "carried": "v-carried",
+  "carried in part": "v-part",
+  "contradicted in part": "v-part",
+  "restated": "v-part",
+  "not reachable": "v-parked",
+  "awaiting fetch": "v-parked",
+  "parked": "v-parked"
+};
+
+// ---------------------------------------------------------------------------
+// Render
+// ---------------------------------------------------------------------------
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined && text !== null) n.textContent = text;
+  return n;
+}
+function link(url, text) {
+  const a = el("a", null, text || url);
+  a.href = url;
+  a.rel = "noopener";
+  return a;
+}
+function host(u) {
+  let retval;
+  try {
+    retval = new URL(u).host.replace(/^www\./, "");
+  } catch (e) {
+    retval = "";
+  }
+  return retval;
+}
+
+const ledger = document.getElementById("ledger");
+
+CLAIMS.forEach(row => {
+  const verdict = verdictOf(row);
+  const good = goodFaithOf(row, verdict);
+  const card = el("div", "card row");
+
+  const head = el("div", "rowhead");
+  head.append(el("span", "idx", "index " + row.index + "  ·  " + row.date));
+  head.append(el("span", "verdict " + (VERDICT_CLASS[verdict] || ""), verdict));
+  if (!isParked(row)) {
+    head.append(el("span", "verdict", "good faith: " + good));
+  }
+  if (row.rubric < RUBRIC_VERSION) {
+    head.append(el("span", "verdict v-part", "stale — judged under rubric v" + row.rubric));
+  }
+  card.append(head);
+
+  const bq = el("blockquote", "claim", row.claim);
+  card.append(bq);
+  const at = el("p", "attrib");
+  at.append(document.createTextNode("Claim as published by " + SOURCE_CREDIT + ". Row cites "));
+  at.append(link(row.citedUrl, host(row.citedUrl)));
+  at.append(document.createTextNode("."));
+  card.append(at);
+
+  if (isParked(row)) {
+    if ((row.routesTried || []).length > 0) {
+      card.append(el("h3", null, "Routes tried"));
+      const rl = el("ul", "art");
+      row.routesTried.forEach(r => rl.append(el("li", "fetch", r)));
+      card.append(rl);
+    }
+    card.append(el("h3", null, row.status === "awaiting fetch"
+      ? "Why this row is awaiting a fetch" : "Why this row is parked"));
+    card.append(el("p", null, row.parkedReason));
+  } else {
+    card.append(el("h3", null, "Artifacts"));
+    const ul = el("ul", "art");
+    (row.artifacts || []).forEach(a => {
+      const li = el("li");
+      li.append(el("span", "grade", a.grade));
+      li.append(link(a.url, a.what));
+      const f = a.fetch || {};
+      const fetchLine = el("span", "fetch",
+        "  — fetched by " + (f.by || "?") + " via " + (f.route || "?")
+        + " on " + (f.date || "?") + ", HTTP " + (f.status === undefined ? "?" : f.status)
+        + (a.fetch && a.fetch.note ? ". " + a.fetch.note : ""));
+      li.append(fetchLine);
+      ul.append(li);
+    });
+    card.append(ul);
+
+    card.append(el("h3", null, "Clause tests"));
+    const tb = el("table", "tests");
+    const thead = el("thead");
+    const htr = el("tr");
+    ["test", "result", "what the artifact says"].forEach(h => htr.append(el("th", null, h)));
+    thead.append(htr);
+    tb.append(thead);
+    const body = el("tbody");
+    TESTS.forEach(t => {
+      const cell = row.tests[t] || { v: "n/a" };
+      const tr = el("tr");
+      tr.append(el("td", null, t));
+      tr.append(el("td", "t-" + String(cell.v).replace(/[^a-z]/g, ""), cell.v));
+      const td = el("td");
+      if (cell.quote) {
+        td.append(el("span", "q", "“" + cell.quote + "”"));
+      }
+      if (cell.note) {
+        td.append(el("span", "q", cell.note));
+      }
+      tr.append(td);
+      body.append(tr);
+    });
+    tb.append(body);
+    card.append(tb);
+
+    if (row.rubricNote) { card.append(el("p", "fetch", row.rubricNote)); }
+    (row.notes || []).forEach(n => card.append(el("p", null, n)));
+  }
+
+  const steel = el("div", "steel");
+  const a1 = el("div");
+  a1.append(el("h4", null, "The strongest reading under which the claim stands"));
+  a1.append(el("p", null, row.forClaim || "— not written; this row does not render as adjudicated"));
+  const a2 = el("div");
+  a2.append(el("h4", null, "The strongest reading under which it does not"));
+  a2.append(el("p", null, row.againstClaim || "— not written; this row does not render as adjudicated"));
+  if (!isParked(row)) {
+    steel.append(a1, a2);
+    card.append(steel);
+  }
+
+  const fl = el("p", "flags");
+  (row.flags || []).forEach(f => fl.append(el("span", null, f)));
+  fl.append(el("span", null, "row's own citation: " + row.rowSourcing));
+  card.append(fl);
+
+  ledger.append(card);
+});
+
+// pending rows
+const pend = document.getElementById("pending");
+const done = new Set(CLAIMS.map(r => r.index));
+DRAWN.filter(i => !done.has(i)).forEach(i => {
+  const tr = el("tr", "pendlist");
+  tr.append(el("td", null, "index " + i));
+  tr.append(el("td", null, "drawn, not yet adjudicated"));
+  pend.append(tr);
+});
+
+// ---------------------------------------------------------------------------
+// The page validates itself. RUBRIC.md step 7. Failures print here, loudly.
+// ---------------------------------------------------------------------------
+const failures = [];
+
+CLAIMS.forEach(row => {
+  const where = "index " + row.index;
+  if ("verdict" in row || "goodFaith" in row) {
+    failures.push(where + ": stores a verdict; verdicts must be computed");
+  }
+  if (row.rubric === undefined) {
+    failures.push(where + ": no rubric version stamp");
+  } else if (row.rubric < RUBRIC_VERSION) {
+    failures.push(where + ": judged under rubric v" + row.rubric + ", current is v" + RUBRIC_VERSION);
+  }
+  if (isParked(row)) {
+    if (!row.parkedReason) { failures.push(where + ": parked with no reason given"); }
+    if (row.status === "awaiting fetch" && (row.routesTried || []).length === 0) {
+      failures.push(where + ": awaiting fetch but names no routes tried");
+    }
+    return;
+  }
+  (row.artifacts || []).forEach((a, i) => {
+    const f = a.fetch;
+    if (!f || !f.by || !f.route || !f.date || f.status === undefined) {
+      failures.push(where + ": artifact " + i + " has incomplete fetch provenance");
+    }
+  });
+  if (!row.forClaim || !row.againstClaim) {
+    failures.push(where + ": missing a steelman; both directions are required");
+  }
+  TESTS.forEach(t => {
+    const cell = row.tests[t];
+    if (!cell) { failures.push(where + ": test '" + t + "' missing"); return; }
+    if (cell.v === "supported" || cell.v === "contradicted") {
+      const art = (row.artifacts || [])[cell.src];
+      if (!cell.quote || !art || !art.url) {
+        failures.push(where + ": test '" + t + "' is " + cell.v + " without a verbatim quote and artifact");
+      }
+    }
+  });
+  const v = verdictOf(row);
+  if (v !== "restated") {
+    const citedHost = host(row.citedUrl);
+    const independent = (row.artifacts || []).some(a => host(a.url) !== citedHost);
+    if (!independent) {
+      failures.push(where + ": verdict '" + v + "' but every artifact shares a host with the row's own citation");
+    }
+  }
+});
+
+// Gaps are not row defects. They are places our own procedure has no answer,
+// and they are printed rather than filled in.
+const gaps = CLAIMS
+  .filter(r => !isParked(r))
+  .filter(r => goodFaithOf(r, verdictOf(r)) === RUBRIC_GAP)
+  .map(r => "index " + r.index + ": verdict '" + verdictOf(r) + "' with no motive or characterisation clause");
+
+const checks = document.getElementById("checks");
+if (gaps.length > 0) {
+  checks.append(el("b", "bad", "RUBRIC GAP — " + gaps.length + " row(s) fall outside the cases rubric v"
+    + RUBRIC_VERSION + " defines: "));
+  checks.append(document.createTextNode(gaps.join("; ")
+    + ". The good-faith column is left unanswered for these rows rather than filled with the nearest "
+    + "plausible label. Fixing this means amending the rubric, which bumps its version and forces every "
+    + "row already judged to be re-adjudicated. "));
+  checks.append(el("br"));
+  checks.append(el("br"));
+}
+if (failures.length === 0) {
+  checks.append(el("b", "ok", "Self-check passed. "));
+  checks.append(document.createTextNode(
+    "Every adjudicated row carries a rubric stamp, a steelman in both directions, a verbatim quote and a "
+    + "reachable artifact behind each supported or contradicted test, and at least one artifact from a host "
+    + "other than the one the row itself cites. Every parked row states why. No row stores a verdict."));
+} else {
+  checks.append(el("b", "bad", "SELF-CHECK FAILED — " + failures.length + " problem(s): "));
+  checks.append(document.createTextNode(failures.join("; ")));
+}
+
+// footer
+const adjudicated = CLAIMS.filter(r => r.status === "adjudicated").length;
+const parked = CLAIMS.filter(r => isParked(r)).length;
+const artifacts = CLAIMS.flatMap(r => r.artifacts || []).length;
+const foot = document.getElementById("foot");
+foot.append(document.createTextNode(
+  DRAWN.length + " claims drawn at random from 3,466. " + adjudicated + " adjudicated, "
+  + parked + " parked, " + (DRAWN.length - CLAIMS.length) + " not yet worked. "
+  + artifacts + " artifacts read. Rubric v" + RUBRIC_VERSION + ". "
+  + "Counts, not percentages: 30 of 3,466 cannot measure the dataset and this page does not claim to. "
+  + "Claims quoted from " + SOURCE_CREDIT + " for examination, credited and linked; the dataset is not "
+  + "redistributed here. A dead link, a wrong citation, a misread quotation or a bad framing is a bug, and "
+  + "bugs are welcome: "));
+foot.append(link("https://github.com/debedb/elephants", "github.com/debedb/elephants"));
+</script>
+</body>
+</html>

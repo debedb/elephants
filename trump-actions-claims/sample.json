@@ -1,0 +1,297 @@
+{
+  "note": "Drawn before adjudication. Committed in its own commit so the draw is verifiable from git history. Every row here ships, including rows that come out fully carried.",
+  "credit": "Trump Action Tracker, Christina Pagel. Source: trumpactiontracker.info",
+  "export": "trump-actions-6-26-26.csv",
+  "exportSha256": "6fa721f4c588993e8a65b8b14fa80ac20d0bafe74221222a0b028976682cc8f2",
+  "populationRows": 3466,
+  "seed": 1729,
+  "drawnCount": 30,
+  "method": "random.Random(seed).sample over all rows, uniform, without replacement",
+  "rubricVersion": 1,
+  "rows": [
+    {
+      "index": 71,
+      "date": "2025-02-06",
+      "claim": "Trump repeats the right-wing claim that USAID subscriptions to Politico were payoffs. The $8 million payment in question was for subscriptions for Politico for the entire federal government, not payoffs from USAid.  ",
+      "citedUrl": "https://www.theguardian.com/us-news/2025/feb/06/trump-politico-usaid-subcriptions",
+      "tags": [
+        "Violating democrating norms or undermining rule of law",
+        "Controlling information, including spreading misinformation and propoganda"
+      ]
+    },
+    {
+      "index": 348,
+      "date": "2025-05-02",
+      "claim": "To enforce Trump's Executive Order (EO) \"Protecting American Energy from State Overreach,\" the U.S. Attorney General Pam Bondi is suing Hawaii, Michigan, New York, and Vermont claiming their actions conflict with the administration's federal authority and agenda.",
+      "citedUrl": "https://apnews.com/article/trump-doj-climate-states-policy-lawsuits-a5228e1dd6348f09d2a70f460142531a",
+      "tags": [
+        "Suppressing dissent or weaponising state against 'enemies'",
+        "Politicisation of science and health"
+      ]
+    },
+    {
+      "index": 437,
+      "date": "2025-05-22",
+      "claim": "As Trump views voting for the \"Big Beautiful Bill Act\" a loyalty test, he says the two House Republicans who voted against the bill should face primary challenges.",
+      "citedUrl": "https://edition.cnn.com/politics/live-news/trump-president-administration-news-05-22-25#cmaznstvk00003b6nbfrgh306",
+      "tags": [
+        "Suppressing dissent or weaponising state against 'enemies'"
+      ]
+    },
+    {
+      "index": 473,
+      "date": "2025-05-30",
+      "claim": "The U.S. Supreme Court announces it will allow the Trump administration to remove temporary legal status of 532,000 Venezuelan, Cuban, Haitian, and Nicaraguan migrants living in the U.S.",
+      "citedUrl": "https://www.theguardian.com/us-news/2025/may/30/supreme-court-trump-administration-revoke-temporary-protected-status",
+      "tags": [
+        "Dismantling social protections and civil rights",
+        "Anti-immigration or militarised nationalism"
+      ]
+    },
+    {
+      "index": 527,
+      "date": "2025-06-11",
+      "claim": "In a highly unusual move, the State Department Secretary Marco Rubio is trying to influence the Treasury Department's sanctions process to target a domestic entity, Harvard University.",
+      "citedUrl": "https://www.nytimes.com/2025/06/11/us/politics/rubio-is-pressing-to-open-sanctions-investigation-into-harvard.html",
+      "tags": [
+        "Attacking universities, schools, museums and culture"
+      ]
+    },
+    {
+      "index": 652,
+      "date": "2025-06-30",
+      "claim": "Trump considers forcing journalists to reveal sources who leaked Iran report",
+      "citedUrl": "https://www.theguardian.com/us-news/2025/jun/29/trump-iran-military-strike-report",
+      "tags": [
+        "Suppressing dissent or weaponising state against 'enemies'"
+      ]
+    },
+    {
+      "index": 734,
+      "date": "2025-07-15",
+      "claim": "Justice Department (DOJ) political leadership claims sweeping authority to fire career law enforcement officials without cause, bypassing Civil Service and Whistleblower laws",
+      "citedUrl": "https://www.nytimes.com/2025/07/15/us/politics/justice-department-dismissals-civil-service-laws.html",
+      "tags": [
+        "Violating democrating norms or undermining rule of law"
+      ]
+    },
+    {
+      "index": 789,
+      "date": "2025-07-22",
+      "claim": "The United States Olympic & Paralympic Committee banned transgender women from women’s competitions to comply with Trump’s executive order on the issue, taking the decision away from national governing bodies for each sport.",
+      "citedUrl": "https://www.nytimes.com/2025/07/22/us/politics/us-olympics-trans-women-athletes-ban-trump.html",
+      "tags": [
+        "Dismantling social protections and civil rights"
+      ]
+    },
+    {
+      "index": 954,
+      "date": "2025-08-08",
+      "claim": "Trump directs military to target foreign drug cartels by ordering the Pentagon to use the armed forces to carry out what in the past was considered law enforcement.",
+      "citedUrl": "https://www.nytimes.com/2025/08/08/us/trump-military-drug-cartels.html",
+      "tags": [
+        "Aggressive foreign policy and global destabilisation"
+      ]
+    },
+    {
+      "index": 1219,
+      "date": "2025-09-08",
+      "claim": "US enlists \"Amerikaners\" group in refugee scheme for white South Africans",
+      "citedUrl": "https://www.reuters.com/world/us/us-enlists-amerikaners-group-refugee-scheme-white-south-africans-2025-09-09/",
+      "tags": [
+        "Aggressive foreign policy and global destabilisation"
+      ]
+    },
+    {
+      "index": 1337,
+      "date": "2025-09-20",
+      "claim": "Scientists at the Environmental Protection Agency’s Office of Water, which ensures drinking water is safe, have been instructed by Trump officials to halt publishing ongoing research in an “unprecedented” move",
+      "citedUrl": "https://www.independent.co.uk/news/world/americas/us-politics/trump-epa-scientists-water-research-b2830523.html",
+      "tags": [
+        "Controlling information, including spreading misinformation and propoganda",
+        "Politicisation of science and health"
+      ]
+    },
+    {
+      "index": 1413,
+      "date": "2025-09-29",
+      "claim": "President Donald Trump threatened to withhold federal funding for New York City if the progressive Zohran Mamdani wins the mayoral election. Trump, who is from New York City, said the democratic socialist \"needs the money from me, as President, in order to fulfill all of his FAKE Communist promises. He won't be getting any of it, so what’s the point of voting for him?\" on Truth Social",
+      "citedUrl": "https://www.businessinsider.com/trump-threatens-nyc-federal-funding-zohran-mamdani-2025-9",
+      "tags": [
+        "Suppressing dissent or weaponising state against 'enemies'"
+      ]
+    },
+    {
+      "index": 1420,
+      "date": "2025-09-30",
+      "claim": "Trump posts racist, AI-generated video of Schumer and Jeffries ahead of looming government shutdown",
+      "citedUrl": "https://edition.cnn.com/2025/09/29/politics/trump-ai-generated-video-schumer-jeffries-shutdown",
+      "tags": [
+        "Suppressing dissent or weaponising state against 'enemies'",
+        "Controlling information, including spreading misinformation and propoganda"
+      ]
+    },
+    {
+      "index": 1592,
+      "date": "2025-10-18",
+      "claim": "White House and other government agencies join Social Media platform Bluesky and use it to attack Democrats and blame them for the government shutdown. The administration has repeatedly thrust normally nonpartisan agencies into the funding fight, including by posting politically loaded language on agency websites",
+      "citedUrl": "https://www.nytimes.com/2025/10/18/us/politics/trump-administration-bluesky.html",
+      "tags": [
+        "Suppressing dissent or weaponising state against 'enemies'",
+        "Controlling information, including spreading misinformation and propoganda"
+      ]
+    },
+    {
+      "index": 1595,
+      "date": "2025-10-19",
+      "claim": "Trump lashes out at Colombian president threatening cuts to aid following the Colombian president accusing the US of killing an innocent Colombian fisherman in international waters in one of its strikes on boats in international waters",
+      "citedUrl": "https://www.nytimes.com/2025/10/19/us/politics/trump-colombia-petro-aid.html",
+      "tags": [
+        "Aggressive foreign policy and global destabilisation"
+      ]
+    },
+    {
+      "index": 1784,
+      "date": "2025-11-11",
+      "claim": "There are growing concerns within CBS News that Bari Weiss could gut or even disband the network’s Standards and Practices team, with multiple sources saying that the new editor-in-chief has complained that the unit has “too much power” and she doesn't see the point of keeping it around. The Standards and Practices. team are responsible for upholding journalistic standards. The network disbanded its vaunted Race and Culture unit during parent company Paramount’s layoffs last month",
+      "citedUrl": "https://www.independent.co.uk/news/world/americas/us-politics/bari-weiss-cbs-news-standards-and-practices-b2862631.html",
+      "tags": [
+        "Controlling information, including spreading misinformation and propoganda"
+      ]
+    },
+    {
+      "index": 1785,
+      "date": "2025-11-11",
+      "claim": "Trump Warns of ‘devastating’ $3 Trillion hit in a social media post if the Supreme Court (SCOTUS) rules against his tariffs. Goldman Sachs expects the decision to come in December or January 2026, with tariff refunds between $115 and $145 billion if the SCOTUS rules against Trump. The U.S. has collected $88 billion of tariff revenue this year under the Trump administration.",
+      "citedUrl": "https://www.msn.com/en-us/money/markets/trump-warns-of-devastating-3-trillion-hit-if-supreme-court-scraps-tariffs/ar-AA1QeU1c",
+      "tags": [
+        "Controlling information, including spreading misinformation and propoganda"
+      ]
+    },
+    {
+      "index": 1844,
+      "date": "2025-11-20",
+      "claim": "Deputy Attorney General Todd Blanche strongly suggested Wednesday that the Department of Justice will investigate Democratic members of Congress who made a video telling military members to “refuse illegal orders.”",
+      "citedUrl": "https://www.huffingtonpost.co.uk/entry/todd-blanche-doj-investigation-sean-hannity_n_691ef05ae4b0b763ab8e0e07",
+      "tags": [
+        "Violating democrating norms or undermining rule of law",
+        "Suppressing dissent or weaponising state against 'enemies'"
+      ]
+    },
+    {
+      "index": 1949,
+      "date": "2025-12-02",
+      "claim": "The US is funding fewer grants in every area of medicine and science this year compared to previous years",
+      "citedUrl": "https://www.nytimes.com/interactive/2025/12/02/upshot/trump-science-funding-cuts.html",
+      "tags": [
+        "Politicisation of science and health"
+      ]
+    },
+    {
+      "index": 1979,
+      "date": "2025-12-05",
+      "claim": "The U.S. plans to expand the number of countries covered by its travel ban to more than 30, U.S. Homeland Security Secretary Kristi Noem said on Thursday.",
+      "citedUrl": "https://www.reuters.com/world/us/us-expanding-list-countries-travel-ban-more-than-30-noem-says-2025-12-05/",
+      "tags": [
+        "Aggressive foreign policy and global destabilisation",
+        "Anti-immigration or militarised nationalism"
+      ]
+    },
+    {
+      "index": 2013,
+      "date": "2025-12-09",
+      "claim": "U.S. health regulators informed senior executives at Merck, Sanofi and AstraZeneca last week that their approved protective RSV treatments for infants would face fresh safety scrutiny following concerns raised by vaccine skeptics. Kennedy maintains the potential risks of many pharmaceutical products have not been properly studied. Leading medical societies and many state health officials say Kennedy is trying to dismantle a program that prevents disease and saves lives based on his beliefs rather than scientific evidence.",
+      "citedUrl": "https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-launches-fresh-safety-scrutiny-approved-rsv-therapies-infants-2025-12-09/",
+      "tags": [
+        "Politicisation of science and health"
+      ]
+    },
+    {
+      "index": 2270,
+      "date": "2026-01-14",
+      "claim": "White House social media post about Greenland nods to racist, far-right subculture according to an extremism expert. The image with the question ‘Which way, Greenland man?’ is a ‘key concept in neo-Nazi and white supremacist subculture’",
+      "citedUrl": "https://www.theguardian.com/us-news/2026/jan/14/trump-administration-white-supremacist-language",
+      "tags": [
+        "Controlling information, including spreading misinformation and propoganda"
+      ]
+    },
+    {
+      "index": 2294,
+      "date": "2026-01-17",
+      "claim": "Donald Trump has pardoned a woman who ended up imprisoned for fraud a second time after he afforded her clemency during his first presidency. The Camberoses were among 13 pardons Trump issued on Thursday, along with eight commutations. Others were for the father of a large donor to his super PAC and former governor of Puerto Rico Wanda Vázquez, who had pleaded guilty to a campaign finance violation.",
+      "citedUrl": "https://www.theguardian.com/us-news/2026/jan/17/trump-pardon-woman-repeat-fraud",
+      "tags": [
+        "Violating democrating norms or undermining rule of law",
+        "Corruption and enrichment"
+      ]
+    },
+    {
+      "index": 2616,
+      "date": "2026-02-23",
+      "claim": "The Education Department (DoE) announced plans to move two more programs to other federal agencies amid President Trump’s effort to “break up the federal education bureaucracy.”.HHS (Health and Human Services) will take some control of family engagement and school support programs, while the State Department will take on responsibilities for Section 117 foreign gift reporting requirements for universities.",
+      "citedUrl": "https://thehill.com/homenews/education/5751248-education-department-trump-mcmahon/",
+      "tags": [
+        "Hollowing state or weakening federal institutions"
+      ]
+    },
+    {
+      "index": 2719,
+      "date": "2026-03-06",
+      "claim": "The Department of Defense (calling itself Dept of War) on Social Media posted a propaganda style post showing a fighterjet with the words \"Uncontested airspace - we will fly all day, all night finding and finishing the Iranian military US air power every minute of every day until we decide it's over\"",
+      "citedUrl": "https://bsky.app/profile/onestpress.onestnetwork.com/post/3mggczr5slk25",
+      "tags": [
+        "Controlling information, including spreading misinformation and propoganda",
+        "Aggressive foreign policy and global destabilisation"
+      ]
+    },
+    {
+      "index": 2772,
+      "date": "2026-03-14",
+      "claim": "Trump posts an image boasting that he has defunded independent media or removed critical journalists / TV hosts, while securing allies running key agencies and media companies",
+      "citedUrl": "https://truthsocial.com/@realDonaldTrump/116228130264134892",
+      "tags": [
+        "Suppressing dissent or weaponising state against 'enemies'",
+        "Controlling information, including spreading misinformation and propoganda"
+      ]
+    },
+    {
+      "index": 2827,
+      "date": "2026-03-22",
+      "claim": "Border czar Tom Homan will be in charge of deploying Immigration and Customs Enforcement (ICE) agents to airports. According to Homan, agents will help with security at entrances and exits to ease the Transportation Security Administration’s (TSA) workload.",
+      "citedUrl": "https://edition.cnn.com/2026/03/22/politics/homan-ice-security-airports",
+      "tags": [
+        "Anti-immigration or militarised nationalism"
+      ]
+    },
+    {
+      "index": 3228,
+      "date": "2026-05-18",
+      "claim": "The Environmental Protection Agency (EPA) announced a plan to rescind a Biden-era rule that puts limits on four Pfas “forever chemicals” in drinking water, and to delay the implementation of standards for two other compounds.",
+      "citedUrl": "https://www.theguardian.com/us-news/2026/may/18/trump-administration-epa-pfas-water",
+      "tags": [
+        "Politicisation of science and health"
+      ]
+    },
+    {
+      "index": 3282,
+      "date": "2026-05-26",
+      "claim": "Following private comments a week ago, U.S. Homeland Security Secretary Markwayne Mullin publicly confirmed on Fox News that the Trump administration is drawing up plans to stop processing international travelers and cargo at ​major U.S. airports in \"sanctuary cities\" that have declined to cooperate with an immigration crackdown. The ‌move could effectively halt international air travel and commerce at major airports in Democratic states, with millions of foreign tourists expected to stream in for next month's start of the FIFA World Cup",
+      "citedUrl": "https://www.reuters.com/legal/government/us-drawing-up-plans-halt-immigration-customs-processing-sanctuary-city-airports-2026-05-27/",
+      "tags": [
+        "Violating democrating norms or undermining rule of law",
+        "Suppressing dissent or weaponising state against 'enemies'",
+        "Aggressive foreign policy and global destabilisation",
+        "Anti-immigration or militarised nationalism"
+      ]
+    },
+    {
+      "index": 3443,
+      "date": "2026-06-19",
+      "claim": "White House officials have for months delayed the release of a U.S. government report that outlines what it describes as significant vulnerabilities in the ​nation's voting machines ahead of the November midterms, according to three sources familiar with the matter. Several court cases filed by Trump's lawyers failed to prove voter fraud in the 2020 ​presidential race.",
+      "citedUrl": "https://www.reuters.com/world/white-house-delays-release-us-voting-machine-study-midterms-near-2026-06-19/",
+      "tags": [
+        "Violating democrating norms or undermining rule of law"
+      ]
+    }
+  ]
+}

@@ -36,6 +36,35 @@ attribution.
 We currently grade rows on the first axis only. We think the second axis needs
 its own field. We do not know what its values should be.
 
+**Partial progress, from an argument about football.** The vocabulary we were
+missing is *constitutive* versus *epistemic*. A referee's decision does not
+report whether the ball was played legally; it makes the result so within the
+institution. Argentina beat England 2–1 in Mexico City on 22 June 1986 and that
+is the record, permanently and correctly. Maradona also put the ball in with his
+hand. Both are true, neither damages the other, and the mistake is to treat them
+as competing answers to one question rather than true answers to two.
+
+"The Supreme Court said X, therefore X is the law" is the same shape: true by
+virtue of the rules, and fully compatible with "the reasoning in X does not
+follow." That is the whole licence for criticism without authority. You never
+contest the constitutive fact — the ruling is the ruling, the classification made
+under published criteria is that classification, the press secretary speaking in
+capacity has spoken for the institution. You test only whether the artifact
+carries what the sentence asserts.
+
+This turns out to explain something `trump-actions-claims/` was already doing
+without a name for it. A verdict of "carried in part" is often not a hedge but a
+row that is **institutionally true and evidentially unsupported at once**, on two
+axes, without contradiction. Both worked examples there have that shape.
+
+It is progress on the vocabulary and not yet on the field. We still do not know
+what the values of a deontic column should be, only that "supported" and
+"unsupported" are answers to the wrong question when asked of it. The football
+case also flatters us, because there the constitutive authority is undisputed and
+the physical fact is uncontested. The hard rows are the ones where the
+institution's competence to perform the act is itself in question, and there we
+have nothing.
+
 ### 2. When does an officeholder speak *as* the institution?
 
 An organisation's only ultimate voice is whoever holds its top office, so a

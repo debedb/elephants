@@ -275,6 +275,107 @@ The questions we cannot settle:
   for you the way it resolved for us* — which we had not noticed we were
   assuming.
 
+### 10. An artifact rule launders toward null, and we did not notice for months
+
+Question 4 is about claims acquiring confidence they never earned, hop by hop,
+always in the direction of more certainty. This question is its mirror, and it is
+about us.
+
+**Our rule sheds confidence hop by hop, and that drift is also directional.** A
+claim that is perfectly checkable gets demoted to "not sourced" because no
+artifact exists *in the form we require*, and the demotion presents itself as
+rigour when it is a format requirement. The resting state it drifts toward —
+*nothing happened* — is not neutral. It is a substantive claim about the world
+wearing the clothes of procedure. That is structurally the same vice as
+laundering, running the other way.
+
+**The deflationary reading is a claim, and we exempt it.** Consider: *"the
+President demanded the arrest of his opponents"* against *"there was a routine
+case, of which there are hundreds every year, that went to court and came to
+nothing."* The second asserts a base rate, a comparison class, and an outcome
+distribution. Every one of those is checkable and none is free. But our rubric
+demands artifacts of assertions and demands nothing of deflations, because a
+deflation wears the grammar of scepticism. So the null reading accretes
+credibility by default at exactly the hops where the affirmative claim sheds it.
+
+**Where this lives in our own machinery.** In `trump-actions-claims/`, every
+`supported` test requires a verbatim quote and a reachable artifact, enforced at
+render. The two steelman paragraphs — the prose that actually persuades, written
+by us — require only that they be non-empty. The apparatus is rigorous about the
+tests and wholly permissive about the argument. If a deflationary bias were going
+to enter, that is the aperture, and we built it.
+
+**A repair to Hitchens's razor.** "What can be asserted without evidence can be
+dismissed without evidence" is symmetric on its face and is almost never deployed
+symmetrically; it gets pointed at assertions and essentially never at deflations.
+The teapot and the alien abduction are dismissible not because they are positive
+claims but because they are maximally far from checkability — no register, no
+docket, no comparison class, no independent access. So:
+
+> **The razor should track distance from checkability, not polarity.**
+
+A deflation that cannot produce its base rate is exactly as unsupported as an
+assertion that cannot produce its artifact.
+
+**What we do not know.** Whether burden can be made genuinely symmetric without
+becoming unusable — requiring a reference class for every deflation may simply
+halt the work. And whether there is a principled measure of "distance from
+checkability" or whether it collapses into taste.
+
+### 11. There is no referee here, by design, and that changes what a verdict is
+
+Working through a football example — Maradona's handball against England in 1986,
+where the goal stood, the result stands, and the film shows the hand — produced a
+distinction we had been missing, and then destroyed our first use of it.
+
+A referee's decision is **constitutive**: it does not report whether the ball was
+played legally, it makes the result so. Argentina won 2–1 and that is permanently
+the record. Maradona also handled the ball. Both true, neither damaging the
+other, because they answer different questions. Note what this means: **the film
+settled the epistemic question at full strength and had no purchase whatsoever on
+the constitutive one.** They are not in tension. The constitutive axis is simply
+unmoved by evidence.
+
+Then the correction. We first said a Supreme Court order functions as a referee
+for our pages. It does not. It is a referee **for the case**. Our question is
+whether a sentence carries what a document says, and **no body anywhere has
+jurisdiction over that.** So the order is not an adjudicator, it is a witness with
+essentially perfect provenance, because the utterance and the act are the same
+event. Everything on these pages is a claim. What differs is provenance: how
+directly the claimant is the actor, how checkable the claim is, how far the
+claimant's interest bears on it. **Claims all the way down, on a gradient, with no
+referee at any point.**
+
+That is deliberate rather than deficient. No comment section, no editor to get
+past, disagreement as a pull request or a fork, forks requiring nobody's
+permission, rules published so anyone may re-run them on different axioms. It is
+the ending of question 8 reached **by construction rather than by renunciation** —
+there is no voice from heaven to refuse, because none was ever installed.
+
+**Which corrects something we believed an hour earlier.** We had concluded that
+without a referee, an artifact rule "ratifies inertia": whoever inscribed the
+record first wins by persistence. That conflated two things. *Under-weighting* is
+real and is question 10 above. *Foreclosure* is not — **there is no whistle, so
+nothing can be closed.** A claim we decline to admit is not extinguished, because
+nobody here holds the power to extinguish it. It stays live indefinitely, for
+anyone who later produces the film. Permanently open is the design goal, and
+installing a referee is precisely what would let someone close it.
+
+**And it suggests the honest shape of an output.** For the football case, the
+strongest thing a page like this can publish is not a ruling. It is:
+
+> Here is the video. Here is the governing body's statement on the finality of
+> the result. *We do not adjudicate whether he handled the ball.*
+
+Two artifacts, their provenance, and the divergence pointed at. Nothing is left
+undone by declining to rule, and the reader is not asked to trust anyone. The
+open question is whether that is sufficient or evasive. Pure juxtaposition works
+in the football case only because every reader already knows what to look for in
+that footage; where they do not, someone must point, and pointing shades into
+judging. We think the line falls between **a test, which says where to look and
+is itself sourced**, and **a verdict, which renders a decision**. We are not
+confident that line holds under pressure.
+
 ## Prior art we are aware of
 
 Split into what we have verified and what we have not, because a reading list is

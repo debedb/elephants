@@ -156,11 +156,26 @@ right actor, the right act and the right date and still be wrong about whether
 the thing was **done**, **planned**, **proposed**, **threatened**, **permitted**
 or merely **discussed**.
 
-It carries more weight here than on any other page in this repository, because
-the dataset under examination is a tracker of *actions*, and its format presents
-every row in the mode of something having been done. Drafts, intentions,
-recommendations and interim procedural steps all arrive wearing the same clothes
-as completed acts, and nothing in a date-plus-sentence row distinguishes them.
+**Corrected after publication.** This section originally said the dataset
+"presents every row in the mode of something having been done" and that drafts
+and interim steps "arrive dressed as completed acts." That was an inference from
+the shape of the CSV export, and the publisher's own site contradicts it. The
+Trump Action Tracker states its scope in its About page disclaimer: it *"records
+publicly reported actions, **statements**, policies, legal developments and
+**plans**."* Plans and statements are declared, not smuggled. We read the export
+and attributed to the project a property of the export — which is the same error
+as citing a piece that describes a piece, committed by us, on the day we shipped
+a page built to catch it. The original wording is preserved here rather than
+deleted.
+
+What survives the correction is narrower and still real: **the declared scope is
+global, and modality is unmarked per row.** Nothing in the data or the display
+distinguishes a row recording a completed act from a row recording a plan, a
+proposal or a statement of intent. A reader of any single row cannot tell which
+they are looking at, and the counters, charts and totals built on the dataset
+cannot tell either, because a boolean tag matrix has nowhere to put a mood. A
+declaration at the top of a site does not survive into a row, an export, or
+anything computed from one.
 
 The failure this test catches has a characteristic shape: **the event is real and
 the mood is wrong.** It is also directional. A summary drifts toward the more

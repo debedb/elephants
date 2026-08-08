@@ -137,6 +137,14 @@
   .steel h4 { margin: 0 0 6px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
   .steel p { margin: 0; font-size: 13.5px; }
 
+  .tags { margin: 10px 0 14px; }
+  .tag {
+    display: block; border: 1px solid var(--border); border-left: 2px solid var(--cat-2);
+    border-radius: 6px; padding: 9px 12px; margin-bottom: 8px; font-size: 13px;
+  }
+  .tag b { color: var(--text-primary); font-weight: 600; }
+  .tag .crit { display: block; color: var(--text-muted); font-size: 12.5px; margin-top: 5px; }
+
   dl.tests-key { max-width: 74ch; margin: 14px 0 18px; font-size: 13.5px; }
   dl.tests-key dt {
     font: 12px ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -176,13 +184,22 @@
 
 <div class="howto">
   <p><b>It does not decide whether claims are true.</b> A clause our search did not support is a clause <i>we could not source</i>. That is a statement about our search and the reachable record, not about the world. You will not find a sentence here saying a claim is false.</p>
-  <p><b>It is not about the curator.</b> A claim we could not source is not a finding of bad faith, error or incompetence by anyone. Character is out of scope in this repository and that applies here with extra force, because this page is pointed at one identifiable person's work — work that is larger in scope than anything on this site.</p>
+  <p><b>The unit of criticism is a chain of reasoning, not a person.</b> A chain runs from an artifact to a claim about it, from that claim to a classification, from classifications to counts, and from counts to conclusions. Every link is public and every link can be inspected by a stranger. That is what we object to when we object: a step that does not follow, a qualifier dropped between one link and the next, a citation that points at the previous link instead of at the artifact. Chains belong to nobody. They can be repaired by anyone, including by us, and two of ours have been repaired on this page already.</p>
+  <p><b>So nothing here is a finding about the curator.</b> A claim we could not source is not evidence of bad faith, error or incompetence by any person. Character is out of scope throughout this repository, and that applies here with extra force, because this page is pointed at work by identifiable people — work larger in scope than anything on this site, done under constraints we have not had to work under.</p>
   <p><b>Thirty out of 3,466 is 0.9%.</b> This page reports counts and never percentages. Nothing here measures the dataset.</p>
   <p><b>The verdicts are computed, not written.</b> Each row records four clause tests; a published function turns those into a verdict at render time. Our opinion is meant to sit in one rule you can read and re-run, not in thirty separate judgment calls. The two steelman paragraphs on each row are the only prose of ours doing any work, and both are required on every row.</p>
 </div>
 
 <h2>Source of the claims</h2>
 <p>Claims are quoted verbatim from the <b>Trump Action Tracker</b>, by Christina Pagel — <a href="https://trumpactiontracker.info">trumpactiontracker.info</a> — export <code>trump-actions-6-26-26.csv</code>, accessed 2026-06-27, pinned at <code>sha256 6fa721f4…2cc8f2</code>. The wording of each claim is the artifact under examination here, so it is quoted rather than summarised; paraphrasing the thing you are judging is the same laundering-by-hop this repository refuses everywhere else. The dataset is not mirrored into this repository and nothing here permits its reconstruction.</p>
+
+<h2>Why we are arguing at all</h2>
+
+<div class="howto">
+  <p><b>We are arguing in order to improve the work, and to show ours.</b> Not to score against it. The Trump Action Tracker is a larger undertaking than anything in this repository, maintained under constraints we have not had to work under, and its author has done several things this repository demands and many projects skip — she publishes the criteria behind her classifications, sources the framework to named academic work, declares her scope, and marks her classifications as opinion in her own words.</p>
+  <p>There are two different projects in this story and we conflated them at first. <a href="https://www.trumpactiontracker.info">trumpactiontracker.info</a> is the source. A separate third-party dashboard rebuilds the exported CSV into velocity and complexity metrics and a forecast; it strips the glossary, the scope statement and the opinion disclaimer, and adds claims the source does not make. Criticism aimed at one is not criticism of the other, and we have already made that mistake once.</p>
+  <p>Where we still disagree with the source, we say so specifically rather than globally, because that is the only form of disagreement anyone can argue back against. And where we get it wrong, the wrong version stays on the page above the correction. There are corrections on this page already, and there will be more.</p>
+</div>
 
 <h2>The five tests</h2>
 
@@ -198,7 +215,8 @@
 
 <div class="howto">
   <p><b>Modality is the mood of a claim rather than its content.</b> Grammar has this idea already: <i>did</i>, <i>will</i>, <i>may</i>, <i>should</i>, <i>was ordered to</i>, <i>is considering</i> are all different modes of asserting the same underlying event. A claim can name the right actor, the right act and the right date, and still be wrong about whether the thing was <b>done</b>, <b>planned</b>, <b>proposed</b>, <b>threatened</b>, <b>permitted</b> or merely <b>discussed</b>.</p>
-  <p>This matters more here than anywhere else on this site, because the dataset under examination is a tracker of <i>actions</i>. Every row it contains is presented in the mode of something having been done. Some of them are drafts, intentions, recommendations, or interim steps in a process that has not finished — and nothing in the format distinguishes those from completed acts.</p>
+  <p><b>Corrected after publication.</b> This paragraph originally said the dataset "presents every row in the mode of something having been done" and that drafts and interim steps arrive "dressed as completed acts." That was inferred from the shape of the CSV export, and the publisher's own site says otherwise: the Trump Action Tracker <a href="https://www.trumpactiontracker.info/about">states</a> that it "records publicly reported actions, <b>statements</b>, policies, legal developments and <b>plans</b>." Plans and statements are declared, not smuggled. We read the export and attributed to the project a property of the export — the same error as citing a piece that describes a piece, committed by us, on the day we shipped a page built to catch it.</p>
+  <p>What survives is narrower and still real: <b>the declaration is global and modality is unmarked per row.</b> Nothing in the data or the display distinguishes a row recording a completed act from one recording a plan or a statement of intent. A reader of a single row cannot tell which they have, and neither can any counter, chart or total computed from the data, because a boolean tag matrix has nowhere to put a mood. A declaration at the top of a site does not survive into a row, an export, or anything built from one.</p>
   <p>Two of the three rows below turn on exactly this. The Supreme Court did not decide that the government may end a status; it granted a <i>stay pending appeal</i>, an interim order that provides for its own expiry — so "announces it will allow" is a modality error, not a factual one. Everything else in that row checks out. That is the shape of the finding this test exists to catch: <b>the event is real, the mood is wrong,</b> and the mood always shifts toward the more finished, more decided, more alarming reading. Nobody's summary of a court order ever drifts toward "and then a temporary procedural thing happened."</p>
   <p>A claim asserting a plan or an intention is not thereby false or unimportant. It is a different kind of claim, and it earns its own label — <code>plan not act</code> — rather than being graded as though a document could settle it.</p>
 </div>
@@ -212,6 +230,15 @@
 
 <h2>Where this page stops</h2>
 <p>Our search is not exhaustive, and reachability turned out not to be a property of a document at all — it is a property of the tuple (document, fetcher, jurisdiction, moment). One row below is <b>awaiting fetch</b> for exactly that reason, with every route we tried named — a state rubric v2 added because v1 could not tell an artifact nobody can reach from one this fetcher cannot. See <a href="https://github.com/debedb/elephants/blob/master/OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>, question 9, which this page produced.</p>
+
+<h2>Corrections</h2>
+<p>Recorded rather than quietly applied. A rule or a claim that changes without leaving a trace is indistinguishable from one that was never applied.</p>
+
+<div class="howto">
+  <p><b>2026-08-08 — we audited the export and inferred the project from it.</b> This page was built from the CSV export alone. The export is a derived product: it strips the <a href="https://www.trumpactiontracker.info/glossary">glossary</a> defining all ten domains, the <a href="https://www.trumpactiontracker.info/about">About-page</a> statement of scope, and the publisher's own marking of her classifications as opinion. Three of our early characterisations were inferences from the export's shape that those pages contradict. We read a description and attributed its properties to the thing described, which is the error this repository exists to refuse, on the day we shipped a page built to catch it. The modality section above carries its original wording above the correction.</p>
+  <p><b>2026-08-08 — we conflated two projects.</b> Criticism of a third-party dashboard built on the exported data ran through our analysis as though it were criticism of the source. The dashboard adds velocity-as-intent metrics and a forecast, and carries none of the source's glossary, scope statement or disclaimer. They are different work by different people and are now kept apart.</p>
+  <p><b>2026-08-08 — rubric v1 to v2, five defects.</b> Found by a five-row pilot run for that purpose. Recorded in the <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">rubric's own version history</a>, including that none of the five moved a verdict in the direction that favours our argument.</p>
+</div>
 
 <div id="checks"></div>
 <p id="foot"></p>
@@ -235,6 +262,83 @@ const DRAWN = [71,348,437,473,527,652,734,789,954,1219,1337,1413,1420,1592,1595,
 // The rows. `verdict` and `goodFaith` are deliberately absent: both are
 // computed at render time. A row that stores either is flagged by the checks.
 // ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// The curator's own classifications, and the published criteria behind them.
+// Source: https://www.trumpactiontracker.info/glossary
+//
+// These are NOT adjudicated as right or wrong. A classification is an editorial
+// judgement, and this repository does not grade those — the same rule that
+// stops us grading motive. What is checkable, and all we say, is the narrow
+// question: does the action fall within the criterion the publisher states for
+// that domain? That tests an assignment against a published rule rather than
+// testing the rule itself.
+// ---------------------------------------------------------------------------
+const TAXONOMY = {
+  "glossary": {
+    "Violating democrating norms or undermining rule of law": {
+      "domain": "Violating democratic norms, undermining rule of law",
+      "criteria": "There are a few different types of actions included in this domain: Any action weakening democratic checks and balances such as restricting press freedom, undermining the authority or oversight of Congress, reducing the independence of arm's-length bodies, violating political norms, making it harder to hold power to account, or restricting access to public information Any action undermining States' rights Any action that undermines the Rule of Law, such as violating court orders or the Constitution, circumventing Congressional appropriated funds, attacking law firms or judges."
+    },
+    "Hollowing state or weakening federal institutions": {
+      "domain": "Hollowing state / weakening federal institutions",
+      "criteria": "These are actions that reduce the ability of government to perform its functions, such as wholesale dismantling of federal institutions, mass firings of staff, or actions that make it easier to fire staff or seek to politicise their role."
+    },
+    "Suppressing dissent or weaponising state against 'enemies'": {
+      "domain": "Suppressing dissent / Weaponising state power against 'enemies'",
+      "criteria": "This includes: any action that directly suppresses dissent, such as intimidating, threatening or punishing opponents or rivals, taking out law suits against critics or making it harder for others to take out law suits against the state, instituting loyalty tests on employees or making access / visas dependent on scrutiny of e.g. past actions, beliefs or social media any action that weaponises executive power against perceived enemies, such as January 6th prosecutors, threatening rivals with legal action or deportation, starting investigations, taking out lawsuits against organisations. It can also (and increasingly has) include state action against perceived enemy states or cities."
+    },
+    "Controlling information, including spreading misinformation and propoganda": {
+      "domain": "Controlling information including spreading misinformation and propaganda",
+      "criteria": "This includes actions that control information, such as manufacturing or massaging evidence to support the state policy, or ignoring, contradicting, restricting access to, or stopping publication of, evidence that might contradict state policy. It also includes propaganda and misinformation."
+    },
+    "Politicisation of science and health": {
+      "domain": "Politicisation of science and health",
+      "criteria": "There are a few different types of actions included in this domain: Any action that restricts scientific activity to align with state ideology, for instance restricting research on climate change or vaccine hesitancy Any action that goes against environment evidence for administrative geopolitical objectives, such as expanding oil and gas drilling or weakening pollution protections. Any action that attacks the health of populations, such as cutting infectious disease surveillance, reducing accessibility of vaccines, terminating grants that target improving health of marginalised populations, cuts to foreign AID such as HIV treatments or childhood vaccination."
+    },
+    "Attacking universities, schools, museums and culture": {
+      "domain": "Attacking universities, schools, museums, culture",
+      "criteria": "This domain includes the following types of action: Any action that undermines the independence of universities Any action that undermines education more generally, including K1-K12 education (such as rules against teaching 'anti-American' topics) Any action that attacks the arts, humanities or social sciences Any action targeting information within museums or national parks."
+    },
+    "Dismantling social protections and civil rights": {
+      "domain": "Dismantling Social Protections & Rights",
+      "criteria": "There are a few different types actions included this domain: Any action removing civil rights protections (including data privacy) from groups, such as LGTBQ+ communities, immigrants or women. This includes actions to accelerate detention and deportation of 'undesirable' immigrants (e.g. undocumented immigrants or overseas students). Any action attacking diversity and inclusion initiatives Any action attacking civil rights organisations Any action directly contravening fundamental rights such as the right to due process"
+    },
+    "Corruption and enrichment": {
+      "domain": "Corruption and Enrichment",
+      "criteria": "This domain includes: Any action that directly enriches the president, his family, his cabinet or senior cronies. Any action that is potentially corrupt, such as trading leniency for political support or trading political or business favours for money or wealth Any action that is primarily aimed at self-aggrandisement (e.g. naming buildings or institutions after Trump; military parades in Trump's honour)."
+    },
+    "Aggressive foreign policy and global destabilisation": {
+      "domain": "Aggressive Foreign Policy & Global Destabilisation",
+      "criteria": "Actions in this domain include: Aggressive threats or actions against other countries, particularly allies, such as threatening the independence of Canada and Greenland, using tariffs or trade policies to extract concessions, or restricting access to the US through increased visa scrutiny. This includes military action (e.g. Venezuela or Iran) Any action that interferes directly in another country's rule of law or democratic processes, such as expressing preferences in elections or declaring opinions on formal investigations Any action deliberately destablising the international world order, such as withdrawing from WHO or the Paris Climate Treaty, undermining NATO or aligning with anti-democratic rivals such as Putin."
+    },
+    "Anti-immigration or militarised nationalism": {
+      "domain": "Anti-immigrant or Militarised Nationalism",
+      "criteria": "Actions in this domain include: Any action that is explicitly Nationalistic, such as using language that demonises immigrants, celebrating dehumanising conditions in detention facilities, or militarising the US border. Any action that explicitly deploys military-type enforcement within the US (e.g. ICE, National Guard) or increases enforcement powers to target immigrants or dissenters (e.g. accessing sensisitve data from federal databases, facial recognition monitoring)."
+    }
+  },
+  "tags": {
+    "348": [
+      "Suppressing dissent or weaponising state against 'enemies'",
+      "Politicisation of science and health"
+    ],
+    "473": [
+      "Dismantling social protections and civil rights",
+      "Anti-immigration or militarised nationalism"
+    ],
+    "437": [
+      "Suppressing dissent or weaponising state against 'enemies'"
+    ],
+    "71": [
+      "Violating democrating norms or undermining rule of law",
+      "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "527": [
+      "Attacking universities, schools, museums and culture"
+    ]
+  }
+};
+
 const CLAIMS = [
   {
     index: 348,
@@ -583,6 +687,26 @@ CLAIMS.forEach(row => {
   at.append(document.createTextNode("."));
   card.append(at);
 
+  const rowTags = TAXONOMY.tags[String(row.index)] || [];
+  if (rowTags.length > 0) {
+    card.append(el("h3", null, "The curator's classification, and the criterion it asserts"));
+    const note = el("p", "fetch",
+      "Assigned by the Trump Action Tracker, not by us. We do not grade whether a classification is "
+      + "correct — that is an editorial judgement, and the rule that stops us grading motive stops us "
+      + "grading this. The criterion below is the publisher's own, quoted from her glossary, so a reader "
+      + "can see what the tag is asserting and judge the fit themselves.");
+    card.append(note);
+    const box = el("div", "tags");
+    rowTags.forEach(t => {
+      const g = TAXONOMY.glossary[t];
+      const d = el("div", "tag");
+      d.append(el("b", null, g ? g.domain : t));
+      d.append(el("span", "crit", g ? g.criteria : "no published criterion found for this column name"));
+      box.append(d);
+    });
+    card.append(box);
+  }
+
   if (isParked(row)) {
     if ((row.routesTried || []).length > 0) {
       card.append(el("h3", null, "Routes tried"));
@@ -687,6 +811,11 @@ CLAIMS.forEach(row => {
   } else if (row.rubric < RUBRIC_VERSION) {
     failures.push(where + ": judged under rubric v" + row.rubric + ", current is v" + RUBRIC_VERSION);
   }
+  (TAXONOMY.tags[String(row.index)] || []).forEach(t => {
+    if (!TAXONOMY.glossary[t]) {
+      failures.push(where + ": tag '" + t + "' has no published criterion in the glossary");
+    }
+  });
   if (isParked(row)) {
     if (!row.parkedReason) { failures.push(where + ": parked with no reason given"); }
     if (row.status === "awaiting fetch" && (row.routesTried || []).length === 0) {

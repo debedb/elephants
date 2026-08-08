@@ -1,0 +1,42 @@
+{
+  "Violating democrating norms or undermining rule of law": {
+    "domain": "Violating democratic norms, undermining rule of law",
+    "criteria": "There are a few different types of actions included in this domain: Any action weakening democratic checks and balances such as restricting press freedom, undermining the authority or oversight of Congress, reducing the independence of arm's-length bodies, violating political norms, making it harder to hold power to account, or restricting access to public information Any action undermining States' rights Any action that undermines the Rule of Law, such as violating court orders or the Constitution, circumventing Congressional appropriated funds, attacking law firms or judges."
+  },
+  "Hollowing state or weakening federal institutions": {
+    "domain": "Hollowing state / weakening federal institutions",
+    "criteria": "These are actions that reduce the ability of government to perform its functions, such as wholesale dismantling of federal institutions, mass firings of staff, or actions that make it easier to fire staff or seek to politicise their role."
+  },
+  "Suppressing dissent or weaponising state against 'enemies'": {
+    "domain": "Suppressing dissent / Weaponising state power against 'enemies'",
+    "criteria": "This includes: any action that directly suppresses dissent, such as intimidating, threatening or punishing opponents or rivals, taking out law suits against critics or making it harder for others to take out law suits against the state, instituting loyalty tests on employees or making access / visas dependent on scrutiny of e.g. past actions, beliefs or social media any action that weaponises executive power against perceived enemies, such as January 6th prosecutors, threatening rivals with legal action or deportation, starting investigations, taking out lawsuits against organisations. It can also (and increasingly has) include state action against perceived enemy states or cities."
+  },
+  "Controlling information, including spreading misinformation and propoganda": {
+    "domain": "Controlling information including spreading misinformation and propaganda",
+    "criteria": "This includes actions that control information, such as manufacturing or massaging evidence to support the state policy, or ignoring, contradicting, restricting access to, or stopping publication of, evidence that might contradict state policy. It also includes propaganda and misinformation."
+  },
+  "Politicisation of science and health": {
+    "domain": "Politicisation of science and health",
+    "criteria": "There are a few different types of actions included in this domain: Any action that restricts scientific activity to align with state ideology, for instance restricting research on climate change or vaccine hesitancy Any action that goes against environment evidence for administrative geopolitical objectives, such as expanding oil and gas drilling or weakening pollution protections. Any action that attacks the health of populations, such as cutting infectious disease surveillance, reducing accessibility of vaccines, terminating grants that target improving health of marginalised populations, cuts to foreign AID such as HIV treatments or childhood vaccination."
+  },
+  "Attacking universities, schools, museums and culture": {
+    "domain": "Attacking universities, schools, museums, culture",
+    "criteria": "This domain includes the following types of action: Any action that undermines the independence of universities Any action that undermines education more generally, including K1-K12 education (such as rules against teaching 'anti-American' topics) Any action that attacks the arts, humanities or social sciences Any action targeting information within museums or national parks."
+  },
+  "Dismantling social protections and civil rights": {
+    "domain": "Dismantling Social Protections & Rights",
+    "criteria": "There are a few different types actions included this domain: Any action removing civil rights protections (including data privacy) from groups, such as LGTBQ+ communities, immigrants or women. This includes actions to accelerate detention and deportation of 'undesirable' immigrants (e.g. undocumented immigrants or overseas students). Any action attacking diversity and inclusion initiatives Any action attacking civil rights organisations Any action directly contravening fundamental rights such as the right to due process"
+  },
+  "Corruption and enrichment": {
+    "domain": "Corruption and Enrichment",
+    "criteria": "This domain includes: Any action that directly enriches the president, his family, his cabinet or senior cronies. Any action that is potentially corrupt, such as trading leniency for political support or trading political or business favours for money or wealth Any action that is primarily aimed at self-aggrandisement (e.g. naming buildings or institutions after Trump; military parades in Trump's honour)."
+  },
+  "Aggressive foreign policy and global destabilisation": {
+    "domain": "Aggressive Foreign Policy & Global Destabilisation",
+    "criteria": "Actions in this domain include: Aggressive threats or actions against other countries, particularly allies, such as threatening the independence of Canada and Greenland, using tariffs or trade policies to extract concessions, or restricting access to the US through increased visa scrutiny. This includes military action (e.g. Venezuela or Iran) Any action that interferes directly in another country's rule of law or democratic processes, such as expressing preferences in elections or declaring opinions on formal investigations Any action deliberately destablising the international world order, such as withdrawing from WHO or the Paris Climate Treaty, undermining NATO or aligning with anti-democratic rivals such as Putin."
+  },
+  "Anti-immigration or militarised nationalism": {
+    "domain": "Anti-immigrant or Militarised Nationalism",
+    "criteria": "Actions in this domain include: Any action that is explicitly Nationalistic, such as using language that demonises immigrants, celebrating dehumanising conditions in detention facilities, or militarising the US border. Any action that explicitly deploys military-type enforcement within the US (e.g. ICE, National Guard) or increases enforcement powers to target immigrants or dissenters (e.g. accessing sensisitve data from federal databases, facial recognition monitoring)."
+  }
+}

@@ -153,6 +153,14 @@
   dl.tests-key dd { margin: 2px 0 0 0; color: var(--text-secondary); }
   .gloss { display: block; font-size: 11.5px; color: var(--text-muted); margin-top: 2px; max-width: 34ch; }
 
+  .openstate {
+    font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px; border: 1px dashed var(--axis);
+    color: var(--text-muted); background: none; white-space: nowrap;
+  }
+  .unsourced { color: var(--warn); font-size: 11.5px; }
+  .srcline { font-size: 12.5px; color: var(--text-muted); margin: 4px 0 12px; }
+
   .flags { font-size: 12.5px; color: var(--text-muted); margin: 8px 0 0; }
   .flags span { border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; margin-right: 6px; display: inline-block; }
 
@@ -262,7 +270,7 @@
 // RUBRIC.md was frozen at v1 before the sample was drawn; v2 amends it after a
 // five-row pilot, and its version history records what changed and why.
 // ---------------------------------------------------------------------------
-const RUBRIC_VERSION = 2;
+const RUBRIC_VERSION = 3;
 
 const SOURCE_CREDIT = "Trump Action Tracker, Christina Pagel, trumpactiontracker.info";
 
@@ -355,7 +363,7 @@ const CLAIMS = [
   {
     index: 348,
     date: "2025-05-02",
-    rubric: 2,
+    rubric: 3,
     status: "adjudicated",
     citedUrl: "https://apnews.com/article/trump-doj-climate-states-policy-lawsuits-a5228e1dd6348f09d2a70f460142531a",
     claim: "To enforce Trump's Executive Order (EO) \"Protecting American Energy from State Overreach,\" "
@@ -367,16 +375,22 @@ const CLAIMS = [
       { type: "characterization", text: "conflict with the administration's federal authority and agenda" }
     ],
     artifacts: [
-      { grade: "document", url: "https://public-inspection.federalregister.gov/2025-06379.pdf",
+      { grade: "constitutive record", url: "https://public-inspection.federalregister.gov/2025-06379.pdf",
         what: "Executive Order 14260, Protecting American Energy From State Overreach, as filed for publication",
         fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } },
-      { grade: "document", url: "https://www.justice.gov/opa/pr/justice-department-files-complaints-against-hawaii-michigan-new-york-and-vermont-over",
-        what: "Justice Department press release, Thursday 1 May 2025",
-        fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } }
+      { grade: "party account", url: "https://www.justice.gov/opa/pr/justice-department-files-complaints-against-hawaii-michigan-new-york-and-vermont-over",
+        what: "Justice Department press release, Thursday 1 May 2025 — the Department describing its own conduct",
+        fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } },
+      { grade: "constitutive record", url: "https://justice.gov/opa/media/1398726/dl?inline=",
+        what: "Complaint, United States v. State of Hawaii, No. 1:25-cv-00179 (D. Haw.), filed 30 April 2025",
+        fetch: { by: "agent", route: "curl", date: "2026-08-08", status: 200 } },
+      { grade: "constitutive record", url: "https://justice.gov/opa/media/1398731/dl?inline=",
+        what: "Complaint, United States v. State of Michigan, No. 1:25-cv-496 (W.D. Mich.), filed 30 April 2025",
+        fetch: { by: "agent", route: "curl", date: "2026-08-08", status: 200 } }
     ],
     tests: {
-      agent: { v: "supported", src: 1,
-        quote: "President Trump recently directed Attorney General Pamela Bondi to take action to stop the enforcement of state laws that unreasonably burden domestic energy development" },
+      agent: { v: "unsupported", src: 2,
+        note: "Re-adjudicated under v3, and reversed. Under v2 this was marked supported on the strength of a Justice Department press release describing a directive to the Justice Department — a party's account of its own conduct. Against the constitutive record, the instrument does not carry it. The plaintiff on both complaints is \u201cUNITED STATES OF AMERICA\u201d; they are signed by Adam R.F. Gustafson, Robert N. Stander and Justin D. Heminger of the Environment and Natural Resources Division; and the string \u201cBondi\u201d appears zero times in either document. The party account does support that the Attorney General was directed to act and speaks for the action. The filing does not support that she is the one suing." },
       predicate: { v: "supported", src: 1,
         quote: "The Justice Department today filed complaints against the states of New York and Vermont over their “climate superfund laws.” In separate actions, the Justice Department yesterday filed lawsuits against the states of Hawaii and Michigan" },
       date: { v: "unsupported", src: 1,
@@ -384,27 +398,32 @@ const CLAIMS = [
       modality: { v: "supported", src: 1,
         quote: "These lawsuits advance President Trump’s directive in Executive Order 14260, Protecting American Energy from State Overreach" },
       quantity: { v: "supported", src: 1,
-        quote: "complaints against the states of New York and Vermont ... lawsuits against the states of Hawaii and Michigan" }
+        quote: "complaints against the states of New York and Vermont ... lawsuits against the states of Hawaii and Michigan" },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
     },
-    rubricNote: "Re-adjudicated under v2. The new quantity test asks whether the four named states are the four in the artifact; they are. The verdict is unchanged.",
+    rubricNote: "Re-adjudicated under v3, and the verdict moved. Splitting the old \u2018document\u2019 grade into constitutive record and party account exposed that our agent test had rested on the Justice Department\u2019s account of the Justice Department. Read against the filed complaints, it does not hold. This is the first verdict on this page reversed by a rubric change, and it moved against our earlier reading rather than toward it.",
     rowSourcing: "named",
     flags: ["characterization present"],
-    forClaim: "Every load-bearing element is in a government document, and the link the claim asserts between the "
-            + "executive order and the lawsuits is not the row's inference — the Department states it itself, by "
-            + "EO number. Naming the Attorney General as the party suing is ordinary usage for a Department "
-            + "acting under her direction, and the release names her in exactly that role.",
-    againstClaim: "The United States is the plaintiff, not Pam Bondi, and four separate complaints in four "
-                + "districts are compressed into one sentence with one date that matches none of the filings. "
-                + "“Their actions conflict with the administration's ... agenda” is not the government's "
-                + "stated theory: the complaints plead preemption under the Clean Air Act and constitutional "
-                + "grounds. An agenda is a political object; preemption is a legal one, and the substitution "
-                + "flatters the row's framing."
+    forClaim: [
+      { text: "The link the claim asserts between the executive order and the lawsuits is not the row's inference. The Department states it itself, by executive order number.",
+        src: 1, quote: "These lawsuits advance President Trump\u2019s directive in Executive Order 14260, Protecting American Energy from State Overreach" },
+      { text: "The Attorney General was in fact directed to act, and the Department publishes her as the responsible officer.",
+        src: 1, quote: "President Trump recently directed Attorney General Pamela Bondi to take action to stop the enforcement of state laws that unreasonably burden domestic energy development" },
+      { reasoning: "Naming an Attorney General as the party suing is ordinary metonymy for a Department litigating under her direction. Almost no reader of a timeline understands \u201cBondi is suing\u201d as a claim about the caption of a complaint, and holding a one-sentence entry to a pleading standard may be the wrong instrument rather than a finding about the entry." }
+    ],
+    againstClaim: [
+      { text: "The instrument names a different plaintiff. The caption is the United States of America, not the Attorney General.",
+        src: 2, quote: "UNITED STATES OF AMERICA, Plaintiff, v. STATE OF HAWAII; JOSHUA BOOTH GREEN, Governor of Hawaii" },
+      { text: "The complaints are signed by Division attorneys, and Bondi appears nowhere in either document.",
+        src: 3, quote: "Respectfully submitted, ADAM R.F. GUSTAFSON, Acting Assistant Attorney General; ROBERT N. STANDER, Deputy Assistant Attorney General; s/ Justin D. Heminger" },
+      { reasoning: "Four separate complaints in four districts are compressed into one sentence carrying one date that matches none of the filings. And \u201ctheir actions conflict with the administration\u2019s federal authority and agenda\u201d is not the pleaded theory: the complaints plead preemption and constitutional grounds. An agenda is a political object and preemption is a legal one, and the substitution flatters the row\u2019s framing." }
+    ]
   },
 
   {
     index: 473,
     date: "2025-05-30",
-    rubric: 2,
+    rubric: 3,
     status: "adjudicated",
     citedUrl: "https://www.theguardian.com/us-news/2025/may/30/supreme-court-trump-administration-revoke-temporary-protected-status",
     claim: "The U.S. Supreme Court announces it will allow the Trump administration to remove temporary legal "
@@ -415,7 +434,7 @@ const CLAIMS = [
       { type: "act", text: "the number affected is 532,000" }
     ],
     artifacts: [
-      { grade: "document", url: "https://www.supremecourt.gov/opinions/24pdf/24a1079_p86b.pdf",
+      { grade: "constitutive record", url: "https://www.supremecourt.gov/opinions/24pdf/24a1079_p86b.pdf",
         what: "Order on application for stay, Noem v. Svitlana Doe, No. 24A1079, with Jackson, J., dissenting",
         fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } }
     ],
@@ -429,30 +448,36 @@ const CLAIMS = [
       modality: { v: "unsupported", src: 0,
         note: "The Court granted a stay pending appeal. It did not decide the merits, and the order provides for its own termination — “Should certiorari be denied, this stay shall terminate automatically.” “Announces it will allow” reads as a settled permission; the artifact is an interim order whose effect is to let the government proceed while the case continues." },
       quantity: { v: "unsupported", src: 0,
-        note: "The claim says 532,000. That figure appears nowhere in the artifact. The nearest quantities are in the dissent — “approximately 500,000 current CHNV parole beneficiaries” and “nearly half a million.” Marked unsupported rather than contradicted: the Court is not the natural source for the exact count, and the artifact that would settle it is the Department of Homeland Security's own Federal Register notice of 25 March 2025 terminating the CHNV parole programmes, which we have not yet pulled. Naming the document that would settle a test is part of recording the test." }
+        note: "The claim says 532,000. That figure appears nowhere in the artifact. The nearest quantities are in the dissent — “approximately 500,000 current CHNV parole beneficiaries” and “nearly half a million.” Marked unsupported rather than contradicted: the Court is not the natural source for the exact count, and the artifact that would settle it is the Department of Homeland Security's own Federal Register notice of 25 March 2025 terminating the CHNV parole programmes, which we have not yet pulled. Naming the document that would settle a test is part of recording the test." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
     },
+    baseRateNote: true,
     rubricNote: "Re-adjudicated under v2. The 532,000 figure was recorded as an ungraded note under v1, which had no test for a quantity; it is now graded unsupported. The verdict is unchanged.",
     notes: [
       "The status at issue is humanitarian parole under the CHNV programme, not Temporary Protected Status. The row says “temporary legal status,” which is accurate; the URL it cites has “temporary-protected-status” in its slug, which is not. The row is more precise than its own citation."
     ],
     rowSourcing: "named",
     flags: [],
-    forClaim: "The date is the date of the act, not of the reporting — rare in this dataset. The four "
-            + "nationalities match the document exactly, and the row's phrase “temporary legal status” "
-            + "is the correct general description of parole, avoiding an error its own cited article's URL makes. "
-            + "In practical effect the Court did allow the administration to proceed, which is what a reader "
-            + "of a timeline needs to know.",
-    againstClaim: "A stay pending appeal is not a decision that the government may do the thing; it is a "
-                + "decision about who bears the risk while a court decides. Compressing that into “the "
-                + "Supreme Court announces it will allow” imports a finality the order explicitly disclaims, "
-                + "and does so in the direction that makes the timeline's point more sharply. The specific "
-                + "figure of 532,000 is carried by nothing we have read."
+    forClaim: [
+      { text: "The four nationalities match the document exactly, and in practical effect the Court did allow the administration to proceed while the case continues.",
+        src: 0, quote: "Nearly half a million Cuban, Haitian, Nicaraguan, and Venezuelan noncitizens are presently in the United States" },
+      { text: "The date is the date of the act rather than of the reporting, which is rare in this dataset.",
+        src: 0, quote: "[May 30, 2025]" },
+      { reasoning: "The row\u2019s phrase \u201ctemporary legal status\u201d is the correct general description of parole, and avoids an error that its own cited article\u2019s URL slug makes by calling it Temporary Protected Status. On the point a timeline reader actually needs \u2014 can the government proceed \u2014 the row is right." }
+    ],
+    againstClaim: [
+      { text: "The order provides for its own expiry, which is not what a decision that the government may act looks like.",
+        src: 0, quote: "Should certiorari be denied, this stay shall terminate automatically. In the event certiorari is granted, the stay shall terminate upon the sending down of the judgment of this Court." },
+      { text: "The number in the claim is carried by nothing in the artifact, which gives a different and rounder figure.",
+        src: 0, quote: "approximately 500,000 current CHNV parole beneficiaries" },
+      { reasoning: "A stay pending appeal is a decision about who bears the risk while a court decides, not a decision on the merits. Compressing it into \u201cannounces it will allow\u201d imports a finality the order disclaims, and does so in the direction that sharpens the timeline\u2019s point rather than softening it." }
+    ]
   },
 
   {
     index: 437,
     date: "2025-05-22",
-    rubric: 2,
+    rubric: 3,
     status: "adjudicated",
     citedUrl: "https://edition.cnn.com/politics/live-news/trump-president-administration-news-05-22-25#cmaznstvk00003b6nbfrgh306",
     claim: "As Trump views voting for the \"Big Beautiful Bill Act\" a loyalty test, he says the two House "
@@ -463,7 +488,7 @@ const CLAIMS = [
       { type: "act", text: "two House Republicans voted against the bill" }
     ],
     artifacts: [
-      { grade: "document", url: "https://clerk.house.gov/evs/2025/roll145.xml",
+      { grade: "constitutive record", url: "https://clerk.house.gov/evs/2025/roll145.xml",
         what: "Office of the Clerk, U.S. House of Representatives, roll call 145, H R 1, On Passage",
         fetch: { by: "agent", route: "curl", date: "2026-08-07", status: 200 } },
       { grade: "named reporting", url: "https://www.cnn.com/politics/live-news/trump-president-administration-news-05-22-25#cmaznstvk00003b6nbfrgh306",
@@ -481,7 +506,8 @@ const CLAIMS = [
       modality: { v: "supported", src: 1,
         quote: "“The president believes the Republican Party needs to be unified,” Leavitt said" },
       quantity: { v: "supported", src: 0,
-        quote: "Davidson (R-OH) — Nay; Massie (R-KY) — Nay; total Yea 215, Nay 214, Present 1, Not Voting 2" }
+        quote: "Davidson (R-OH) — Nay; Massie (R-KY) — Nay; total Yea 215, Nay 214, Present 1, Not Voting 2" },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
     },
     rubricNote: "Re-adjudicated under v2. The new quantity test moves the row's strongest element — “two House Republicans” — from a footnote into a graded test, settled against the roll call rather than against the reporting. The verdict is unchanged.",
     notes: [
@@ -490,25 +516,26 @@ const CLAIMS = [
     ],
     rowSourcing: "named",
     flags: ["motive present"],
-    forClaim: "A press secretary speaking at the podium in that capacity is the White House speaking, and this "
-            + "repository's own rule is that an institution's voice is whoever holds its office, while they hold "
-            + "it. On that rule, “the White House says the President believes X” is close to the best "
-            + "available evidence of the President's position short of his own words, and compressing it to "
-            + "“he says” is a defensible shorthand that a good-faith reader can make. The hard factual "
-            + "core — two Republicans, which two, and when — is exactly right.",
-    againstClaim: "The compression runs in one direction. “The White House says Trump believes” has two "
-                + "hops in it and a hedge at the end of the second; “he says” has neither. The row's own "
-                + "source put the qualifier in its headline, and the row removed it. That is the drift this "
-                + "repository documents elsewhere — every hop is where the qualifiers fall off, and the drift is "
-                + "always toward more confidence — occurring in a single hop, with both documents in hand. A "
-                + "spokesperson's report of a belief is also not a speech act by the person: Leavitt prefaced it "
-                + "with “I believe he does,” which is her inference, not his statement."
+    forClaim: [
+      { text: "The hard factual core is exactly right, and is confirmed by a constitutive record the row does not cite: two Republicans, which two, and when.",
+        src: 0, quote: "Davidson (R-OH) — Nay; Massie (R-KY) — Nay; total Yea 215, Nay 214, Present 1, Not Voting 2" },
+      { text: "The position was in fact stated on the record by the White House, in that capacity, on that day.",
+        src: 1, quote: "President Donald Trump believes the two House Republicans who voted against his budget mega-bill should face primary challenges, the White House said today" },
+      { reasoning: "A press secretary speaking at the podium in that capacity is the White House speaking, and this repository\u2019s own rule is that an institution\u2019s voice is whoever holds its office while they hold it. On that rule, \u201cthe White House says the President believes X\u201d is close to the best available evidence of a President\u2019s position short of his own words, and compressing it to \u201che says\u201d is a shorthand a good-faith reader can defend." }
+    ],
+    againstClaim: [
+      { text: "The row\u2019s own source put the qualifier in its headline, and the row removed it.",
+        src: 1, quote: "White House says Trump believes Republicans who voted \"no\" on tax bill should face primary challenges" },
+      { text: "The only person quoted is the spokesperson, prefacing it as her own inference rather than reporting his words.",
+        src: 1, quote: "I don\u2019t think he likes to see grandstanders in Congress" },
+      { reasoning: "The compression runs in one direction. \u201cThe White House says Trump believes\u201d contains two hops and a hedge at the end of the second; \u201che says\u201d contains neither. That is the drift this repository documents elsewhere \u2014 every hop is where the qualifiers fall off, and the drift is always toward more confidence \u2014 occurring in a single hop, with both documents in hand." }
+    ]
   },
 
   {
     index: 71,
     date: "2025-02-06",
-    rubric: 2,
+    rubric: 3,
     status: "parked",
     parkedKind: "not yet worked",
     routesTried: [],
@@ -530,7 +557,7 @@ const CLAIMS = [
   {
     index: 527,
     date: "2025-06-11",
-    rubric: 2,
+    rubric: 3,
     status: "awaiting fetch",
     parkedKind: "reachability blocked",
     routesTried: [
@@ -542,6 +569,7 @@ const CLAIMS = [
     citedUrl: "https://www.nytimes.com/2025/06/11/us/politics/rubio-is-pressing-to-open-sanctions-investigation-into-harvard.html",
     claim: "In a highly unusual move, the State Department Secretary Marco Rubio is trying to influence the "
          + "Treasury Department's sanctions process to target a domestic entity, Harvard University.",
+    baseRateFlag: "The claim opens \u201cIn a highly unusual move\u201d, which asserts a comparison class. Rubric v3 requires that whoever asserts novelty produce the reference class \u2014 and it requires the same of anyone asserting the opposite, that this is routine. Neither has been produced here. The class would be prior State Department referrals to Treasury\u2019s sanctions process concerning domestic entities, which is a countable thing.",
     parkedReason: "The artifact exists — a published New York Times article — and this fetcher could not obtain "
                 + "it by any route available to it. The four routes tried are listed above; three supposedly "
                 + "independent custody paths closed inside the same minute. Every other outlet carrying this story "
@@ -562,7 +590,7 @@ const CLAIMS = [
 // ---------------------------------------------------------------------------
 // Verdict, computed. RUBRIC.md step 4.
 // ---------------------------------------------------------------------------
-const TESTS = ["agent", "predicate", "date", "modality", "quantity"];
+const TESTS = ["agent", "predicate", "date", "modality", "quantity", "baseRate"];
 
 // Shown under each test name in every row's table, so a reader never meets a
 // bare column header. "modality" is the only one of the five that is jargon.
@@ -571,7 +599,8 @@ const TEST_GLOSS = {
   predicate: "did the thing described happen?",
   date:      "on the date claimed?",
   modality:  "what kind of thing is asserted — done, planned, proposed, permitted? and is the artifact that kind of thing?",
-  quantity:  "does the artifact carry the number?"
+  quantity:  "does the artifact carry the number?",
+  baseRate:  "if it claims novelty or routineness, is the reference class produced? same burden either way"
 };
 
 function isParked(row) {
@@ -593,7 +622,7 @@ function verdictOf(row) {
   const anyContradicted = values.some(v => v === "contradicted");
   const anySupported = values.some(v => v === "supported");
   const allSupported = values.every(v => v === "supported" || v === "n/a");
-  const independent = (row.artifacts || []).some(a => a.grade === "document" || a.grade === "on the record");
+  const independent = (row.artifacts || []).some(a => a.grade === "constitutive record" || a.grade === "on the record");
   if (anyContradicted) {
     retval = "contradicted in part";
   } else if (!independent) {
@@ -682,7 +711,9 @@ CLAIMS.forEach(row => {
 
   const head = el("div", "rowhead");
   head.append(el("span", "idx", "index " + row.index + "  ·  " + row.date));
-  head.append(el("span", "verdict " + (VERDICT_CLASS[verdict] || ""), verdict));
+  const openState = (verdict === "awaiting fetch" || verdict === "not reachable" || verdict === "parked");
+  head.append(el("span", (openState ? "openstate" : "verdict " + (VERDICT_CLASS[verdict] || "")),
+                 openState ? "open — no finding: " + verdict : verdict));
   if (!isParked(row)) {
     head.append(el("span", "verdict", "good faith: " + good));
   }
@@ -778,13 +809,28 @@ CLAIMS.forEach(row => {
     (row.notes || []).forEach(n => card.append(el("p", null, n)));
   }
 
+  function steelSide(heading, segments, arts) {
+    const box = el("div");
+    box.append(el("h4", null, heading));
+    (segments || []).forEach(seg => {
+      if (seg.reasoning) {
+        const pr = el("p", null, seg.reasoning);
+        pr.append(el("span", "unsourced", " [our reasoning, unsourced]"));
+        box.append(pr);
+      } else {
+        box.append(el("p", null, seg.text));
+        const a = (arts || [])[seg.src];
+        const q = el("p", "srcline");
+        q.append(document.createTextNode("\u201c" + (seg.quote || "") + "\u201d \u2014 "));
+        if (a) { q.append(link(a.url, a.what)); }
+        box.append(q);
+      }
+    });
+    return box;
+  }
   const steel = el("div", "steel");
-  const a1 = el("div");
-  a1.append(el("h4", null, "The strongest reading under which the claim stands"));
-  a1.append(el("p", null, row.forClaim || "— not written; this row does not render as adjudicated"));
-  const a2 = el("div");
-  a2.append(el("h4", null, "The strongest reading under which it does not"));
-  a2.append(el("p", null, row.againstClaim || "— not written; this row does not render as adjudicated"));
+  const a1 = steelSide("The strongest reading under which the claim stands", row.forClaim, row.artifacts);
+  const a2 = steelSide("The strongest reading under which it does not", row.againstClaim, row.artifacts);
   if (!isParked(row)) {
     steel.append(a1, a2);
     card.append(steel);
@@ -841,9 +887,20 @@ CLAIMS.forEach(row => {
       failures.push(where + ": artifact " + i + " has incomplete fetch provenance");
     }
   });
-  if (!row.forClaim || !row.againstClaim) {
-    failures.push(where + ": missing a steelman; both directions are required");
-  }
+  ["forClaim", "againstClaim"].forEach(side => {
+    const segs = row[side];
+    if (!Array.isArray(segs) || segs.length === 0) {
+      failures.push(where + ": " + side + " missing; both directions are required");
+      return;
+    }
+    segs.forEach((seg, k) => {
+      const sourced = (seg.src !== undefined) && seg.quote && (row.artifacts || [])[seg.src];
+      if (!seg.reasoning && !sourced) {
+        failures.push(where + ": " + side + " segment " + k
+          + " asserts a fact with no artifact and is not marked as our reasoning");
+      }
+    });
+  });
   TESTS.forEach(t => {
     const cell = row.tests[t];
     if (!cell) { failures.push(where + ": test '" + t + "' missing"); return; }

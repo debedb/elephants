@@ -1,4 +1,4 @@
-# Rubric v2
+# Rubric v3
 
 **v1 was frozen before any row was drawn or read.** Committed ahead of the sample
 draw so that a reader can verify from git history that the procedure was fixed
@@ -12,6 +12,36 @@ re-adjudicated under the new one. A rubric that quietly moves to fit its results
 is indistinguishable from no rubric.
 
 ## Version history
+
+### v3 — after an argument about a referee, and about who a rule favours
+
+Four changes, all of which make the rubric harder on us rather than on the rows.
+One of them reversed a verdict we had already published.
+
+1. **The `document` grade is split.** It covered both a Supreme Court order and a
+   Justice Department press release. In one the utterance *is* the act; in the
+   other a party describes its own conduct. Now `constitutive record` and
+   `party account`. Index 348 was re-adjudicated against the filed complaints as
+   a result, and its `agent` test went from `supported` to `unsupported`: the
+   plaintiff on the instrument is the United States, and Pamela Bondi appears
+   nowhere in either complaint. We had rested that test on DOJ's own press
+   release about DOJ.
+2. **Steelman prose is no longer exempt from the evidence rule.** Every factual
+   assertion inside `forClaim` or `againstClaim` now carries an artifact and a
+   quotation, or is explicitly labelled as our own unsourced reasoning. This was
+   the single aperture through which a deflationary bias could enter the page —
+   the tests were rigorous and the paragraphs that actually persuade required
+   nothing — and we built it.
+3. **A base-rate test, symmetric in both directions.** Where a claim asserts
+   novelty ("in a highly unusual move") *or* a deflation asserts routineness
+   ("there are hundreds of these every year"), whoever asserts it produces the
+   reference class. See `OPEN-QUESTIONS.md` question 10: an artifact rule launders
+   toward null unless deflations carry a burden too.
+4. **Open states are no longer displayed as verdicts.** `awaiting fetch` and
+   `not reachable` are refusals to conclude, and rendering them where results go
+   made a permanently-open record read as a finished one. Per question 11: there
+   is no whistle here, so nothing can be closed, and the presentation must not
+   imply otherwise.
 
 ### v2 — after a five-row pilot, before the remaining twenty-five
 
@@ -98,7 +128,12 @@ The artifact is graded with this repository's existing custody grades from
 
 - `on the record` — the person's own words, in a transcript, recording, or paper
   they signed
-- `document` — published by the body whose act it is
+- `constitutive record` — the instrument itself, where the utterance *is* the
+  act: a court order, a roll call, a filed complaint, a Federal Register
+  instrument. The document does not report the act; it performs it.
+- `party account` — a body's own published description of its own conduct: a
+  press release, an agency statement. Excellent provenance for *what was said*,
+  and a claim like any other about *what was done*. **(v3)**
 - `named reporting` — journalism whose source is named and on the record, or
   which publishes the underlying document
 - `capture` — an Internet Archive or archive.today capture; custody of a
@@ -147,6 +182,7 @@ Each test takes one of four values: `supported`, `unsupported`, `contradicted`,
 | `date` | Does the artifact establish the date as claimed? |
 | `modality` | Does the claim describe a completed act, and does the artifact show one? |
 | `quantity` | Where the claim asserts a number, does the artifact carry that number? |
+| `base rate` | Where the claim asserts novelty or routineness, is the reference class produced? |
 
 **Modality, explained, because it is the only one of the five that is jargon.**
 Modality is the *mood* of a claim rather than its content. Grammar already has
@@ -335,3 +371,35 @@ reconstruction. Credit, link, export name and access date appear on the page.
 - **Strict admissibility has a direction**, discussed at `OPEN-QUESTIONS.md`
   question 5. It disfavours claims that will never produce an artifact, which is
   not the same as claims that are wrong.
+
+## Fetching through a human's browser (v3)
+
+archive.today refuses automated fetchers: rate limits, then a CAPTCHA. Row 527
+needed it and could not have it. There is a route available — the page open in
+the operator's own Chrome, read through a browser extension — and it is worth
+being precise about what that is and is not, because "bypass" is the wrong word
+for it.
+
+**What the control is for.** A CAPTCHA establishes that a human is present. When
+the operator opens the page in their own browser, in their own session, and
+solves any challenge themselves, **a human is present**. The signal is satisfied,
+not faked. That is materially different from automating a solve or driving a
+browser at machine rates, both of which defeat the control rather than meeting
+it, and neither of which we will do.
+
+**Three constraints that follow, and they are strict.**
+
+1. Anything obtained this way is recorded `by: human` and carries the cost
+   stated above: it widens what we can reach and narrows what a reader can check
+   independently.
+2. **The route must be one the reader can also take.** This is what makes the
+   archive case unusually clean — a reader with a browser can open the same
+   capture and see the same thing, which is not true of a paywalled article we
+   transcribe. Reader-reproducible access ranks far above operator-only access.
+3. Rate is human rate. A page at a time, because a person is reading it.
+
+**The honest residue.** We are the party deciding that our own use satisfies the
+spirit of somebody else's access control, and that is a self-serving judgment
+however carefully argued. It is recorded here rather than left as an
+undocumented convenience, so that a reader who disagrees can see exactly what
+was done and object to it on the record.

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method: how the claims audit works, and what it refuses to do</title>
+<meta name="description" content="The rules behind the claims audit: what it does not do, the five clause tests, why it argues at all, where it stops, and every correction it has had to make.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --plane: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --cat-1: #2a78d6;
+    --cat-2: #eb6834;
+    --cat-3: #1baf7a;
+    --warn: #b3541e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.10);
+      --cat-1: #3987e5;
+      --cat-2: #d95926;
+      --cat-3: #199e70;
+      --warn: #e08a4e;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+    --warn: #e08a4e;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--text-primary);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 34px 20px 72px; }
+  h1 { font-size: 27px; line-height: 1.22; margin: 0 0 10px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 44px 0 10px; }
+  h3 { font-size: 15px; margin: 22px 0 8px; }
+  p { margin: 0 0 12px; color: var(--text-secondary); max-width: 74ch; }
+  a { color: inherit; }
+  .lede { font-size: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+  code { font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .repo { font-size: 13px; color: var(--text-muted); margin: 0 0 18px; }
+
+  .banner {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-2);
+    background: var(--surface-1); border-radius: 10px;
+    padding: 14px 16px; margin: 18px 0 8px; max-width: 74ch;
+  }
+  .banner b { color: var(--text-primary); }
+  .banner p { margin: 0 0 8px; }
+  .banner p:last-child { margin: 0; }
+
+  .howto {
+    border-left: 2px solid var(--axis); padding: 2px 0 2px 14px; margin: 18px 0 6px;
+    font-size: 13.5px; max-width: 74ch;
+  }
+  .howto p { margin: 0 0 6px; font-size: 13.5px; }
+  .howto p:last-child { margin: 0; }
+  .howto b { color: var(--text-primary); font-weight: 600; }
+
+  .row { margin: 14px 0; padding: 16px 18px; }
+  .rowhead { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 10px; }
+  .idx { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text-muted); }
+  .verdict {
+    font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; border: 1px solid var(--border);
+    color: var(--text-primary); white-space: nowrap;
+  }
+  .v-carried { background: color-mix(in srgb, var(--cat-3) 16%, transparent); }
+  .v-part    { background: color-mix(in srgb, var(--cat-2) 16%, transparent); }
+  .v-parked  { background: color-mix(in srgb, var(--axis) 26%, transparent); }
+  .v-pending { background: transparent; color: var(--text-muted); }
+
+  blockquote.claim {
+    margin: 0 0 12px; padding: 10px 14px;
+    border-left: 2px solid var(--cat-1);
+    background: color-mix(in srgb, var(--cat-1) 6%, transparent);
+    font-size: 14.5px; color: var(--text-primary); max-width: 74ch;
+  }
+  .attrib { font-size: 12.5px; color: var(--text-muted); margin: -6px 0 12px; }
+
+  table.tests { border-collapse: collapse; width: 100%; margin: 8px 0 14px; font-size: 13.5px; }
+  table.tests th, table.tests td { text-align: left; vertical-align: top; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--border); }
+  table.tests th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  td.t-supported { color: var(--cat-3); }
+  td.t-unsupported { color: var(--warn); }
+  td.t-contradicted { color: var(--cat-2); }
+  td.t-na { color: var(--text-muted); }
+  .q { color: var(--text-secondary); display: block; margin-top: 4px; }
+
+  ul.art { margin: 4px 0 14px; padding-left: 18px; font-size: 13.5px; color: var(--text-secondary); }
+  ul.art li { margin-bottom: 6px; }
+  .grade {
+    font: 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+    border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; margin-right: 6px;
+    color: var(--text-muted);
+  }
+  .fetch { color: var(--text-muted); font-size: 12.5px; }
+
+  .steel { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0 4px; }
+  @media (max-width: 720px) { .steel { grid-template-columns: 1fr; } }
+  .steel > div { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .steel h4 { margin: 0 0 6px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  .steel p { margin: 0; font-size: 13.5px; }
+
+  .tags { margin: 10px 0 14px; }
+  .tag {
+    display: block; border: 1px solid var(--border); border-left: 2px solid var(--cat-2);
+    border-radius: 6px; padding: 9px 12px; margin-bottom: 8px; font-size: 13px;
+  }
+  .tag b { color: var(--text-primary); font-weight: 600; }
+  .tag .crit { display: block; color: var(--text-muted); font-size: 12.5px; margin-top: 5px; }
+
+  dl.tests-key { max-width: 74ch; margin: 14px 0 18px; font-size: 13.5px; }
+  dl.tests-key dt {
+    font: 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--text-primary); margin-top: 10px;
+  }
+  dl.tests-key dd { margin: 2px 0 0 0; color: var(--text-secondary); }
+  .gloss { display: block; font-size: 11.5px; color: var(--text-muted); margin-top: 2px; max-width: 34ch; }
+
+  .openstate {
+    font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 4px; border: 1px dashed var(--axis);
+    color: var(--text-muted); background: none; white-space: nowrap;
+  }
+  .unsourced { color: var(--warn); font-size: 11.5px; }
+  .srcline { font-size: 12.5px; color: var(--text-muted); margin: 4px 0 12px; }
+
+  .flags { font-size: 12.5px; color: var(--text-muted); margin: 8px 0 0; }
+  .flags span { border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; margin-right: 6px; display: inline-block; }
+
+  .pendlist { font-size: 13.5px; color: var(--text-secondary); }
+  .pendlist td { padding: 5px 14px 5px 0; border-bottom: 1px solid var(--border); }
+  table.pend { border-collapse: collapse; width: 100%; margin-top: 10px; }
+
+  #foot { font-size: 13px; color: var(--text-muted); margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); max-width: 82ch; }
+  #checks { font-size: 13px; margin-top: 18px; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border); max-width: 82ch; }
+  #checks b { color: var(--text-primary); }
+  .ok { color: var(--cat-3); }
+  .bad { color: var(--cat-2); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Method</h1>
+<p class="repo"><a href="./">&larr; back to the claims</a> &middot; part of <a href="https://github.com/debedb/elephants">github.com/debedb/elephants</a></p>
+
+<p class="lede">This is the long form: the rules, the argument for having rules at all, and the list of times we have been wrong. It sits on its own page because the claims should be readable without it, and because a reader who has not yet seen a single claim has no reason to care about any of this.</p>
+
+<h2>What this page does not do</h2>
+
+<div class="howto">
+  <p><b>It does not decide whether claims are true.</b> A clause our search did not support is a clause <i>we could not source</i>. That is a statement about our search and the reachable record, not about the world. You will not find a sentence here saying a claim is false.</p>
+  <p><b>The unit of criticism is a chain of reasoning, not a person.</b> A chain runs from an artifact to a claim about it, from that claim to a classification, from classifications to counts, and from counts to conclusions. Every link is public and can be inspected by a stranger. That is what we object to when we object: a step that does not follow, a qualifier dropped between one link and the next, a citation pointing at the previous link instead of at the artifact. Chains belong to nobody. They can be repaired by anyone, including by us, and two of ours have been repaired on this page already.</p>
+  <p><b>A reversal was the wrong analogy, and it stood on this page for about an hour.</b> Part of it was right: when a higher court reverses, it does not find that the judge below acted in bad faith, was foolish, or should not be sitting. It finds a judgment wrong and says why, in writing, on the record. The judge keeps the bench. But the rest of it is wrong in a way that matters here, because <b>an appellate court's power to reverse comes from where it sits, not from the quality of its reasoning.</b> It decides because it is the body that decides. Justice Robert Jackson made the argument himself, from the top of the hierarchy:</p>
+  <blockquote class="claim">However, reversal by a higher court is not proof that justice is thereby better done. There is no doubt that if there were a super-Supreme Court, a substantial proportion of our reversals of state courts would also be reversed. We are not final because we are infallible, but we are infallible only because we are final.</blockquote>
+  <p class="attrib">Jackson, J., concurring, <i>Brown v. Allen</i>, 344 U.S. 443, 540 (1953). Quoted from <a href="https://tile.loc.gov/storage-services/service/ll/usrep/usrep344/usrep344443/usrep344443.pdf">the bound volume of the United States Reports</a>, Library of Congress. We first took the page as 537 from a search result; the volume says 540, and secondary sources are wrong about the wording too — the sentence carries an "only" that most quotations of it drop. Small, and exactly the drift this page is about.</p>
+  <p><b>We are nowhere in that hierarchy, and do not want to be.</b> We decide nothing. Nothing here is final, binding, or owed a response. What this page does is conditional, and the condition is published before the work rather than after it:</p>
+  <p style="border-left:2px solid var(--cat-1); padding-left:14px; max-width:70ch;"><i>Given these rules of admissibility, declared in advance, this step does not follow from that one.</i></p>
+  <p><b>The epistemic rules come first, and the verdict is a function of them.</b> That is not a stylistic preference; it is why the verdicts on this page are computed by a published function rather than typed by hand, and why the rubric was frozen and committed before the sample was drawn. Adopt different rules and you get a different answer, <i>legitimately</i>. That is nonsense in a court, where a differently reasoned judgment from a lower authority simply loses. It is ordinary in a derivation, where the axioms are stated and anyone may adopt others and check what follows from them.</p>
+  <p>So forking this page is not a failure mode, it is the expected use. Two audits of the same claims under different admissibility rules would be more informative than either alone, and neither would need to defeat the other. The only thing we ask a reader to grant is that the rules were published first — and that is checkable in the commit history rather than on our word.</p>
+  <p><b>Two kinds of true.</b> A referee's decision is <i>constitutive</i>. It does not report whether the ball was played legally; it makes the result so. Argentina beat England 2–1 in Mexico City on 22 June 1986 and that is permanently the record. Maradona also put the ball in with his hand. Both true, neither damaging the other, because they answer different questions. And note which way that cuts: <b>the film settled the second question at full strength and had no purchase whatsoever on the first.</b> The result stands to this day. The constitutive axis is not in tension with evidence — it is simply unmoved by it.</p>
+  <p><b>There is no referee here at all.</b> We first thought a Supreme Court order acts as one for a page like this. It does not. It is a referee <i>for the case</i>. Our question is whether a sentence carries what a document says, and no body anywhere has jurisdiction over that question. So the order is not an adjudicator; it is a witness with essentially perfect provenance, because there the utterance and the act are the same event. Everything here is a claim, differing only in provenance — how directly the claimant is the actor, how checkable the claim is, how far their interest bears on it. Claims all the way down, on a gradient, with no referee at any point on it.</p>
+  <p>That is <b>by design, not by omission</b>. No comment section, no editor to get past, disagreement as a pull request or a fork, forks needing nobody's permission, and rules published so anyone can re-run them on their own axioms. It is where <a href="https://github.com/debedb/elephants/blob/master/OPEN-QUESTIONS.md">question 8</a> ends up, reached by construction rather than by renunciation: there is no voice from heaven to refuse, because none was ever installed.</p>
+  <p><b>So there is no whistle, and nothing here can be closed.</b> A claim we decline to admit is not thereby extinguished — nobody on this page holds the power to extinguish anything. It stays live indefinitely, for anyone who later produces the film. That is the point of having no referee: installing one is exactly what would let somebody close a record that should stay open.</p>
+  <p><b>Which is why the strongest thing this page can publish is not a ruling.</b> For the football case it would be: <i>here is the video; here is the governing body's statement on the finality of the result; we do not adjudicate whether he handled the ball.</i> Two artifacts, their provenance, and the divergence pointed at. Nothing is left undone by declining to rule, and nobody is asked to trust us. Where a reader would not know what to look for, we point — and we take the line to fall between <b>a test, which says where to look and is itself sourced</b>, and <b>a verdict, which decides</b>. We are not confident that line holds under pressure, and we have said so where we keep the questions we cannot settle.</p>
+  <p><b>So nothing here is a finding about the curator.</b> A claim we could not source is not evidence of bad faith, error or incompetence by any person. Character is out of scope throughout this repository, and that applies here with extra force, because this page is pointed at work by identifiable people — work larger in scope than anything on this site, done under constraints we have not had to work under.</p>
+  <p><b>Thirty out of 3,466 is 0.9%.</b> This page reports counts and never percentages. Nothing here measures the dataset.</p>
+  <p><b>The verdicts are computed, not written.</b> Each row records four clause tests; a published function turns those into a verdict at render time. Our opinion is meant to sit in one rule you can read and re-run, not in thirty separate judgment calls. The two steelman paragraphs on each row are the only prose of ours doing any work, and both are required on every row.</p>
+</div>
+
+<h2>Source of the claims</h2>
+<p>Claims are quoted verbatim from the <b>Trump Action Tracker</b>, by Christina Pagel — <a href="https://trumpactiontracker.info">trumpactiontracker.info</a> — export <code>trump-actions-6-26-26.csv</code>, accessed 2026-06-27, pinned at <code>sha256 6fa721f4…2cc8f2</code>. The wording of each claim is the artifact under examination here, so it is quoted rather than summarised; paraphrasing the thing you are judging is the same laundering-by-hop this repository refuses everywhere else. The dataset is not mirrored into this repository and nothing here permits its reconstruction.</p>
+
+<h2>Why we are arguing at all</h2>
+
+<div class="howto">
+  <p><b>We are arguing in order to improve the work, and to show ours.</b> Not to score against it. The Trump Action Tracker is a larger undertaking than anything in this repository, maintained under constraints we have not had to work under, and its author has done several things this repository demands and many projects skip — she publishes the criteria behind her classifications, sources the framework to named academic work, declares her scope, and marks her classifications as opinion in her own words.</p>
+  <p>There are two different projects in this story and we conflated them at first. <a href="https://www.trumpactiontracker.info">trumpactiontracker.info</a> is the source. A separate third-party dashboard rebuilds the exported CSV into velocity and complexity metrics and a forecast; it strips the glossary, the scope statement and the opinion disclaimer, and adds claims the source does not make. Criticism aimed at one is not criticism of the other, and we have already made that mistake once.</p>
+  <p>Where we still disagree with the source, we say so specifically rather than globally, because that is the only form of disagreement anyone can argue back against. And where we get it wrong, the wrong version stays on the page above the correction. There are corrections on this page already, and there will be more.</p>
+</div>
+
+<h2>The five tests</h2>
+
+<p>Each claim is broken into clauses and each clause is tested separately against the artifact, because a claim is rarely wholly right or wholly wrong. Four of the five tests are what they sound like. The fifth is the one that does most of the work here, so it is worth a paragraph.</p>
+
+<dl class="tests-key">
+  <dt>agent</dt><dd>Does the artifact establish that the actor was who the claim says? Institutions act through people and people act on behalf of institutions, and the two get swapped freely.</dd>
+  <dt>predicate</dt><dd>Does the artifact establish that the thing described actually happened?</dd>
+  <dt>date</dt><dd>Does the artifact establish the date as claimed? The common failure is not error but indexing: the date an event was reported is not the date it occurred.</dd>
+  <dt>quantity</dt><dd>Where the claim asserts a number, does the artifact carry that number? A claim more precise than its artifact is marked unsupported, not contradicted — the artifact may simply be rounding.</dd>
+  <dt>modality</dt><dd><b>What kind of thing is being asserted — and is the artifact that kind of thing?</b></dd>
+</dl>
+
+<div class="howto">
+  <p><b>Modality is the mood of a claim rather than its content.</b> Grammar has this idea already: <i>did</i>, <i>will</i>, <i>may</i>, <i>should</i>, <i>was ordered to</i>, <i>is considering</i> are all different modes of asserting the same underlying event. A claim can name the right actor, the right act and the right date, and still be wrong about whether the thing was <b>done</b>, <b>planned</b>, <b>proposed</b>, <b>threatened</b>, <b>permitted</b> or merely <b>discussed</b>.</p>
+  <p><b>Corrected after publication.</b> This paragraph originally said the dataset "presents every row in the mode of something having been done" and that drafts and interim steps arrive "dressed as completed acts." That was inferred from the shape of the CSV export, and the publisher's own site says otherwise: the Trump Action Tracker <a href="https://www.trumpactiontracker.info/about">states</a> that it "records publicly reported actions, <b>statements</b>, policies, legal developments and <b>plans</b>." Plans and statements are declared, not smuggled. We read the export and attributed to the project a property of the export — the same error as citing a piece that describes a piece, committed by us, on the day we shipped a page built to catch it.</p>
+  <p>What survives is narrower and still real: <b>the declaration is global and modality is unmarked per row.</b> Nothing in the data or the display distinguishes a row recording a completed act from one recording a plan or a statement of intent. A reader of a single row cannot tell which they have, and neither can any counter, chart or total computed from the data, because a boolean tag matrix has nowhere to put a mood. A declaration at the top of a site does not survive into a row, an export, or anything built from one.</p>
+  <p>Two of the three rows below turn on exactly this. The Supreme Court did not decide that the government may end a status; it granted a <i>stay pending appeal</i>, an interim order that provides for its own expiry — so "announces it will allow" is a modality error, not a factual one. Everything else in that row checks out. That is the shape of the finding this test exists to catch: <b>the event is real, the mood is wrong,</b> and the mood always shifts toward the more finished, more decided, more alarming reading. Nobody's summary of a court order ever drifts toward "and then a temporary procedural thing happened."</p>
+  <p>A claim asserting a plan or an intention is not thereby false or unimportant. It is a different kind of claim, and it earns its own label — <code>plan not act</code> — rather than being graded as though a document could settle it.</p>
+</div>
+
+
+<h2>Where this page stops</h2>
+<p>Our search is not exhaustive, and reachability turned out not to be a property of a document at all — it is a property of the tuple (document, fetcher, jurisdiction, moment). One row below is <b>awaiting fetch</b> for exactly that reason, with every route we tried named — a state rubric v2 added because v1 could not tell an artifact nobody can reach from one this fetcher cannot. See <a href="https://github.com/debedb/elephants/blob/master/OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>, question 9, which this page produced.</p>
+
+<h2>Corrections</h2>
+<p>Recorded rather than quietly applied. A rule or a claim that changes without leaving a trace is indistinguishable from one that was never applied.</p>
+
+<div class="howto">
+  <p><b>2026-08-08 — we audited the export and inferred the project from it.</b> This page was built from the CSV export alone. The export is a derived product: it strips the <a href="https://www.trumpactiontracker.info/glossary">glossary</a> defining all ten domains, the <a href="https://www.trumpactiontracker.info/about">About-page</a> statement of scope, and the publisher's own marking of her classifications as opinion. Three of our early characterisations were inferences from the export's shape that those pages contradict. We read a description and attributed its properties to the thing described, which is the error this repository exists to refuse, on the day we shipped a page built to catch it. The modality section above carries its original wording above the correction.</p>
+  <p><b>2026-08-08 — we conflated two projects.</b> Criticism of a third-party dashboard built on the exported data ran through our analysis as though it were criticism of the source. The dashboard adds velocity-as-intent metrics and a forecast, and carries none of the source's glossary, scope statement or disclaimer. They are different work by different people and are now kept apart.</p>
+  <p><b>2026-08-08 — rubric v1 to v2, five defects.</b> Found by a five-row pilot run for that purpose. Recorded in the <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">rubric's own version history</a>, including that none of the five moved a verdict in the direction that favours our argument.</p>
+</div>
+
+
+<h2>The rest of it</h2>
+<p>The full procedure is <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">RUBRIC.md</a>, with its version history. Observations about the upstream dataset accumulate in <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/OBSERVATIONS.md">OBSERVATIONS.md</a>. The questions we could not settle are in <a href="https://github.com/debedb/elephants/blob/master/OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>, and questions 10 and 11 there were produced by building this page.</p>
+
+<p class="repo"><a href="./">&larr; back to the claims</a></p>
+
+</main>
+</body>
+</html>

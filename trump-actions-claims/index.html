@@ -153,6 +153,21 @@
   dl.tests-key dd { margin: 2px 0 0 0; color: var(--text-secondary); }
   .gloss { display: block; font-size: 11.5px; color: var(--text-muted); margin-top: 2px; max-width: 34ch; }
 
+  .punch { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 4px 0 14px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  @media (max-width: 720px) { .punch { grid-template-columns: 1fr; } }
+  .punch-side { padding: 13px 15px; }
+  .punch-side + .punch-side { border-left: 1px solid var(--border); }
+  @media (max-width: 720px) { .punch-side + .punch-side { border-left: none; border-top: 1px solid var(--border); } }
+  .punch-side h4 { margin: 0 0 7px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  .punch-side p { margin: 0; font-size: 14.5px; color: var(--text-primary); }
+  .punch-art { background: color-mix(in srgb, var(--cat-3) 7%, transparent); }
+  .punch-side:first-child { background: color-mix(in srgb, var(--cat-1) 6%, transparent); }
+  .nextstep { font-size: 13.5px; margin: 0 0 12px; }
+  .nextstep b { color: var(--text-primary); }
+  details.work { margin-top: 6px; border-top: 1px solid var(--border); padding-top: 10px; }
+  details.work > summary { cursor: pointer; font-size: 12.5px; color: var(--text-muted); list-style: revert; }
+  details.work[open] > summary { margin-bottom: 10px; }
+
   .openstate {
     font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase;
     padding: 3px 8px; border-radius: 4px; border: 1px dashed var(--axis);
@@ -179,86 +194,27 @@
 <main>
 
 <h1>Claims under audit</h1>
-<p class="repo">Part of <a href="https://github.com/debedb/elephants">github.com/debedb/elephants</a> — the sources, the rules, the argument and the case against it are all in the repository.</p>
+<p class="repo">Part of <a href="https://github.com/debedb/elephants">github.com/debedb/elephants</a> &middot; <a href="method.html">the method, in full &rarr;</a></p>
 
-<p class="lede">Thirty claims drawn at random from a third party's dataset of 3,466. For each one we go looking for the primary artifact behind it and report <b>which clauses of the claim the artifact carries</b>.</p>
+<p class="lede">We took thirty claims at random from a tracker of 3,466, went looking for the primary document behind each one, and put the two side by side.</p>
 
 <div class="banner">
-  <p><b>This page is 5 of 30 adjudicated. It is not a finished audit and must not be read as one.</b> The remaining 25 rows are listed below, drawn but not yet worked. Every drawn row ships when it is done, including rows that come out fully carried and rows we abandon.</p>
-  <p>The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a>, in its own commit, so that nothing can be quietly dropped for coming out inconveniently. The procedure was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>.</p>
-</div>
-
-<h2>What this page does not do</h2>
-
-<div class="howto">
-  <p><b>It does not decide whether claims are true.</b> A clause our search did not support is a clause <i>we could not source</i>. That is a statement about our search and the reachable record, not about the world. You will not find a sentence here saying a claim is false.</p>
-  <p><b>The unit of criticism is a chain of reasoning, not a person.</b> A chain runs from an artifact to a claim about it, from that claim to a classification, from classifications to counts, and from counts to conclusions. Every link is public and can be inspected by a stranger. That is what we object to when we object: a step that does not follow, a qualifier dropped between one link and the next, a citation pointing at the previous link instead of at the artifact. Chains belong to nobody. They can be repaired by anyone, including by us, and two of ours have been repaired on this page already.</p>
-  <p><b>A reversal was the wrong analogy, and it stood on this page for about an hour.</b> Part of it was right: when a higher court reverses, it does not find that the judge below acted in bad faith, was foolish, or should not be sitting. It finds a judgment wrong and says why, in writing, on the record. The judge keeps the bench. But the rest of it is wrong in a way that matters here, because <b>an appellate court's power to reverse comes from where it sits, not from the quality of its reasoning.</b> It decides because it is the body that decides. Justice Robert Jackson made the argument himself, from the top of the hierarchy:</p>
-  <blockquote class="claim">However, reversal by a higher court is not proof that justice is thereby better done. There is no doubt that if there were a super-Supreme Court, a substantial proportion of our reversals of state courts would also be reversed. We are not final because we are infallible, but we are infallible only because we are final.</blockquote>
-  <p class="attrib">Jackson, J., concurring, <i>Brown v. Allen</i>, 344 U.S. 443, 540 (1953). Quoted from <a href="https://tile.loc.gov/storage-services/service/ll/usrep/usrep344/usrep344443/usrep344443.pdf">the bound volume of the United States Reports</a>, Library of Congress. We first took the page as 537 from a search result; the volume says 540, and secondary sources are wrong about the wording too — the sentence carries an "only" that most quotations of it drop. Small, and exactly the drift this page is about.</p>
-  <p><b>We are nowhere in that hierarchy, and do not want to be.</b> We decide nothing. Nothing here is final, binding, or owed a response. What this page does is conditional, and the condition is published before the work rather than after it:</p>
-  <p style="border-left:2px solid var(--cat-1); padding-left:14px; max-width:70ch;"><i>Given these rules of admissibility, declared in advance, this step does not follow from that one.</i></p>
-  <p><b>The epistemic rules come first, and the verdict is a function of them.</b> That is not a stylistic preference; it is why the verdicts on this page are computed by a published function rather than typed by hand, and why the rubric was frozen and committed before the sample was drawn. Adopt different rules and you get a different answer, <i>legitimately</i>. That is nonsense in a court, where a differently reasoned judgment from a lower authority simply loses. It is ordinary in a derivation, where the axioms are stated and anyone may adopt others and check what follows from them.</p>
-  <p>So forking this page is not a failure mode, it is the expected use. Two audits of the same claims under different admissibility rules would be more informative than either alone, and neither would need to defeat the other. The only thing we ask a reader to grant is that the rules were published first — and that is checkable in the commit history rather than on our word.</p>
-  <p><b>Two kinds of true.</b> A referee's decision is <i>constitutive</i>. It does not report whether the ball was played legally; it makes the result so. Argentina beat England 2–1 in Mexico City on 22 June 1986 and that is permanently the record. Maradona also put the ball in with his hand. Both true, neither damaging the other, because they answer different questions. And note which way that cuts: <b>the film settled the second question at full strength and had no purchase whatsoever on the first.</b> The result stands to this day. The constitutive axis is not in tension with evidence — it is simply unmoved by it.</p>
-  <p><b>There is no referee here at all.</b> We first thought a Supreme Court order acts as one for a page like this. It does not. It is a referee <i>for the case</i>. Our question is whether a sentence carries what a document says, and no body anywhere has jurisdiction over that question. So the order is not an adjudicator; it is a witness with essentially perfect provenance, because there the utterance and the act are the same event. Everything here is a claim, differing only in provenance — how directly the claimant is the actor, how checkable the claim is, how far their interest bears on it. Claims all the way down, on a gradient, with no referee at any point on it.</p>
-  <p>That is <b>by design, not by omission</b>. No comment section, no editor to get past, disagreement as a pull request or a fork, forks needing nobody's permission, and rules published so anyone can re-run them on their own axioms. It is where <a href="https://github.com/debedb/elephants/blob/master/OPEN-QUESTIONS.md">question 8</a> ends up, reached by construction rather than by renunciation: there is no voice from heaven to refuse, because none was ever installed.</p>
-  <p><b>So there is no whistle, and nothing here can be closed.</b> A claim we decline to admit is not thereby extinguished — nobody on this page holds the power to extinguish anything. It stays live indefinitely, for anyone who later produces the film. That is the point of having no referee: installing one is exactly what would let somebody close a record that should stay open.</p>
-  <p><b>Which is why the strongest thing this page can publish is not a ruling.</b> For the football case it would be: <i>here is the video; here is the governing body's statement on the finality of the result; we do not adjudicate whether he handled the ball.</i> Two artifacts, their provenance, and the divergence pointed at. Nothing is left undone by declining to rule, and nobody is asked to trust us. Where a reader would not know what to look for, we point — and we take the line to fall between <b>a test, which says where to look and is itself sourced</b>, and <b>a verdict, which decides</b>. We are not confident that line holds under pressure, and we have said so where we keep the questions we cannot settle.</p>
-  <p><b>So nothing here is a finding about the curator.</b> A claim we could not source is not evidence of bad faith, error or incompetence by any person. Character is out of scope throughout this repository, and that applies here with extra force, because this page is pointed at work by identifiable people — work larger in scope than anything on this site, done under constraints we have not had to work under.</p>
-  <p><b>Thirty out of 3,466 is 0.9%.</b> This page reports counts and never percentages. Nothing here measures the dataset.</p>
-  <p><b>The verdicts are computed, not written.</b> Each row records four clause tests; a published function turns those into a verdict at render time. Our opinion is meant to sit in one rule you can read and re-run, not in thirty separate judgment calls. The two steelman paragraphs on each row are the only prose of ours doing any work, and both are required on every row.</p>
-</div>
-
-<h2>Source of the claims</h2>
-<p>Claims are quoted verbatim from the <b>Trump Action Tracker</b>, by Christina Pagel — <a href="https://trumpactiontracker.info">trumpactiontracker.info</a> — export <code>trump-actions-6-26-26.csv</code>, accessed 2026-06-27, pinned at <code>sha256 6fa721f4…2cc8f2</code>. The wording of each claim is the artifact under examination here, so it is quoted rather than summarised; paraphrasing the thing you are judging is the same laundering-by-hop this repository refuses everywhere else. The dataset is not mirrored into this repository and nothing here permits its reconstruction.</p>
-
-<h2>Why we are arguing at all</h2>
-
-<div class="howto">
-  <p><b>We are arguing in order to improve the work, and to show ours.</b> Not to score against it. The Trump Action Tracker is a larger undertaking than anything in this repository, maintained under constraints we have not had to work under, and its author has done several things this repository demands and many projects skip — she publishes the criteria behind her classifications, sources the framework to named academic work, declares her scope, and marks her classifications as opinion in her own words.</p>
-  <p>There are two different projects in this story and we conflated them at first. <a href="https://www.trumpactiontracker.info">trumpactiontracker.info</a> is the source. A separate third-party dashboard rebuilds the exported CSV into velocity and complexity metrics and a forecast; it strips the glossary, the scope statement and the opinion disclaimer, and adds claims the source does not make. Criticism aimed at one is not criticism of the other, and we have already made that mistake once.</p>
-  <p>Where we still disagree with the source, we say so specifically rather than globally, because that is the only form of disagreement anyone can argue back against. And where we get it wrong, the wrong version stays on the page above the correction. There are corrections on this page already, and there will be more.</p>
-</div>
-
-<h2>The five tests</h2>
-
-<p>Each claim is broken into clauses and each clause is tested separately against the artifact, because a claim is rarely wholly right or wholly wrong. Four of the five tests are what they sound like. The fifth is the one that does most of the work here, so it is worth a paragraph.</p>
-
-<dl class="tests-key">
-  <dt>agent</dt><dd>Does the artifact establish that the actor was who the claim says? Institutions act through people and people act on behalf of institutions, and the two get swapped freely.</dd>
-  <dt>predicate</dt><dd>Does the artifact establish that the thing described actually happened?</dd>
-  <dt>date</dt><dd>Does the artifact establish the date as claimed? The common failure is not error but indexing: the date an event was reported is not the date it occurred.</dd>
-  <dt>quantity</dt><dd>Where the claim asserts a number, does the artifact carry that number? A claim more precise than its artifact is marked unsupported, not contradicted — the artifact may simply be rounding.</dd>
-  <dt>modality</dt><dd><b>What kind of thing is being asserted — and is the artifact that kind of thing?</b></dd>
-</dl>
-
-<div class="howto">
-  <p><b>Modality is the mood of a claim rather than its content.</b> Grammar has this idea already: <i>did</i>, <i>will</i>, <i>may</i>, <i>should</i>, <i>was ordered to</i>, <i>is considering</i> are all different modes of asserting the same underlying event. A claim can name the right actor, the right act and the right date, and still be wrong about whether the thing was <b>done</b>, <b>planned</b>, <b>proposed</b>, <b>threatened</b>, <b>permitted</b> or merely <b>discussed</b>.</p>
-  <p><b>Corrected after publication.</b> This paragraph originally said the dataset "presents every row in the mode of something having been done" and that drafts and interim steps arrive "dressed as completed acts." That was inferred from the shape of the CSV export, and the publisher's own site says otherwise: the Trump Action Tracker <a href="https://www.trumpactiontracker.info/about">states</a> that it "records publicly reported actions, <b>statements</b>, policies, legal developments and <b>plans</b>." Plans and statements are declared, not smuggled. We read the export and attributed to the project a property of the export — the same error as citing a piece that describes a piece, committed by us, on the day we shipped a page built to catch it.</p>
-  <p>What survives is narrower and still real: <b>the declaration is global and modality is unmarked per row.</b> Nothing in the data or the display distinguishes a row recording a completed act from one recording a plan or a statement of intent. A reader of a single row cannot tell which they have, and neither can any counter, chart or total computed from the data, because a boolean tag matrix has nowhere to put a mood. A declaration at the top of a site does not survive into a row, an export, or anything built from one.</p>
-  <p>Two of the three rows below turn on exactly this. The Supreme Court did not decide that the government may end a status; it granted a <i>stay pending appeal</i>, an interim order that provides for its own expiry — so "announces it will allow" is a modality error, not a factual one. Everything else in that row checks out. That is the shape of the finding this test exists to catch: <b>the event is real, the mood is wrong,</b> and the mood always shifts toward the more finished, more decided, more alarming reading. Nobody's summary of a court order ever drifts toward "and then a temporary procedural thing happened."</p>
-  <p>A claim asserting a plan or an intention is not thereby false or unimportant. It is a different kind of claim, and it earns its own label — <code>plan not act</code> — rather than being graded as though a document could settle it.</p>
+  <p id="tally"><b>Loading.</b></p>
+  <p><b>This is 5 of 30. It is not a finished audit.</b> The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a> and the rules were <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>, so no row can be dropped for coming out inconveniently. Every drawn row ships.</p>
+  <p><b>We grade whether a document carries a sentence. Never whether a claim is true.</b> Nothing here says any claim is false, and nothing here is about the people who made them. <a href="method.html">Why, and what else we refuse to do &rarr;</a></p>
 </div>
 
 <h2>The ledger</h2>
+<p>Each row opens with the claim and the document, quoted. Read those two and you have the finding; everything after them is us showing our work, and you can ignore it or attack it.</p>
 <div id="ledger"></div>
 
 <h2>Drawn, not yet adjudicated</h2>
-<p>These rows are in the sample and will be published when worked. They are listed by index and date only.</p>
+<p>In the sample, not yet worked. Listed by index so the draw stays verifiable.</p>
 <table class="pend"><tbody id="pending"></tbody></table>
 
-<h2>Where this page stops</h2>
-<p>Our search is not exhaustive, and reachability turned out not to be a property of a document at all — it is a property of the tuple (document, fetcher, jurisdiction, moment). One row below is <b>awaiting fetch</b> for exactly that reason, with every route we tried named — a state rubric v2 added because v1 could not tell an artifact nobody can reach from one this fetcher cannot. See <a href="https://github.com/debedb/elephants/blob/master/OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>, question 9, which this page produced.</p>
+<h2>Claims quoted from</h2>
+<p>The <b>Trump Action Tracker</b>, by Christina Pagel &mdash; <a href="https://trumpactiontracker.info">trumpactiontracker.info</a>, export <code>trump-actions-6-26-26.csv</code>, accessed 2026-06-27, pinned at <code>sha256 6fa721f4&hellip;2cc8f2</code>. Quoted verbatim for examination, credited and linked; the dataset is not mirrored here. Her <a href="https://www.trumpactiontracker.info/glossary">glossary</a> defines every domain and states that the classifications are expressions of opinion, and her <a href="https://www.trumpactiontracker.info/about">about page</a> declares the scope. <a href="method.html">We read the export before we read those pages, and got things wrong as a result &rarr;</a></p>
 
-<h2>Corrections</h2>
-<p>Recorded rather than quietly applied. A rule or a claim that changes without leaving a trace is indistinguishable from one that was never applied.</p>
-
-<div class="howto">
-  <p><b>2026-08-08 — we audited the export and inferred the project from it.</b> This page was built from the CSV export alone. The export is a derived product: it strips the <a href="https://www.trumpactiontracker.info/glossary">glossary</a> defining all ten domains, the <a href="https://www.trumpactiontracker.info/about">About-page</a> statement of scope, and the publisher's own marking of her classifications as opinion. Three of our early characterisations were inferences from the export's shape that those pages contradict. We read a description and attributed its properties to the thing described, which is the error this repository exists to refuse, on the day we shipped a page built to catch it. The modality section above carries its original wording above the correction.</p>
-  <p><b>2026-08-08 — we conflated two projects.</b> Criticism of a third-party dashboard built on the exported data ran through our analysis as though it were criticism of the source. The dashboard adds velocity-as-intent metrics and a forecast, and carries none of the source's glossary, scope statement or disclaimer. They are different work by different people and are now kept apart.</p>
-  <p><b>2026-08-08 — rubric v1 to v2, five defects.</b> Found by a five-row pilot run for that purpose. Recorded in the <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">rubric's own version history</a>, including that none of the five moved a verdict in the direction that favours our argument.</p>
-</div>
 
 <div id="checks"></div>
 <p id="foot"></p>
@@ -362,6 +318,10 @@ const TAXONOMY = {
 const CLAIMS = [
   {
     index: 348,
+    punch: { claim: "the U.S. Attorney General Pam Bondi is suing Hawaii, Michigan, New York, and Vermont",
+             artifact: "UNITED STATES OF AMERICA, Plaintiff, v. STATE OF HAWAII \u2014 and the string \u201cBondi\u201d appears zero times in either complaint",
+             src: 2 },
+    nextStep: "The New York and Vermont complaints have not been pulled. They would confirm or break the same point.",
     date: "2025-05-02",
     rubric: 3,
     status: "adjudicated",
@@ -422,6 +382,10 @@ const CLAIMS = [
 
   {
     index: 473,
+    punch: { claim: "The U.S. Supreme Court announces it will allow the Trump administration to remove temporary legal status of 532,000",
+             artifact: "The application for stay \u2026 is granted. \u2026 Should certiorari be denied, this stay shall terminate automatically. \u2014 and the figure given is approximately 500,000",
+             src: 0 },
+    nextStep: "The Department of Homeland Security\u2019s Federal Register notice of 25 March 2025 terminating the CHNV parole programmes would settle the number. Not yet pulled.",
     date: "2025-05-30",
     rubric: 3,
     status: "adjudicated",
@@ -476,6 +440,10 @@ const CLAIMS = [
 
   {
     index: 437,
+    punch: { claim: "he says the two House Republicans who voted against the bill should face primary challenges",
+             artifact: "White House says Trump believes Republicans who voted \"no\" on tax bill should face primary challenges",
+             src: 1 },
+    nextStep: "Nothing outstanding. Both documents are in hand and reachable.",
     date: "2025-05-22",
     rubric: 3,
     status: "adjudicated",
@@ -534,6 +502,10 @@ const CLAIMS = [
 
   {
     index: 71,
+    punch: { claim: "Trump repeats the right-wing claim that USAID subscriptions to Politico were payoffs",
+             artifact: "not yet fetched \u2014 the post is quoted consistently across outlets but we have not opened it",
+             src: null },
+    nextStep: "Two artifacts: the Truth Social post of 6 February 2025, and federal spending records for the $8 million figure.",
     date: "2025-02-06",
     rubric: 3,
     status: "parked",
@@ -556,6 +528,10 @@ const CLAIMS = [
 
   {
     index: 527,
+    punch: { claim: "the State Department Secretary Marco Rubio is trying to influence the Treasury Department\u2019s sanctions process",
+             artifact: "unreachable from here \u2014 publisher 403, Internet Archive 403, archive.today 429 behind a CAPTCHA, all within one minute",
+             src: null },
+    nextStep: "One fact would decide it: does the article attribute to named people, or to unnamed officials? Under this repository\u2019s rule, anonymous sourcing is not admitted. A person whose browser reaches the page can answer it in a sentence.",
     date: "2025-06-11",
     rubric: 3,
     status: "awaiting fetch",
@@ -722,23 +698,48 @@ CLAIMS.forEach(row => {
   }
   card.append(head);
 
+  if (row.punch) {
+    const pl = el("div", "punch");
+    const c1 = el("div", "punch-side");
+    c1.append(el("h4", null, "the claim says"));
+    c1.append(el("p", null, "\u201c" + row.punch.claim + "\u201d"));
+    const c2 = el("div", "punch-side punch-art");
+    c2.append(el("h4", null, row.punch.src === null ? "the document" : "the document says"));
+    c2.append(el("p", null, row.punch.src === null ? row.punch.artifact : "\u201c" + row.punch.artifact + "\u201d"));
+    if (row.punch.src !== null && (row.artifacts || [])[row.punch.src]) {
+      const a = row.artifacts[row.punch.src];
+      const sl = el("p", "srcline");
+      sl.append(link(a.url, a.what));
+      c2.append(sl);
+    }
+    pl.append(c1, c2);
+    card.append(pl);
+  }
+  if (row.nextStep) {
+    const ns = el("p", "nextstep");
+    ns.append(el("b", null, "What would settle it: "));
+    ns.append(document.createTextNode(row.nextStep));
+    card.append(ns);
+  }
+  const det = el("details", "work");
+  det.append(el("summary", null, "Show the work \u2014 full claim, every test, both steelmen, sources"));
   const bq = el("blockquote", "claim", row.claim);
-  card.append(bq);
+  det.append(bq);
   const at = el("p", "attrib");
   at.append(document.createTextNode("Claim as published by " + SOURCE_CREDIT + ". Row cites "));
   at.append(link(row.citedUrl, host(row.citedUrl)));
   at.append(document.createTextNode("."));
-  card.append(at);
+  det.append(at);
 
   const rowTags = TAXONOMY.tags[String(row.index)] || [];
   if (rowTags.length > 0) {
-    card.append(el("h3", null, "The curator's classification, and the criterion it asserts"));
+    det.append(el("h3", null, "The curator's classification, and the criterion it asserts"));
     const note = el("p", "fetch",
       "Assigned by the Trump Action Tracker, not by us. We do not grade whether a classification is "
       + "correct — that is an editorial judgement, and the rule that stops us grading motive stops us "
       + "grading this. The criterion below is the publisher's own, quoted from her glossary, so a reader "
       + "can see what the tag is asserting and judge the fit themselves.");
-    card.append(note);
+    det.append(note);
     const box = el("div", "tags");
     rowTags.forEach(t => {
       const g = TAXONOMY.glossary[t];
@@ -747,21 +748,21 @@ CLAIMS.forEach(row => {
       d.append(el("span", "crit", g ? g.criteria : "no published criterion found for this column name"));
       box.append(d);
     });
-    card.append(box);
+    det.append(box);
   }
 
   if (isParked(row)) {
     if ((row.routesTried || []).length > 0) {
-      card.append(el("h3", null, "Routes tried"));
+      det.append(el("h3", null, "Routes tried"));
       const rl = el("ul", "art");
       row.routesTried.forEach(r => rl.append(el("li", "fetch", r)));
-      card.append(rl);
+      det.append(rl);
     }
-    card.append(el("h3", null, row.status === "awaiting fetch"
+    det.append(el("h3", null, row.status === "awaiting fetch"
       ? "Why this row is awaiting a fetch" : "Why this row is parked"));
-    card.append(el("p", null, row.parkedReason));
+    det.append(el("p", null, row.parkedReason));
   } else {
-    card.append(el("h3", null, "Artifacts"));
+    det.append(el("h3", null, "Artifacts"));
     const ul = el("ul", "art");
     (row.artifacts || []).forEach(a => {
       const li = el("li");
@@ -775,9 +776,9 @@ CLAIMS.forEach(row => {
       li.append(fetchLine);
       ul.append(li);
     });
-    card.append(ul);
+    det.append(ul);
 
-    card.append(el("h3", null, "Clause tests"));
+    det.append(el("h3", null, "Clause tests"));
     const tb = el("table", "tests");
     const thead = el("thead");
     const htr = el("tr");
@@ -803,10 +804,10 @@ CLAIMS.forEach(row => {
       body.append(tr);
     });
     tb.append(body);
-    card.append(tb);
+    det.append(tb);
 
-    if (row.rubricNote) { card.append(el("p", "fetch", row.rubricNote)); }
-    (row.notes || []).forEach(n => card.append(el("p", null, n)));
+    if (row.rubricNote) { det.append(el("p", "fetch", row.rubricNote)); }
+    (row.notes || []).forEach(n => det.append(el("p", null, n)));
   }
 
   function steelSide(heading, segments, arts) {
@@ -833,14 +834,15 @@ CLAIMS.forEach(row => {
   const a2 = steelSide("The strongest reading under which it does not", row.againstClaim, row.artifacts);
   if (!isParked(row)) {
     steel.append(a1, a2);
-    card.append(steel);
+    det.append(steel);
   }
 
   const fl = el("p", "flags");
   (row.flags || []).forEach(f => fl.append(el("span", null, f)));
   fl.append(el("span", null, "row's own citation: " + row.rowSourcing));
-  card.append(fl);
+  det.append(fl);
 
+    card.append(det);
   ledger.append(card);
 });
 
@@ -949,6 +951,22 @@ if (failures.length === 0) {
   checks.append(el("b", "bad", "SELF-CHECK FAILED — " + failures.length + " problem(s): "));
   checks.append(document.createTextNode(failures.join("; ")));
 }
+
+// tally, up top: the punch line for the page as a whole
+const tally = document.getElementById("tally");
+const nCarried = CLAIMS.filter(r => verdictOf(r) === "carried").length;
+const nPart = CLAIMS.filter(r => verdictOf(r) === "carried in part").length;
+const nOpen = CLAIMS.filter(r => isParked(r)).length;
+tally.textContent = "";
+tally.append(el("b", null,
+  CLAIMS.length + " of " + DRAWN.length + " checked so far: "
+  + nPart + " where the document carries part of the sentence and not the rest, "
+  + nCarried + " carried whole, "
+  + nOpen + " still open."));
+tally.append(document.createTextNode(
+  " Every one of the three worked rows has the same shape \u2014 the act is documented and something "
+  + "adjacent to it is not. On this sample that is the pattern, and thirty of 3,466 cannot tell you "
+  + "whether it holds generally."));
 
 // footer
 const adjudicated = CLAIMS.filter(r => r.status === "adjudicated").length;

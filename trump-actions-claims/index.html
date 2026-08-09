@@ -311,6 +311,9 @@ const TAXONOMY = {
     ],
     "527": [
       "Attacking universities, schools, museums and culture"
+    ],
+    "789": [
+      "Dismantling social protections and civil rights"
     ]
   }
 };
@@ -497,6 +500,64 @@ const CLAIMS = [
       { text: "The only person quoted is the spokesperson, prefacing it as her own inference rather than reporting his words.",
         src: 1, quote: "I don\u2019t think he likes to see grandstanders in Congress" },
       { reasoning: "The compression runs in one direction. \u201cThe White House says Trump believes\u201d contains two hops and a hedge at the end of the second; \u201che says\u201d contains neither. That is the drift this repository documents elsewhere \u2014 every hop is where the qualifiers fall off, and the drift is always toward more confidence \u2014 occurring in a single hop, with both documents in hand." }
+    ]
+  },
+
+  {
+    index: 789,
+    date: "2025-07-22",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/07/22/us/politics/us-olympics-trans-women-athletes-ban-trump.html",
+    claim: "The United States Olympic & Paralympic Committee banned transgender women from women\u2019s "
+         + "competitions to comply with Trump\u2019s executive order on the issue, taking the decision away "
+         + "from national governing bodies for each sport.",
+    punch: { claim: "The United States Olympic & Paralympic Committee banned transgender women from women\u2019s competitions",
+             artifact: "As of July 21, 2025, please refer to the USOPC athlete safety policy.",
+             src: 0 },
+    nextStep: "Two documents, neither located. The USOPC athlete safety policy itself, which would show whether its operative language restricts eligibility and in what terms; and the letter to national governing bodies, which is the only thing that could support the claim that the decision was taken away from them.",
+    clauses: [
+      { type: "act", text: "the USOPC banned transgender women from women\u2019s competitions" },
+      { type: "act", text: "it did so to comply with the executive order" },
+      { type: "act", text: "the decision was taken away from national governing bodies" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.usopc.org/diversity-equity-inclusion/transgender-athlete-participation-in-sport",
+        what: "USOPC, Transgender Athlete Participation in Sport \u2014 the Committee\u2019s own published position, carrying its own change notice",
+        fetch: { by: "agent", route: "curl", date: "2026-08-08", status: 200 } },
+      { grade: "constitutive record", url: "https://public-inspection.federalregister.gov/2025-02513.pdf",
+        what: "Executive Order 14201, Keeping Men Out of Women\u2019s Sports, as filed for publication 11 February 2025",
+        fetch: { by: "agent", route: "curl", date: "2026-08-08", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "As of July 21, 2025, please refer to the USOPC athlete safety policy." },
+      predicate: { v: "unsupported", src: 0,
+        note: "The USOPC\u2019s own page records that something changed and redirects to a policy. It does not say what the policy does, and the word \u201cban\u201d appears in nothing we could reach from the Committee. We could not locate the athlete safety policy document itself at any USOPC path, so the operative restriction is known to us only through reporting. Marked unsupported rather than contradicted: the policy plainly exists and may say exactly what the claim says." },
+      date: { v: "unsupported", src: 0,
+        note: "The Committee dates its own change to 21 July 2025. The row is dated 22 July, the day of the reporting." },
+      modality: { v: "supported", src: 0,
+        quote: "As of July 21, 2025, please refer to the USOPC athlete safety policy." },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "The reversal is visible inside a single document, which is unusual and worth reading directly. Beneath the July 2025 change notice, the Committee\u2019s superseded 2022 principles are still displayed on the same page: \u201cIt is not fair if athletes cannot participate or compete in sport because of their gender identity \u2013 participation in sport should be available to everyone,\u201d and \u201cthe only way to do that for all genders, and specifically for those who are transgender, is to rely on real data and science-based evidence rather than ideology.\u201d",
+      "The executive order does not, in the text we read, order the USOPC to do anything. Section 4 directs the Assistant to the President for Domestic Policy to convene governing bodies and State Attorneys General, and directs the Secretary of State to rescind support for certain sports exchanges and to seek amendment of International Olympic Committee standards. \u201cTo comply with\u201d describes the Committee\u2019s own account of its position rather than a command we located in the instrument."
+    ],
+    rowSourcing: "named",
+    flags: ["third-party act"],
+    forClaim: [
+      { text: "The Committee itself records that its position changed on a specific date and points readers to the policy that replaced it.",
+        src: 0, quote: "As of July 21, 2025, please refer to the USOPC athlete safety policy." },
+      { text: "An executive order squarely on this subject exists and predates the change.",
+        src: 1, quote: "KEEPING MEN OUT OF WOMEN\u2019S SPORTS" },
+      { reasoning: "Every outlet that covered this described it as a ban, and if the policy functions as one then \u201cbanned\u201d is how a reader will understand what happened. Holding a one-sentence timeline entry to the drafting language of a policy document may be the wrong instrument rather than a finding about the entry." }
+    ],
+    againstClaim: [
+      { text: "The order\u2019s operative provisions direct convening, funding decisions and diplomacy. They do not command the Committee.",
+        src: 1, quote: "The Assistant to the President for Domestic Policy shall, within 60 days of the date of this order: (i) convene representatives of major athletic organizations and governing bodies" },
+      { reasoning: "Two of the sentence\u2019s three clauses rest on documents we never reached. \u201cBanned\u201d appears in nothing the Committee published that we could find, and \u201ctaking the decision away from national governing bodies\u201d is a specific claim about the transfer of institutional authority \u2014 the sort of claim that should rest on the instrument that transfers it. We did not locate that instrument, and neither, on the page, does the row." }
     ]
   },
 

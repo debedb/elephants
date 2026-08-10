@@ -613,38 +613,66 @@ const CLAIMS = [
 
   {
     index: 527,
-    punch: { claim: "the State Department Secretary Marco Rubio is trying to influence the Treasury Department\u2019s sanctions process",
-             artifact: "unreachable from here \u2014 publisher 403, Internet Archive 403, archive.today 429 behind a CAPTCHA, all within one minute",
-             src: null },
-    nextStep: "One fact would decide it: does the article attribute to named people, or to unnamed officials? Under this repository\u2019s rule, anonymous sourcing is not admitted. A person whose browser reaches the page can answer it in a sentence.",
     date: "2025-06-11",
     rubric: 3,
-    status: "awaiting fetch",
-    parkedKind: "reachability blocked",
-    routesTried: [
-      "nytimes.com direct, HTTP 403, 2026-08-07",
-      "web.archive.org playback, HTTP 403, 2026-08-07",
-      "archive.org availability API, reported no snapshot, 2026-08-07",
-      "archive.today via stealth proxy, HTTP 429 behind a CAPTCHA, 2026-08-07"
-    ],
+    status: "adjudicated",
     citedUrl: "https://www.nytimes.com/2025/06/11/us/politics/rubio-is-pressing-to-open-sanctions-investigation-into-harvard.html",
     claim: "In a highly unusual move, the State Department Secretary Marco Rubio is trying to influence the "
          + "Treasury Department's sanctions process to target a domestic entity, Harvard University.",
-    baseRateFlag: "The claim opens \u201cIn a highly unusual move\u201d, which asserts a comparison class. Rubric v3 requires that whoever asserts novelty produce the reference class \u2014 and it requires the same of anyone asserting the opposite, that this is routine. Neither has been produced here. The class would be prior State Department referrals to Treasury\u2019s sanctions process concerning domestic entities, which is a countable thing.",
-    parkedReason: "The artifact exists — a published New York Times article — and this fetcher could not obtain "
-                + "it by any route available to it. The four routes tried are listed above; three supposedly "
-                + "independent custody paths closed inside the same minute. Every other outlet carrying this story "
-                + "attributes it to the Times rather than to anything of its own, so there is no second path to the "
-                + "underlying fact. One adjacent primary document does exist and is reachable — Senator Tom "
-                + "Cotton's letter to Rubio and Bessent — but that records a senator asking, which is a different "
-                + "act by a different person. Under rubric v2 this is 'awaiting fetch', not 'not reachable': the "
-                + "block is at our end, and calling it a finding about the record would be publishing an "
-                + "infrastructure accident as an evidentiary one. It is the state a human with a different tuple "
-                + "can move, and nothing else can. What is needed is narrow — whether the piece attributes to "
-                + "named people or to unnamed officials — because that single fact decides the row under this "
-                + "repository's rule against anonymously sourced claims. See OPEN-QUESTIONS question 9.",
-    rowSourcing: "unknown",
-    flags: ["reachability blocked"]
+    punch: { claim: "Marco Rubio is trying to influence the Treasury Department\u2019s sanctions process to target a domestic entity",
+             artifact: "\u2026 according to people familiar with the matter and documents reviewed by The New York Times",
+             src: 0 },
+    nextStep: "Nothing further is available to us. The act clause rests on unnamed sources and no instrument has been published; Treasury and State both declined to comment. Only Treasury or State confirming on the record, or the recommendation itself surfacing, would move it.",
+    clauses: [
+      { type: "act", text: "Rubio signed off on a recommendation to Treasury to open an investigation" },
+      { type: "characterization", text: "in a highly unusual move" }
+    ],
+    routesTried: [
+      "nytimes.com direct, HTTP 403, 2026-08-07",
+      "web.archive.org playback, HTTP 403, and its availability API reported no snapshot, 2026-08-07",
+      "archive.today via automated fetcher with stealth proxy, HTTP 429 behind a CAPTCHA, 2026-08-07",
+      "archive.today in the operator's own browser, succeeded, 2026-08-10"
+    ],
+    artifacts: [
+      { grade: "capture", url: "https://archive.ph/20250611091008/https://www.nytimes.com/2025/06/11/us/politics/rubio-is-pressing-to-open-sanctions-investigation-into-harvard.html",
+        what: "archive.today capture of the New York Times article, taken 11 June 2025 at 09:10:08 UTC, hours after publication",
+        fetch: { by: "human", route: "operator's own Chrome, via browser extension", date: "2026-08-10", status: 200,
+                 note: "Three automated routes failed. Recorded as human-fetched per rubric v3. The route is reader-reproducible: anyone with a browser can open this dated capture, which is why it ranks above a quotation transcribed from behind a wall." } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 0,
+        note: "Not because the artifact is silent \u2014 it says exactly this \u2014 but because its basis is one this repository does not admit. The piece attributes the central factual claim to \u201cpeople familiar with the matter,\u201d and elsewhere to \u201ctwo people familiar with the inquiry who insisted on anonymity.\u201d PROCESS.md excludes claims resting on unnamed sources regardless of outlet, on the reasoning that anonymous sources are investigative leads rather than evidence. Both named departments declined to comment. So no admissible artifact supports the act clause, and this is a plain instance of our rule excluding something that may well be true." },
+      predicate: { v: "unsupported", src: 0,
+        note: "Same basis. The reported act \u2014 signing off on a recommendation to Treasury \u2014 has produced no published instrument, and the piece itself records that whether the Office of Foreign Assets Control acted on it was unclear." },
+      date: { v: "supported", src: 0,
+        quote: "June 11, 2025, 5:01 a.m. ET" },
+      modality: { v: "supported", src: 0,
+        quote: "Whether the agency within the Treasury that handles sanctions, the Office of Foreign Assets Control, opened an investigation in response was unclear",
+        note: "The claim says \u201cis trying to influence,\u201d which is the correct mood for what is described: a recommendation sent, outcome expressly unknown. The row does not assert an investigation was opened, and neither does the artifact. Modality is the test that most often fails on this page; here it passes." },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "supported", src: 0,
+        quote: "I wouldn\u2019t say it\u2019s wrong or improper \u2014 I would just say it\u2019s unusual and not the usual course of business" }
+    },
+    notes: [
+      "The base-rate test earns its keep here, and it is the only clause of this row that lands. \u201cHighly unusual\u201d is a claim about a reference class, and the article produces one on the record: John Smith, a former director of the Treasury\u2019s Office of Foreign Assets Control, speaking by name, says such investigations are typically initiated after reporting in the media or from companies, the intelligence community or law enforcement, and that it is atypical for the chief diplomat to single out an American entity. A named former office-holder describing the ordinary course is exactly what v3 asks anyone asserting novelty to produce.",
+      "He also declines the stronger reading, in the same breath, and that is worth printing because it cuts against the row\u2019s framing rather than for it: \u201cI wouldn\u2019t say it\u2019s wrong or improper.\u201d The claim as written says only \u201cunusual,\u201d and is therefore more careful than the tag it is filed under.",
+      "This row was published as awaiting fetch for three days. It moved because a person opened the capture in their own browser, which is the state working as rubric v3 describes: not a verdict, not resolved by time, and moveable only by a party whose reachability differs from ours."
+    ],
+    rowSourcing: "anonymous",
+    flags: ["anonymous sourcing", "characterization present"],
+    forClaim: [
+      { text: "The one clause that can be tested against a named source holds, and holds from a former holder of the relevant office.",
+        src: 0, quote: "I wouldn\u2019t say it\u2019s wrong or improper \u2014 I would just say it\u2019s unusual and not the usual course of business" },
+      { text: "The date is the date of publication, and the mood of the claim matches what is described.",
+        src: 0, quote: "June 11, 2025, 5:01 a.m. ET" },
+      { reasoning: "The claim is narrower than it could have been. It says Rubio is trying to influence a process and that this is unusual; it does not say an investigation was opened, that anything improper occurred, or that Harvard violated anything. Read strictly, the only part our rules exclude is the part that rests on unnamed sources, and the part they do not exclude is stated accurately." }
+    ],
+    againstClaim: [
+      { text: "The central factual assertion rests on sources nobody can check, which is the one thing this repository refuses regardless of the outlet.",
+        src: 0, quote: "according to people familiar with the matter and documents reviewed by The New York Times" },
+      { reasoning: "No instrument has been published, both departments declined to comment, and every other outlet carrying the story attributes it to the Times rather than to anything of its own. A reader who wants to check the act clause has nowhere to go. We do not conclude it is false, and we note the discomfort: our rule here excludes a claim from a reporter who reviewed documents, and it would exclude it identically if the documents were conclusive." }
+    ]
+
   }
 ];
 

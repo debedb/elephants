@@ -327,6 +327,12 @@ const TAXONOMY = {
     ],
     "789": [
       "Dismantling social protections and civil rights"
+    ],
+    "954": [
+      "Aggressive foreign policy and global destabilisation"
+    ],
+    "1219": [
+      "Aggressive foreign policy and global destabilisation"
     ]
   }
 };
@@ -582,6 +588,113 @@ const CLAIMS = [
       { text: "The order\u2019s operative provisions direct convening, funding decisions and diplomacy. They do not command the Committee.",
         src: 1, quote: "The Assistant to the President for Domestic Policy shall, within 60 days of the date of this order: (i) convene representatives of major athletic organizations and governing bodies" },
       { reasoning: "Two of the sentence\u2019s three clauses rest on documents we never reached. \u201cBanned\u201d appears in nothing the Committee published that we could find, and \u201ctaking the decision away from national governing bodies\u201d is a specific claim about the transfer of institutional authority \u2014 the sort of claim that should rest on the instrument that transfers it. We did not locate that instrument, and neither, on the page, does the row." }
+    ]
+  },
+
+  {
+    index: 954,
+    date: "2025-08-08",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/08/08/us/trump-military-drug-cartels.html",
+    claim: "Trump directs military to target foreign drug cartels by ordering the Pentagon to use the armed "
+         + "forces to carry out what in the past was considered law enforcement.",
+    punch: { claim: "ordering the Pentagon to use the armed forces to carry out what in the past was considered law enforcement",
+             artifact: "The Department of Defense shall serve as the single lead agency of the Federal Government for the detection and monitoring of aerial and maritime transit of illegal drugs into the United States.",
+             src: 1 },
+    nextStep: "The directive itself is reported to be classified and no instrument has been published, so the act clause may never become checkable. What would move it: any public order, a congressional notification, or an on-the-record confirmation by a named official.",
+    clauses: [
+      { type: "act", text: "Trump signed a directive ordering the Pentagon to use force against cartels" },
+      { type: "characterization", text: "what in the past was considered law enforcement" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.state.gov/designation-of-international-cartels/",
+        what: "Department of State, Designation of International Cartels, 20 February 2025 \u2014 the designation itself, naming eight organisations as Foreign Terrorist Organizations and Specially Designated Global Terrorists",
+        fetch: { by: "agent", route: "curl", date: "2026-08-09", status: 200 } },
+      { grade: "constitutive record", url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section124&num=0&edition=prelim",
+        what: "10 U.S.C. \u00a7 124, Detection and monitoring of aerial and maritime transit of illegal drugs: Department of Defense to be lead agency",
+        fetch: { by: "agent", route: "curl", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 0,
+        note: "The directive is reported to be classified. No instrument has been published, and every account of it rests on unnamed officials \u2014 the same admissibility problem as index 527, but worse, because there the underlying document at least existed in a reporter\u2019s hands. Here there is nothing a reader can be pointed at." },
+      predicate: { v: "unsupported", src: 0,
+        note: "Same basis. What is publicly documented is the designation of eight cartels as Foreign Terrorist Organizations in February 2025, which is a precondition for the reported directive rather than the directive itself." },
+      date: { v: "unsupported", src: 0,
+        note: "Reports place the signing on 8 August 2025 and the row carries that date, but with no published instrument there is nothing to check it against." },
+      modality: { v: "unsupported", src: 0,
+        note: "\u201cDirects\u201d and \u201cordering\u201d assert a completed act. Reporting describes options being prepared and states that any use of military assets was not imminent, which is a different mood \u2014 but we cannot test the claim\u2019s mood against a document we cannot read." },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "unsupported", src: 1,
+        quote: "The Department of Defense shall serve as the single lead agency of the Federal Government for the detection and monitoring of aerial and maritime transit of illegal drugs into the United States." }
+    },
+    notes: [
+      "The base-rate clause is the interesting one and it cuts both ways, so both halves are printed. Military involvement in counter-narcotics is not new and is not informal: 10 U.S.C. \u00a7 124 makes the Department of Defense the statutory lead agency for detection and monitoring of drug transit, and has done since 1989. To that extent \u201cwhat in the past was considered law enforcement\u201d understates how long the armed forces have had a role.",
+      "But the same statute limits what that role is. \u00a7 124(a)(2) says the responsibility is \u201ccarried out in support of the counter-drug activities of Federal, State, local, and foreign law enforcement agencies,\u201d and \u00a7 124(b) describes intercepting, identifying, communicating with and directing vessels and aircraft \u2014 not striking them. So a directive authorising direct force would be a different thing from what \u00a7 124 authorises, and the claim\u2019s novelty assertion is not refuted by it. Marked unsupported rather than contradicted: the reference class is only partly produced, and the part that is produced does not settle the question either way."
+    ],
+    rowSourcing: "anonymous",
+    flags: ["anonymous sourcing", "characterization present", "plan not act"],
+    forClaim: [
+      { text: "The precondition the claim depends on is publicly documented: the organisations in question had been designated as terrorist entities six months earlier, by the department that makes such designations.",
+        src: 0, quote: "the Department of State announces the designation of Tren de Aragua (TdA), Mara Salvatrucha (MS-13), C\u00e1rtel de Sinaloa, C\u00e1rtel de Jalisco Nueva Generaci\u00f3n (CJNG), C\u00e1rtel del Noreste (CDN), La Nueva Familia Michoacana (LNFM), C\u00e1rtel de Golfo (CDG), and C\u00e1rteles Unidos (CU) as Foreign Terrorist Organizations (FTOs) and Specially Designated Global Terrorists (SDGTs)" },
+      { reasoning: "A rule that admits only published instruments will systematically miss anything done by classified order, and a government that wishes to avoid the record can simply classify. That is not a reason to abandon the rule, but it is a reason to say plainly that its silence here is a limitation of the rule rather than evidence about the world. This row is the clearest instance on the page of our method excluding something that may be both true and important." }
+    ],
+    againstClaim: [
+      { text: "The one element that can be tested against a statute shows the armed forces have had a statutory counter-narcotics role for decades, which is in tension with the claim that this is a departure.",
+        src: 1, quote: "The responsibility conferred by paragraph (1) shall be carried out in support of the counter-drug activities of Federal, State, local, and foreign law enforcement agencies." },
+      { reasoning: "Everything else rests on unnamed officials describing a document nobody outside government has seen. The same reporting says options were being prepared and that any use of military assets was not imminent, which does not match the completed-act mood of \u201cdirects\u201d and \u201cordering\u201d. A reader who wants to check any of this has nowhere to go, and we do not conclude it is false." }
+    ]
+  },
+
+  {
+    index: 1219,
+    date: "2025-09-08",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.reuters.com/world/us/us-enlists-amerikaners-group-refugee-scheme-white-south-africans-2025-09-09/",
+    claim: "US enlists \"Amerikaners\" group in refugee scheme for white South Africans",
+    punch: { claim: "refugee scheme for white South Africans",
+             artifact: "Must be of Afrikaner ethnicity or be a member of a racial minority in South Africa",
+             src: 0 },
+    nextStep: "A capture of this page as it stood in September 2025. The version we read is dated 4 November 2025 and post-dates the claim by nearly two months, so it establishes the arrangement exists but not that it existed on the day claimed.",
+    clauses: [
+      { type: "act", text: "the United States enlisted the Amerikaners group in the refugee programme" },
+      { type: "characterization", text: "for white South Africans" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://za.usembassy.gov/refugee-admissions-program-for-south-africans/",
+        what: "U.S. Mission South Africa, Refugee Admissions Program for South Africans \u2014 the government\u2019s own statement of the programme, its criteria and its partners; page dated 4 November 2025",
+        fetch: { by: "agent", route: "curl", date: "2026-08-09", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "Functions supporting resettlement processing in South Africa are being performed by partners of the USRAP: RSC Africa, which is operated by Church World Service (CWS); and Amerikaners." },
+      predicate: { v: "supported", src: 0,
+        quote: "The authority to grant access to the USRAP rests with the U.S. government and is not a function of USRAP implementing partners RSC Africa/CWS or Amerikaners." },
+      date: { v: "unsupported", src: 0,
+        note: "Two problems, in opposite directions. The row is dated 8 September 2025 while the Reuters article it cites is dated 9 September \u2014 the row precedes its own citation, which is the reverse of the reporting-date pattern found elsewhere on this page. And the government page we read is dated 4 November 2025, so it post-dates the claim by nearly two months and cannot establish what was true in September." },
+      modality: { v: "supported", src: 0,
+        quote: "Functions supporting resettlement processing in South Africa are being performed by partners of the USRAP" },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "The claim says \u201cwhite South Africans\u201d and the published criteria are broader than that. Eligibility requires South African nationality and that the applicant \u201cbe of Afrikaner ethnicity or be a member of a racial minority in South Africa\u201d, which on its face also reaches Coloured and Indian South Africans, who are racial minorities and are not white. Whether the programme operates in practice as the claim describes is a real and important question, and it is not one this artifact can answer. Recorded as a characterisation the instrument does not carry, not as an error.",
+      "The programme is grounded in a published instrument the row does not cite: Executive Order 14204, \u201cAddressing Egregious Actions of the Republic of South Africa\u201d, which the government page names as its basis."
+    ],
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: [
+      { text: "The core assertion is carried by the government\u2019s own page, which names the group as an implementing partner in its own words.",
+        src: 0, quote: "RSC Africa/CWS and Amerikaners will communicate with applicants and respond to applicant inquiries at various stages of the process." },
+      { text: "The programme is expressly framed around race by the government itself, so the claim\u2019s framing is not an invention of the reporting.",
+        src: 0, quote: "consider eligibility for U.S. refugee resettlement for people who are of Afrikaner ethnicity or a member of a racial minority in South Africa who are victims of government-sponsored race-based discrimination" },
+      { reasoning: "The claim is a Reuters headline reproduced verbatim, and headlines compress. As compression goes this one is close: a named group was enlisted, by the United States, into a race-conditioned refugee programme. The word doing the extra work is \u201cwhite\u201d." }
+    ],
+    againstClaim: [
+      { text: "The published criteria are broader than the claim, reaching racial minorities generally rather than white South Africans specifically.",
+        src: 0, quote: "Must be of Afrikaner ethnicity or be a member of a racial minority in South Africa" },
+      { reasoning: "And the artifact is out of time. The page we read is dated nearly two months after the claim, so it shows the arrangement existing later rather than on the day asserted. We looked for a contemporaneous version and have not obtained one; until we do, the date clause rests on nothing we have read." }
     ]
   },
 

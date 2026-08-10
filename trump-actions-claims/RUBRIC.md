@@ -403,3 +403,58 @@ spirit of somebody else's access control, and that is a self-serving judgment
 however carefully argued. It is recorded here rather than left as an
 undocumented convenience, so that a reader who disagrees can see exactly what
 was done and object to it on the record.
+
+## Classification notes, and one lens that keeps recurring (v3)
+
+Our five tests ask whether a document carries a sentence. They cannot ask whether
+an event belongs in the domain it was filed under. That question came from a
+reader rather than from anything we built, and it needed somewhere to live.
+
+A **classification note** records such an objection and refuses to settle it. It
+quotes the publisher's own criterion in full, states the objection, states the
+best case against it at its honest weight, and declines to rule. We do not grade
+whether a classification is correct: that is an editorial judgement, and the rule
+that stops us grading motive stops us grading this. What we can do is check an
+action against a published criterion, and make the dispute visible instead of
+leaving it invisible under a tag.
+
+### Political pressure is not apparatus pressure
+
+The first classification note produced a distinction general enough to name,
+because it will recur:
+
+| | |
+|---|---|
+| **Political pressure** | endorsement withdrawn, funding withheld, a committee seat lost, a primary challenger backed. Imposed by political actors, using political means, available to any party leader. |
+| **Apparatus pressure** | investigation, prosecution, audit, deportation, clearance revocation, licence review. Machinery built for non-political purposes, redirected at a political target. |
+
+**The test between them: does the target have a political remedy?** A primary
+challenge can be answered by out-organising it. An investigation cannot be
+answered by winning a vote. That asymmetry is checkable rather than atmospheric,
+and it does not depend on anyone's view of the actors.
+
+This matters for a tracker of democratic erosion because political pressure is
+universal and ancient. In parliamentary systems it is formal and harsher than
+anything an American president can do to a legislator — withdrawing the whip is
+an explicit act, and twenty-one Conservative MPs lost it over Brexit votes in
+2019, which nobody files as backsliding. So a domain whose criterion is read
+broadly enough to include ordinary party discipline stops distinguishing
+anything, and the reference class runs against the classification rather than
+for it.
+
+**It is a base-rate question, and therefore already testable under this rubric.**
+The `base rate` test does not bite on a sentence that asserts nothing about
+novelty. It bites on a classification, which by filing an event under an erosion
+domain implicitly asserts the event is not ordinary politics. Where that is the
+live dispute, produce the reference class.
+
+### A finding against this rubric, recorded on the first use
+
+The rubric requires a steelman in both directions on every row. On the first
+classification note the honest weight was lopsided, and writing the counter as
+though it balanced would have manufactured a controversy that does not exist.
+**Mandatory symmetry can produce false balance, and a rule that always demands
+two sides will sometimes invent one.** Where that happens, state the imbalance
+rather than dressing it as a contest. This is not yet fixed in the machinery; the
+render still requires both fields to be non-empty and cannot tell a strong
+counter from a manufactured one.

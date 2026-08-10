@@ -448,6 +448,40 @@ novelty. It bites on a classification, which by filing an event under an erosion
 domain implicitly asserts the event is not ordinary politics. Where that is the
 live dispute, produce the reference class.
 
+### Statutory function performed is not departure from norm
+
+The second instance of the same pattern, recorded because there will be a third.
+
+| | |
+|---|---|
+| **The office doing its job** | the Solicitor General arguing the government's position in the Supreme Court; the Attorney General directing litigation; a President nominating judges. |
+| **Departure from the office's own conventions** | reversing a long-held United States position without explanation; confessing error to unwind a case; bypassing the office that normally decides. |
+
+The first is not erosion, however much one dislikes the position being argued.
+The Solicitor General has argued the government's cases since the office was
+created by the Act of 22 June 1870, ch. 150, sec. 2, 16 Stat. 162 — "an officer
+learned in the law, to assist the Attorney-General in the performance of his
+duties" — language that survives verbatim in 28 U.S.C. 505 today, with the
+operative function at 28 U.S.C. 518(a) and 28 C.F.R. 0.20(a).
+
+One qualification, because the statute is narrower than the shorthand. It says
+suits "in which **the United States** is interested" and assistance to **the
+Attorney General**, not the President's policy position. That gap is where the
+Tenth Justice tradition lives — confessions of error, declining to seek
+certiorari, a duty of candour that can cut against the administration's preferred
+litigating position. So "argues the current government's position" is the core
+function and not a complete description of the office.
+
+Both halves reduce to the same testable thing: **produce the reference class.**
+How often Solicitors General switch positions between administrations is a
+studied number, not an atmosphere.
+
+**Nothing in the dataset raises this.** Zero of 3,466 rows mention the Solicitor
+General. The lens is recorded because the pattern will recur, not because this
+particular error was made — and the absence is worth stating in the tracker's
+favour, since it is not sweeping ordinary statutory functions into an erosion
+count.
+
 ### A finding against this rubric, recorded on the first use
 
 The rubric requires a steelman in both directions on every row. On the first

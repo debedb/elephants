@@ -162,6 +162,16 @@
   .punch-side p { margin: 0; font-size: 14.5px; color: var(--text-primary); }
   .punch-art { background: color-mix(in srgb, var(--cat-3) 7%, transparent); }
   .punch-side:first-child { background: color-mix(in srgb, var(--cat-1) 6%, transparent); }
+  .epigraph {
+    margin: 4px 0 22px; padding: 16px 0 16px 18px;
+    border-left: 3px solid var(--cat-3); max-width: 78ch;
+  }
+  .epi-line { font-size: 19px; line-height: 1.38; color: var(--text-primary); margin: 0 0 8px; }
+  .epi-attr { font-size: 13.5px; color: var(--text-secondary); margin: 0 0 12px; }
+  .epi-note { font-size: 12.8px; color: var(--text-muted); margin: 0 0 8px; }
+  .epi-note:last-child { margin: 0; }
+  .epi-note b { color: var(--text-secondary); }
+
   .thesis {
     border: 1px solid var(--border); border-left: 3px solid var(--cat-3);
     background: var(--surface-1); border-radius: 10px;
@@ -227,6 +237,13 @@
 <h1>Claims under audit</h1>
 <p class="repo">Part of <a href="https://github.com/debedb/elephants">github.com/debedb/elephants</a> &middot; <a href="method.html">the method, in full &rarr;</a></p>
 
+<blockquote class="epigraph">
+  <p class="epi-line">Everything is arguable. The field is even, the ball is round. Everything must be in the open.</p>
+  <p class="epi-attr">&mdash; a football saying. We do not know whose.</p>
+  <p class="epi-note">We tried three. Sepp Herberger, whose 1954 <i>der Ball ist rund</i> is repeated everywhere and sourced nowhere we could reach. Nikolai Ozerov, offered in review, whose documented catchphrases are other lines. Vadim Sinyavsky, offered next, with the person offering him saying plainly that he might be misremembering. The Russian form <i>&#1084;&#1103;&#1095; &#1082;&#1088;&#1091;&#1075;&#1083;&#1099;&#1081;, &#1087;&#1086;&#1083;&#1077; &#1088;&#1086;&#1074;&#1085;&#1086;&#1077;</i> carries both halves and Russian sources call it simply an old saying, attached to no one. Three names, no primary source, and a sentence that is probably older than all of them.</p>
+  <p class="epi-note"><b>This is the whole method, failing in public, on its own epigraph.</b> The rule we work by says a half-remembered citation is a lead rather than a problem to be repaired: you do not go and verify who said it, you go and find out whether the artifact exists. We went. It does not. So the honest citation for the sentence this page is built on is that we cannot give you one &mdash; and saying that is worth more than a confident name would have been, because a confident name is exactly what we would have printed if we had not looked.</p>
+</blockquote>
+
 <p class="lede">We took thirty claims at random from a tracker of 3,466, went looking for the primary document behind each one, and put the two side by side.</p>
 
 <div class="banner">
@@ -240,7 +257,7 @@
 <h2>Our position</h2>
 
 <div class="thesis">
-  <p class="thesis-lead">Everything is arguable. The field is even, the ball is round. Everything must be in the open.</p>
+  <p class="thesis-lead">The epigraph above, unpacked.</p>
   <p><b>Hidden methodology is discounted. Open methodology can be disputed.</b> That is the whole rule, and it runs the opposite way to the usual instinct that concealing how you reached a conclusion protects it. Concealment does not protect a method; it removes its standing. A method nobody can inspect cannot be argued with, and a claim that cannot be argued with cannot be relied on either \u2014 it is not refuted, it is <i>discounted</i>. Publishing a method exposes it to attack, and being attackable is what makes it worth something.</p>
   <p><b>The field is even because nobody here has standing.</b> We claim no authority and hold no office. Nothing on this page is binding, nothing is remanded, and no one owes it a response. What we have is what we can show you \u2014 which is also all anyone else in this argument has, which is what makes the field level. Authority would tilt it.</p>
   <p><b>The ball is round because a well-argued case can lose.</b> Six of our own findings have been overturned by our own checks; one rubric change reversed a verdict we had already published. If the outcome were settled in advance there would be no reason to run the tests, and we would be doing something other than what we say we are doing.</p>

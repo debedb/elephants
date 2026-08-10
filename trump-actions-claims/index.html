@@ -162,6 +162,17 @@
   .punch-side p { margin: 0; font-size: 14.5px; color: var(--text-primary); }
   .punch-art { background: color-mix(in srgb, var(--cat-3) 7%, transparent); }
   .punch-side:first-child { background: color-mix(in srgb, var(--cat-1) 6%, transparent); }
+  .cnote {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-1);
+    border-radius: 8px; padding: 13px 15px; margin: 0 0 14px;
+  }
+  .cnote h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  .cnote p { font-size: 13.5px; margin: 0 0 9px; }
+  .cnote p:last-child { margin: 0; }
+  .cnote b { color: var(--text-primary); }
+  .cn-crit { color: var(--text-muted); }
+  .cn-credit { font-size: 12px; color: var(--text-muted); font-style: italic; }
+
   .nextstep { font-size: 13.5px; margin: 0 0 12px; }
   .nextstep b { color: var(--text-primary); }
   details.work { margin-top: 6px; border-top: 1px solid var(--border); padding-top: 10px; }
@@ -485,8 +496,19 @@ const CLAIMS = [
       "The subordinate factual clause is independently confirmed by a primary document the row does not cite. Roll call 145 records passage 215–214 with exactly two Republicans voting Nay — Davidson (R-OH) and Massie (R-KY) — and Harris (R-MD) voting Present. The row's “two House Republicans” is exact.",
       "The loyalty-test clause is typed as motive and is therefore not adjudicated. For what it is worth, the cited card asserts it in CNN's own voice — “Ahead of the vote, Trump made clear he viewed support for the bill as a loyalty test” — without quoting him. That is reporting's characterisation, which is a different thing from an artifact, and the rubric declines to grade it either way."
     ],
+    classificationNote: {
+      domain: "Suppressing dissent or weaponising state against 'enemies'",
+      criterion: "any action that directly suppresses dissent, such as intimidating, threatening or punishing opponents or rivals, taking out law suits against critics or making it harder for others to take out law suits against the state, instituting loyalty tests on employees or making access / visas dependent on scrutiny of e.g. past actions, beliefs or social media \u2014 [and] any action that weaponises executive power against perceived enemies, such as January 6th prosecutors, threatening rivals with legal action or deportation, starting investigations, taking out lawsuits against organisations",
+      objection: "No executive power is exercised in this row. Nobody is investigated, prosecuted, audited, defunded, deported or dismissed. A party leader saying that members who voted against a bill should face primary challenges is party discipline, which long predates this administration, requires no state machinery, and is how parties enforce cohesion. Every illustration in the criterion above is either state apparatus \u2014 lawsuits, prosecutions, investigations, visas \u2014 or an employment relationship. None is an electoral consequence. Read broadly enough to cover a primary threat, the domain would take in every leader who has ever said support this or I back your opponent, and would stop distinguishing anything.",
+      distinction: "The line we would draw, and it is checkable rather than atmospheric: does the target have a political remedy? A primary challenge can be answered by out-organising it. An investigation cannot be answered by winning a vote. Political consequences are imposed by political actors using political means and are available to any party leader. State coercion redirects apparatus built for non-political purposes at a political target, and leaves the target no political answer.",
+      routine: "This is a base-rate question, and the base rate is not close. Party discipline against defectors is universal and in parliamentary systems it is both formal and considerably harsher: withdrawing the whip is an explicit act, and twenty-one Conservative MPs lost it over Brexit votes in 2019. Nobody files that as democratic backsliding. A president saying two members should face primary challenges is a weaker sanction than the routine practice of several established democracies.",
+      counter: "The only argument we can construct on the other side, and we do not think it carries: a President is not merely a party leader, and the office holds leverage a party chair does not \u2014 federal funds to a district, appointments, the Department of Justice. So the same sentence from that mouth could in principle shade into something else. But nothing in this row evidences any of that leverage being invoked, and an argument that a statement could have been backed by apparatus is not a finding that it was.",
+      verdict: "We do not adjudicate whether the classification is correct. That is an editorial judgement and the rule that stops us grading motive stops us grading this. What is recorded is that the action described uses none of the machinery the criterion\u2019s own examples are made of, and that the objection came from a reader rather than from our tests \u2014 which had nowhere to put it.",
+      credit: "Raised in review by the repository owner, whose formulation the distinction above is.",
+      onOurOwnRule: "Recording something uncomfortable about this page rather than about the row. Our rubric requires a steelman in both directions on every row, and here the honest weight is lopsided. Presenting the counter as though it balanced the objection would manufacture a controversy that does not exist, which is a distortion of the same family as the ones we audit. Mandatory symmetry can produce false balance, and a rule that always demands two sides will sometimes invent one. Kept as written, with the imbalance stated, rather than dressed up as a contest."
+    },
     rowSourcing: "named",
-    flags: ["motive present"],
+    flags: ["motive present", "classification questioned"],
     forClaim: [
       { text: "The hard factual core is exactly right, and is confirmed by a constitutive record the row does not cite: two Republicans, which two, and when.",
         src: 0, quote: "Davidson (R-OH) — Nay; Massie (R-KY) — Nay; total Yea 215, Nay 214, Present 1, Not Voting 2" },
@@ -775,6 +797,25 @@ CLAIMS.forEach(row => {
     }
     pl.append(c1, c2);
     card.append(pl);
+  }
+  if (row.classificationNote) {
+    const cn = row.classificationNote;
+    const box = el("div", "cnote");
+    box.append(el("h4", null, "A reader objects to the classification, and we do not settle it"));
+    const c1 = el("p", "cn-crit");
+    c1.append(el("b", null, "Filed under \u201c" + cn.domain + "\u201d. The publisher\u2019s criterion: "));
+    c1.append(document.createTextNode("\u201c" + cn.criterion + "\u201d"));
+    box.append(c1);
+    [["The objection", cn.objection], ["The line proposed", cn.distinction],
+     ["The reference class", cn.routine], ["The best case against the objection", cn.counter],
+     ["What we record", cn.verdict], ["And against ourselves", cn.onOurOwnRule]].forEach(pair => {
+      const pp = el("p");
+      pp.append(el("b", null, pair[0] + ": "));
+      pp.append(document.createTextNode(pair[1]));
+      box.append(pp);
+    });
+    box.append(el("p", "cn-credit", cn.credit));
+    card.append(box);
   }
   if (row.nextStep) {
     const ns = el("p", "nextstep");

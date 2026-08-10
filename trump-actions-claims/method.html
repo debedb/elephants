@@ -216,15 +216,16 @@
   <p>Where we still disagree with the source, we say so specifically rather than globally, because that is the only form of disagreement anyone can argue back against. And where we get it wrong, the wrong version stays on the page above the correction. There are corrections on this page already, and there will be more.</p>
 </div>
 
-<h2>The five tests</h2>
+<h2>The six tests</h2>
 
-<p>Each claim is broken into clauses and each clause is tested separately against the artifact, because a claim is rarely wholly right or wholly wrong. Four of the five tests are what they sound like. The fifth is the one that does most of the work here, so it is worth a paragraph.</p>
+<p>Each claim is broken into clauses and each clause is tested separately against the artifact, because a claim is rarely wholly right or wholly wrong. Five of the six are what they sound like. Modality is the one that does most of the work here and is the only one that is jargon, so it gets a paragraph.</p>
 
 <dl class="tests-key">
   <dt>agent</dt><dd>Does the artifact establish that the actor was who the claim says? Institutions act through people and people act on behalf of institutions, and the two get swapped freely.</dd>
   <dt>predicate</dt><dd>Does the artifact establish that the thing described actually happened?</dd>
   <dt>date</dt><dd>Does the artifact establish the date as claimed? The common failure is not error but indexing: the date an event was reported is not the date it occurred.</dd>
   <dt>quantity</dt><dd>Where the claim asserts a number, does the artifact carry that number? A claim more precise than its artifact is marked unsupported, not contradicted — the artifact may simply be rounding.</dd>
+  <dt>base rate</dt><dd>Where a claim asserts novelty ("in a highly unusual move") <i>or</i> a deflation asserts routineness ("there are hundreds of these every year"), whoever asserts it produces the reference class. Same burden either way, because a deflation is a claim too. Added in v3.</dd>
   <dt>modality</dt><dd><b>What kind of thing is being asserted — and is the artifact that kind of thing?</b></dd>
 </dl>
 
@@ -232,7 +233,7 @@
   <p><b>Modality is the mood of a claim rather than its content.</b> Grammar has this idea already: <i>did</i>, <i>will</i>, <i>may</i>, <i>should</i>, <i>was ordered to</i>, <i>is considering</i> are all different modes of asserting the same underlying event. A claim can name the right actor, the right act and the right date, and still be wrong about whether the thing was <b>done</b>, <b>planned</b>, <b>proposed</b>, <b>threatened</b>, <b>permitted</b> or merely <b>discussed</b>.</p>
   <p><b>Corrected after publication.</b> This paragraph originally said the dataset "presents every row in the mode of something having been done" and that drafts and interim steps arrive "dressed as completed acts." That was inferred from the shape of the CSV export, and the publisher's own site says otherwise: the Trump Action Tracker <a href="https://www.trumpactiontracker.info/about">states</a> that it "records publicly reported actions, <b>statements</b>, policies, legal developments and <b>plans</b>." Plans and statements are declared, not smuggled. We read the export and attributed to the project a property of the export — the same error as citing a piece that describes a piece, committed by us, on the day we shipped a page built to catch it.</p>
   <p>What survives is narrower and still real: <b>the declaration is global and modality is unmarked per row.</b> Nothing in the data or the display distinguishes a row recording a completed act from one recording a plan or a statement of intent. A reader of a single row cannot tell which they have, and neither can any counter, chart or total computed from the data, because a boolean tag matrix has nowhere to put a mood. A declaration at the top of a site does not survive into a row, an export, or anything built from one.</p>
-  <p>Two of the three rows below turn on exactly this. The Supreme Court did not decide that the government may end a status; it granted a <i>stay pending appeal</i>, an interim order that provides for its own expiry — so "announces it will allow" is a modality error, not a factual one. Everything else in that row checks out. That is the shape of the finding this test exists to catch: <b>the event is real, the mood is wrong,</b> and the mood always shifts toward the more finished, more decided, more alarming reading. Nobody's summary of a court order ever drifts toward "and then a temporary procedural thing happened."</p>
+  <p>Two of the adjudicated rows turn on exactly this. The Supreme Court did not decide that the government may end a status; it granted a <i>stay pending appeal</i>, an interim order that provides for its own expiry — so "announces it will allow" is a modality error, not a factual one. Everything else in that row checks out. That is the shape of the finding this test exists to catch: <b>the event is real, the mood is wrong,</b> and the mood always shifts toward the more finished, more decided, more alarming reading. Nobody's summary of a court order ever drifts toward "and then a temporary procedural thing happened."</p>
   <p>A claim asserting a plan or an intention is not thereby false or unimportant. It is a different kind of claim, and it earns its own label — <code>plan not act</code> — rather than being graded as though a document could settle it.</p>
 </div>
 

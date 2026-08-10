@@ -211,7 +211,7 @@
 
 <div class="banner">
   <p id="tally"><b>Loading.</b></p>
-  <p><b>This is 5 of 30. It is not a finished audit.</b> The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a> and the rules were <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>, so no row can be dropped for coming out inconveniently. Every drawn row ships.</p>
+  <p><b id="progress">This is not a finished audit.</b> The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a> and the rules were <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>, so no row can be dropped for coming out inconveniently. Every drawn row ships.</p>
   <p><b>We grade whether a document carries a sentence. Never whether a claim is true.</b> Nothing here says any claim is false, and nothing here is about the people who made them. <a href="method.html">Why, and what else we refuse to do &rarr;</a></p>
 </div>
 
@@ -1065,10 +1065,14 @@ tally.append(el("b", null,
   + nPart + " where the document carries part of the sentence and not the rest, "
   + nCarried + " carried whole, "
   + nOpen + " still open."));
+const nWorked = CLAIMS.filter(r => !isParked(r)).length;
 tally.append(document.createTextNode(
-  " Every one of the three worked rows has the same shape \u2014 the act is documented and something "
-  + "adjacent to it is not. On this sample that is the pattern, and thirty of 3,466 cannot tell you "
-  + "whether it holds generally."));
+  " Every one of the " + nWorked + " worked rows has the same shape \u2014 the act is documented and "
+  + "something adjacent to it is not. On this sample that is the pattern, and thirty of 3,466 cannot "
+  + "tell you whether it holds generally."));
+const prog = document.getElementById("progress");
+if (prog) { prog.textContent = "This is " + CLAIMS.length + " of " + DRAWN.length
+  + ". It is not a finished audit."; }
 
 // footer
 const adjudicated = CLAIMS.filter(r => r.status === "adjudicated").length;

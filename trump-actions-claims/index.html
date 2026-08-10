@@ -162,6 +162,15 @@
   .punch-side p { margin: 0; font-size: 14.5px; color: var(--text-primary); }
   .punch-art { background: color-mix(in srgb, var(--cat-3) 7%, transparent); }
   .punch-side:first-child { background: color-mix(in srgb, var(--cat-1) 6%, transparent); }
+  .ourpos {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-2);
+    background: color-mix(in srgb, var(--cat-2) 5%, transparent);
+    border-radius: 8px; padding: 13px 15px; margin: 0 0 14px;
+  }
+  .ourpos h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--cat-2); font-weight: 600; }
+  .ourpos p { font-size: 13.5px; margin: 0 0 9px; }
+  .ourpos p:last-child { margin: 0; }
+
   .cnote {
     border: 1px solid var(--border); border-left: 3px solid var(--cat-1);
     border-radius: 8px; padding: 13px 15px; margin: 0 0 14px;
@@ -632,12 +641,18 @@ const CLAIMS = [
       "The base-rate clause is the interesting one and it cuts both ways, so both halves are printed. Military involvement in counter-narcotics is not new and is not informal: 10 U.S.C. \u00a7 124 makes the Department of Defense the statutory lead agency for detection and monitoring of drug transit, and has done since 1989. To that extent \u201cwhat in the past was considered law enforcement\u201d understates how long the armed forces have had a role.",
       "But the same statute limits what that role is. \u00a7 124(a)(2) says the responsibility is \u201ccarried out in support of the counter-drug activities of Federal, State, local, and foreign law enforcement agencies,\u201d and \u00a7 124(b) describes intercepting, identifying, communicating with and directing vessels and aircraft \u2014 not striking them. So a directive authorising direct force would be a different thing from what \u00a7 124 authorises, and the claim\u2019s novelty assertion is not refuted by it. Marked unsupported rather than contradicted: the reference class is only partly produced, and the part that is produced does not settle the question either way."
     ],
+    ourPosition: {
+      heading: "Ours, and it is an accusation \u2014 about a structure, not about a person",
+      body: "Classification is a switch available to the party being examined. Any evidentiary rule built on published instruments \u2014 ours, a journalist\u2019s, a court\u2019s, an inspector general\u2019s \u2014 can be emptied on a given question by classifying the instrument, and the party who decides what is classified is the party whose conduct the instrument would record. That is not a flaw in this page\u2019s method. It is a hole in the accountability structure itself, and our method only makes it visible by falling into it in public.",
+      limits: "What we are not saying, and will not say: we do not claim this directive was classified in order to avoid scrutiny. We have no way to know that, motive is out of scope throughout this repository, and asserting it would be the precise failure we audit others for. Nor do we say the claim is false. We say we cannot check it, and that the reason we cannot is a decision made by the party whose act is at issue.",
+      consequence: "Two things follow that we would rather state than imply. First, on any question decided by classified order, an artifact-based record will be systematically quieter than the world \u2014 and quieter in one direction, since the party controlling classification is rarely the party disadvantaged by silence. Second, this is the strongest available argument against the rule we have adopted, and it is on our own page under our own name because a page that only published the objections it could answer would not be worth reading."
+    },
     rowSourcing: "anonymous",
-    flags: ["anonymous sourcing", "characterization present", "plan not act"],
+    flags: ["anonymous sourcing", "characterization present", "plan not act", "our position stated"],
     forClaim: [
       { text: "The precondition the claim depends on is publicly documented: the organisations in question had been designated as terrorist entities six months earlier, by the department that makes such designations.",
         src: 0, quote: "the Department of State announces the designation of Tren de Aragua (TdA), Mara Salvatrucha (MS-13), C\u00e1rtel de Sinaloa, C\u00e1rtel de Jalisco Nueva Generaci\u00f3n (CJNG), C\u00e1rtel del Noreste (CDN), La Nueva Familia Michoacana (LNFM), C\u00e1rtel de Golfo (CDG), and C\u00e1rteles Unidos (CU) as Foreign Terrorist Organizations (FTOs) and Specially Designated Global Terrorists (SDGTs)" },
-      { reasoning: "A rule that admits only published instruments will systematically miss anything done by classified order, and a government that wishes to avoid the record can simply classify. That is not a reason to abandon the rule, but it is a reason to say plainly that its silence here is a limitation of the rule rather than evidence about the world. This row is the clearest instance on the page of our method excluding something that may be both true and important." }
+      { reasoning: "A rule that admits only published instruments will systematically miss anything done by classified order. That is not a reason to abandon the rule, but it is a reason to say plainly that its silence here is a limitation of the rule rather than evidence about the world. This row is the clearest instance on the page of our method excluding something that may be both true and important. See the position stated below, which is ours and is not an argument for this claim." }
     ],
     againstClaim: [
       { text: "The one element that can be tested against a statute shows the armed forces have had a statutory counter-narcotics role for decades, which is in tension with the claim that this is a departure.",
@@ -940,6 +955,13 @@ CLAIMS.forEach(row => {
     }
     pl.append(c1, c2);
     card.append(pl);
+  }
+  if (row.ourPosition) {
+    const op = row.ourPosition;
+    const box = el("div", "ourpos");
+    box.append(el("h4", null, op.heading));
+    [op.body, op.limits, op.consequence].forEach(t => box.append(el("p", null, t)));
+    card.append(box);
   }
   if (row.classificationNote) {
     const cn = row.classificationNote;

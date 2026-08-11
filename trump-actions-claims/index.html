@@ -396,6 +396,9 @@ const TAXONOMY = {
     ],
     "3443": [
       "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "2270": [
+      "Anti-immigration or militarised nationalism"
     ]
   }
 };
@@ -1020,6 +1023,67 @@ const CLAIMS = [
       { text: "Nothing corroborates the delay, which is the claim\u2019s actual assertion. What the footnote establishes is that an assessment exists, not that anyone withheld one.",
         src: 0, quote: "While CISA did review the report, the agency did not have access to those devices and was unable to perform an examination." },
       { reasoning: "The row also drops Reuters\u2019 own disclosure that its sources were granted anonymity, keeping the phrase \u201cthree sources familiar with the matter\u201d while removing the sentence explaining what that means. And the second sentence about 2020 court cases is Reuters\u2019 context, carried across as though it were part of the same finding; it bears on the subject but not on whether a report was delayed." }
+    ]
+  },
+
+  {
+    index: 2270,
+    date: "2026-01-14",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.theguardian.com/us-news/2026/jan/14/trump-administration-white-supremacist-language",
+    claim: "White House social media post about Greenland nods to racist, far-right subculture according to an "
+         + "extremism expert. The image with the question \u2018Which way, Greenland man?\u2019 is a \u2018key concept in "
+         + "neo-Nazi and white supremacist subculture\u2019",
+    punch: { claim: "The image with the question \u2018Which way, Greenland man?\u2019",
+             artifact: "The image contains no text of any kind. Both arms of the signpost in it are blank. The question is the post\u2019s own text, posted alongside the image.",
+             src: 0 },
+    nextStep: "Nothing outstanding. The post, the image at full resolution, the quoted post it replies to, and the article are all reachable and were read directly.",
+    clauses: [
+      { type: "act", text: "the White House posted this" },
+      { type: "quote", text: "an extremism expert said the phrase is a key concept in neo-Nazi and white supremacist subculture" },
+      { type: "characterization", text: "nods to racist, far-right subculture" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://x.com/WhiteHouse/status/2011476301060702329",
+        what: "The White House post itself, account verified_type \u201cGovernment\u201d, created 2026-01-14T16:31:36Z, with its image at full resolution",
+        fetch: { by: "agent", route: "public syndication endpoint, then the image directly, opened and read", date: "2026-08-11", status: 200,
+                 note: "The image is 1638x2048 and was viewed at full size rather than described from reporting." } },
+      { grade: "named reporting", url: "https://www.theguardian.com/us-news/2026/jan/14/trump-administration-white-supremacist-language",
+        what: "The article the row cites",
+        fetch: { by: "agent", route: "curl with an identifying user agent", date: "2026-08-11", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "Which way, Greenland man?" },
+      predicate: { v: "unsupported", src: 0,
+        note: "The post exists and says exactly that, but not where the claim places it. We opened the image at full resolution: it carries no text at all, and the two arms of the signpost at its centre are blank wood. The question is the post\u2019s text, posted alongside the picture. The Guardian states this correctly \u2014 \u201cPaired with the image, the official White House account posted a single question\u201d \u2014 and the row\u2019s compression relocates the words into the picture." },
+      date: { v: "supported", src: 0,
+        quote: "2026-01-14T16:31:36.000Z" },
+      modality: { v: "supported", src: 0,
+        quote: "Which way, Greenland man?" },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "The expert is named, on the record, with her affiliation, which is worth stating because this page excludes anonymous claims and this one is not. Heidi Beirich, described by the Guardian as \u201ca co-founder of the Global Project Against Hate and Extremism who closely monitors American neo-Nazis\u201d, said: \u201cThis is a key concept in neo-Nazi and white supremacist subculture. Western man is code for white man, and one of the most popular racist books in these subcultures is Which Way Western Man, which has been featured in a [Department of Homeland Security] post celebrating manifest destiny.\u201d The Guardian identifies the book as a 1978 work by William Gayley Simpson.",
+      "What she is describing is a resemblance between the post\u2019s phrasing and that title. The row compresses this into \u201cthe image \u2026 is a key concept\u201d, which attributes to a picture a property she attributed to a form of words. This page does not adjudicate whether the resemblance is intended \u2014 that is a claim about motive \u2014 and the row does not assert intent either; it reports what an expert said, which she did say.",
+      "One detail neither the Guardian nor the row mentions, and it bears on how the post reads: it is a quote-post. Twenty-six seconds earlier the same account had posted a Trump quotation \u2014 \u201cThe United States needs Greenland for the purpose of National Security... IF WE DON\u2019T, RUSSIA OR CHINA WILL, AND THAT IS NOT GOING TO HAPPEN!\u201d \u2014 and this image was posted on top of it. The picture\u2019s two destinations are the White House on one side and the Great Wall and Kremlin on the other, which tracks the quoted sentence exactly.",
+      "The Guardian also carries one anonymously sourced passage, attributed to \u201cone neo-Nazi tastemaker on Telegram, in a post viewed close to 2,000 times on the app\u201d. It does not bear on the clause the row reproduces, and the row does not use it."
+    ],
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: [
+      { text: "The post is exactly as described, from an account the platform marks as governmental, and the words are the government\u2019s own.",
+        src: 0, quote: "Which way, Greenland man?" },
+      { text: "The expert is named with her affiliation and said what the row quotes her as saying, in those words.",
+        src: 1, quote: "This is a key concept in neo-Nazi and white supremacist subculture" },
+      { reasoning: "The row is careful in the way that matters most on a contested subject: it attributes the interpretation to an expert rather than asserting it, and the expert is named and on the record. Compared with rows elsewhere on this page that state anonymously sourced material as fact, this is the more disciplined construction." }
+    ],
+    againstClaim: [
+      { text: "The image carries no text, so the question the row places on it is not there. Its central signpost has two blank arms.",
+        src: 0, quote: "Which way, Greenland man?" },
+      { reasoning: "The relocation matters because the whole force of the observation is about a form of words resembling a book title. Put the words inside the picture and a reader imagines a captioned graphic; read the artifact and it is a wordless painting with a sentence posted above it. The Guardian keeps them apart and the row runs them together, which is a small compression with a real effect on what a reader pictures." }
     ]
   },
 

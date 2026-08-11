@@ -580,3 +580,39 @@ This page's only claim on a reader is that its method holds up when inspected.
 stops being the thing we are offering.** The rule is not that we can reach
 everything. It is that everything we reach was reached in a way we are willing to
 describe on the row.
+
+## Cartoons are a different modality, and we do not argue with them (v3)
+
+A cartoon has no truth conditions. There is no agent, no predicate, no date and no
+quantity in an allegory, so our five tests have nothing to bite on, and forcing
+them onto a caricature would be the same error as fact-checking a metaphor. You
+cannot check a sombrero against a document.
+
+**The line, and it is testable rather than aesthetic.**
+
+| | |
+|---|---|
+| **A proposition in graphic form** | Text attributable to its publisher, merely set in type rather than typed — "WE WILL FLY ALL DAY, ALL NIGHT FINDING AND FINISHING THE IRANIAN MILITARY". An assertion by a body, adjudicable like any other. |
+| **A cartoon** | Allegory, caricature, mood. Storm clouds, sled dogs, sombreros. Not adjudicable, and not ours to contest. |
+
+**The consequence for sources, which is the part that bites.** We do not argue
+against cartoons. But a claim that rests its factual weight on one has offered
+rhetoric where evidence was called for, and *that* is recorded — as a mark
+against the claim's basis rather than as an argument with the drawing. Political
+cartooning is an old and legitimate form. It is simply not evidence, and a
+tracker that treats it as evidence has changed modality without saying so.
+
+**Practical rule for images.** Open an image only when it may carry a
+proposition, which in practice means when it carries text. Do not open cartoons
+to analyse them: there is nothing in our modality to extract, and opening them
+renders somebody's propaganda into a working session for no evidentiary return.
+Where an image is allegorical, say so and stop.
+
+**Worked example, index 2270.** The White House posted a wordless painting —
+split sky, flags, two dog sleds, a blank signpost — with the sentence "Which way,
+Greenland man?" beside it. The expert's observation concerns the *sentence*,
+which resembles the title of a 1978 far-right book. The claim relocated the
+sentence into the picture. That is not merely a compression error; it is an
+attempt to make a cartoon carry a proposition, and the picture cannot carry one.
+The painting is unadjudicable and we do not adjudicate it. The sentence is a
+government statement and we do.

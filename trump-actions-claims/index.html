@@ -393,6 +393,9 @@ const TAXONOMY = {
       "Suppressing dissent or weaponising state against 'enemies'",
       "Aggressive foreign policy and global destabilisation",
       "Anti-immigration or militarised nationalism"
+    ],
+    "3443": [
+      "Controlling information, including spreading misinformation and propoganda"
     ]
   }
 };
@@ -953,6 +956,70 @@ const CLAIMS = [
       { text: "The article says the public threat came first, in April, which inverts the sequence the claim asserts.",
         src: 1, quote: "Mullin first publicly made the threat in April during a dispute over funding for his department but said on Tuesday the idea was under active consideration." },
       { reasoning: "Two clauses of a three-clause sentence are load-bearing and both are softer in the source than in the row. A reader of the row learns that plans are being drawn up; a reader of the artifact learns that plans are being drawn up, that they are expressly not being initiated, that no decision has been made, and that the position has been public since April." }
+    ]
+  },
+
+  {
+    index: 3443,
+    date: "2026-06-19",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.reuters.com/world/white-house-delays-release-us-voting-machine-study-midterms-near-2026-06-19/",
+    claim: "White House officials have for months delayed the release of a U.S. government report that outlines "
+         + "what it describes as significant vulnerabilities in the nation\u2019s voting machines ahead of the "
+         + "November midterms, according to three sources familiar with the matter. Several court cases filed "
+         + "by Trump\u2019s lawyers failed to prove voter fraud in the 2020 presidential race.",
+    punch: { claim: "a U.S. government report that outlines \u2026 significant vulnerabilities in the nation\u2019s voting machines \u2026 according to three sources familiar with the matter",
+             artifact: "The Office of the Director of National Intelligence (ODNI) additionally commissioned a forensic examination of Dominion Voting Systems devices used in Puerto Rico\u2019s 2024 election. \u2014 footnote 3: Dominion Voting Systems Democracy Suite Preliminary Vulnerability Assessment, Mojave Research for the ODNI, September 25, 2025.",
+             src: 0 },
+    nextStep: "The assessment itself. It is named, dated and attributed in a government footnote, and it is not in the July 2026 release; one seven-page image-only PDF in the relevant folder was not opened, and 41 of the release\u2019s 58 documents have no text layer and were cleared by subject matter rather than individually.",
+    clauses: [
+      { type: "act", text: "White House officials delayed the release of the report for months" },
+      { type: "act", text: "a U.S. government report on voting-machine vulnerabilities exists" },
+      { type: "context", text: "court cases filed by Trump\u2019s lawyers failed to prove voter fraud in 2020" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.whitehouse.gov/wp-content/uploads/2026/07/Vulnerabilities-in-Electronic-Voting-and-Ballot-Counting-Systems.zip",
+        what: "CISA Election Report, footer \u201cAs of July 13, 2026\u201d, published by the White House in its release of 16 July 2026 \u2014 one of 8 PDFs in this archive and 58 across the release",
+        fetch: { by: "agent", route: "curl with an identifying user agent, unzipped, read with pdftotext", date: "2026-08-11", status: 200,
+                 note: "Downloaded and read directly. The Mojave footnote was verified against the PDF rather than taken from a report about it." } },
+      { grade: "named reporting", url: "https://www.reuters.com/world/white-house-delays-release-us-voting-machine-study-midterms-near-2026-06-19/",
+        what: "The article the row cites, by Erin Banco, Phil Stewart and Jonathan Landay",
+        fetch: { by: "agent", route: "Firecrawl stealth proxy", date: "2026-08-10", status: 200,
+                 note: "curl returned 401 and all twelve Wayback captures are 401 shells, because Reuters serves robots noarchive. No public archival copy exists." } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 1,
+        note: "The delay is attributed to unnamed people and to nobody else. Reuters states the grant of anonymity in its own text \u2014 \u201cThe sources were granted anonymity to discuss internal administration deliberations\u201d \u2014 and the named officials it reached did not confirm a delay: a White House spokesman spoke about assistance to election officials, and an ODNI spokeswoman about actions \u201cwithin her authorities\u201d. No admissible artifact establishes that anyone delayed anything." },
+      predicate: { v: "supported", src: 0,
+        quote: "The Office of the Director of National Intelligence (ODNI) additionally commissioned a forensic examination of Dominion Voting Systems devices used in Puerto Rico\u2019s 2024 election." },
+      date: { v: "supported", src: 1,
+        quote: "2026-06-19T10:04:07Z" },
+      modality: { v: "supported", src: 0,
+        quote: "As of July 13, 2026",
+        note: "The claim describes a continuing state of affairs \u2014 a report withheld \u2014 rather than a completed act, and that mood is right. The release of 16 July 2026, dated three days after this report was finalised, does not contain the assessment, so the state the claim describes persisted past the date of the claim." },
+      quantity: { v: "n/a", note: "The claim asserts no number of its own; \u201cthree sources\u201d describes the reporting, not the world." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "This row tests our own rule harder than any other on this page, and our rule comes off worse. The claim rests on unnamed sources, which this repository does not admit. Yet a document published by the White House itself corroborates four separate elements of that anonymously sourced account: the contractor\u2019s name, the client, the subject, and a date. Footnote 3 of the CISA report reads, complete: \u201cDominion Voting Systems Democracy Suite Preliminary Vulnerability Assessment, Mojave Research for the ODNI, September 25, 2025.\u201d Reuters\u2019 anonymous sources had described a report by a contractor called Mojave Research, commissioned in connection with machines from Puerto Rico, whose contract was terminated in October. A government footnote names the contractor, the commissioning agency, the machines, and a September date consistent with an October termination.",
+      "So the position is uncomfortable and should be stated plainly. Our rule would have us decline the whole claim as unsourceable. The claim was, in the part now checkable, accurate \u2014 and it became checkable only because the government published a document three weeks after the reporting that happened to cite the thing in a footnote. That is not a vindication of anonymous sourcing in general, and it is a concrete instance of our rule excluding something that later proved right. See OPEN-QUESTIONS question 3.",
+      "What the release does not contain is the report itself. Eight PDFs in the relevant folder \u2014 CIA notes, two email chains, two National Intelligence Council assessments from 2020, and one CISA report written three days before the President\u2019s address. None is an ODNI voting-machine report, and the phrase Reuters attributed to it, about machines being safeguarded by updating their software, appears nowhere. On the evidence of the release itself, the report the claim says was withheld was still unpublished as of 11 August 2026.",
+      "The CISA report also records its own limit on the Puerto Rico examination: \u201cWhile CISA did review the report, the agency did not have access to those devices and was unable to perform an examination.\u201d"
+    ],
+    rowSourcing: "anonymous",
+    flags: ["anonymous sourcing"],
+    forClaim: [
+      { text: "The existence of the work is no longer a matter of anonymous testimony. A government document names the assessment, its author, its client and its date.",
+        src: 0, quote: "3 Dominion Voting Systems Democracy Suite Preliminary Vulnerability Assessment, Mojave Research for the ODNI, September 25, 2025." },
+      { text: "The same document confirms the subject matter the reporting described, down to the machines and the jurisdiction.",
+        src: 0, quote: "a forensic examination of Dominion Voting Systems devices used in Puerto Rico\u2019s 2024 election" },
+      { reasoning: "Reuters also disclosed its sourcing conditions in its own text rather than concealing them, reached named officials at two agencies for response, and printed what they said. That is the transparent form of anonymous sourcing, and the claim it produced has now been partly corroborated by the government\u2019s own paperwork." }
+    ],
+    againstClaim: [
+      { text: "Nothing corroborates the delay, which is the claim\u2019s actual assertion. What the footnote establishes is that an assessment exists, not that anyone withheld one.",
+        src: 0, quote: "While CISA did review the report, the agency did not have access to those devices and was unable to perform an examination." },
+      { reasoning: "The row also drops Reuters\u2019 own disclosure that its sources were granted anonymity, keeping the phrase \u201cthree sources familiar with the matter\u201d while removing the sentence explaining what that means. And the second sentence about 2020 court cases is Reuters\u2019 context, carried across as though it were part of the same finding; it bears on the subject but not on whether a report was delayed." }
     ]
   },
 

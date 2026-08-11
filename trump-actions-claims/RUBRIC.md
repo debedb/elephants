@@ -595,12 +595,27 @@ cannot check a sombrero against a document.
 | **A proposition in graphic form** | Text attributable to its publisher, merely set in type rather than typed — "WE WILL FLY ALL DAY, ALL NIGHT FINDING AND FINISHING THE IRANIAN MILITARY". An assertion by a body, adjudicable like any other. |
 | **A cartoon** | Allegory, caricature, mood. Storm clouds, sled dogs, sombreros. Not adjudicable, and not ours to contest. |
 
+**These genres are not ranked. They are inverse in technique.** A cartoon works by
+compression and exaggeration, and the great ones work *because* of it — Nast on
+Tweed moved a city, Daumier and Gillray did what no column could. That operation
+is exactly what this page's apparatus exists to detect and undo. Satire's virtue
+is our failure mode. So a cartoon is not beneath our method; it is outside its
+jurisdiction, and we are no more qualified to judge it than it is answerable to
+us.
+
 **The consequence for sources, which is the part that bites.** We do not argue
-against cartoons. But a claim that rests its factual weight on one has offered
-rhetoric where evidence was called for, and *that* is recorded — as a mark
-against the claim's basis rather than as an argument with the drawing. Political
-cartooning is an old and legitimate form. It is simply not evidence, and a
-tracker that treats it as evidence has changed modality without saying so.
+against cartoons. But a claim that rests its factual weight on one has changed
+modality without saying so, offering the compressed form where the documentary
+one was called for — and *that* is recorded, as a fact about the claim's basis
+rather than as an argument with the drawing.
+
+**And the edge that points back at us.** Nothing stops this page drifting into
+the genre it declines to adjudicate. Our own prose contains rhetorical moves — a
+stated accusation about classification, a distinction drawn through a television
+detective. Those are legitimate only while they stay marked as ours and carry no
+evidentiary weight. A phrase doing argumentative work that a document should be
+doing is the same error, committed by us, and it is easier to commit than to
+notice.
 
 **Practical rule for images.** Open an image only when it may carry a
 proposition, which in practice means when it carries text. Do not open cartoons

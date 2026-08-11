@@ -284,6 +284,38 @@ evidence. Claiming more would be its own laundering.
 See [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) question 8 for why we think this is
 the honest form of the problem rather than a weakness in it.
 
+## Working rules the agent carries between sessions
+
+This repository is written with an AI coding agent, and that agent keeps notes
+which persist across sessions. Those notes are part of the method, so they are
+here rather than in a private directory: a project arguing that hidden
+methodology is discounted should not keep its own working rules out of sight.
+
+Both of the rules below were produced by getting something wrong.
+
+**Always check the person you are working with.** The owner's standing
+instruction is that his own assertions be verified against primary sources rather
+than agreed with, and that the result be reported either way. On the Solicitor
+General he was right that arguing the government's position is the statutory job
+— the office was created by the Act of 22 June 1870, ch. 150, sec. 2, 16 Stat.
+162, and the language survives in 28 U.S.C. 505 — and slightly overstated it,
+because the statute says suits "in which the United States is interested" rather
+than the President's position. Both halves were worth having. The check that
+mattered most was neither: zero of 3,466 rows in the dataset raise the office at
+all, so the concern was not live.
+
+**Memory is admissible for technique, never for sources.** How to fetch a thing
+may come from recollection. What is true about the world may not — every source,
+date, number, officeholder and citation is fetched every time. This was written
+after nearly publishing a finding against a claim that turned out to be correct,
+where the recollection was stale precisely because the claim was recent. The
+detailed version, with the case and what generalises from it, is in
+[trump-actions-claims/RUBRIC.md](trump-actions-claims/RUBRIC.md).
+
+Neither rule is novel. Both are here because we can point at the row where the
+absence of them nearly cost us something, which is the only form of evidence this
+repository accepts for anything else.
+
 ## What this file is not
 
 It is not a claim that the process is neutral. The selection of events is an

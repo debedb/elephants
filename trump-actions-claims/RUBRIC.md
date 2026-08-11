@@ -492,3 +492,41 @@ two sides will sometimes invent one.** Where that happens, state the imbalance
 rather than dressing it as a contest. This is not yet fixed in the machinery; the
 render still requires both fields to be non-empty and cannot tell a strong
 counter from a manufactured one.
+
+## Memory is admissible for technique, never for sources (v3)
+
+Added after a near-miss that would have produced a fabricated finding rather than
+a missed one, which is the worse direction and the one this page is least
+protected against.
+
+**The rule.** *How* to obtain something may come from memory — that a browser
+user-agent gets past hosts which refuse other fetchers, that a public-inspection
+mirror sidesteps a redirect wall, that a layout-preserving extractor keeps columns
+intact. *What is true about the world* may not. Every source, date, number,
+officeholder, citation and page reference is fetched, every time, including when
+it feels certain. Especially then.
+
+**The case.** A claim under audit described a named person as Secretary of
+Homeland Security. From memory that person held different office, so it was
+passed to a research agent as a probable error in the dataset. The department's
+own leadership page names him as Secretary, and the word "Acting" does not appear
+on it. The claim was correct and we were one step from publishing against it.
+
+Three compounding factors, each of which generalises:
+
+1. **Recency inverts reliability.** Our knowledge of the world ends at a fixed
+   point while the claims under audit are often more recent. The more recent a
+   claim, the less admissible memory is about it — and that is exactly when a
+   recollection feels most current.
+2. **The error ran deflationary.** Treating a surprising claim as probably wrong
+   is question 10 above, committed while auditing others for its mirror. A rule
+   that discounts what it does not expect will manufacture findings, not merely
+   miss them.
+3. **A current page is not a contemporaneous one.** A leadership page establishes
+   who holds an office now, not who held it on the claim's date. That gap is
+   recorded rather than closed by assumption.
+
+**Operationally:** when a claim contains a fact that memory contradicts, that is a
+signal to fetch, not a signal to doubt the claim. Fetch first, form the view
+after. This applies with extra force to delegated research, because a suspicion
+passed downstream in a brief arrives looking like a finding.

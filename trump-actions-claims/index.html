@@ -384,6 +384,9 @@ const TAXONOMY = {
     ],
     "2719": [
       "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "652": [
+      "Suppressing dissent or weaponising state against 'enemies'"
     ]
   }
 };
@@ -817,6 +820,64 @@ const CLAIMS = [
       { text: "The row cites a private individual\u2019s reaction post whose entire text is a single emoji, rather than the department, whose own verified account is on the same platform.",
         src: 2, quote: "\ud83d\ude35\u200d\ud83d\udcab" },
       { reasoning: "A screenshot taken by an unknown party and reposted by another is custody without control: nobody in that chain is accountable for what the image shows, and a reader who wants to verify the department said this must trust two strangers before reaching a government account that was reachable all along. It happens to be faithful here. That is luck rather than method, and the row gives a reader no way to tell the difference." }
+    ]
+  },
+
+  {
+    index: 652,
+    date: "2025-06-30",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.theguardian.com/us-news/2025/jun/29/trump-iran-military-strike-report",
+    claim: "Trump considers forcing journalists to reveal sources who leaked Iran report",
+    punch: { claim: "Trump considers forcing journalists to reveal sources",
+             artifact: "You go up and tell the reporter, national security, who gave it? You have to do that. And I suspect we will be doing things like that.",
+             src: 0 },
+    nextStep: "Nothing outstanding for the act clause. The interview transcript is complete and reachable. What we did not obtain is the original Truth Social post of 26 June quoted inside the article; its text is identical across four outlets but we did not open the post itself.",
+    clauses: [
+      { type: "act", text: "Trump said this" },
+      { type: "plan", text: "he is considering forcing journalists to reveal sources" }
+    ],
+    artifacts: [
+      { grade: "on the record", url: "https://rollcall.com/factbase/trump/transcript/donald-trump-interview-maria-bartiromo-fox-news-sunday-futures-june-29-2025/",
+        what: "Full timestamped transcript of the Bartiromo interview, taped at the White House 27 June 2025 and broadcast 29 June",
+        fetch: { by: "agent", route: "Firecrawl", date: "2026-08-10", status: 200,
+                 note: "249,930 characters, searched in full. The word \u201ccomply\u201d appears zero times; \u201cprosecut\u201d appears once." } },
+      { grade: "named reporting", url: "https://www.theguardian.com/us-news/2025/jun/29/trump-iran-military-strike-report",
+        what: "The article the row cites, by Marina Dunbar",
+        fetch: { by: "agent", route: "curl", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "You can find out. If they want to, they could find out easily. You go up and tell the reporter, national security, who gave it? You have to do that. And I suspect we will be doing things like that." },
+      predicate: { v: "supported", src: 0,
+        quote: "You go up and tell the reporter, national security, who gave it? You have to do that." },
+      date: { v: "unsupported", src: 0,
+        note: "Three dates are in play and the row matches none of them to the act. The interview was taped 27 June, broadcast 29 June, and the article published 29 June and updated 30 June. The row is dated 30 June, the date of the article\u2019s last update." },
+      modality: { v: "unsupported", src: 0,
+        note: "\u201cConsiders\u201d describes deliberation. \u201cI suspect we will be doing things like that\u201d is a prediction about future conduct, and the conduct he describes is telling a reporter to name a source \u2014 asking, not compelling. No mechanism is named anywhere in the exchange: no subpoena, no court order, no statute. \u201cForcing\u201d is not in the artifact." },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "The most substantial finding on this row is not about the row. The Guardian\u2019s opening sentence states that Trump \u201calso claimed his administration may prosecute those reporters and sources if they do not comply.\u201d We searched the complete transcript: the word \u201ccomply\u201d does not occur, and \u201cprosecuted\u201d occurs once \u2014 \u201cThey should be prosecuted\u201d \u2014 in answer to Bartiromo\u2019s question about who leaked, immediately followed by Trump specifying \u201cthe people that leaked it.\u201d Nothing in the interview conditions prosecution on a reporter\u2019s non-compliance.",
+      "The same article\u2019s body reports it accurately. It quotes the Truth Social post about leakers, then \u201cTrump then reiterated on-air that \u2018they should be prosecuted\u2019\u201d, then Bartiromo\u2019s \u201cWho specifically?\u201d The overreach is between the lede and the body of one article, not between the article and the tracker.",
+      "And the tracker did not carry it forward. Its claim covers only the first half of the Guardian\u2019s sentence, about compelling journalists to reveal sources, and drops the prosecution-of-reporters clause entirely. On this row the compression removed an overstatement rather than adding one, which is the opposite of the pattern elsewhere on this page and is worth recording as such.",
+      "Two transcription differences between the Guardian and the transcript, both minor and both in the Guardian\u2019s rendering: \u201cif they wanted\u201d for \u201cif they want to\u201d, and \u201cI suspect we\u2019ll\u201d for \u201cI suspect we will\u201d."
+    ],
+    rowSourcing: "named",
+    flags: ["plan not act"],
+    forClaim: [
+      { text: "Trump said it himself, on camera, under his own name, and the transcript is complete and public.",
+        src: 0, quote: "And I suspect we will be doing things like that." },
+      { text: "The subject matter is exactly what the row says it is: getting a reporter to name a source for the leaked assessment.",
+        src: 0, quote: "You go up and tell the reporter, national security, who gave it?" },
+      { reasoning: "A President saying he suspects his administration will be pressing reporters to name sources is the substance of the row, and a headline-length entry cannot carry the full exchange. On the thing that matters \u2014 that he said it, about that \u2014 the row is right, and it is more careful than the article it cites." }
+    ],
+    againstClaim: [
+      { text: "The artifact describes asking a reporter, and names no mechanism of compulsion at all.",
+        src: 0, quote: "You go up and tell the reporter, national security, who gave it? You have to do that." },
+      { reasoning: "\u201cForcing\u201d and \u201cconsiders\u201d are both the row\u2019s words rather than his. He described telling a reporter to name a source and predicted his administration would do such things; that is a statement of expectation about an informal act, not deliberation about compulsion. The gap is small and it is in the familiar direction \u2014 toward the more decided and more coercive reading." }
     ]
   },
 

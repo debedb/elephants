@@ -76,6 +76,42 @@ under v2.
 Retained above in git history at `e58acf0`. Rows judged under v1 are marked stale
 on the page until re-adjudicated.
 
+## The two things we can actually do
+
+Stated as narrowly as it can be stated, because every widening of this is a
+widening into somewhere we do not belong:
+
+1. **Does this statement match that statement from an official or an instrument?**
+2. **Do these numbers check out?**
+
+That is the whole jurisdiction. Everything else on this page exists to make those
+two questions answerable by a stranger — the artifact hunting, the fetch
+provenance, the quotation requirement, the version stamps. None of it extends the
+jurisdiction.
+
+**What is outside it, permanently and not for want of effort.** Metaphor.
+Oratory. Satire. Cartoons. Aspiration. You cannot fact-check "I have a dream" —
+there is nothing in it to check, and the absence is not a defect in the speech.
+The same is true of a caricature: no agent, no predicate, no number, nothing our
+tests can bite on. These are for an audience to weigh, and an audience is a
+better judge of them than any apparatus.
+
+This is a narrower claim than the one a reader might expect from a page that
+audits claims, and the narrowness is the point. A method that could adjudicate a
+metaphor would be a method that could adjudicate anything, which means it would
+be checking nothing.
+
+**Where our own machinery presses against the limit.** Recorded rather than
+resolved. The `modality` test asks whether a document records an act or a plan,
+which is statement-matching and sits inside the jurisdiction. The `base rate`
+test asks whether a reference class was produced, which sits at the edge: the
+class is countable, the judgement that a class is the right one is not. The
+classification notes go further still — the distinction between political
+pressure and apparatus pressure is an argument, not a fact, and it is marked as
+ours precisely because it cannot be checked the way a quotation can. It stays
+because a reader raised it and it is better argued in the open than left
+implicit, and it is not a finding.
+
 ## What this page does, and does not do
 
 This page takes a small random sample of claims from a third party's dataset,

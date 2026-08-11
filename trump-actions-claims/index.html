@@ -1440,7 +1440,43 @@ const gaps = CLAIMS
   .filter(r => goodFaithOf(r, verdictOf(r)) === RUBRIC_GAP)
   .map(r => "index " + r.index + ": verdict '" + verdictOf(r) + "' with no motive or characterisation clause");
 
+// ---------------------------------------------------------------------------
+// Voice ratio. This page's claim on a reader is that it shows them documents.
+// If our own prose outweighs the quoted artifacts, that claim is false however
+// rigorous the tests are. Counted and printed, because a page that measures
+// everything except its own verbosity is measuring the convenient things.
+// ---------------------------------------------------------------------------
+function wordsIn(list) {
+  let retval = list.reduce((n, t) => n + String(t || "").trim().split(/\s+/).filter(Boolean).length, 0);
+  return retval;
+}
+const quotedWords = wordsIn(
+  CLAIMS.flatMap(r => [
+    ...TESTS.map(t => (r.tests && r.tests[t] && r.tests[t].quote) || ""),
+    ...(r.forClaim || []).map(g => g.quote || ""),
+    ...(r.againstClaim || []).map(g => g.quote || ""),
+    (r.punch && r.punch.src !== null && r.punch.artifact) || ""
+  ]));
+const ourWords = wordsIn(
+  CLAIMS.flatMap(r => [
+    ...(r.forClaim || []).map(g => g.reasoning || ""),
+    ...(r.againstClaim || []).map(g => g.reasoning || ""),
+    ...(r.notes || []),
+    (r.ourPosition ? [r.ourPosition.body, r.ourPosition.limits, r.ourPosition.consequence].join(" ") : "")
+  ]));
+const voiceRatio = quotedWords > 0 ? (ourWords / quotedWords) : Infinity;
+
 const checks = document.getElementById("checks");
+const vr = el("p", null);
+vr.append(el("b", voiceRatio > 1 ? "bad" : "ok",
+  "Voice ratio " + voiceRatio.toFixed(2) + " \u2014 "));
+vr.append(document.createTextNode(
+  ourWords + " words of our prose against " + quotedWords + " words quoted from artifacts. "
+  + (voiceRatio > 1
+      ? "We are printing more of ourselves than of the documents. This page's claim on a reader is that it shows them documents, and at this ratio that claim is weaker than the tests are. Recorded here rather than left for a reader to notice."
+      : "The documents outweigh us, which is the intended state.")));
+checks.append(vr);
+
 if (gaps.length > 0) {
   checks.append(el("b", "bad", "RUBRIC GAP — " + gaps.length + " row(s) fall outside the cases rubric v"
     + RUBRIC_VERSION + " defines: "));

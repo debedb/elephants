@@ -530,3 +530,53 @@ Three compounding factors, each of which generalises:
 signal to fetch, not a signal to doubt the claim. Fetch first, form the view
 after. This applies with extra force to delegated research, because a suspicion
 passed downstream in a brief arrives looking like a finding.
+
+## We inquire, we do not exploit (v3)
+
+A stance, and the rules that fall out of it. Both were stated by the repository
+owner, and both cost us something immediately, which is how we know they are not
+decorative.
+
+**Send a truthful user agent.** A user agent states who is asking, and a server
+uses it to decide what to serve. A browser string sent by a script is a false
+statement about the requester, however ordinary the practice.
+
+We had been spoofing. It was in our fetch notes, in a skill we published for
+others to follow, and in the brief we handed to five research agents. When
+challenged we measured it across the nine hosts this audit actually depends on —
+the Federal Register, the U.S. Code, Justice, the Supreme Court, the Clerk of the
+House, a State Department embassy site, Homeland Security, a newspaper, and a
+public API. **An honest identifying agent and a spoofed browser string returned
+identical status codes on all nine. Every one 200.** The dishonesty bought
+nothing.
+
+Our original diagnosis had been wrong in a way worth naming, because it is a
+common shape: what actually failed was one framework's own fetch tool, blocked at
+the framework level, which plain curl never shared. A *fetcher* difference misread
+as a *user-agent* difference, and a dishonest technique built on the misreading.
+Diagnose in this order — change fetcher before you touch identity.
+
+**Where a wall is a business model, respect it.** A paywall returning 401 is a
+publisher declining to give away what it sells, and that is theirs to decide.
+Recording that a source is unreachable to us is a finding about the evidentiary
+landscape. Getting around it because we can is not inquiry.
+
+**The dilemma we have not solved, stated rather than buried.** We read one
+paywalled article through a capture opened in the operator's own browser. That
+route sends the browser's own true agent and a human is genuinely present, so it
+is not impersonation — and the publisher would still plainly rather we had paid,
+and we are the party judging our own use acceptable. A rule you follow only when
+it is free is not a rule.
+
+**Columbo, not a gossip column.** Both figures ask questions; only one is trusted
+with the answers. What separates them is not curiosity but what the asking is
+*for*, and what becomes of what is found. Columbo's inquiry is bounded by the
+case, aimed at establishing what happened, and conducted so the method survives
+being examined. Gossip is unbounded, aimed at circulation, and collapses the
+moment anyone asks how it was obtained.
+
+This page's only claim on a reader is that its method holds up when inspected.
+**So the moment we obtain something by a means we would not print, the method
+stops being the thing we are offering.** The rule is not that we can reach
+everything. It is that everything we reach was reached in a way we are willing to
+describe on the row.

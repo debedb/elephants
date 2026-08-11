@@ -387,6 +387,12 @@ const TAXONOMY = {
     ],
     "652": [
       "Suppressing dissent or weaponising state against 'enemies'"
+    ],
+    "3282": [
+      "Violating democrating norms or undermining rule of law",
+      "Suppressing dissent or weaponising state against 'enemies'",
+      "Aggressive foreign policy and global destabilisation",
+      "Anti-immigration or militarised nationalism"
     ]
   }
 };
@@ -878,6 +884,75 @@ const CLAIMS = [
       { text: "The artifact describes asking a reporter, and names no mechanism of compulsion at all.",
         src: 0, quote: "You go up and tell the reporter, national security, who gave it? You have to do that." },
       { reasoning: "\u201cForcing\u201d and \u201cconsiders\u201d are both the row\u2019s words rather than his. He described telling a reporter to name a source and predicted his administration would do such things; that is a statement of expectation about an informal act, not deliberation about compulsion. The gap is small and it is in the familiar direction \u2014 toward the more decided and more coercive reading." }
+    ]
+  },
+
+  {
+    index: 3282,
+    date: "2026-05-26",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.reuters.com/legal/government/us-drawing-up-plans-halt-immigration-customs-processing-sanctuary-city-airports-2026-05-27/",
+    claim: "Following private comments a week ago, U.S. Homeland Security Secretary Markwayne Mullin publicly "
+         + "confirmed on Fox News that the Trump administration is drawing up plans to stop processing "
+         + "international travelers and cargo at major U.S. airports in \"sanctuary cities\" that have declined "
+         + "to cooperate with an immigration crackdown. The move could effectively halt international air "
+         + "travel and commerce at major airports in Democratic states, with millions of foreign tourists "
+         + "expected to stream in for next month\u2019s start of the FIFA World Cup",
+    punch: { claim: "Mullin publicly confirmed \u2026 that the Trump administration is drawing up plans",
+             artifact: "We are currently - which we\u2019re not initiating yet - but we\u2019re currently drawing up plans",
+             src: 1 },
+    nextStep: "The Fox interview itself. Reuters places it on \u201cFox News Channel\u2019s Sean Hannity\u201d and another same-day account places it on his radio programme; no transcript or video page was found on foxnews.com, so the venue is unresolved and his words are read from two independent transcriptions rather than from the broadcast.",
+    clauses: [
+      { type: "act", text: "Mullin said this on Fox News" },
+      { type: "plan", text: "the administration is drawing up plans to stop processing at sanctuary-city airports" },
+      { type: "context", text: "the move could halt international travel and commerce ahead of the World Cup" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.federalregister.gov/api/v1/documents.json",
+        what: "Federal Register documents signed by the Secretary of Homeland Security, bracketing the claim date: doc 2026-10179 published 21 May 2026 and doc 2026-10704 published 29 May 2026, each signed \u201cMarkwayne Mullin, Secretary, U.S. Department of Homeland Security\u201d; a full-text series query returns 14 DHS documents naming him continuously from 17 April to 29 June 2026",
+        fetch: { by: "agent", route: "Federal Register API plus raw text", date: "2026-08-10", status: 200,
+                 note: "Verified twice by independent routes. The continuity of the series is the stronger evidence: a vacancy or an acting appointment would appear as a break in the series or a changed title. The word \u201cActing\u201d appears in neither signature block." } },
+      { grade: "named reporting", url: "https://www.reuters.com/legal/government/us-drawing-up-plans-halt-immigration-customs-processing-sanctuary-city-airports-2026-05-27/",
+        what: "The article the row cites, by David Shepardson, dateline WASHINGTON, May 26, published 2026-05-27T03:03:14Z",
+        fetch: { by: "agent", route: "Firecrawl stealth proxy", date: "2026-08-10", status: 200,
+                 note: "curl returned 401 and every one of ten Wayback captures is a 401 shell, because Reuters serves robots noarchive. There is no public archival copy of this article." } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "Markwayne Mullin, Secretary, U.S. Department of Homeland Security." },
+      predicate: { v: "supported", src: 1,
+        quote: "We are currently - which we\u2019re not initiating yet - but we\u2019re currently drawing up plans" },
+      date: { v: "supported", src: 1,
+        quote: "WASHINGTON, May 26 (Reuters)",
+        note: "The row carries the dateline date rather than the publication timestamp, which was the following morning. That is the date of the act, and on this page it is the exception rather than the rule." },
+      modality: { v: "unsupported", src: 1,
+        quote: "Mullin told Fox News Channel\u2019s Sean Hannity in an interview broadcast on Tuesday that he had met White House officials but emphasized no decision had been made whether to proceed.",
+        note: "The claim reports plans being drawn up, which is accurate, but drops both hedges: his own parenthetical \u201cwhich we\u2019re not initiating yet\u201d, quoted inside the sentence the row otherwise reproduces, and Reuters\u2019 statement that no decision had been made. What survives reads as further along than what he said." },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "\u201cDrawing up plans\u201d is Mullin\u2019s own phrase, not the reporter\u2019s. It sits inside his quotation marks in two independently fetched outlets, and Reuters lifted it into its headline. Where this page has repeatedly found a claim adopting a journalist\u2019s characterisation as though it were a principal\u2019s words, here the reverse holds.",
+      "The sequence in the claim\u2019s opening does not match the article. \u201cFollowing private comments a week ago \u2026 publicly confirmed\u201d implies a private statement made public for the first time. Reuters says he \u201cfirst publicly made the threat in April during a dispute over funding for his department\u201d \u2014 a month before the private remarks to travel executives. The public statement was not the confirmation of the private one; it preceded it.",
+      "The word \u201cconfirmed\u201d traces to a named third party rather than to Reuters\u2019 own characterisation: the U.S. Travel Association said in a statement that Mullin \u201cconfirmed his previous comments that the administration is considering a withdrawal of CBP officers from international airports in certain sanctuary cities.\u201d",
+      "This row also produced a correction to our own method, recorded in RUBRIC.md. We initially flagged the description of Mullin as a probable error, from memory rather than from any source, and were one step from publishing a finding against a claim that is correct. The rule now is that memory is admissible for technique and never for sources."
+    ],
+    rowSourcing: "named",
+    flags: ["plan not act"],
+    forClaim: [
+      { text: "Every element is on the record from named principals: the Secretary speaking under his own name, and a named trade association confirming the substance in a statement.",
+        src: 1, quote: "Mullin \u201cconfirmed his previous comments that the administration is considering a withdrawal of CBP officers from international airports in certain sanctuary cities,\u201d U.S. Travel added in a statement to Reuters." },
+      { text: "The private-comments premise is documented rather than assumed.",
+        src: 1, quote: "Last week, Reuters and other media reported that Mullin had privately told U.S. travel executives his department could opt to stop customs and immigrations processing of international travelers." },
+      { reasoning: "The second half of the claim is a near-verbatim reproduction of Reuters\u2019 own second paragraph, so the consequences it describes are the outlet\u2019s framing carried across intact rather than the tracker\u2019s invention. And the officeholder, the phrase, and the date all check out against instruments." }
+    ],
+    againstClaim: [
+      { text: "The hedge is inside the very sentence the row reproduces, and the row removes it.",
+        src: 1, quote: "We are currently - which we\u2019re not initiating yet - but we\u2019re currently drawing up plans" },
+      { text: "The article says the public threat came first, in April, which inverts the sequence the claim asserts.",
+        src: 1, quote: "Mullin first publicly made the threat in April during a dispute over funding for his department but said on Tuesday the idea was under active consideration." },
+      { reasoning: "Two clauses of a three-clause sentence are load-bearing and both are softer in the source than in the row. A reader of the row learns that plans are being drawn up; a reader of the artifact learns that plans are being drawn up, that they are expressly not being initiated, that no decision has been made, and that the position has been public since April." }
     ]
   },
 

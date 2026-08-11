@@ -381,6 +381,9 @@ const TAXONOMY = {
     ],
     "1219": [
       "Aggressive foreign policy and global destabilisation"
+    ],
+    "2719": [
+      "Controlling information, including spreading misinformation and propoganda"
     ]
   }
 };
@@ -749,6 +752,71 @@ const CLAIMS = [
       { text: "The published criteria are broader than the claim, reaching racial minorities generally rather than white South Africans specifically.",
         src: 0, quote: "Must be of Afrikaner ethnicity or be a member of a racial minority in South Africa" },
       { reasoning: "And the artifact is out of time. The page we read is dated nearly two months after the claim, so it shows the arrangement existing later rather than on the day asserted. We looked for a contemporaneous version and have not obtained one; until we do, the date clause rests on nothing we have read." }
+    ]
+  },
+
+  {
+    index: 2719,
+    date: "2026-03-06",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://bsky.app/profile/onestpress.onestnetwork.com/post/3mggczr5slk25",
+    claim: "The Department of Defense (calling itself Dept of War) on Social Media posted a propaganda style "
+         + "post showing a fighterjet with the words \"Uncontested airspace - we will fly all day, all night "
+         + "finding and finishing the Iranian military US air power every minute of every day until we decide "
+         + "it's over\"",
+    punch: { claim: "The Department of Defense (calling itself Dept of War) on Social Media posted \u2026",
+             artifact: "UNCONTESTED AIRSPACE / WE WILL FLY ALL DAY, ALL NIGHT / FINDING AND FINISHING / THE IRANIAN MILITARY / U.S. AIR POWER / EVERY MINUTE OF EVERY DAY / UNTIL WE DECIDE IT\u2019S OVER",
+             src: 2 },
+    nextStep: "The originating post on the department\u2019s own Instagram account. We established the account is real and verified but did not reach the individual post, so the words are read from a screenshot rather than from the publisher.",
+    clauses: [
+      { type: "act", text: "the department posted this graphic on social media" },
+      { type: "act", text: "the department is calling itself the Department of War" },
+      { type: "characterization", text: "propaganda style" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://war.gov",
+        what: "TLS certificate for war.gov, whose subject alternative names include comptroller.war.gov, dowcio.war.gov, policy.war.gov, prhome.war.gov and jamrs.war.gov \u2014 department component offices operating under War branding in the government\u2019s own public-key infrastructure",
+        fetch: { by: "agent", route: "openssl s_client", date: "2026-08-10", status: 200,
+                 note: "The web root itself returned 403 to our fetcher, via AkamaiGHost, as did defense.gov. The certificate was readable regardless." } },
+      { grade: "constitutive record", url: "https://bsky.app/profile/deptofwar.bsky.social",
+        what: "The department\u2019s own Bluesky account, description \u201cOfficial U.S. Department of War\u201d, verification status valid",
+        fetch: { by: "agent", route: "public.api.bsky.app getProfile", date: "2026-08-10", status: 200 } },
+      { grade: "capture", url: "https://bsky.app/profile/onestpress.onestnetwork.com/post/3mggczr5slk25",
+        what: "The post the row cites: a screenshot of an Instagram post by the verified account deptofwar, posted to Bluesky by a private individual on 2026-03-06 at 22:05:15 UTC",
+        fetch: { by: "agent", route: "public.api.bsky.app getPostThread, then fetched the embedded image and read it", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 1,
+        quote: "Official U.S. Department of War" },
+      predicate: { v: "supported", src: 2,
+        quote: "UNCONTESTED AIRSPACE \u2014 WE WILL FLY ALL DAY, ALL NIGHT \u2014 FINDING AND FINISHING THE IRANIAN MILITARY \u2014 U.S. AIR POWER EVERY MINUTE OF EVERY DAY \u2014 UNTIL WE DECIDE IT\u2019S OVER" },
+      date: { v: "supported", src: 2,
+        quote: "2026-03-06T22:05:15.191Z",
+        note: "This is the timestamp of the Bluesky post carrying the screenshot, which matches the row. The date of the department\u2019s own originating post is not established by anything we reached." },
+      modality: { v: "supported", src: 2,
+        quote: "2026-03-06T22:05:15.191Z" },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "The citation is four links from the artifact. A verified account posts a graphic to Instagram; somebody screenshots it; a private individual posts that screenshot to Bluesky with a caption consisting of one emoji, \u201c\ud83d\ude35\u200d\ud83d\udcab\u201d; and the row cites that. The department\u2019s own accounts are reachable and verified, and one of them is on the same platform the row cites.",
+      "And yet the words survived intact. We read the text off the screenshot and compared it to the claim: the quotation is accurate, flattening the graphic\u2019s line breaks into a run-on and changing nothing else. This is worth stating because it cuts against the pattern this page has otherwise been finding \u2014 four hops of custody, and no drift in the quotation at all. The hops created a risk that did not materialise here, which is a different thing from the hops being harmless.",
+      "A note for anyone checking this themselves. Searching Bluesky for the department turns up departmentofwar.bsky.social, which is a Minnesota hardcore punk band that got the handle first and whose profile reads, in part, \u201cThe assholes you\u2019re looking for are \u2018deptofwar\u2019.\u201d It carries no verification. The official account is deptofwar.bsky.social and its verification status is valid. Handle similarity is not identity, and the platform\u2019s own verification field is what separates them."
+    ],
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: [
+      { text: "The department really does operate under War branding, and not merely rhetorically: its component offices are served under that domain in the government\u2019s own certificate infrastructure.",
+        src: 0, quote: "DNS:comptroller.war.gov, DNS:dowcio.war.gov, DNS:dpac.war.gov, DNS:jamrs.war.gov, DNS:policy.war.gov, DNS:prhome.war.gov, DNS:war.gov, DNS:www.war.gov" },
+      { text: "The quoted words are accurate to the graphic, which we read directly rather than taking from the reporting.",
+        src: 2, quote: "WE WILL FLY ALL DAY, ALL NIGHT FINDING AND FINISHING THE IRANIAN MILITARY" },
+      { reasoning: "On the substance the row is right about a public act by a public body, and the account in the screenshot carries a platform verification badge and the department seal. Nothing about the underlying event is in doubt." }
+    ],
+    againstClaim: [
+      { text: "The row cites a private individual\u2019s reaction post whose entire text is a single emoji, rather than the department, whose own verified account is on the same platform.",
+        src: 2, quote: "\ud83d\ude35\u200d\ud83d\udcab" },
+      { reasoning: "A screenshot taken by an unknown party and reposted by another is custody without control: nobody in that chain is accountable for what the image shows, and a reader who wants to verify the department said this must trust two strangers before reaching a government account that was reachable all along. It happens to be faithful here. That is luck rather than method, and the row gives a reader no way to tell the difference." }
     ]
   },
 

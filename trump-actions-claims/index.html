@@ -399,6 +399,12 @@ const TAXONOMY = {
     ],
     "2270": [
       "Anti-immigration or militarised nationalism"
+    ],
+    "1785": [
+      "Aggressive foreign policy and global destabilisation"
+    ],
+    "1595": [
+      "Aggressive foreign policy and global destabilisation"
     ]
   }
 };
@@ -1084,6 +1090,129 @@ const CLAIMS = [
       { text: "The image carries no text, so the question the row places on it is not there. Its central signpost has two blank arms.",
         src: 0, quote: "Which way, Greenland man?" },
       { reasoning: "The relocation matters because the whole force of the observation is about a form of words resembling a book title. Put the words inside the picture and a reader imagines a captioned graphic; read the artifact and it is a wordless painting with a sentence posted above it. The Guardian keeps them apart and the row runs them together, which is a small compression with a real effect on what a reader pictures." }
+    ]
+  },
+
+  {
+    index: 1785,
+    date: "2025-11-11",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.msn.com/en-us/money/markets/trump-warns-of-devastating-3-trillion-hit-if-supreme-court-scraps-tariffs/ar-AA1QeU1c",
+    claim: "Trump Warns of \u2018devastating\u2019 $3 Trillion hit in a social media post if the Supreme Court (SCOTUS) "
+         + "rules against his tariffs. Goldman Sachs expects the decision to come in December or January 2026, "
+         + "with tariff refunds between $115 and $145 billion if the SCOTUS rules against Trump. The U.S. has "
+         + "collected $88 billion of tariff revenue this year under the Trump administration.",
+    punch: { claim: "The U.S. has collected $88 billion of tariff revenue this year",
+             artifact: "Customs Duties, fiscal year 2025, current fiscal-year-to-date: 194,865,739,872.82",
+             src: 0 },
+    nextStep: "A source for the $88 billion. The nearest reconciliation is that it counts only tariffs imposed under the emergency statute at issue in the case rather than all customs duties, which would put it in range for early November \u2014 but we could not source that figure to any document, and it is a hypothesis rather than a finding.",
+    clauses: [
+      { type: "quote", text: "Trump warned of a devastating $3 trillion hit in a social media post" },
+      { type: "act", text: "Goldman Sachs expects a decision in December or January with refunds of $115\u2013145bn" },
+      { type: "act", text: "the U.S. has collected $88 billion of tariff revenue this year" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9",
+        what: "U.S. Treasury, Monthly Treasury Statement Table 9, Customs Duties line, fiscal year 2025",
+        fetch: { by: "agent", route: "Treasury fiscal data API, identifying user agent", date: "2026-08-11", status: 200,
+                 note: "Queried and read directly. Prior fiscal year to date on the same record is 77,036,909,944.89." } },
+      { grade: "constitutive record", url: "https://www.supremecourt.gov/opinions/25pdf/24-1287_4gcj.pdf",
+        what: "Learning Resources, Inc. v. Trump, No. 24\u20131287, consolidated with No. 25\u2013250, decided 20 February 2026",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-11", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 1,
+        quote: "Argued November 5, 2025\u2014Decided February 20, 2026" },
+      predicate: { v: "supported", src: 1,
+        quote: "Held: IEEPA does not authorize the President to impose tariffs." },
+      date: { v: "n/a", note: "The claim carries the date of the post and the reporting, 11 November 2025. We reached neither the post nor the cited article directly \u2014 the post only as quoted, and the article\u2019s likely source refuses automated access \u2014 so we have no artifact against which to test the date, and record that rather than scoring it." },
+      modality: { v: "supported", src: 1,
+        quote: "Argued November 5, 2025\u2014Decided February 20, 2026",
+        note: "The claim reports a warning and a forecast, both of which are the right mood for what they describe: a statement made, and an expectation held." },
+      quantity: { v: "contradicted", src: 0,
+        quote: "194,865,739,872.82",
+        note: "The claim says the United States has collected $88 billion in tariff revenue this year. Treasury\u2019s own Monthly Treasury Statement records customs duties for fiscal year 2025 at $194,865,739,872.82, against $77,036,909,944.89 the year before. The claim understates the published total by roughly $107 billion. Marked contradicted rather than unsupported because a specific figure is asserted and the government\u2019s own accounting gives a different one." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "Two of the three forecasts attributed to Goldman Sachs turned out wrong, and the artifact that settles it is the judgment itself. The decision came on 20 February 2026, not in December or January. And the refund exposure was larger than the range given: the Court struck the tariffs outright, holding that the emergency statute does not authorise them at all.",
+      "The refunds are visible in the same Treasury series that contradicts the $88 billion. Monthly net customs duties turned negative in May and June 2026 \u2014 refunds exceeding collections \u2014 and the fiscal-year-to-date total fell from a peak of $188.6bn in April to $163.0bn in June.",
+      "On the part of the claim that is a quotation, Trump\u2019s own words support both \u201cdevastating\u201d and \u201c$3 trillion\u201d. One precision the claim loses: his $3 trillion is a figure for an \u201cunwind\u201d including \u201cinvestments made, to be made, and return of funds\u201d, not for a refund liability. The claim places it alongside Goldman\u2019s refund range as though the two were the same kind of number.",
+      "We could not read the article the row cites. Its likely proximate source refuses automated access from any agent, honest or otherwise, and that is recorded as a property of the host rather than worked around."
+    ],
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: [
+      { text: "The case was real, was argued when the reporting said, and was decided against the tariffs, so the premise the whole claim rests on was sound.",
+        src: 1, quote: "Held: IEEPA does not authorize the President to impose tariffs. The judgment in No. 24\u20131287 is vacated" },
+      { reasoning: "\u201cDevastating\u201d and the $3 trillion figure are his own words rather than a characterisation applied to him, and a market-news item reporting a presidential post and a bank\u2019s estimate is doing what such items do. The error is in a subordinate figure, not in the event." }
+    ],
+    againstClaim: [
+      { text: "The revenue figure is off against the government\u2019s own accounting by more than the figure itself.",
+        src: 0, quote: "194,865,739,872.82" },
+      { reasoning: "A number stated flatly, with no qualifier and no source, is the kind of claim a reader has no way to interrogate \u2014 and it is the one element here that a reader could most easily have checked, because Treasury publishes it monthly. The most likely reconciliation, that it counts only the tariffs at issue in the case rather than all customs duties, is exactly the sort of qualification the sentence omits." }
+    ]
+  },
+
+  {
+    index: 1595,
+    date: "2025-10-19",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/10/19/us/politics/trump-colombia-petro-aid.html",
+    claim: "Trump lashes out at Colombian president threatening cuts to aid following the Colombian president "
+         + "accusing the US of killing an innocent Colombian fisherman in international waters in one of its "
+         + "strikes on boats in international waters",
+    punch: { claim: "accusing the US of killing an innocent Colombian fisherman in international waters",
+             artifact: "Funcionarios del gobierno de los EEUU han cometido un asesinato y violado nuestra soberan\u00eda en aguas territoriales",
+             src: 1 },
+    nextStep: "Any United States statement identifying the strike Petro refers to. No announced strike for the date he gives was found, no US statement names the man, and the family\u2019s own petition gives a different date than he does.",
+    clauses: [
+      { type: "act", text: "Trump threatened cuts to aid" },
+      { type: "act", text: "Petro accused the US of killing a fisherman" },
+      { type: "characterization", text: "in international waters" }
+    ],
+    artifacts: [
+      { grade: "on the record", url: "https://trumpstruth.org/statuses/33356",
+        what: "Trump\u2019s post of 19 October 2025, 9:58 AM EDT, archived; the platform copy was later removed",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-11", status: 200 } },
+      { grade: "on the record", url: "https://x.com/petrogustavo/status/1979700160608206983",
+        what: "Gustavo Petro\u2019s post of 19 October 2025 00:04:33 UTC, in his own words",
+        fetch: { by: "agent", route: "public API, identifying user agent", date: "2026-08-12", status: 200,
+                 note: "Read directly in the original Spanish rather than through a translation or a summary." } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "President Gustavo Petro, of Colombia, is an illegal drug leader strongly encouraging the massive production of drugs" },
+      predicate: { v: "supported", src: 1,
+        quote: "El pescador Alejandro Carranza no ten\u00eda v\u00ednculos con el narco y sus actividad diaria era pescar." },
+      date: { v: "supported", src: 1,
+        quote: "Sun Oct 19 00:04:33 +0000 2025",
+        note: "Petro\u2019s accusation is timestamped by the platform to 19 October 00:04 UTC and Trump\u2019s post to 9:58 AM EDT the same day, so the sequence the claim asserts \u2014 the accusation first, the response after \u2014 is the sequence that occurred." },
+      modality: { v: "unsupported", src: 0,
+        quote: "AS OF TODAY, THESE PAYMENTS, OR ANY OTHER FORM OF PAYMENT, OR SUBSIDIES, WILL NO LONGER BE MADE TO COLOMBIA.",
+        note: "The claim says \u201cthreatening cuts to aid\u201d. The post does not threaten; it announces, in capitals, as accomplished. The claim understates what was said \u2014 and separately overstates what was done, since reporting more than two weeks later found no interruption to the assistance had occurred." },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "The phrase \u201cinternational waters\u201d appears twice in the claim and inverts what Petro said. His words, read in the original: \u201cviolado nuestra soberan\u00eda en aguas territoriales\u201d \u2014 violated our sovereignty in territorial waters. The day before he had written \u201cpresumiblemente estaba en aguas colombianas\u201d. The location is not incidental to his accusation; the sovereignty violation is its entire substance, and a killing in international waters would not be one.",
+      "\u201cInternational waters\u201d is the United States\u2019 characterisation of these strikes, and the claim attributes it to the man disputing it. The Secretary of War\u2019s post about a strike two days earlier uses exactly that phrase.",
+      "The claim\u2019s \u201cinnocent\u201d is Petro\u2019s characterisation and is reported as his. It is contested: Colombian media have reported a criminal record for the man, and prosecutors approached about those reports declined to confirm or deny them. We record the dispute and do not resolve it.",
+      "The strike itself has never been officially identified. No United States announcement exists for the date Petro gives, no US statement names the man, and the date is disputed between Petro and the family\u2019s own petition to the Inter-American Commission."
+    ],
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: [
+      { text: "Both principals are quoted from their own posts, in their own words, and the sequence the claim gives is the sequence that occurred.",
+        src: 0, quote: "Petro, a low rated and very unpopular leader, with a fresh mouth toward America, better close up these killing fields immediately, or the United States will close them up for him, and it won\u2019t be done nicely." },
+      { reasoning: "The core of the row \u2014 that a US president responded to a foreign head of state\u2019s accusation by announcing an end to payments and calling him a drug leader \u2014 is accurate and is carried by the post itself. Nothing about the event is in doubt." }
+    ],
+    againstClaim: [
+      { text: "The claim places the killing in international waters. Petro placed it in territorial waters, and that is the whole of his accusation.",
+        src: 1, quote: "violado nuestra soberan\u00eda en aguas territoriales" },
+      { reasoning: "Adopting one party\u2019s framing while reporting the other party\u2019s accusation is a specific kind of error, and it runs against the accuser here rather than for him. It also makes the accusation smaller than it was: a wrongful killing is one claim, a wrongful killing inside another state\u2019s waters is that claim plus a violation of sovereignty, which is what he actually alleged and what the two governments then argued about." }
     ]
   },
 

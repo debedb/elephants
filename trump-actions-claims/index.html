@@ -417,6 +417,24 @@ const TAXONOMY = {
     ],
     "2827": [
       "Anti-immigration or militarised nationalism"
+    ],
+    "2616": [
+      "Attacking universities, schools, museums and culture"
+    ],
+    "1949": [
+      "Politicisation of science and health"
+    ],
+    "1979": [
+      "Anti-immigration or militarised nationalism"
+    ],
+    "2013": [
+      "Politicisation of science and health"
+    ],
+    "1337": [
+      "Politicisation of science and health"
+    ],
+    "1784": [
+      "Controlling information, including spreading misinformation and propoganda"
     ]
   }
 };
@@ -1418,6 +1436,304 @@ const CLAIMS = [
       { text: "Asked whether he was in charge, he described a joint plan in progress rather than a command.",
         src: 0, quote: "I’m currently working on the plan now of execution, working with the director of ICE and administrator at TSA" },
       { reasoning: "The row reads as though an arrangement existed and a person led it. The transcript shows a plan being written during the broadcast, with the airports not yet chosen, and no instrument was ever published to settle who was responsible for what." }
+    ]
+  },
+
+  {
+    index: 2616, date: "2026-02-23", rubric: 3, status: "adjudicated",
+    citedUrl: "https://thehill.com/homenews/education/5751248-education-department-trump-mcmahon/",
+    claim: "The Education Department (DoE) announced plans to move two more programs to other federal agencies "
+         + "amid President Trump’s effort to “break up the federal education bureaucracy”. HHS (Health and Human "
+         + "Services) will take some control of family engagement and school support programs, while the State "
+         + "Department will take on responsibilities for Section 117 foreign gift reporting requirements for "
+         + "universities.",
+    punch: { claim: "the State Department will take on responsibilities for Section 117",
+             artifact: "State will partner with ED on the Section 117 foreign gift reporting, and HHS will partner with ED on family engagement and school support programs.",
+             src: 0 },
+    nextStep: "The interagency agreements themselves are published but the Section 117 one is an image-only scan with no text layer, so its operative clauses were read by another party through optical character recognition rather than by us directly.",
+    clauses: [
+      { type: "act", text: "ED announced two agreements moving programs to other agencies" },
+      { type: "act", text: "State will take on Section 117 responsibilities" }
+    ],
+    artifacts: [
+      { grade: "party account", url: "https://www.ed.gov/about/news/press-release/us-department-of-education-announces-additional-partnerships-break-federal-education-bureaucracy",
+        what: "Education Department press release, 23 February 2026 — the Department describing its own conduct",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-14", status: 200 } },
+      { grade: "constitutive record", url: "https://www.ed.gov/media/document/interagency-agreement-ed-and-state-department-section-117-february-23-2026-113310.pdf",
+        what: "The interagency agreement between Education and State on Section 117",
+        fetch: { by: "human", route: "downloaded, but the file is an image-only scan; its text was extracted by a research agent using optical character recognition, not read by us directly", date: "2026-08-14", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "The U.S. Department of Education (ED) today announced two new interagency agreements" },
+      predicate: { v: "unsupported", src: 0,
+        quote: "State will partner with ED on the Section 117 foreign gift reporting, and HHS will partner with ED on family engagement and school support programs.",
+        note: "The Department’s own verb is “partner with”. The claim’s verbs are “move”, “take some control” and “take on responsibilities”. The release adds “With proper oversight by ED” for the HHS side, and the agreement has State acting at ED’s direction with the reporting portal still run by Education staff detailed to State. Responsibility is shared in the instrument and transferred in the claim." },
+      date: { v: "unsupported", src: 0,
+        note: "The row carries 23 February, the announcement date. Both agreements were signed 20 February." },
+      modality: { v: "supported", src: 0, quote: "today announced two new interagency agreements" },
+      quantity: { v: "unsupported", src: 0,
+        quote: "The U.S. Department of Education (ED) today announced two new interagency agreements",
+        note: "The claim counts two programs. There are two agreements; the health-agency one alone covers six named grant programmes." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The quoted phrase in the claim is genuine: “break up the federal education bureaucracy” is the Department’s own language, used in the release’s headline and its first sentence."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "The agreements exist, on the date given, and the quoted phrase is the Department’s own.",
+        src: 0, quote: "to further break up the federal education bureaucracy" },
+      { reasoning: "Reporting a partnership as a transfer is the natural reading of what a partnership of this kind does, and the Department’s framing is the one with an interest in sounding modest. The row follows the announcement it cites." }
+    ],
+    againstClaim: [
+      { text: "Every departmental verb is weaker than the claim’s, and one adds an explicit reservation.",
+        src: 0, quote: "With proper oversight by ED, HHS will manage competitions, provide technical assistance" },
+      { reasoning: "Two agreements are also not two programmes. The count reads as small when the underlying scope is larger, which is an unusual direction for an error on this page." }
+    ]
+  },
+
+  {
+    index: 1949, date: "2025-12-02", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/interactive/2025/12/02/upshot/trump-science-funding-cuts.html",
+    claim: "The US is funding fewer grants in every area of medicine and science this year compared to previous "
+         + "years",
+    punch: { claim: "fewer grants in every area of medicine and science",
+             artifact: "Of 25 National Institutes of Health institutes and 11 National Science Foundation directorates, none rose. Grant counts fell in all 36.",
+             src: 0 },
+    nextStep: "The cited interactive itself, which we could not locate at any address. Its data source and method are therefore unverified and nothing here characterises them.",
+    clauses: [ { type: "act", text: "fewer grants funded this year in every area" } ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://api.reporter.nih.gov/v2/projects/search",
+        what: "National Institutes of Health RePORTER, project counts by institute and fiscal year, subprojects excluded",
+        fetch: { by: "human", route: "queried by a research agent and re-run with an identifying user agent; totals reproduced byte-identically", date: "2026-08-11", status: 200 } },
+      { grade: "constitutive record", url: "https://api.usaspending.gov/api/v2/search/spending_by_award_count/",
+        what: "USAspending, new National Science Foundation awards by fiscal year and programme",
+        fetch: { by: "human", route: "queried by a research agent with an identifying user agent", date: "2026-08-11", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "National Institutes of Health" },
+      predicate: { v: "supported", src: 0,
+        quote: "NIH grant counts: FY2024 72,461; FY2025 65,818. NSF new grants: FY2024 11,678; FY2025 9,242.",
+        note: "Counts fell at every level tested." },
+      date: { v: "n/a", note: "The claim gives no date for an act; it describes a fiscal year." },
+      modality: { v: "supported", src: 0, quote: "FY2025 65,818" },
+      quantity: { v: "supported", src: 0,
+        quote: "0 of 25 institutes rose; 0 of 11 directorates rose",
+        note: "This is a universal claim, falsifiable by a single counterexample, and no counterexample exists in the data we queried. One series was non-monotonic earlier — education grants rose in the prior year before falling — but nothing rose in the year the claim concerns." },
+      baseRate: { v: "supported", src: 0,
+        quote: "NIH: FY2021 71,283; FY2022 72,630; FY2023 73,765; FY2024 72,461; FY2025 65,818",
+        note: "The comparison class the claim implies is prior years, and the series supplies it: FY2025 is below all four preceding years." }
+    },
+    notes: [
+      "The universal survives on counts and would fail on money. Obligations fell far less than grant numbers — about a tenth for the science foundation and under two per cent for the health institutes — and separate reporting found total commitments roughly flat. The claim’s verb is “funding fewer grants”, which is a count, so it holds. Had it said funding was cut, it would not.",
+      "One methodological choice changes the totals materially: including subprojects raises the health figures by roughly a seventh. The comparison is held constant across years either way, and the direction does not change."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "A universal claim, tested against the agencies’ own data at the finest granularity available, with no counterexample.",
+        src: 0, quote: "0 of 25 institutes rose; 0 of 11 directorates rose" },
+      { reasoning: "Universals are the easiest claims to break and this one did not break. That is worth stating plainly, because most rows on this page fail on some clause and this one fails on none we could test." }
+    ],
+    againstClaim: [
+      { text: "The same data shows money holding up far better than counts, so a reader who takes “funding fewer grants” to mean “spending less” would be misled by a claim that is literally accurate.",
+        src: 0, quote: "NIH grant counts: FY2024 72,461; FY2025 65,818. NSF new grants: FY2024 11,678; FY2025 9,242." },
+      { reasoning: "And we never reached the cited interactive, so we verified the claim against the underlying agency data rather than against the analysis the row points at. Those could differ in method, and we cannot say they agree." }
+    ]
+  },
+
+  {
+    index: 1979, date: "2025-12-05", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.reuters.com/world/us/us-expanding-list-countries-travel-ban-more-than-30-noem-says-2025-12-05/",
+    claim: "The U.S. plans to expand the number of countries covered by its travel ban to more than 30, U.S. "
+         + "Homeland Security Secretary Kristi Noem said on Thursday.",
+    punch: { claim: "plans to expand … to more than 30",
+             artifact: "I won’t be specific on the number, but it’s over 30, and the president is continuing to evaluate countries",
+             src: 1 },
+    nextStep: "Any departmental record of the remark. No statement, transcript or video was found on the department’s site or the broadcaster’s; custody for her words is reporting only.",
+    clauses: [ { type: "plan", text: "the US plans to expand the ban to more than 30 countries" }, { type: "quote", text: "Noem said it" } ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.federalregister.gov/documents/2025/12/19/2025-23570/restricting-and-limiting-the-entry-of-foreign-nationals-to-protect-the-security-of-the-united-states",
+        what: "Proclamation 10998, signed 16 December 2025 — the act the statement anticipated",
+        fetch: { by: "human", route: "Federal Register, fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } },
+      { grade: "named reporting", url: "https://www.reuters.com/world/us/us-expanding-list-countries-travel-ban-more-than-30-noem-says-2025-12-05/",
+        what: "The article the row cites; the remark was made in a broadcast interview",
+        fetch: { by: "human", route: "fetched by a research agent via a stealth proxy after curl returned 401", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 1, quote: "Noem said" },
+      predicate: { v: "supported", src: 0,
+        quote: "Restricting and Limiting the Entry of Foreign Nationals To Protect the Security of the United States",
+        note: "The expansion did occur, eleven days later, by proclamation." },
+      date: { v: "unsupported", src: 1,
+        note: "The row is dated 5 December, the publication date. The article’s own dateline is 4 December, the day of the interview." },
+      modality: { v: "supported", src: 1, quote: "the president is continuing to evaluate countries",
+        note: "The claim reports a plan, and a plan is what she described." },
+      quantity: { v: "unsupported", src: 1,
+        quote: "I won’t be specific on the number, but it’s over 30",
+        note: "The substance of “more than 30” is hers. The claim drops the refusal that precedes it in the same sentence, and states as a plan what she declined to put a number on. The figure the interviewer put to her — 32 — she did not accept." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "Custody here is thin in a way worth naming. Nothing published by the department or the broadcaster records the remark; it exists for us only as transcribed by news organisations. Where those transcriptions differ they differ trivially, in punctuation, but there is no artifact behind them."
+    ],
+    rowSourcing: "named", flags: ["plan not act"],
+    forClaim: [
+      { text: "The plan was real and became an instrument within a fortnight, so the claim reported something that happened.",
+        src: 0, quote: "Restricting and Limiting the Entry of Foreign Nationals To Protect the Security of the United States" },
+      { reasoning: "“More than 30” is her own formulation, not a reporter’s inference, and she said it on the record under her own name." }
+    ],
+    againstClaim: [
+      { text: "She prefaced the number with a refusal to give one, and the claim keeps the number and drops the refusal.",
+        src: 1, quote: "I won’t be specific on the number, but it’s over 30" },
+      { reasoning: "A hedge removed from inside a quoted sentence is the recurring pattern on this page, and it is the third row in the sample where the qualification sits in the very clause the claim reproduces." }
+    ]
+  },
+
+  {
+    index: 2013, date: "2025-12-09", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-launches-fresh-safety-scrutiny-approved-rsv-therapies-infants-2025-12-09/",
+    claim: "U.S. health regulators informed senior executives at Merck, Sanofi and AstraZeneca last week that "
+         + "their approved protective RSV treatments for infants would face fresh safety scrutiny following "
+         + "concerns raised by vaccine skeptics.",
+    punch: { claim: "U.S. health regulators informed senior executives … would face fresh safety scrutiny",
+             artifact: "… multiple sources familiar with the situation told Reuters.",
+             src: 1 },
+    nextStep: "Any published regulatory record. Searches of the agency’s drug-safety communications, biologics safety pages, press announcements and the quarterly signal listing for the period found nothing; the earliest published entry for one of these products is in the following year’s quarterly.",
+    clauses: [ { type: "act", text: "regulators informed executives that the treatments would face scrutiny" } ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/october-december-2025-new-safety-information-or-potential-signals-serious-risks-identified-fda",
+        what: "The agency’s own quarterly listing of new safety signals for the quarter containing the claim — a negative result: neither product appears",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } },
+      { grade: "named reporting", url: "https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-launches-fresh-safety-scrutiny-approved-rsv-therapies-infants-2025-12-09/",
+        what: "The article the row cites",
+        fetch: { by: "human", route: "fetched by a research agent via a stealth proxy after curl returned 401", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 1,
+        quote: "multiple sources familiar with the situation told Reuters",
+        note: "The article attributes its central assertion to unnamed sources. This repository does not admit claims resting on unnamed sources, so no admissible artifact supports it. A named departmental spokesman is quoted in the same piece, but on the agency’s general practice rather than on the meeting." },
+      predicate: { v: "unsupported", src: 0,
+        note: "Nothing in the agency’s published record for that quarter concerns either product. The absence is not evidence the meeting did not happen — a call to companies would not appear in a safety-signal listing — but it is the whole of what we can check." },
+      date: { v: "supported", src: 1, quote: "2025-12-09" },
+      modality: { v: "supported", src: 1, quote: "multiple sources familiar with the situation told Reuters",
+        note: "The claim reports a completed act of notification, which is what the reporting describes." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The claim reproduces the article’s opening sentence almost word for word and deletes the attribution clause at its end. What the source presents as anonymously sourced, the claim states as fact. This is the same operation found on another row in this sample, and it is the single most consequential edit a tracker can make to a wire lede.",
+      "The reporting is also narrower than the claim in one respect: it describes a call telling companies to expect further questions, and says the call did not specify what data might be requested."
+    ],
+    rowSourcing: "anonymous", flags: ["anonymous sourcing"],
+    forClaim: [
+      { text: "The agency did later record a safety signal for one of the products, so the subject matter was real even if the meeting is unverifiable.",
+        src: 0, quote: "October – December 2025" },
+      { reasoning: "The outlet is one that discloses its sourcing conditions in its own text and reached the department for comment. Removing the attribution is the tracker’s edit, not the reporter’s." }
+    ],
+    againstClaim: [
+      { text: "The attribution the claim removes is the article’s own account of what its assertion rests on.",
+        src: 1, quote: "multiple sources familiar with the situation told Reuters" },
+      { reasoning: "Nothing published by the agency records the notification, and a reader who wants to check the claim has nowhere to go. Presenting it flatly gives no signal that this is so." }
+    ]
+  },
+
+  {
+    index: 1337, date: "2025-09-20", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.independent.co.uk/news/world/americas/us-politics/trump-epa-scientists-water-research-b2830523.html",
+    claim: "Scientists at the Environmental Protection Agency’s Office of Water, which ensures drinking water is "
+         + "safe, have been instructed by Trump officials to halt publishing ongoing research in an "
+         + "“unprecedented” move",
+    punch: { claim: "in an “unprecedented” move",
+             artifact: "Both employees said that the imposition of this type of review is unprecedented — reported speech, not a quotation. No one is quoted using the word.",
+             src: 0 },
+    nextStep: "Any memorandum, email or directive. None is cited, quoted or linked by any account; the mechanism is described only as an oral meeting.",
+    clauses: [
+      { type: "act", text: "scientists were instructed to halt publishing" },
+      { type: "characterization", text: "unprecedented" }
+    ],
+    artifacts: [
+      { grade: "named reporting", url: "https://www.washingtonpost.com/climate-environment/2025/09/20/epa-scientists-research-publications/",
+        what: "The originating report, which the cited article aggregates; read through an archived copy after the publisher returned 403",
+        fetch: { by: "human", route: "publisher 403; text obtained by a research agent from an archived copy and a syndicated reprint", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 0,
+        quote: "according to two agency employees familiar with the matter who spoke on the condition of anonymity because they were not authorized to speak publicly",
+        note: "The instruction rests on two unnamed employees. The agency denied it on the record. No admissible artifact supports the act." },
+      predicate: { v: "unsupported", src: 0,
+        note: "No document is cited by any account. The originating report later carried a correction narrowing its own framing: the decision was made by political appointees but conveyed by career staff, and the headline was revised to say only some scientists received the message." },
+      date: { v: "supported", src: 0, quote: "2025-09-20" },
+      modality: { v: "supported", src: 0, quote: "halt publishing" },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "unsupported", src: 0,
+        quote: "Both employees said that the imposition of this type of review is unprecedented",
+        note: "No reference class is produced by anyone. The assertion of novelty is the two anonymous employees’ own, reported indirectly." }
+    },
+    notes: [
+      "The quotation marks around “unprecedented” have no speaker behind them. The originating text is reported speech — “Both employees said that the imposition of this type of review is unprecedented” — with no quotation marks. The aggregating article scare-quoted the word in its opening line while its own body correctly calls it a paraphrase, and the claim inherited the marks. A reader sees a quoted word and looks for who said it; nobody did, in those words.",
+      "The claim also names a different publication than the one that reported it. Its wording is the aggregator’s, and no article on this subject exists at the outlet the row appears to credit."
+    ],
+    rowSourcing: "anonymous", flags: ["anonymous sourcing", "characterization present"],
+    forClaim: [
+      { text: "The account is specific about how thin it is, which is more than the claim conveys.",
+        src: 0, quote: "according to two agency employees familiar with the matter who spoke on the condition of anonymity" },
+      { reasoning: "Later reporting from a different office does document a comparable review process in writing, so the practice the claim describes is not fanciful — but that is a different office and six months later, and it is not evidence for this." }
+    ],
+    againstClaim: [
+      { text: "The word in quotation marks was said by no one.",
+        src: 0, quote: "Both employees said that the imposition of this type of review is unprecedented" },
+      { reasoning: "Two anonymous sources, no document, an on-the-record denial, and a subsequent correction to the originating report’s central framing. Quotation marks around a paraphrase are a small typographic act with a large effect: they convert an inference into testimony." }
+    ]
+  },
+
+  {
+    index: 1784, date: "2025-11-11", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.independent.co.uk/news/world/americas/us-politics/bari-weiss-cbs-news-standards-and-practices-b2862631.html",
+    claim: "There are growing concerns within CBS News that Bari Weiss could gut or even disband the network’s "
+         + "Standards and Practices team, with multiple sources saying that the new editor-in-chief has "
+         + "complained that the unit has “too much power” and she doesn’t see the point of keeping it around. "
+         + "The Standards and Practices team are responsible for upholding journalistic standards. The network "
+         + "disbanded its vaunted Race and Culture unit during parent company Paramount’s layoffs last month",
+    punch: { claim: "could gut or even disband the network’s Standards and Practices team",
+             artifact: "Every substantive assertion is attributed to unnamed people. No named source supports any of it, and no document establishes that the unit was gutted or disbanded, then or since.",
+             src: 0 },
+    nextStep: "Any on-the-record statement from the network or its parent. None was found at publication or since, not even a declination to comment beyond the individual’s own non-response.",
+    clauses: [
+      { type: "plan", text: "Weiss could gut or disband the Standards and Practices team" },
+      { type: "quote", text: "she complained the unit has too much power" },
+      { type: "act", text: "the Race and Culture unit was disbanded during layoffs" }
+    ],
+    artifacts: [
+      { grade: "named reporting", url: "https://www.independent.co.uk/news/world/americas/us-politics/bari-weiss-cbs-news-standards-and-practices-b2862631.html",
+        what: "The article the row reproduces",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 0,
+        quote: "with multiple sources telling",
+        note: "Every attribution in the piece is to unnamed people: one reporter, one insider twice, another senior staffer, sources. Nobody is named. The only response line is that the individual did not immediately respond to a request for comment, and there is no statement from the network or its parent at all." },
+      predicate: { v: "unsupported", src: 0,
+        note: "The operative verbs are conditional — could gut, could disband — and remain unrealised in any record we could find, then or since." },
+      date: { v: "supported", src: 0, quote: "2025-11-11" },
+      modality: { v: "supported", src: 0, quote: "could gut or even disband",
+        note: "The claim reports concerns about a possible future act, and that is what the article describes. The mood is right; it is the basis that is absent." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The last sentence is the only part with independent footing: the disbanding of a different unit during the parent company’s layoffs is separately documented.",
+      "This is the thinnest row in the sample by the standard this repository applies. It is not a claim that anything happened; it is a report that unnamed people are worried something might. That is a legitimate thing for a newspaper to publish and an unusual thing for a tracker of actions to carry as an entry."
+    ],
+    rowSourcing: "anonymous", flags: ["anonymous sourcing", "plan not act"],
+    forClaim: [
+      { text: "The claim is careful about its own basis in a way many rows are not: it says “growing concerns” and “multiple sources”, so a reader is told this is not established.",
+        src: 0, quote: "with multiple sources telling" },
+      { reasoning: "And its final clause about the other unit is accurate and independently documented, so the row is not wholly without footing." }
+    ],
+    againstClaim: [
+      { text: "Nobody is named anywhere in the piece, and no institution responded on the record.",
+        src: 0, quote: "with multiple sources telling" },
+      { reasoning: "An entry recording that unnamed people fear a future act sits outside what this method can examine at all. We record it as unsupported rather than false, and note that our rule and the row’s own subject matter simply do not meet." }
     ]
   },
 

@@ -435,6 +435,21 @@ const TAXONOMY = {
     ],
     "1784": [
       "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "734": [
+      "Violating democrating norms or undermining rule of law"
+    ],
+    "1844": [
+      "Suppressing dissent or weaponising state against 'enemies'"
+    ],
+    "1420": [
+      "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "1592": [
+      "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "2772": [
+      "Controlling information, including spreading misinformation and propoganda"
     ]
   }
 };
@@ -1738,6 +1753,238 @@ const CLAIMS = [
   },
 
   {
+    index: 734, date: "2025-07-15", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/07/15/us/politics/justice-department-dismissals-civil-service-laws.html",
+    claim: "Justice Department (DOJ) political leadership claims sweeping authority to fire career law "
+         + "enforcement officials without cause, bypassing Civil Service and Whistleblower laws",
+    punch: { claim: "claims sweeping authority to fire career law enforcement officials without cause",
+             artifact: "Because Senior Executive Service officials exercise significant executive power, they are generally removable without cause under Article II.",
+             src: 0 },
+    nextStep: "The Department’s own brief. It is identified — a nineteen-page filing — but hosted on a document platform that blocks downloads, so every departmental quotation available to us is as reproduced inside an opposing filing.",
+    clauses: [
+      { type: "act", text: "the Department asserted authority to fire without cause" },
+      { type: "characterization", text: "sweeping" },
+      { type: "act", text: "career law enforcement officials" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://web.archive.org/web/2025/https://democracyforward.org/wp-content/uploads/2025/08/Oyer-Tab-24-Response-to-Agencys-07-15-2025-Response-to-5-22-2025-Order-and-Summary-of-Status-Conference.pdf",
+        what: "Filing before the Merit Systems Protection Board quoting the Department’s assertions with page citations",
+        fetch: { by: "human", route: "publisher blocks scripted access regardless of agent; obtained by a research agent from an archived copy", date: "2026-08-10", status: 200 } },
+      { grade: "constitutive record", url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title5-section7543&num=0&edition=prelim",
+        what: "5 U.S.C. 7543, the removal standard governing career Senior Executive Service employees",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "The Agency nonetheless claims" },
+      predicate: { v: "supported", src: 0,
+        quote: "Because Senior Executive Service officials exercise significant executive power, they are generally removable without cause under Article II." },
+      date: { v: "unsupported", src: 0,
+        note: "The filing the claim describes is dated 17 July in the docket index and in the file’s own name, though an opposing filing refers to responses filed on 15 July. The row carries 15 July; the reporting appeared on the 17th." },
+      modality: { v: "supported", src: 0, quote: "The Agency nonetheless claims",
+        note: "The claim reports an assertion of authority, which is what a litigating position is. It does not say the authority exists." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The people at issue are not law enforcement officials. The case concerns the Pardon Attorney, a career Senior Executive Service lawyer; the parallel cases concern immigration judges. No filing about agents was located.",
+      "The governing statute is also not the one usually cited for this. Career Senior Executive Service removals run under a provision permitting removal only for misconduct, neglect of duty, malfeasance or refusal of reassignment — a narrower standard than the general civil-service one, and the relevant text for what “without cause” would displace.",
+      "A custody limit worth stating plainly: we never read the Department’s brief. It is hosted on a platform that returns a download-blocked response, and every quotation of the Department here is as reproduced inside a filing by the party opposing it. Those quotations carry page citations and are made in a tribunal, which is better than most secondhand quotation — but it is still the other side’s rendering."
+    ],
+    rowSourcing: "named", flags: ["characterization present"],
+    forClaim: [
+      { text: "The assertion is quoted with a page citation in a filing before the tribunal hearing the case, which is a high grade of secondhand quotation.",
+        src: 0, quote: "Because Senior Executive Service officials exercise significant executive power, they are generally removable without cause under Article II." },
+      { reasoning: "And “without cause” is the Department’s own phrase rather than a characterisation applied to it. On the substance of what was argued, the row is right." }
+    ],
+    againstClaim: [
+      { text: "The statutory standard for these employees is narrow and specific, which is what makes the assertion notable and also what the claim misdescribes.",
+        src: 1, quote: "only for misconduct, neglect of duty, malfeasance, or failure to accept a directed reassignment" },
+      { reasoning: "“Career law enforcement officials” names a category the case does not involve. The Department’s theory also carries a conceded limit — that only the head of the department may exercise the power — which is the opposite of sweeping and is the ground the removal was actually challenged on." }
+    ]
+  },
+
+  {
+    index: 1844, date: "2025-11-20", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.huffingtonpost.co.uk/entry/todd-blanche-doj-investigation-sean-hannity_n_691ef05ae4b0b763ab8e0e07",
+    claim: "Deputy Attorney General Todd Blanche strongly suggested Wednesday that the Department of Justice "
+         + "will investigate Democratic members of Congress who made a video telling military members to "
+         + "“refuse illegal orders.”",
+    punch: { claim: "strongly suggested … that the Department of Justice will investigate",
+             artifact: "And so what does the investigation look like? … I think they should be held to account. … I’m not convicting anybody tonight on this show.",
+             src: 0 },
+    nextStep: "A transcript or recording of the broadcast. The article embeds a clip whose caption track returned empty on every request, so his words are available only as rendered by two outlets, which agree.",
+    clauses: [
+      { type: "plan", text: "the Department will investigate members of Congress" },
+      { type: "characterization", text: "strongly suggested" },
+      { type: "act", text: "members of Congress made a video telling military members to refuse illegal orders" }
+    ],
+    artifacts: [
+      { grade: "named reporting", url: "https://www.huffingtonpost.co.uk/entry/todd-blanche-doj-investigation-sean-hannity_n_691ef05ae4b0b763ab8e0e07",
+        what: "The article the row reproduces, quoting a broadcast interview",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent; quoted strings confirmed present in the body", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "I think they should be held to account." },
+      predicate: { v: "unsupported", src: 0,
+        quote: "I’m not convicting anybody tonight on this show.",
+        note: "No located words have him saying the Department will investigate. What he said was interrogative and conditional: what does the investigation look like, they should be held to account, they should be required to answer questions. The article’s own framing is that he “strongly suggested” it, which is the reporter’s reading of an implication, and the claim adopts that reading as its subject." },
+      date: { v: "unsupported", src: 0,
+        note: "The interview aired Wednesday 19 November. The article and the row are dated the 20th." },
+      modality: { v: "unsupported", src: 0, quote: "And so what does the investigation look like?",
+        note: "“Will investigate” is a future indicative. The artifact is a question and a series of normative statements about accountability." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The underlying video is accurately described. Its participants told service members “You can refuse illegal orders. You must refuse illegal orders.”",
+      "An investigation did follow, and the record of it is public: a grand jury declined to indict the lawmakers some months later. That bears on whether the suggestion was well founded and not on whether he made it in the words the claim gives."
+    ],
+    rowSourcing: "named", flags: ["plan not act", "characterization present"],
+    forClaim: [
+      { text: "He did press for consequences, on the record, under his own name, about these people.",
+        src: 0, quote: "I think that those congressmen should be required to answer questions about why they did what they did" },
+      { reasoning: "“Strongly suggested” is a hedge, not an assertion that he announced anything, and a reader is told they are getting an inference. Given what followed, the inference was sound." }
+    ],
+    againstClaim: [
+      { text: "In the same interview he expressly declined to go where the claim places him.",
+        src: 0, quote: "I’m not convicting anybody tonight on this show." },
+      { reasoning: "A hedge in the reporting becomes the subject of the entry: the row is about what he suggested rather than what he said. That is a claim about a state of mind, and no document establishes one." }
+    ]
+  },
+
+  {
+    index: 1420, date: "2025-09-30", rubric: 3, status: "adjudicated",
+    citedUrl: "https://edition.cnn.com/2025/09/29/politics/trump-ai-generated-video-schumer-jeffries-shutdown",
+    claim: "Trump posts racist, AI-generated video of Schumer and Jeffries ahead of looming government shutdown",
+    punch: { claim: "Trump posts racist, AI-generated video of Schumer and Jeffries",
+             artifact: "The post carries no caption text. Its video, transcribed: “Nobody likes Democrats anymore… So we need new voters. And if we give all these illegal aliens free healthcare, we might be able to get them on our side so they can vote for us. They can’t even speak English…”",
+             src: 0 },
+    nextStep: "Nothing further within our jurisdiction. Whether the video is racist is a judgement about a caricature and is not ours to make; see the note below.",
+    clauses: [
+      { type: "act", text: "Trump posted an AI-generated video of the two men" },
+      { type: "characterization", text: "racist" }
+    ],
+    artifacts: [
+      { grade: "on the record", url: "https://trumpstruth.org/statuses/33148",
+        what: "The post, archived, with its video transcript",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent; the video file was downloaded and sampled", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "President DJT" },
+      predicate: { v: "supported", src: 0,
+        quote: "Nobody likes Democrats anymore. We have no voters left because of all of our woke trans bullshit." },
+      date: { v: "unsupported", src: 0,
+        note: "The post is dated 29 September, 8:31 PM Eastern, and the cited article’s own address carries 29 September. The row is dated the 30th." },
+      modality: { v: "supported", src: 0, quote: "Nobody likes Democrats anymore" },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "We adjudicate the transcript and not the imagery. The video is a caricature, and by the rule this page follows a caricature has no truth conditions — no agent, no predicate, no number for a test to reach. Whether it is racist is a judgement for an audience, and this method is not equipped to make it. What is adjudicable is that the post exists, that it is his, and what the audio says, which the row does not quote.",
+      "The claim is the cited headline reproduced verbatim, including the word this page declines to assess."
+    ],
+    rowSourcing: "named", flags: ["characterization present"],
+    forClaim: [
+      { text: "The post is his and the audio is what the reporting says it is.",
+        src: 0, quote: "if we give all these illegal aliens free healthcare, we might be able to get them on our side so they can vote for us. They can’t even speak English" },
+      { reasoning: "A tracker recording that a president posted this is recording a public act by a public figure, and the act is not in dispute." }
+    ],
+    againstClaim: [
+      { text: "The date is the reporting’s, not the post’s.",
+        src: 0, quote: "29 September 2025, 8:31 PM Eastern" },
+      { reasoning: "And the load-bearing word is a judgement about a caricature, carried across from a headline. We are not saying it is wrong. We are saying nothing we can do reaches it, and an entry whose central adjective is outside every available test is an entry a reader cannot check." }
+    ]
+  },
+
+  {
+    index: 1592, date: "2025-10-18", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/10/18/us/politics/trump-administration-bluesky.html",
+    claim: "White House and other government agencies join Social Media platform Bluesky and use it to attack "
+         + "Democrats and blame them for the government shutdown. The administration has repeatedly thrust "
+         + "normally nonpartisan agencies into the funding fight, including by posting politically loaded "
+         + "language on agency websites",
+    punch: { claim: "join … and use it to attack Democrats and blame them for the government shutdown",
+             artifact: "13,000 air traffic controllers are working without pay because of the Schumer-Jeffries shutdown. — Department of Transportation, 2025-10-17",
+             src: 0 },
+    nextStep: "Whether an inaugural White House post quoted by the cited article was deleted. It is absent from the live feed and the platform’s search endpoints refuse unauthenticated enumeration, so neither deletion nor its absence can be established.",
+    clauses: [
+      { type: "act", text: "agencies joined the platform and posted attacks" },
+      { type: "act", text: "politically loaded language was posted on agency websites" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile",
+        what: "Accounts, creation timestamps, verification status and post text for nine federal accounts, read from the platform’s public API",
+        fetch: { by: "human", route: "queried by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "Department of War, verification status valid" },
+      predicate: { v: "supported", src: 0,
+        quote: "13,000 air traffic controllers are working without pay because of the Schumer-Jeffries shutdown." },
+      date: { v: "unsupported", src: 0,
+        note: "The posts are timestamped 17 October; the row and the cited article are dated the 18th. One department’s account was created on 14 October, three days before the others, so “join” does not describe all of them on one day." },
+      modality: { v: "supported", src: 0, quote: "13,000 air traffic controllers are working without pay" },
+      quantity: { v: "n/a", note: "The claim asserts no number of its own." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "Two verification findings that matter for anyone checking this. One department’s account carried no platform verification at the time and still does not, so a post quoted from it rests on nothing but a matching handle. Another was not verified until a month after the posts at issue — it is verified today, and the badge postdates the evidence.",
+      "The website half of the claim is separately documented: archived captures of two agency sites from the same period carry shutdown messaging naming the opposing party."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "The posts exist, are timestamped, and say what the claim says, from accounts the platform marks as verified government bodies.",
+        src: 0, quote: "13,000 air traffic controllers are working without pay because of the Schumer-Jeffries shutdown." },
+      { reasoning: "This is among the better-founded rows in the sample: a public act, on a public platform, with the artifacts still standing and machine-readable." }
+    ],
+    againstClaim: [
+      { text: "The accounts did not all join on the day the claim implies.",
+        src: 0, quote: "created 2025-10-14" },
+      { reasoning: "And at least one quoted account carried no verification, which on a platform where a similarly named handle can belong to anyone is the difference between an artifact and a lookalike." }
+    ]
+  },
+
+  {
+    index: 2772, date: "2026-03-14", rubric: 3, status: "adjudicated",
+    citedUrl: "https://truthsocial.com/@realDonaldTrump/116228130264134892",
+    claim: "Trump posts an image boasting that he has defunded independent media or removed critical "
+         + "journalists / TV hosts, while securing allies running key agencies and media companies",
+    punch: { claim: "an image boasting that he has defunded independent media or removed critical journalists",
+             artifact: "PRESIDENT TRUMP IS RESHAPING THE MEDIA — GONE: PBS Defunded · NPR Defunded · Joy Reid Out at MSNBC · Colbert Leaving CBS · Lester Holt Out at NBC · Jim Acosta Out at CNN · Terry Moran Out at ABC · Chuck Todd Out at NBC · John Dickerson Out at CBS",
+             src: 0 },
+    nextStep: "Nothing outstanding. The post is image-only and the image was retrieved at full resolution and read.",
+    clauses: [ { type: "act", text: "Trump posted this image" }, { type: "characterization", text: "boasting" } ],
+    artifacts: [
+      { grade: "on the record", url: "https://truthsocial.com/@realDonaldTrump/116228130264134892",
+        what: "The post, image-only, 14 March 2026, 11:02 Eastern; image retrieved at full resolution",
+        fetch: { by: "human", route: "post page and image fetched by a research agent with an identifying user agent; the platform’s API refused, so the post is corroborated against an archive and the identifier’s embedded timestamp", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "PRESIDENT TRUMP IS RESHAPING THE MEDIA" },
+      predicate: { v: "supported", src: 0,
+        quote: "GONE: PBS Defunded · NPR Defunded · Joy Reid Out at MSNBC · Jim Acosta Out at CNN · Terry Moran Out at ABC" },
+      date: { v: "supported", src: 0, quote: "14 March 2026, 11:02 Eastern" },
+      modality: { v: "supported", src: 0, quote: "PRESIDENT TRUMP IS RESHAPING THE MEDIA" },
+      quantity: { v: "n/a", note: "The claim asserts no number; the image lists twelve items under each of two headings." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "This is a text-bearing graphic rather than a caricature, so it is adjudicable: the tiles are propositions set in type and attributable to the account that posted them. The second heading, which the claim describes as securing allies, reads REFORMS and lists items including a broadcast regulator, an ownership change at a network, a settlement with another, and an ombudsman at a third.",
+      "The claim describes the image accurately and does not quote it. Reading the artifact adds the specifics a reader would otherwise have to take on trust — which is the whole argument of this page, and here the row happens to be right."
+    ],
+    rowSourcing: "named", flags: ["characterization present"],
+    forClaim: [
+      { text: "The image says what the claim says it says, in its own headings.",
+        src: 0, quote: "PRESIDENT TRUMP IS RESHAPING THE MEDIA" },
+      { reasoning: "And the row cites the post itself rather than an article about it, which is the citation practice this page argues for and finds in only a minority of the sample." }
+    ],
+    againstClaim: [
+      { text: "The claim paraphrases where the artifact could have been quoted.",
+        src: 0, quote: "GONE" },
+      { reasoning: "“Boasting” is a characterisation, though a mild one given a graphic captioned RESHAPING THE MEDIA. The substantive gap is that a reader of the row learns a summary and a reader of the image learns twelve named outlets and journalists." }
+    ]
+  },
+
+  {
     index: 71,
     punch: { claim: "Trump repeats the right-wing claim that USAID subscriptions to Politico were payoffs",
              artifact: "not yet fetched \u2014 the post is quoted consistently across outlets but we have not opened it",
@@ -1752,7 +1999,7 @@ const CLAIMS = [
     claim: "Trump repeats the right-wing claim that USAID subscriptions to Politico were payoffs. The $8 million "
          + "payment in question was for subscriptions for Politico for the entire federal government, not payoffs "
          + "from USAid.",
-    parkedReason: "Two clauses, two missing artifacts. The first is a statement by Trump, quoted consistently "
+    parkedReason: "Still parked at the end of the sample, and the reason is unchanged after further attempts on 2026-08-14: the archive of the President\u2019s posts does not honour date filtering on its search, and we could not isolate the February 2025 post among results. Two clauses, two missing artifacts. The first is a statement by Trump, quoted consistently "
                 + "across several outlets as a Truth Social post of 6 February 2025, but we have not reached the "
                 + "post itself; truthsocial.com is client-rendered and we will not cite a quotation at second hand "
                 + "when the artifact exists. The second is the row's own corrective — that the $8 million figure "
@@ -2207,8 +2454,15 @@ CLAIMS.forEach(row => {
   const v = verdictOf(row);
   if (v !== "restated") {
     const citedHost = host(row.citedUrl);
+    // A row that cites the artifact itself needs nothing independent: there is
+    // nothing more direct to point at. This check exists to catch rows resting
+    // only on the reporting they came from, and it wrongly penalised the best
+    // citation practice on the page until index 2772 tripped it.
+    const citesArtifactDirectly = (row.artifacts || []).some(a =>
+      host(a.url) === citedHost &&
+      (a.grade === "constitutive record" || a.grade === "on the record"));
     const independent = (row.artifacts || []).some(a => host(a.url) !== citedHost);
-    if (!independent) {
+    if (!independent && !citesArtifactDirectly) {
       failures.push(where + ": verdict '" + v + "' but every artifact shares a host with the row's own citation");
     }
   }
@@ -2293,8 +2547,8 @@ tally.append(el("b", null,
 const nWorked = CLAIMS.filter(r => !isParked(r)).length;
 tally.append(document.createTextNode(
   " Every one of the " + nWorked + " worked rows has the same shape \u2014 the act is documented and "
-  + "something adjacent to it is not. On this sample that is the pattern, and thirty of 3,466 cannot "
-  + "tell you whether it holds generally."));
+  + "something adjacent to it is not, or does not. Four rows came out carried whole. On this sample "
+  + "that is the pattern, and thirty of 3,466 cannot tell you whether it holds generally."));
 const prog = document.getElementById("progress");
 if (prog) { prog.textContent = "This is " + CLAIMS.length + " of " + DRAWN.length
   + ". It is not a finished audit."; }

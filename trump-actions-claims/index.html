@@ -248,7 +248,7 @@
 
 <div class="banner">
   <p id="tally"><b>Loading.</b></p>
-  <p><b id="progress">This is not a finished audit.</b> The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a> and the rules were <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>, so no row can be dropped for coming out inconveniently. Every drawn row ships.</p>
+  <p><b id="progress">Loading.</b> The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a> and the rules were <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>, so no row can be dropped for coming out inconveniently. Every drawn row ships.</p>
   <p><b>The method is currently ahead of the evidence, and we would rather say so than have it noticed.</b> Six rows have been worked. In the same period the rubric went through three versions, nine defects were found in it, four corrections were made to this page, and three new questions were added to the repository\u2019s list of ones it cannot settle. That ratio is what an evolving work in progress looks like from the inside, and it means nothing here should be read as a result about the dataset. It is a method being built and tested on real rows, in the open, with the failures left visible.</p>
   <p><b>Adversarial review is the mechanism, not an attack on it.</b> This is open work and we do not object to anyone coming at it hard. The most useful thing anyone can send is a row where we got it wrong \u2014 a misread quotation, a citation that does not say what we claim, a test applied inconsistently, an objection our rules had nowhere to put. One of the notes below exists because a reader raised exactly that last one. Corrections take the form of a change: <a href="https://github.com/debedb/elephants/issues/new">open an issue</a>, send a pull request, or fork it and apply different rules to the same claims, which would be more informative than either version alone.</p>
   <p><b>We grade whether a document carries a sentence. Never whether a claim is true.</b> Nothing here says any claim is false, and nothing here is about the people who made them. <a href="method.html">Why, and what else we refuse to do &rarr;</a></p>
@@ -2552,8 +2552,12 @@ tally.append(document.createTextNode(
   + (nContra ? ", and " + nContra + " is contradicted on a figure by the government\u2019s own accounting" : "")
   + ". Thirty of 3,466 cannot tell you whether any of that holds generally, and this page does not claim it does."));
 const prog = document.getElementById("progress");
-if (prog) { prog.textContent = "This is " + CLAIMS.length + " of " + DRAWN.length
-  + ". It is not a finished audit."; }
+if (prog) {
+  const parked = CLAIMS.filter(r => isParked(r)).length;
+  prog.textContent = CLAIMS.length + " of " + DRAWN.length + " drawn rows are worked"
+    + (parked ? ", and " + parked + " remains open because its artifact stayed out of reach" : "")
+    + ". The draw is complete; the audit is not a verdict on the dataset.";
+}
 
 // footer
 const adjudicated = CLAIMS.filter(r => r.status === "adjudicated").length;

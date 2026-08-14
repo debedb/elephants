@@ -2545,10 +2545,12 @@ tally.append(el("b", null,
   + nCarried + " carried whole, "
   + nOpen + " still open."));
 const nWorked = CLAIMS.filter(r => !isParked(r)).length;
+const nContra = CLAIMS.filter(r => verdictOf(r) === "contradicted in part").length;
 tally.append(document.createTextNode(
-  " Every one of the " + nWorked + " worked rows has the same shape \u2014 the act is documented and "
-  + "something adjacent to it is not, or does not. Four rows came out carried whole. On this sample "
-  + "that is the pattern, and thirty of 3,466 cannot tell you whether it holds generally."));
+  " In " + nPart + " of the " + nWorked + " worked rows the documented act holds and something adjacent "
+  + "to it does not \u2014 a date, a number, an attribution, a mood. " + nCarried + " came out carried whole"
+  + (nContra ? ", and " + nContra + " is contradicted on a figure by the government\u2019s own accounting" : "")
+  + ". Thirty of 3,466 cannot tell you whether any of that holds generally, and this page does not claim it does."));
 const prog = document.getElementById("progress");
 if (prog) { prog.textContent = "This is " + CLAIMS.length + " of " + DRAWN.length
   + ". It is not a finished audit."; }

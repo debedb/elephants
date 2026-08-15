@@ -162,6 +162,15 @@
   .punch-side p { margin: 0; font-size: 14.5px; color: var(--text-primary); }
   .punch-art { background: color-mix(in srgb, var(--cat-3) 7%, transparent); }
   .punch-side:first-child { background: color-mix(in srgb, var(--cat-1) 6%, transparent); }
+  .tldr {
+    border: 1px solid var(--border); border-left: 3px solid var(--cat-3);
+    background: var(--surface-1); border-radius: 10px;
+    padding: 18px 20px; margin: 6px 0 22px; max-width: 78ch;
+  }
+  .tldr-head { font-size: 19px; line-height: 1.35; color: var(--text-primary); margin: 0 0 10px; }
+  .tldr p { font-size: 14px; }
+  .tldr-limit { font-size: 12.8px; color: var(--text-muted); margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--border); }
+
   .epigraph {
     margin: 4px 0 22px; padding: 16px 0 16px 18px;
     border-left: 3px solid var(--cat-3); max-width: 78ch;
@@ -236,6 +245,12 @@
 
 <h1>Claims under audit</h1>
 <p class="repo">Part of <a href="https://github.com/debedb/elephants">github.com/debedb/elephants</a> &middot; <a href="method.html">the method, in full &rarr;</a></p>
+
+<div class="tldr">
+  <p class="tldr-head">Thirty claims, drawn at random. <b>The events are real. What gets dropped is always the hedge.</b></p>
+  <p id="tldr-body">Loading.</p>
+  <p class="tldr-limit">This is a finding about sentences. It is not a finding about the classifications the tracker assigns, which we do not adjudicate, nor about its method, which publishes its criteria and marks its judgements as opinion. Thirty rows out of 3,466 cannot tell you whether any of this holds generally. Everything below is the working.</p>
+</div>
 
 <blockquote class="epigraph">
   <p class="epi-line">Everything is arguable. The field is even, the ball is round. Everything must be in the open.</p>
@@ -2551,6 +2566,20 @@ tally.append(document.createTextNode(
   + "to it does not \u2014 a date, a number, an attribution, a mood. " + nCarried + " came out carried whole"
   + (nContra ? ", and " + nContra + " is contradicted on a figure by the government\u2019s own accounting" : "")
   + ". Thirty of 3,466 cannot tell you whether any of that holds generally, and this page does not claim it does."));
+const tl = document.getElementById("tldr-body");
+if (tl) {
+  const nW = CLAIMS.filter(r => !isParked(r)).length;
+  const nC = CLAIMS.filter(r => verdictOf(r) === "contradicted in part").length;
+  tl.textContent =
+    "No row in the sample described an event that did not happen. In " + nPart + " of " + nW + " worked rows "
+    + "the act is documented and something beside it is not: a date that belongs to the reporting rather than "
+    + "to the act, a qualification deleted from inside the very sentence being quoted, an attribution tightened "
+    + "by one hop, an anonymously sourced claim stated as fact. " + nCarried
+    + (nCarried === 1 ? " row came out whole" : " rows came out whole")
+    + (nC ? ", and " + nC + " states a figure the government\u2019s own accounting contradicts" : "")
+    + ". The omissions run one way. Nothing was ever dropped that would have made a claim stronger.";
+}
+
 const prog = document.getElementById("progress");
 if (prog) {
   const parked = CLAIMS.filter(r => isParked(r)).length;

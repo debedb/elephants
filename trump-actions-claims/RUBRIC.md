@@ -667,3 +667,53 @@ sentence into the picture. That is not merely a compression error; it is an
 attempt to make a cartoon carry a proposition, and the picture cannot carry one.
 The painting is unadjudicable and we do not adjudicate it. The sentence is a
 government statement and we do.
+
+## The qualifier is where the epistemics live, in both directions (v3)
+
+The finding this audit produced is not that a tracker drops hedges. It is that
+**the qualifier is the part of a sentence that decides what can be checked**, and
+that it can be manipulated in either direction by adding it or by removing it.
+
+| | operation | effect |
+|---|---|---|
+| **Narrowing** | *add* a qualifier | a denial that sounds complete but answers a smaller question |
+| **Broadening** | *remove* a qualifier | an assertion stronger than its source, sounding settled |
+
+The narrowing form is familiar enough to have a folk name. Answer "you took my
+money" with "I did not take your red wallet" and you have said something true,
+addressed nothing, and moved the argument onto the colour — where anyone who
+presses looks pedantic. "No *widespread* fraud" works the same way: the qualifier
+converts a denial into a narrower one while keeping the shape of a denial, and
+attacking it looks like litigating rounding error at national scale.
+
+The broadening form is what this sample found. Same operation, opposite sign.
+
+**Both are invisible unless the two texts are read side by side**, which is the
+only thing this page does. So the method catches both, and we happened to point
+it at a source that removes qualifiers rather than one that inserts them. Applied
+to the other direction it works identically: a claim that "officials found no
+election fraud" drops the qualifier and overstates; an argument that "they only
+ruled out *widespread* fraud, therefore fraud occurred" exploits the qualifier
+and overstates the other way. Neither matches the document, and the same test
+fails both.
+
+### A bias in our own instrument, recorded against us
+
+Scoring every removed qualifier as a loss assumes the qualifier was
+load-bearing. Sometimes it is. Sometimes it is a shield, and its removal is
+clarifying rather than distorting.
+
+Two of our own rows are genuinely ambiguous on this. A Homeland Security
+Secretary's "which we're not initiating yet" is either honest reporting of
+operational status or a deniability clause attached to a public threat. A
+Secretary's "I won't be specific on the number, but it's over 30" is either
+epistemic caution or a way of putting a figure into the world while declining
+to own it. We scored both removals as losses, which quietly rules the qualifiers
+sincere.
+
+**So our instrument systematically favours whoever hedged.** That is the mirror
+of the deflationary bias recorded at question 10 of `OPEN-QUESTIONS.md`, and it
+is why the page's summary now says only that the sentence is stronger than the
+document — a comparison of two texts — and takes no position on whether a given
+qualifier deserved to survive. Whether it did is a judgement about a speaker's
+purpose, which is motive, which is out of scope here.

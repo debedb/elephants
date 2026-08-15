@@ -376,6 +376,43 @@ judging. We think the line falls between **a test, which says where to look and
 is itself sourced**, and **a verdict, which renders a decision**. We are not
 confident that line holds under pressure.
 
+### 12. A rule that counts removed qualifiers favours whoever hedged
+
+Our audit of a third party's claims found that its sentences assert more than
+their documents do, and that the difference is almost always a qualifier the
+document contains and the sentence omits. Scoring each of those as a loss assumes
+the qualifier carried information. That assumption is not safe.
+
+A qualifier can be a shield. "I did not take your red wallet" answers a question
+nobody asked, and its precision is the point: it sounds like a denial, addresses
+a narrower claim, and makes anyone who presses look pedantic. "No *widespread*
+fraud" has the same structure. In cases like these the qualifier is doing
+defensive work, and stripping it arguably clarifies rather than distorts.
+
+Two of our own rows sit on this line. An official's "which we're not initiating
+yet" may be candour about operational status or a deniability clause attached to
+a public threat. Another's "I won't be specific on the number, but it's over 30"
+may be caution or a way of asserting a figure while declining to own it. We
+scored both removals as losses, which silently ruled the qualifiers sincere.
+
+**So the rule has a direction, and it points at the hedger's advantage.** It is
+the mirror of question 10: there we discount claims that cannot produce
+artifacts, here we credit speakers who attach conditions. Both are
+procedural inaccuracies that look like rigour.
+
+Our current answer is to narrow what the finding claims — the sentence is
+stronger than the document, and we say nothing about whether the qualifier
+deserved to survive. That keeps us inside the two things we can actually do, and
+it does mean declining the more interesting question. Whether a qualifier was
+sincere is a question about purpose, which is motive, which we do not adjudicate
+anywhere. We do not know whether that restraint is discipline or evasion.
+
+**The general form, which we think is the real result:** the qualifier is where
+the epistemics live. It can be added to narrow a claim or removed to broaden one,
+and both operations are invisible unless the two texts are read side by side.
+Any method that reads only one of them will miss the manipulation in whichever
+direction it is not looking.
+
 ## Prior art we are aware of
 
 Split into what we have verified and what we have not, because a reading list is

@@ -248,7 +248,7 @@
 
 <div class="banner">
   <p id="tally"><b>Loading.</b></p>
-  <p><b id="progress">This is not a finished audit.</b> The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a> and the rules were <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>, so no row can be dropped for coming out inconveniently. Every drawn row ships.</p>
+  <p><b id="progress">Loading.</b> The draw was <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/sample.json">committed before any row was read</a> and the rules were <a href="https://github.com/debedb/elephants/blob/master/trump-actions-claims/RUBRIC.md">frozen before the draw</a>, so no row can be dropped for coming out inconveniently. Every drawn row ships.</p>
   <p><b>The method is currently ahead of the evidence, and we would rather say so than have it noticed.</b> Six rows have been worked. In the same period the rubric went through three versions, nine defects were found in it, four corrections were made to this page, and three new questions were added to the repository\u2019s list of ones it cannot settle. That ratio is what an evolving work in progress looks like from the inside, and it means nothing here should be read as a result about the dataset. It is a method being built and tested on real rows, in the open, with the failures left visible.</p>
   <p><b>Adversarial review is the mechanism, not an attack on it.</b> This is open work and we do not object to anyone coming at it hard. The most useful thing anyone can send is a row where we got it wrong \u2014 a misread quotation, a citation that does not say what we claim, a test applied inconsistently, an objection our rules had nowhere to put. One of the notes below exists because a reader raised exactly that last one. Corrections take the form of a change: <a href="https://github.com/debedb/elephants/issues/new">open an issue</a>, send a pull request, or fork it and apply different rules to the same claims, which would be more informative than either version alone.</p>
   <p><b>We grade whether a document carries a sentence. Never whether a claim is true.</b> Nothing here says any claim is false, and nothing here is about the people who made them. <a href="method.html">Why, and what else we refuse to do &rarr;</a></p>
@@ -399,6 +399,57 @@ const TAXONOMY = {
     ],
     "2270": [
       "Anti-immigration or militarised nationalism"
+    ],
+    "1785": [
+      "Aggressive foreign policy and global destabilisation"
+    ],
+    "1595": [
+      "Aggressive foreign policy and global destabilisation"
+    ],
+    "1413": [
+      "Suppressing dissent or weaponising state against 'enemies'"
+    ],
+    "3228": [
+      "Politicisation of science and health"
+    ],
+    "2294": [
+      "Corruption and enrichment"
+    ],
+    "2827": [
+      "Anti-immigration or militarised nationalism"
+    ],
+    "2616": [
+      "Attacking universities, schools, museums and culture"
+    ],
+    "1949": [
+      "Politicisation of science and health"
+    ],
+    "1979": [
+      "Anti-immigration or militarised nationalism"
+    ],
+    "2013": [
+      "Politicisation of science and health"
+    ],
+    "1337": [
+      "Politicisation of science and health"
+    ],
+    "1784": [
+      "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "734": [
+      "Violating democrating norms or undermining rule of law"
+    ],
+    "1844": [
+      "Suppressing dissent or weaponising state against 'enemies'"
+    ],
+    "1420": [
+      "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "1592": [
+      "Controlling information, including spreading misinformation and propoganda"
+    ],
+    "2772": [
+      "Controlling information, including spreading misinformation and propoganda"
     ]
   }
 };
@@ -1088,6 +1139,852 @@ const CLAIMS = [
   },
 
   {
+    index: 1785,
+    date: "2025-11-11",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.msn.com/en-us/money/markets/trump-warns-of-devastating-3-trillion-hit-if-supreme-court-scraps-tariffs/ar-AA1QeU1c",
+    claim: "Trump Warns of \u2018devastating\u2019 $3 Trillion hit in a social media post if the Supreme Court (SCOTUS) "
+         + "rules against his tariffs. Goldman Sachs expects the decision to come in December or January 2026, "
+         + "with tariff refunds between $115 and $145 billion if the SCOTUS rules against Trump. The U.S. has "
+         + "collected $88 billion of tariff revenue this year under the Trump administration.",
+    punch: { claim: "The U.S. has collected $88 billion of tariff revenue this year",
+             artifact: "Customs Duties, fiscal year 2025, current fiscal-year-to-date: 194,865,739,872.82",
+             src: 0 },
+    nextStep: "A source for the $88 billion. The nearest reconciliation is that it counts only tariffs imposed under the emergency statute at issue in the case rather than all customs duties, which would put it in range for early November \u2014 but we could not source that figure to any document, and it is a hypothesis rather than a finding.",
+    clauses: [
+      { type: "quote", text: "Trump warned of a devastating $3 trillion hit in a social media post" },
+      { type: "act", text: "Goldman Sachs expects a decision in December or January with refunds of $115\u2013145bn" },
+      { type: "act", text: "the U.S. has collected $88 billion of tariff revenue this year" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9",
+        what: "U.S. Treasury, Monthly Treasury Statement Table 9, Customs Duties line, fiscal year 2025",
+        fetch: { by: "agent", route: "Treasury fiscal data API, identifying user agent", date: "2026-08-11", status: 200,
+                 note: "Queried and read directly. Prior fiscal year to date on the same record is 77,036,909,944.89." } },
+      { grade: "constitutive record", url: "https://www.supremecourt.gov/opinions/25pdf/24-1287_4gcj.pdf",
+        what: "Learning Resources, Inc. v. Trump, No. 24\u20131287, consolidated with No. 25\u2013250, decided 20 February 2026",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-11", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 1,
+        quote: "Argued November 5, 2025\u2014Decided February 20, 2026" },
+      predicate: { v: "supported", src: 1,
+        quote: "Held: IEEPA does not authorize the President to impose tariffs." },
+      date: { v: "n/a", note: "The claim carries the date of the post and the reporting, 11 November 2025. We reached neither the post nor the cited article directly \u2014 the post only as quoted, and the article\u2019s likely source refuses automated access \u2014 so we have no artifact against which to test the date, and record that rather than scoring it." },
+      modality: { v: "supported", src: 1,
+        quote: "Argued November 5, 2025\u2014Decided February 20, 2026",
+        note: "The claim reports a warning and a forecast, both of which are the right mood for what they describe: a statement made, and an expectation held." },
+      quantity: { v: "contradicted", src: 0,
+        quote: "194,865,739,872.82",
+        note: "The claim says the United States has collected $88 billion in tariff revenue this year. Treasury\u2019s own Monthly Treasury Statement records customs duties for fiscal year 2025 at $194,865,739,872.82, against $77,036,909,944.89 the year before. The claim understates the published total by roughly $107 billion. Marked contradicted rather than unsupported because a specific figure is asserted and the government\u2019s own accounting gives a different one." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "Two of the three forecasts attributed to Goldman Sachs turned out wrong, and the artifact that settles it is the judgment itself. The decision came on 20 February 2026, not in December or January. And the refund exposure was larger than the range given: the Court struck the tariffs outright, holding that the emergency statute does not authorise them at all.",
+      "The refunds are visible in the same Treasury series that contradicts the $88 billion. Monthly net customs duties turned negative in May and June 2026 \u2014 refunds exceeding collections \u2014 and the fiscal-year-to-date total fell from a peak of $188.6bn in April to $163.0bn in June.",
+      "On the part of the claim that is a quotation, Trump\u2019s own words support both \u201cdevastating\u201d and \u201c$3 trillion\u201d. One precision the claim loses: his $3 trillion is a figure for an \u201cunwind\u201d including \u201cinvestments made, to be made, and return of funds\u201d, not for a refund liability. The claim places it alongside Goldman\u2019s refund range as though the two were the same kind of number.",
+      "We could not read the article the row cites. Its likely proximate source refuses automated access from any agent, honest or otherwise, and that is recorded as a property of the host rather than worked around."
+    ],
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: [
+      { text: "The case was real, was argued when the reporting said, and was decided against the tariffs, so the premise the whole claim rests on was sound.",
+        src: 1, quote: "Held: IEEPA does not authorize the President to impose tariffs. The judgment in No. 24\u20131287 is vacated" },
+      { reasoning: "\u201cDevastating\u201d and the $3 trillion figure are his own words rather than a characterisation applied to him, and a market-news item reporting a presidential post and a bank\u2019s estimate is doing what such items do. The error is in a subordinate figure, not in the event." }
+    ],
+    againstClaim: [
+      { text: "The revenue figure is off against the government\u2019s own accounting by more than the figure itself.",
+        src: 0, quote: "194,865,739,872.82" },
+      { reasoning: "A number stated flatly, with no qualifier and no source, is the kind of claim a reader has no way to interrogate \u2014 and it is the one element here that a reader could most easily have checked, because Treasury publishes it monthly. The most likely reconciliation, that it counts only the tariffs at issue in the case rather than all customs duties, is exactly the sort of qualification the sentence omits." }
+    ]
+  },
+
+  {
+    index: 1595,
+    date: "2025-10-19",
+    rubric: 3,
+    status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/10/19/us/politics/trump-colombia-petro-aid.html",
+    claim: "Trump lashes out at Colombian president threatening cuts to aid following the Colombian president "
+         + "accusing the US of killing an innocent Colombian fisherman in international waters in one of its "
+         + "strikes on boats in international waters",
+    punch: { claim: "accusing the US of killing an innocent Colombian fisherman in international waters",
+             artifact: "Funcionarios del gobierno de los EEUU han cometido un asesinato y violado nuestra soberan\u00eda en aguas territoriales",
+             src: 1 },
+    nextStep: "Any United States statement identifying the strike Petro refers to. No announced strike for the date he gives was found, no US statement names the man, and the family\u2019s own petition gives a different date than he does.",
+    clauses: [
+      { type: "act", text: "Trump threatened cuts to aid" },
+      { type: "act", text: "Petro accused the US of killing a fisherman" },
+      { type: "characterization", text: "in international waters" }
+    ],
+    artifacts: [
+      { grade: "on the record", url: "https://trumpstruth.org/statuses/33356",
+        what: "Trump\u2019s post of 19 October 2025, 9:58 AM EDT, archived; the platform copy was later removed",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-11", status: 200 } },
+      { grade: "on the record", url: "https://x.com/petrogustavo/status/1979700160608206983",
+        what: "Gustavo Petro\u2019s post of 19 October 2025 00:04:33 UTC, in his own words",
+        fetch: { by: "agent", route: "public API, identifying user agent", date: "2026-08-12", status: 200,
+                 note: "Read directly in the original Spanish rather than through a translation or a summary." } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0,
+        quote: "President Gustavo Petro, of Colombia, is an illegal drug leader strongly encouraging the massive production of drugs" },
+      predicate: { v: "supported", src: 1,
+        quote: "El pescador Alejandro Carranza no ten\u00eda v\u00ednculos con el narco y sus actividad diaria era pescar." },
+      date: { v: "supported", src: 1,
+        quote: "Sun Oct 19 00:04:33 +0000 2025",
+        note: "Petro\u2019s accusation is timestamped by the platform to 19 October 00:04 UTC and Trump\u2019s post to 9:58 AM EDT the same day, so the sequence the claim asserts \u2014 the accusation first, the response after \u2014 is the sequence that occurred." },
+      modality: { v: "unsupported", src: 0,
+        quote: "AS OF TODAY, THESE PAYMENTS, OR ANY OTHER FORM OF PAYMENT, OR SUBSIDIES, WILL NO LONGER BE MADE TO COLOMBIA.",
+        note: "The claim says \u201cthreatening cuts to aid\u201d. The post does not threaten; it announces, in capitals, as accomplished. The claim understates what was said \u2014 and separately overstates what was done, since reporting more than two weeks later found no interruption to the assistance had occurred." },
+      quantity: { v: "n/a", note: "The claim asserts no number." },
+      baseRate: { v: "n/a", note: "The claim asserts neither novelty nor routineness." }
+    },
+    notes: [
+      "The phrase \u201cinternational waters\u201d appears twice in the claim and inverts what Petro said. His words, read in the original: \u201cviolado nuestra soberan\u00eda en aguas territoriales\u201d \u2014 violated our sovereignty in territorial waters. The day before he had written \u201cpresumiblemente estaba en aguas colombianas\u201d. The location is not incidental to his accusation; the sovereignty violation is its entire substance, and a killing in international waters would not be one.",
+      "\u201cInternational waters\u201d is the United States\u2019 characterisation of these strikes, and the claim attributes it to the man disputing it. The Secretary of War\u2019s post about a strike two days earlier uses exactly that phrase.",
+      "The claim\u2019s \u201cinnocent\u201d is Petro\u2019s characterisation and is reported as his. It is contested: Colombian media have reported a criminal record for the man, and prosecutors approached about those reports declined to confirm or deny them. We record the dispute and do not resolve it.",
+      "The strike itself has never been officially identified. No United States announcement exists for the date Petro gives, no US statement names the man, and the date is disputed between Petro and the family\u2019s own petition to the Inter-American Commission."
+    ],
+    rowSourcing: "named",
+    flags: ["characterization present"],
+    forClaim: [
+      { text: "Both principals are quoted from their own posts, in their own words, and the sequence the claim gives is the sequence that occurred.",
+        src: 0, quote: "Petro, a low rated and very unpopular leader, with a fresh mouth toward America, better close up these killing fields immediately, or the United States will close them up for him, and it won\u2019t be done nicely." },
+      { reasoning: "The core of the row \u2014 that a US president responded to a foreign head of state\u2019s accusation by announcing an end to payments and calling him a drug leader \u2014 is accurate and is carried by the post itself. Nothing about the event is in doubt." }
+    ],
+    againstClaim: [
+      { text: "The claim places the killing in international waters. Petro placed it in territorial waters, and that is the whole of his accusation.",
+        src: 1, quote: "violado nuestra soberan\u00eda en aguas territoriales" },
+      { reasoning: "Adopting one party\u2019s framing while reporting the other party\u2019s accusation is a specific kind of error, and it runs against the accuser here rather than for him. It also makes the accusation smaller than it was: a wrongful killing is one claim, a wrongful killing inside another state\u2019s waters is that claim plus a violation of sovereignty, which is what he actually alleged and what the two governments then argued about." }
+    ]
+  },
+
+  {
+    index: 1413, date: "2025-09-29", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.businessinsider.com/trump-threatens-nyc-federal-funding-zohran-mamdani-2025-9",
+    claim: "President Donald Trump threatened to withhold federal funding for New York City if the progressive "
+         + "Zohran Mamdani wins the mayoral election. Trump, who is from New York City, said the democratic "
+         + "socialist \"needs the money from me, as President, in order to fulfill all of his FAKE Communist "
+         + "promises. He won't be getting any of it, so what’s the point of voting for him?\" on Truth Social",
+    punch: { claim: "“needs the money from me, as President, in order to fulfill all of his FAKE Communist promises”",
+             artifact: "Remember, he needs the money from me, as President, in order to fulfill all of his FAKE Communist promises.",
+             src: 0 },
+    nextStep: "Nothing outstanding. The post is archived and was read in full.",
+    clauses: [ { type: "quote", text: "the quoted passage" }, { type: "act", text: "Trump threatened to withhold federal funding" } ],
+    artifacts: [
+      { grade: "on the record", url: "https://trumpstruth.org/statuses/33144",
+        what: "Trump’s Truth Social post of 29 September 2025, archived in full",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-14", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "President DJT" },
+      predicate: { v: "supported", src: 0,
+        quote: "Remember, he needs the money from me, as President, in order to fulfill all of his FAKE Communist promises. He won’t be getting any of it, so what’s the point of voting for him?" },
+      date: { v: "supported", src: 0, quote: "29 September 2025" },
+      modality: { v: "supported", src: 0, quote: "He won’t be getting any of it" },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The quotation is accurate but opens mid-sentence. The post reads “Remember, he needs the money from me”; the claim begins at “needs the money” with no ellipsis. The article it cites includes “Remember,”, so the truncation is the row’s.",
+      "The claim also renders one apostrophe straight and one curly, where the post uses curly throughout. Trivial in itself, and recorded because a quotation is the one thing on a page like this that should survive transcription unchanged."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "Every quoted word is in the post, in that order, and the characterisation of it as a funding threat is the plain sense of the sentence that follows.",
+        src: 0, quote: "He won’t be getting any of it, so what’s the point of voting for him?" },
+      { reasoning: "This is among the most faithful rows in the sample: the principal in his own words, archived, with the substance intact." }
+    ],
+    againstClaim: [
+      { text: "The quotation starts mid-sentence without marking the cut.",
+        src: 0, quote: "Remember, he needs the money from me, as President" },
+      { reasoning: "Dropping “Remember,” changes nothing about the meaning, which is why it is worth being precise about what the objection is: not distortion, but an unmarked edit inside quotation marks." }
+    ]
+  },
+
+  {
+    index: 3228, date: "2026-05-18", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.theguardian.com/us-news/2026/may/18/trump-administration-epa-pfas-water",
+    claim: "The Environmental Protection Agency (EPA) announced a plan to rescind a Biden-era rule that puts "
+         + "limits on four Pfas “forever chemicals” in drinking water, and to delay the implementation of "
+         + "standards for two other compounds.",
+    punch: { claim: "rescind a Biden-era rule that puts limits on four Pfas “forever chemicals”",
+             artifact: "Rescission of Regulatory Determinations and Removal of Related Provisions for Four PFAS Substances (PFHxS, PFNA, HFPO-DA (GenX), and the Mixture of These Three PFAS Plus PFBS)",
+             src: 0 },
+    nextStep: "Nothing outstanding. Both instruments were read from the Federal Register.",
+    clauses: [
+      { type: "plan", text: "EPA announced a plan to rescind" },
+      { type: "act", text: "limits on four PFAS" },
+      { type: "plan", text: "delay standards for two other compounds" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.federalregister.gov/documents/2026/05/20/2026-10085/rescission-of-regulatory-determinations-and-removal-of-related-provisions-for-four-pfas-substances",
+        what: "EPA proposed rule, published 20 May 2026",
+        fetch: { by: "agent", route: "Federal Register API, identifying user agent", date: "2026-08-14", status: 200 } },
+      { grade: "constitutive record", url: "https://www.federalregister.gov/documents/2026/05/20/2026-10086/extending-the-compliance-deadline-for-the-pfoa-and-pfos-maximum-contaminant-levels",
+        what: "EPA proposed rule extending the PFOA and PFOS compliance deadline, published 20 May 2026",
+        fetch: { by: "agent", route: "Federal Register API, identifying user agent", date: "2026-08-14", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "Environmental Protection Agency" },
+      predicate: { v: "supported", src: 0,
+        quote: "Rescission of Regulatory Determinations and Removal of Related Provisions for Four PFAS Substances" },
+      date: { v: "unsupported", src: 0,
+        note: "The row is dated 18 May, the day of EPA’s announcement. Both instruments were published 20 May." },
+      modality: { v: "supported", src: 0,
+        quote: "Notice of proposed rule; request for public comment; notice of public hearing.",
+        note: "The claim says “announced a plan”, which is the right mood: these are proposals open for comment, not completed rescissions." },
+      quantity: { v: "unsupported", src: 0,
+        quote: "PFHxS, PFNA, HFPO-DA (GenX), and the Mixture of These Three PFAS Plus PFBS",
+        note: "The claim says four PFAS chemicals. EPA’s own title lists three compounds and, as the fourth item, a standard for a mixture of those three plus a fourth substance. The count is right; the description of what is counted is not, because a mixture standard is not a chemical." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The second instrument is narrower than “delay the implementation of standards” suggests: the extension is not automatic. Systems must request it and meet criteria, and those that do not remain bound by the original deadline."
+    ],
+    rowSourcing: "named", flags: ["plan not act"],
+    forClaim: [
+      { text: "The instruments exist, do what the row says, and are titled almost in the row’s own words.",
+        src: 0, quote: "Rescission of Regulatory Determinations and Removal of Related Provisions for Four PFAS Substances" },
+      { reasoning: "“Announced a plan” is exactly right for a proposed rule, which is the modality error this page most often finds. Here the row gets it right." }
+    ],
+    againstClaim: [
+      { text: "The fourth item is a mixture standard, not a fourth forever chemical.",
+        src: 0, quote: "the Mixture of These Three PFAS Plus PFBS" },
+      { reasoning: "And the two-compound delay is an opt-in exemption on request rather than a blanket postponement, which is a materially different thing for anyone asking what changes for their water system." }
+    ]
+  },
+
+  {
+    index: 2294, date: "2026-01-17", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.theguardian.com/us-news/2026/jan/17/trump-pardon-woman-repeat-fraud",
+    claim: "Donald Trump has pardoned a woman who ended up imprisoned for fraud a second time after he afforded "
+         + "her clemency during his first presidency. The Camberoses were among 13 pardons Trump issued on "
+         + "Thursday, along with eight commutations. Others were for the father of a large donor to his super "
+         + "PAC and former governor of Puerto Rico Wanda Vázquez, who had pleaded guilty to a campaign finance "
+         + "violation.",
+    punch: { claim: "among 13 pardons Trump issued on Thursday, along with eight commutations",
+             artifact: "January 15, 2026 - 12 Pardons … January 15, 2026 - 8 Commutations … January 16, 2026 - 1 Pardon",
+             src: 0 },
+    nextStep: "Nothing outstanding on the counts. The pardon warrant for the campaign-finance case is dated three days after this claim, which is what the row would need to be reconciled with.",
+    clauses: [
+      { type: "act", text: "13 pardons on Thursday and eight commutations" },
+      { type: "act", text: "a pardon for a woman previously granted clemency" },
+      { type: "act", text: "a pardon for Wanda Vázquez, who pleaded guilty to a campaign finance violation" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.justice.gov/pardon/clemency-grants-president-donald-j-trump-2025-present",
+        what: "Department of Justice, Office of the Pardon Attorney, official clemency list",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-14", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "clemency-grants-president-donald-j-trump" },
+      predicate: { v: "supported", src: 0, quote: "January 15, 2026 - 8 Commutations" },
+      date: { v: "supported", src: 0, quote: "January 15, 2026",
+        note: "15 January 2026 was a Thursday, which is the day the claim gives." },
+      modality: { v: "supported", src: 0, quote: "January 15, 2026 - 12 Pardons" },
+      quantity: { v: "unsupported", src: 0, quote: "January 15, 2026 - 12 Pardons",
+        note: "The claim says 13 pardons on Thursday. The Department’s own list gives 12 for Thursday 15 January and a further single pardon for Friday 16 January. The eight commutations match exactly." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The clause about Wanda Vázquez does not fit the day the claim describes. The warrant issued on 15 January covers her bribery case. The pardon covering the campaign-finance offence she pleaded to is a separate, amended warrant dated 20 January — three days after this claim was published. On the date given, she had not been pardoned for the thing the claim says she was pardoned for.",
+      "Both names the claim turns on are on the list, which is why the row is largely right: Camberos and Vazquez both appear."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "The commutation count is exact and both principals named in the claim are on the Department’s own list.",
+        src: 0, quote: "January 15, 2026 - 8 Commutations" },
+      { reasoning: "A one-off discrepancy between a contemporaneous announcement and a later-corrected list is an ordinary hazard of same-day reporting, and the wire copy the row follows appears to have counted a Friday pardon into a Thursday total." }
+    ],
+    againstClaim: [
+      { text: "The Department lists twelve pardons for that Thursday, not thirteen.",
+        src: 0, quote: "January 15, 2026 - 12 Pardons" },
+      { reasoning: "And the Vázquez clause attaches the wrong case to the date. The campaign-finance pardon is a separate instrument signed after this claim was written, so on the day described the claim states something that had not yet happened." }
+    ]
+  },
+
+  {
+    index: 2827, date: "2026-03-22", rubric: 3, status: "adjudicated",
+    citedUrl: "https://edition.cnn.com/2026/03/22/politics/homan-ice-security-airports",
+    claim: "Border czar Tom Homan will be in charge of deploying Immigration and Customs Enforcement (ICE) "
+         + "agents to airports. According to Homan, agents will help with security at entrances and exits to "
+         + "ease the Transportation Security Administration’s (TSA) workload.",
+    punch: { claim: "agents will help with security at entrances and exits",
+             artifact: "you got TSA agents covering exits, people that enter through the exits. Certainly, a highly trained ICE law enforcement officer can cover an exit and makes sure people don’t go through those exits, entering the airport through the exits.",
+             src: 0 },
+    nextStep: "Any official instrument for the deployment. No executive order, departmental directive or agency release announcing it was located; the only presidential action found on the crisis is a memorandum about TSA pay, which mentions neither ICE nor Homan.",
+    clauses: [
+      { type: "act", text: "Homan will be in charge of deploying ICE agents to airports" },
+      { type: "quote", text: "agents will help with security at entrances and exits" },
+      { type: "plan", text: "to ease the TSA’s workload" }
+    ],
+    artifacts: [
+      { grade: "on the record", url: "https://transcripts.cnn.com/show/sotu/date/2026-03-22/segment/01",
+        what: "CNN State of the Union transcript, 22 March 2026, Homan interviewed by Dana Bash",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-14", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 0,
+        quote: "HOMAN: Yes. And I’m currently working on the plan now of execution, working with the director of ICE and administrator at TSA, the acting administrator.",
+        note: "“In charge of deploying” is not his description of his own role, nor any document’s. It reaches the claim from the interviewer’s question, which paraphrased a presidential post saying he “is in charge” with no object. Asked directly, he described working on a plan jointly with two agency heads." },
+      predicate: { v: "supported", src: 0, quote: "we will be at airports tomorrow helping TSA move those lines along" },
+      date: { v: "supported", src: 0, quote: "2026-03-22" },
+      modality: { v: "unsupported", src: 0, quote: "So it’s a work in progress",
+        note: "The claim states a settled arrangement. On the day, airports and numbers were expressly undecided; he said the discussion was continuing after the broadcast." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "“Entrances and exits” is not what he said. He said “exits” four times in the same answer, describing people entering through exits — a single scenario, not two posts. The paired phrase appears in the network’s own summary of the interview, which the claim reproduces almost word for word.",
+      "The claim gives the mission as easing TSA workload. In the same interview he also said immigration enforcement at airports would continue unchanged, which the claim omits."
+    ],
+    rowSourcing: "named", flags: ["plan not act"],
+    forClaim: [
+      { text: "He confirmed the deployment on the record, in his own name, for the next day.",
+        src: 0, quote: "we will be at airports tomorrow helping TSA move those lines along" },
+      { reasoning: "And the substance of the assisting role is his: covering exits so that screening officers can return to screening. On what ICE would be doing, the row reports him accurately." }
+    ],
+    againstClaim: [
+      { text: "Asked whether he was in charge, he described a joint plan in progress rather than a command.",
+        src: 0, quote: "I’m currently working on the plan now of execution, working with the director of ICE and administrator at TSA" },
+      { reasoning: "The row reads as though an arrangement existed and a person led it. The transcript shows a plan being written during the broadcast, with the airports not yet chosen, and no instrument was ever published to settle who was responsible for what." }
+    ]
+  },
+
+  {
+    index: 2616, date: "2026-02-23", rubric: 3, status: "adjudicated",
+    citedUrl: "https://thehill.com/homenews/education/5751248-education-department-trump-mcmahon/",
+    claim: "The Education Department (DoE) announced plans to move two more programs to other federal agencies "
+         + "amid President Trump’s effort to “break up the federal education bureaucracy”. HHS (Health and Human "
+         + "Services) will take some control of family engagement and school support programs, while the State "
+         + "Department will take on responsibilities for Section 117 foreign gift reporting requirements for "
+         + "universities.",
+    punch: { claim: "the State Department will take on responsibilities for Section 117",
+             artifact: "State will partner with ED on the Section 117 foreign gift reporting, and HHS will partner with ED on family engagement and school support programs.",
+             src: 0 },
+    nextStep: "The interagency agreements themselves are published but the Section 117 one is an image-only scan with no text layer, so its operative clauses were read by another party through optical character recognition rather than by us directly.",
+    clauses: [
+      { type: "act", text: "ED announced two agreements moving programs to other agencies" },
+      { type: "act", text: "State will take on Section 117 responsibilities" }
+    ],
+    artifacts: [
+      { grade: "party account", url: "https://www.ed.gov/about/news/press-release/us-department-of-education-announces-additional-partnerships-break-federal-education-bureaucracy",
+        what: "Education Department press release, 23 February 2026 — the Department describing its own conduct",
+        fetch: { by: "agent", route: "curl, identifying user agent", date: "2026-08-14", status: 200 } },
+      { grade: "constitutive record", url: "https://www.ed.gov/media/document/interagency-agreement-ed-and-state-department-section-117-february-23-2026-113310.pdf",
+        what: "The interagency agreement between Education and State on Section 117",
+        fetch: { by: "human", route: "downloaded, but the file is an image-only scan; its text was extracted by a research agent using optical character recognition, not read by us directly", date: "2026-08-14", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "The U.S. Department of Education (ED) today announced two new interagency agreements" },
+      predicate: { v: "unsupported", src: 0,
+        quote: "State will partner with ED on the Section 117 foreign gift reporting, and HHS will partner with ED on family engagement and school support programs.",
+        note: "The Department’s own verb is “partner with”. The claim’s verbs are “move”, “take some control” and “take on responsibilities”. The release adds “With proper oversight by ED” for the HHS side, and the agreement has State acting at ED’s direction with the reporting portal still run by Education staff detailed to State. Responsibility is shared in the instrument and transferred in the claim." },
+      date: { v: "unsupported", src: 0,
+        note: "The row carries 23 February, the announcement date. Both agreements were signed 20 February." },
+      modality: { v: "supported", src: 0, quote: "today announced two new interagency agreements" },
+      quantity: { v: "unsupported", src: 0,
+        quote: "The U.S. Department of Education (ED) today announced two new interagency agreements",
+        note: "The claim counts two programs. There are two agreements; the health-agency one alone covers six named grant programmes." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The quoted phrase in the claim is genuine: “break up the federal education bureaucracy” is the Department’s own language, used in the release’s headline and its first sentence."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "The agreements exist, on the date given, and the quoted phrase is the Department’s own.",
+        src: 0, quote: "to further break up the federal education bureaucracy" },
+      { reasoning: "Reporting a partnership as a transfer is the natural reading of what a partnership of this kind does, and the Department’s framing is the one with an interest in sounding modest. The row follows the announcement it cites." }
+    ],
+    againstClaim: [
+      { text: "Every departmental verb is weaker than the claim’s, and one adds an explicit reservation.",
+        src: 0, quote: "With proper oversight by ED, HHS will manage competitions, provide technical assistance" },
+      { reasoning: "Two agreements are also not two programmes. The count reads as small when the underlying scope is larger, which is an unusual direction for an error on this page." }
+    ]
+  },
+
+  {
+    index: 1949, date: "2025-12-02", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/interactive/2025/12/02/upshot/trump-science-funding-cuts.html",
+    claim: "The US is funding fewer grants in every area of medicine and science this year compared to previous "
+         + "years",
+    punch: { claim: "fewer grants in every area of medicine and science",
+             artifact: "Of 25 National Institutes of Health institutes and 11 National Science Foundation directorates, none rose. Grant counts fell in all 36.",
+             src: 0 },
+    nextStep: "The cited interactive itself, which we could not locate at any address. Its data source and method are therefore unverified and nothing here characterises them.",
+    clauses: [ { type: "act", text: "fewer grants funded this year in every area" } ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://api.reporter.nih.gov/v2/projects/search",
+        what: "National Institutes of Health RePORTER, project counts by institute and fiscal year, subprojects excluded",
+        fetch: { by: "human", route: "queried by a research agent and re-run with an identifying user agent; totals reproduced byte-identically", date: "2026-08-11", status: 200 } },
+      { grade: "constitutive record", url: "https://api.usaspending.gov/api/v2/search/spending_by_award_count/",
+        what: "USAspending, new National Science Foundation awards by fiscal year and programme",
+        fetch: { by: "human", route: "queried by a research agent with an identifying user agent", date: "2026-08-11", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "National Institutes of Health" },
+      predicate: { v: "supported", src: 0,
+        quote: "NIH grant counts: FY2024 72,461; FY2025 65,818. NSF new grants: FY2024 11,678; FY2025 9,242.",
+        note: "Counts fell at every level tested." },
+      date: { v: "n/a", note: "The claim gives no date for an act; it describes a fiscal year." },
+      modality: { v: "supported", src: 0, quote: "FY2025 65,818" },
+      quantity: { v: "supported", src: 0,
+        quote: "0 of 25 institutes rose; 0 of 11 directorates rose",
+        note: "This is a universal claim, falsifiable by a single counterexample, and no counterexample exists in the data we queried. One series was non-monotonic earlier — education grants rose in the prior year before falling — but nothing rose in the year the claim concerns." },
+      baseRate: { v: "supported", src: 0,
+        quote: "NIH: FY2021 71,283; FY2022 72,630; FY2023 73,765; FY2024 72,461; FY2025 65,818",
+        note: "The comparison class the claim implies is prior years, and the series supplies it: FY2025 is below all four preceding years." }
+    },
+    notes: [
+      "The universal survives on counts and would fail on money. Obligations fell far less than grant numbers — about a tenth for the science foundation and under two per cent for the health institutes — and separate reporting found total commitments roughly flat. The claim’s verb is “funding fewer grants”, which is a count, so it holds. Had it said funding was cut, it would not.",
+      "One methodological choice changes the totals materially: including subprojects raises the health figures by roughly a seventh. The comparison is held constant across years either way, and the direction does not change."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "A universal claim, tested against the agencies’ own data at the finest granularity available, with no counterexample.",
+        src: 0, quote: "0 of 25 institutes rose; 0 of 11 directorates rose" },
+      { reasoning: "Universals are the easiest claims to break and this one did not break. That is worth stating plainly, because most rows on this page fail on some clause and this one fails on none we could test." }
+    ],
+    againstClaim: [
+      { text: "The same data shows money holding up far better than counts, so a reader who takes “funding fewer grants” to mean “spending less” would be misled by a claim that is literally accurate.",
+        src: 0, quote: "NIH grant counts: FY2024 72,461; FY2025 65,818. NSF new grants: FY2024 11,678; FY2025 9,242." },
+      { reasoning: "And we never reached the cited interactive, so we verified the claim against the underlying agency data rather than against the analysis the row points at. Those could differ in method, and we cannot say they agree." }
+    ]
+  },
+
+  {
+    index: 1979, date: "2025-12-05", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.reuters.com/world/us/us-expanding-list-countries-travel-ban-more-than-30-noem-says-2025-12-05/",
+    claim: "The U.S. plans to expand the number of countries covered by its travel ban to more than 30, U.S. "
+         + "Homeland Security Secretary Kristi Noem said on Thursday.",
+    punch: { claim: "plans to expand … to more than 30",
+             artifact: "I won’t be specific on the number, but it’s over 30, and the president is continuing to evaluate countries",
+             src: 1 },
+    nextStep: "Any departmental record of the remark. No statement, transcript or video was found on the department’s site or the broadcaster’s; custody for her words is reporting only.",
+    clauses: [ { type: "plan", text: "the US plans to expand the ban to more than 30 countries" }, { type: "quote", text: "Noem said it" } ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.federalregister.gov/documents/2025/12/19/2025-23570/restricting-and-limiting-the-entry-of-foreign-nationals-to-protect-the-security-of-the-united-states",
+        what: "Proclamation 10998, signed 16 December 2025 — the act the statement anticipated",
+        fetch: { by: "human", route: "Federal Register, fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } },
+      { grade: "named reporting", url: "https://www.reuters.com/world/us/us-expanding-list-countries-travel-ban-more-than-30-noem-says-2025-12-05/",
+        what: "The article the row cites; the remark was made in a broadcast interview",
+        fetch: { by: "human", route: "fetched by a research agent via a stealth proxy after curl returned 401", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 1, quote: "Noem said" },
+      predicate: { v: "supported", src: 0,
+        quote: "Restricting and Limiting the Entry of Foreign Nationals To Protect the Security of the United States",
+        note: "The expansion did occur, eleven days later, by proclamation." },
+      date: { v: "unsupported", src: 1,
+        note: "The row is dated 5 December, the publication date. The article’s own dateline is 4 December, the day of the interview." },
+      modality: { v: "supported", src: 1, quote: "the president is continuing to evaluate countries",
+        note: "The claim reports a plan, and a plan is what she described." },
+      quantity: { v: "unsupported", src: 1,
+        quote: "I won’t be specific on the number, but it’s over 30",
+        note: "The substance of “more than 30” is hers. The claim drops the refusal that precedes it in the same sentence, and states as a plan what she declined to put a number on. The figure the interviewer put to her — 32 — she did not accept." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "Custody here is thin in a way worth naming. Nothing published by the department or the broadcaster records the remark; it exists for us only as transcribed by news organisations. Where those transcriptions differ they differ trivially, in punctuation, but there is no artifact behind them."
+    ],
+    rowSourcing: "named", flags: ["plan not act"],
+    forClaim: [
+      { text: "The plan was real and became an instrument within a fortnight, so the claim reported something that happened.",
+        src: 0, quote: "Restricting and Limiting the Entry of Foreign Nationals To Protect the Security of the United States" },
+      { reasoning: "“More than 30” is her own formulation, not a reporter’s inference, and she said it on the record under her own name." }
+    ],
+    againstClaim: [
+      { text: "She prefaced the number with a refusal to give one, and the claim keeps the number and drops the refusal.",
+        src: 1, quote: "I won’t be specific on the number, but it’s over 30" },
+      { reasoning: "A hedge removed from inside a quoted sentence is the recurring pattern on this page, and it is the third row in the sample where the qualification sits in the very clause the claim reproduces." }
+    ]
+  },
+
+  {
+    index: 2013, date: "2025-12-09", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-launches-fresh-safety-scrutiny-approved-rsv-therapies-infants-2025-12-09/",
+    claim: "U.S. health regulators informed senior executives at Merck, Sanofi and AstraZeneca last week that "
+         + "their approved protective RSV treatments for infants would face fresh safety scrutiny following "
+         + "concerns raised by vaccine skeptics.",
+    punch: { claim: "U.S. health regulators informed senior executives … would face fresh safety scrutiny",
+             artifact: "… multiple sources familiar with the situation told Reuters.",
+             src: 1 },
+    nextStep: "Any published regulatory record. Searches of the agency’s drug-safety communications, biologics safety pages, press announcements and the quarterly signal listing for the period found nothing; the earliest published entry for one of these products is in the following year’s quarterly.",
+    clauses: [ { type: "act", text: "regulators informed executives that the treatments would face scrutiny" } ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/october-december-2025-new-safety-information-or-potential-signals-serious-risks-identified-fda",
+        what: "The agency’s own quarterly listing of new safety signals for the quarter containing the claim — a negative result: neither product appears",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } },
+      { grade: "named reporting", url: "https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-launches-fresh-safety-scrutiny-approved-rsv-therapies-infants-2025-12-09/",
+        what: "The article the row cites",
+        fetch: { by: "human", route: "fetched by a research agent via a stealth proxy after curl returned 401", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 1,
+        quote: "multiple sources familiar with the situation told Reuters",
+        note: "The article attributes its central assertion to unnamed sources. This repository does not admit claims resting on unnamed sources, so no admissible artifact supports it. A named departmental spokesman is quoted in the same piece, but on the agency’s general practice rather than on the meeting." },
+      predicate: { v: "unsupported", src: 0,
+        note: "Nothing in the agency’s published record for that quarter concerns either product. The absence is not evidence the meeting did not happen — a call to companies would not appear in a safety-signal listing — but it is the whole of what we can check." },
+      date: { v: "supported", src: 1, quote: "2025-12-09" },
+      modality: { v: "supported", src: 1, quote: "multiple sources familiar with the situation told Reuters",
+        note: "The claim reports a completed act of notification, which is what the reporting describes." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The claim reproduces the article’s opening sentence almost word for word and deletes the attribution clause at its end. What the source presents as anonymously sourced, the claim states as fact. This is the same operation found on another row in this sample, and it is the single most consequential edit a tracker can make to a wire lede.",
+      "The reporting is also narrower than the claim in one respect: it describes a call telling companies to expect further questions, and says the call did not specify what data might be requested."
+    ],
+    rowSourcing: "anonymous", flags: ["anonymous sourcing"],
+    forClaim: [
+      { text: "The agency did later record a safety signal for one of the products, so the subject matter was real even if the meeting is unverifiable.",
+        src: 0, quote: "October – December 2025" },
+      { reasoning: "The outlet is one that discloses its sourcing conditions in its own text and reached the department for comment. Removing the attribution is the tracker’s edit, not the reporter’s." }
+    ],
+    againstClaim: [
+      { text: "The attribution the claim removes is the article’s own account of what its assertion rests on.",
+        src: 1, quote: "multiple sources familiar with the situation told Reuters" },
+      { reasoning: "Nothing published by the agency records the notification, and a reader who wants to check the claim has nowhere to go. Presenting it flatly gives no signal that this is so." }
+    ]
+  },
+
+  {
+    index: 1337, date: "2025-09-20", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.independent.co.uk/news/world/americas/us-politics/trump-epa-scientists-water-research-b2830523.html",
+    claim: "Scientists at the Environmental Protection Agency’s Office of Water, which ensures drinking water is "
+         + "safe, have been instructed by Trump officials to halt publishing ongoing research in an "
+         + "“unprecedented” move",
+    punch: { claim: "in an “unprecedented” move",
+             artifact: "Both employees said that the imposition of this type of review is unprecedented — reported speech, not a quotation. No one is quoted using the word.",
+             src: 0 },
+    nextStep: "Any memorandum, email or directive. None is cited, quoted or linked by any account; the mechanism is described only as an oral meeting.",
+    clauses: [
+      { type: "act", text: "scientists were instructed to halt publishing" },
+      { type: "characterization", text: "unprecedented" }
+    ],
+    artifacts: [
+      { grade: "named reporting", url: "https://www.washingtonpost.com/climate-environment/2025/09/20/epa-scientists-research-publications/",
+        what: "The originating report, which the cited article aggregates; read through an archived copy after the publisher returned 403",
+        fetch: { by: "human", route: "publisher 403; text obtained by a research agent from an archived copy and a syndicated reprint", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 0,
+        quote: "according to two agency employees familiar with the matter who spoke on the condition of anonymity because they were not authorized to speak publicly",
+        note: "The instruction rests on two unnamed employees. The agency denied it on the record. No admissible artifact supports the act." },
+      predicate: { v: "unsupported", src: 0,
+        note: "No document is cited by any account. The originating report later carried a correction narrowing its own framing: the decision was made by political appointees but conveyed by career staff, and the headline was revised to say only some scientists received the message." },
+      date: { v: "supported", src: 0, quote: "2025-09-20" },
+      modality: { v: "supported", src: 0, quote: "halt publishing" },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "unsupported", src: 0,
+        quote: "Both employees said that the imposition of this type of review is unprecedented",
+        note: "No reference class is produced by anyone. The assertion of novelty is the two anonymous employees’ own, reported indirectly." }
+    },
+    notes: [
+      "The quotation marks around “unprecedented” have no speaker behind them. The originating text is reported speech — “Both employees said that the imposition of this type of review is unprecedented” — with no quotation marks. The aggregating article scare-quoted the word in its opening line while its own body correctly calls it a paraphrase, and the claim inherited the marks. A reader sees a quoted word and looks for who said it; nobody did, in those words.",
+      "The claim also names a different publication than the one that reported it. Its wording is the aggregator’s, and no article on this subject exists at the outlet the row appears to credit."
+    ],
+    rowSourcing: "anonymous", flags: ["anonymous sourcing", "characterization present"],
+    forClaim: [
+      { text: "The account is specific about how thin it is, which is more than the claim conveys.",
+        src: 0, quote: "according to two agency employees familiar with the matter who spoke on the condition of anonymity" },
+      { reasoning: "Later reporting from a different office does document a comparable review process in writing, so the practice the claim describes is not fanciful — but that is a different office and six months later, and it is not evidence for this." }
+    ],
+    againstClaim: [
+      { text: "The word in quotation marks was said by no one.",
+        src: 0, quote: "Both employees said that the imposition of this type of review is unprecedented" },
+      { reasoning: "Two anonymous sources, no document, an on-the-record denial, and a subsequent correction to the originating report’s central framing. Quotation marks around a paraphrase are a small typographic act with a large effect: they convert an inference into testimony." }
+    ]
+  },
+
+  {
+    index: 1784, date: "2025-11-11", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.independent.co.uk/news/world/americas/us-politics/bari-weiss-cbs-news-standards-and-practices-b2862631.html",
+    claim: "There are growing concerns within CBS News that Bari Weiss could gut or even disband the network’s "
+         + "Standards and Practices team, with multiple sources saying that the new editor-in-chief has "
+         + "complained that the unit has “too much power” and she doesn’t see the point of keeping it around. "
+         + "The Standards and Practices team are responsible for upholding journalistic standards. The network "
+         + "disbanded its vaunted Race and Culture unit during parent company Paramount’s layoffs last month",
+    punch: { claim: "could gut or even disband the network’s Standards and Practices team",
+             artifact: "Every substantive assertion is attributed to unnamed people. No named source supports any of it, and no document establishes that the unit was gutted or disbanded, then or since.",
+             src: 0 },
+    nextStep: "Any on-the-record statement from the network or its parent. None was found at publication or since, not even a declination to comment beyond the individual’s own non-response.",
+    clauses: [
+      { type: "plan", text: "Weiss could gut or disband the Standards and Practices team" },
+      { type: "quote", text: "she complained the unit has too much power" },
+      { type: "act", text: "the Race and Culture unit was disbanded during layoffs" }
+    ],
+    artifacts: [
+      { grade: "named reporting", url: "https://www.independent.co.uk/news/world/americas/us-politics/bari-weiss-cbs-news-standards-and-practices-b2862631.html",
+        what: "The article the row reproduces",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "unsupported", src: 0,
+        quote: "with multiple sources telling",
+        note: "Every attribution in the piece is to unnamed people: one reporter, one insider twice, another senior staffer, sources. Nobody is named. The only response line is that the individual did not immediately respond to a request for comment, and there is no statement from the network or its parent at all." },
+      predicate: { v: "unsupported", src: 0,
+        note: "The operative verbs are conditional — could gut, could disband — and remain unrealised in any record we could find, then or since." },
+      date: { v: "supported", src: 0, quote: "2025-11-11" },
+      modality: { v: "supported", src: 0, quote: "could gut or even disband",
+        note: "The claim reports concerns about a possible future act, and that is what the article describes. The mood is right; it is the basis that is absent." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The last sentence is the only part with independent footing: the disbanding of a different unit during the parent company’s layoffs is separately documented.",
+      "This is the thinnest row in the sample by the standard this repository applies. It is not a claim that anything happened; it is a report that unnamed people are worried something might. That is a legitimate thing for a newspaper to publish and an unusual thing for a tracker of actions to carry as an entry."
+    ],
+    rowSourcing: "anonymous", flags: ["anonymous sourcing", "plan not act"],
+    forClaim: [
+      { text: "The claim is careful about its own basis in a way many rows are not: it says “growing concerns” and “multiple sources”, so a reader is told this is not established.",
+        src: 0, quote: "with multiple sources telling" },
+      { reasoning: "And its final clause about the other unit is accurate and independently documented, so the row is not wholly without footing." }
+    ],
+    againstClaim: [
+      { text: "Nobody is named anywhere in the piece, and no institution responded on the record.",
+        src: 0, quote: "with multiple sources telling" },
+      { reasoning: "An entry recording that unnamed people fear a future act sits outside what this method can examine at all. We record it as unsupported rather than false, and note that our rule and the row’s own subject matter simply do not meet." }
+    ]
+  },
+
+  {
+    index: 734, date: "2025-07-15", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/07/15/us/politics/justice-department-dismissals-civil-service-laws.html",
+    claim: "Justice Department (DOJ) political leadership claims sweeping authority to fire career law "
+         + "enforcement officials without cause, bypassing Civil Service and Whistleblower laws",
+    punch: { claim: "claims sweeping authority to fire career law enforcement officials without cause",
+             artifact: "Because Senior Executive Service officials exercise significant executive power, they are generally removable without cause under Article II.",
+             src: 0 },
+    nextStep: "The Department’s own brief. It is identified — a nineteen-page filing — but hosted on a document platform that blocks downloads, so every departmental quotation available to us is as reproduced inside an opposing filing.",
+    clauses: [
+      { type: "act", text: "the Department asserted authority to fire without cause" },
+      { type: "characterization", text: "sweeping" },
+      { type: "act", text: "career law enforcement officials" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://web.archive.org/web/2025/https://democracyforward.org/wp-content/uploads/2025/08/Oyer-Tab-24-Response-to-Agencys-07-15-2025-Response-to-5-22-2025-Order-and-Summary-of-Status-Conference.pdf",
+        what: "Filing before the Merit Systems Protection Board quoting the Department’s assertions with page citations",
+        fetch: { by: "human", route: "publisher blocks scripted access regardless of agent; obtained by a research agent from an archived copy", date: "2026-08-10", status: 200 } },
+      { grade: "constitutive record", url: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title5-section7543&num=0&edition=prelim",
+        what: "5 U.S.C. 7543, the removal standard governing career Senior Executive Service employees",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "The Agency nonetheless claims" },
+      predicate: { v: "supported", src: 0,
+        quote: "Because Senior Executive Service officials exercise significant executive power, they are generally removable without cause under Article II." },
+      date: { v: "unsupported", src: 0,
+        note: "The filing the claim describes is dated 17 July in the docket index and in the file’s own name, though an opposing filing refers to responses filed on 15 July. The row carries 15 July; the reporting appeared on the 17th." },
+      modality: { v: "supported", src: 0, quote: "The Agency nonetheless claims",
+        note: "The claim reports an assertion of authority, which is what a litigating position is. It does not say the authority exists." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The people at issue are not law enforcement officials. The case concerns the Pardon Attorney, a career Senior Executive Service lawyer; the parallel cases concern immigration judges. No filing about agents was located.",
+      "The governing statute is also not the one usually cited for this. Career Senior Executive Service removals run under a provision permitting removal only for misconduct, neglect of duty, malfeasance or refusal of reassignment — a narrower standard than the general civil-service one, and the relevant text for what “without cause” would displace.",
+      "A custody limit worth stating plainly: we never read the Department’s brief. It is hosted on a platform that returns a download-blocked response, and every quotation of the Department here is as reproduced inside a filing by the party opposing it. Those quotations carry page citations and are made in a tribunal, which is better than most secondhand quotation — but it is still the other side’s rendering."
+    ],
+    rowSourcing: "named", flags: ["characterization present"],
+    forClaim: [
+      { text: "The assertion is quoted with a page citation in a filing before the tribunal hearing the case, which is a high grade of secondhand quotation.",
+        src: 0, quote: "Because Senior Executive Service officials exercise significant executive power, they are generally removable without cause under Article II." },
+      { reasoning: "And “without cause” is the Department’s own phrase rather than a characterisation applied to it. On the substance of what was argued, the row is right." }
+    ],
+    againstClaim: [
+      { text: "The statutory standard for these employees is narrow and specific, which is what makes the assertion notable and also what the claim misdescribes.",
+        src: 1, quote: "only for misconduct, neglect of duty, malfeasance, or failure to accept a directed reassignment" },
+      { reasoning: "“Career law enforcement officials” names a category the case does not involve. The Department’s theory also carries a conceded limit — that only the head of the department may exercise the power — which is the opposite of sweeping and is the ground the removal was actually challenged on." }
+    ]
+  },
+
+  {
+    index: 1844, date: "2025-11-20", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.huffingtonpost.co.uk/entry/todd-blanche-doj-investigation-sean-hannity_n_691ef05ae4b0b763ab8e0e07",
+    claim: "Deputy Attorney General Todd Blanche strongly suggested Wednesday that the Department of Justice "
+         + "will investigate Democratic members of Congress who made a video telling military members to "
+         + "“refuse illegal orders.”",
+    punch: { claim: "strongly suggested … that the Department of Justice will investigate",
+             artifact: "And so what does the investigation look like? … I think they should be held to account. … I’m not convicting anybody tonight on this show.",
+             src: 0 },
+    nextStep: "A transcript or recording of the broadcast. The article embeds a clip whose caption track returned empty on every request, so his words are available only as rendered by two outlets, which agree.",
+    clauses: [
+      { type: "plan", text: "the Department will investigate members of Congress" },
+      { type: "characterization", text: "strongly suggested" },
+      { type: "act", text: "members of Congress made a video telling military members to refuse illegal orders" }
+    ],
+    artifacts: [
+      { grade: "named reporting", url: "https://www.huffingtonpost.co.uk/entry/todd-blanche-doj-investigation-sean-hannity_n_691ef05ae4b0b763ab8e0e07",
+        what: "The article the row reproduces, quoting a broadcast interview",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent; quoted strings confirmed present in the body", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "I think they should be held to account." },
+      predicate: { v: "unsupported", src: 0,
+        quote: "I’m not convicting anybody tonight on this show.",
+        note: "No located words have him saying the Department will investigate. What he said was interrogative and conditional: what does the investigation look like, they should be held to account, they should be required to answer questions. The article’s own framing is that he “strongly suggested” it, which is the reporter’s reading of an implication, and the claim adopts that reading as its subject." },
+      date: { v: "unsupported", src: 0,
+        note: "The interview aired Wednesday 19 November. The article and the row are dated the 20th." },
+      modality: { v: "unsupported", src: 0, quote: "And so what does the investigation look like?",
+        note: "“Will investigate” is a future indicative. The artifact is a question and a series of normative statements about accountability." },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "The underlying video is accurately described. Its participants told service members “You can refuse illegal orders. You must refuse illegal orders.”",
+      "An investigation did follow, and the record of it is public: a grand jury declined to indict the lawmakers some months later. That bears on whether the suggestion was well founded and not on whether he made it in the words the claim gives."
+    ],
+    rowSourcing: "named", flags: ["plan not act", "characterization present"],
+    forClaim: [
+      { text: "He did press for consequences, on the record, under his own name, about these people.",
+        src: 0, quote: "I think that those congressmen should be required to answer questions about why they did what they did" },
+      { reasoning: "“Strongly suggested” is a hedge, not an assertion that he announced anything, and a reader is told they are getting an inference. Given what followed, the inference was sound." }
+    ],
+    againstClaim: [
+      { text: "In the same interview he expressly declined to go where the claim places him.",
+        src: 0, quote: "I’m not convicting anybody tonight on this show." },
+      { reasoning: "A hedge in the reporting becomes the subject of the entry: the row is about what he suggested rather than what he said. That is a claim about a state of mind, and no document establishes one." }
+    ]
+  },
+
+  {
+    index: 1420, date: "2025-09-30", rubric: 3, status: "adjudicated",
+    citedUrl: "https://edition.cnn.com/2025/09/29/politics/trump-ai-generated-video-schumer-jeffries-shutdown",
+    claim: "Trump posts racist, AI-generated video of Schumer and Jeffries ahead of looming government shutdown",
+    punch: { claim: "Trump posts racist, AI-generated video of Schumer and Jeffries",
+             artifact: "The post carries no caption text. Its video, transcribed: “Nobody likes Democrats anymore… So we need new voters. And if we give all these illegal aliens free healthcare, we might be able to get them on our side so they can vote for us. They can’t even speak English…”",
+             src: 0 },
+    nextStep: "Nothing further within our jurisdiction. Whether the video is racist is a judgement about a caricature and is not ours to make; see the note below.",
+    clauses: [
+      { type: "act", text: "Trump posted an AI-generated video of the two men" },
+      { type: "characterization", text: "racist" }
+    ],
+    artifacts: [
+      { grade: "on the record", url: "https://trumpstruth.org/statuses/33148",
+        what: "The post, archived, with its video transcript",
+        fetch: { by: "human", route: "fetched by a research agent with an identifying user agent; the video file was downloaded and sampled", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "President DJT" },
+      predicate: { v: "supported", src: 0,
+        quote: "Nobody likes Democrats anymore. We have no voters left because of all of our woke trans bullshit." },
+      date: { v: "unsupported", src: 0,
+        note: "The post is dated 29 September, 8:31 PM Eastern, and the cited article’s own address carries 29 September. The row is dated the 30th." },
+      modality: { v: "supported", src: 0, quote: "Nobody likes Democrats anymore" },
+      quantity: { v: "n/a", note: "No number asserted." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "We adjudicate the transcript and not the imagery. The video is a caricature, and by the rule this page follows a caricature has no truth conditions — no agent, no predicate, no number for a test to reach. Whether it is racist is a judgement for an audience, and this method is not equipped to make it. What is adjudicable is that the post exists, that it is his, and what the audio says, which the row does not quote.",
+      "The claim is the cited headline reproduced verbatim, including the word this page declines to assess."
+    ],
+    rowSourcing: "named", flags: ["characterization present"],
+    forClaim: [
+      { text: "The post is his and the audio is what the reporting says it is.",
+        src: 0, quote: "if we give all these illegal aliens free healthcare, we might be able to get them on our side so they can vote for us. They can’t even speak English" },
+      { reasoning: "A tracker recording that a president posted this is recording a public act by a public figure, and the act is not in dispute." }
+    ],
+    againstClaim: [
+      { text: "The date is the reporting’s, not the post’s.",
+        src: 0, quote: "29 September 2025, 8:31 PM Eastern" },
+      { reasoning: "And the load-bearing word is a judgement about a caricature, carried across from a headline. We are not saying it is wrong. We are saying nothing we can do reaches it, and an entry whose central adjective is outside every available test is an entry a reader cannot check." }
+    ]
+  },
+
+  {
+    index: 1592, date: "2025-10-18", rubric: 3, status: "adjudicated",
+    citedUrl: "https://www.nytimes.com/2025/10/18/us/politics/trump-administration-bluesky.html",
+    claim: "White House and other government agencies join Social Media platform Bluesky and use it to attack "
+         + "Democrats and blame them for the government shutdown. The administration has repeatedly thrust "
+         + "normally nonpartisan agencies into the funding fight, including by posting politically loaded "
+         + "language on agency websites",
+    punch: { claim: "join … and use it to attack Democrats and blame them for the government shutdown",
+             artifact: "13,000 air traffic controllers are working without pay because of the Schumer-Jeffries shutdown. — Department of Transportation, 2025-10-17",
+             src: 0 },
+    nextStep: "Whether an inaugural White House post quoted by the cited article was deleted. It is absent from the live feed and the platform’s search endpoints refuse unauthenticated enumeration, so neither deletion nor its absence can be established.",
+    clauses: [
+      { type: "act", text: "agencies joined the platform and posted attacks" },
+      { type: "act", text: "politically loaded language was posted on agency websites" }
+    ],
+    artifacts: [
+      { grade: "constitutive record", url: "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile",
+        what: "Accounts, creation timestamps, verification status and post text for nine federal accounts, read from the platform’s public API",
+        fetch: { by: "human", route: "queried by a research agent with an identifying user agent", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "Department of War, verification status valid" },
+      predicate: { v: "supported", src: 0,
+        quote: "13,000 air traffic controllers are working without pay because of the Schumer-Jeffries shutdown." },
+      date: { v: "unsupported", src: 0,
+        note: "The posts are timestamped 17 October; the row and the cited article are dated the 18th. One department’s account was created on 14 October, three days before the others, so “join” does not describe all of them on one day." },
+      modality: { v: "supported", src: 0, quote: "13,000 air traffic controllers are working without pay" },
+      quantity: { v: "n/a", note: "The claim asserts no number of its own." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "Two verification findings that matter for anyone checking this. One department’s account carried no platform verification at the time and still does not, so a post quoted from it rests on nothing but a matching handle. Another was not verified until a month after the posts at issue — it is verified today, and the badge postdates the evidence.",
+      "The website half of the claim is separately documented: archived captures of two agency sites from the same period carry shutdown messaging naming the opposing party."
+    ],
+    rowSourcing: "named", flags: [],
+    forClaim: [
+      { text: "The posts exist, are timestamped, and say what the claim says, from accounts the platform marks as verified government bodies.",
+        src: 0, quote: "13,000 air traffic controllers are working without pay because of the Schumer-Jeffries shutdown." },
+      { reasoning: "This is among the better-founded rows in the sample: a public act, on a public platform, with the artifacts still standing and machine-readable." }
+    ],
+    againstClaim: [
+      { text: "The accounts did not all join on the day the claim implies.",
+        src: 0, quote: "created 2025-10-14" },
+      { reasoning: "And at least one quoted account carried no verification, which on a platform where a similarly named handle can belong to anyone is the difference between an artifact and a lookalike." }
+    ]
+  },
+
+  {
+    index: 2772, date: "2026-03-14", rubric: 3, status: "adjudicated",
+    citedUrl: "https://truthsocial.com/@realDonaldTrump/116228130264134892",
+    claim: "Trump posts an image boasting that he has defunded independent media or removed critical "
+         + "journalists / TV hosts, while securing allies running key agencies and media companies",
+    punch: { claim: "an image boasting that he has defunded independent media or removed critical journalists",
+             artifact: "PRESIDENT TRUMP IS RESHAPING THE MEDIA — GONE: PBS Defunded · NPR Defunded · Joy Reid Out at MSNBC · Colbert Leaving CBS · Lester Holt Out at NBC · Jim Acosta Out at CNN · Terry Moran Out at ABC · Chuck Todd Out at NBC · John Dickerson Out at CBS",
+             src: 0 },
+    nextStep: "Nothing outstanding. The post is image-only and the image was retrieved at full resolution and read.",
+    clauses: [ { type: "act", text: "Trump posted this image" }, { type: "characterization", text: "boasting" } ],
+    artifacts: [
+      { grade: "on the record", url: "https://truthsocial.com/@realDonaldTrump/116228130264134892",
+        what: "The post, image-only, 14 March 2026, 11:02 Eastern; image retrieved at full resolution",
+        fetch: { by: "human", route: "post page and image fetched by a research agent with an identifying user agent; the platform’s API refused, so the post is corroborated against an archive and the identifier’s embedded timestamp", date: "2026-08-10", status: 200 } }
+    ],
+    tests: {
+      agent: { v: "supported", src: 0, quote: "PRESIDENT TRUMP IS RESHAPING THE MEDIA" },
+      predicate: { v: "supported", src: 0,
+        quote: "GONE: PBS Defunded · NPR Defunded · Joy Reid Out at MSNBC · Jim Acosta Out at CNN · Terry Moran Out at ABC" },
+      date: { v: "supported", src: 0, quote: "14 March 2026, 11:02 Eastern" },
+      modality: { v: "supported", src: 0, quote: "PRESIDENT TRUMP IS RESHAPING THE MEDIA" },
+      quantity: { v: "n/a", note: "The claim asserts no number; the image lists twelve items under each of two headings." },
+      baseRate: { v: "n/a", note: "Neither novelty nor routineness asserted." }
+    },
+    notes: [
+      "This is a text-bearing graphic rather than a caricature, so it is adjudicable: the tiles are propositions set in type and attributable to the account that posted them. The second heading, which the claim describes as securing allies, reads REFORMS and lists items including a broadcast regulator, an ownership change at a network, a settlement with another, and an ombudsman at a third.",
+      "The claim describes the image accurately and does not quote it. Reading the artifact adds the specifics a reader would otherwise have to take on trust — which is the whole argument of this page, and here the row happens to be right."
+    ],
+    rowSourcing: "named", flags: ["characterization present"],
+    forClaim: [
+      { text: "The image says what the claim says it says, in its own headings.",
+        src: 0, quote: "PRESIDENT TRUMP IS RESHAPING THE MEDIA" },
+      { reasoning: "And the row cites the post itself rather than an article about it, which is the citation practice this page argues for and finds in only a minority of the sample." }
+    ],
+    againstClaim: [
+      { text: "The claim paraphrases where the artifact could have been quoted.",
+        src: 0, quote: "GONE" },
+      { reasoning: "“Boasting” is a characterisation, though a mild one given a graphic captioned RESHAPING THE MEDIA. The substantive gap is that a reader of the row learns a summary and a reader of the image learns twelve named outlets and journalists." }
+    ]
+  },
+
+  {
     index: 71,
     punch: { claim: "Trump repeats the right-wing claim that USAID subscriptions to Politico were payoffs",
              artifact: "not yet fetched \u2014 the post is quoted consistently across outlets but we have not opened it",
@@ -1102,7 +1999,7 @@ const CLAIMS = [
     claim: "Trump repeats the right-wing claim that USAID subscriptions to Politico were payoffs. The $8 million "
          + "payment in question was for subscriptions for Politico for the entire federal government, not payoffs "
          + "from USAid.",
-    parkedReason: "Two clauses, two missing artifacts. The first is a statement by Trump, quoted consistently "
+    parkedReason: "Still parked at the end of the sample, and the reason is unchanged after further attempts on 2026-08-14: the archive of the President\u2019s posts does not honour date filtering on its search, and we could not isolate the February 2025 post among results. Two clauses, two missing artifacts. The first is a statement by Trump, quoted consistently "
                 + "across several outlets as a Truth Social post of 6 February 2025, but we have not reached the "
                 + "post itself; truthsocial.com is client-rendered and we will not cite a quotation at second hand "
                 + "when the artifact exists. The second is the row's own corrective — that the $8 million figure "
@@ -1557,8 +2454,15 @@ CLAIMS.forEach(row => {
   const v = verdictOf(row);
   if (v !== "restated") {
     const citedHost = host(row.citedUrl);
+    // A row that cites the artifact itself needs nothing independent: there is
+    // nothing more direct to point at. This check exists to catch rows resting
+    // only on the reporting they came from, and it wrongly penalised the best
+    // citation practice on the page until index 2772 tripped it.
+    const citesArtifactDirectly = (row.artifacts || []).some(a =>
+      host(a.url) === citedHost &&
+      (a.grade === "constitutive record" || a.grade === "on the record"));
     const independent = (row.artifacts || []).some(a => host(a.url) !== citedHost);
-    if (!independent) {
+    if (!independent && !citesArtifactDirectly) {
       failures.push(where + ": verdict '" + v + "' but every artifact shares a host with the row's own citation");
     }
   }
@@ -1641,13 +2545,19 @@ tally.append(el("b", null,
   + nCarried + " carried whole, "
   + nOpen + " still open."));
 const nWorked = CLAIMS.filter(r => !isParked(r)).length;
+const nContra = CLAIMS.filter(r => verdictOf(r) === "contradicted in part").length;
 tally.append(document.createTextNode(
-  " Every one of the " + nWorked + " worked rows has the same shape \u2014 the act is documented and "
-  + "something adjacent to it is not. On this sample that is the pattern, and thirty of 3,466 cannot "
-  + "tell you whether it holds generally."));
+  " In " + nPart + " of the " + nWorked + " worked rows the documented act holds and something adjacent "
+  + "to it does not \u2014 a date, a number, an attribution, a mood. " + nCarried + " came out carried whole"
+  + (nContra ? ", and " + nContra + " is contradicted on a figure by the government\u2019s own accounting" : "")
+  + ". Thirty of 3,466 cannot tell you whether any of that holds generally, and this page does not claim it does."));
 const prog = document.getElementById("progress");
-if (prog) { prog.textContent = "This is " + CLAIMS.length + " of " + DRAWN.length
-  + ". It is not a finished audit."; }
+if (prog) {
+  const parked = CLAIMS.filter(r => isParked(r)).length;
+  prog.textContent = CLAIMS.length + " of " + DRAWN.length + " drawn rows are worked"
+    + (parked ? ", and " + parked + " remains open because its artifact stayed out of reach" : "")
+    + ". The draw is complete; the audit is not a verdict on the dataset.";
+}
 
 // footer
 const adjudicated = CLAIMS.filter(r => r.status === "adjudicated").length;
